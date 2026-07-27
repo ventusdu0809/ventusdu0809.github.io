@@ -1,0 +1,8 @@
+﻿label,analysis_level,SA3M_n,SA3M_denom,SAO1_n,SAO1_denom,SA3M_rate,SAO1_rate,applicable_prompt_n,output_n_per_model,evidence_level
+wrong_source,prompt_conditioned_sample_label_rate,29,200,13,200,14.5%,6.5%,40,200,controlled_descriptive
+wrong_count_explicit,prompt_conditioned_sample_label_rate,17,40,24,40,42.5%,60.0%,8,40,retrospective_conditional
+wrong_count_implicit,prompt_conditioned_sample_label_rate,13,80,19,80,16.2%,23.8%,16,80,retrospective_conditional
+missing_secondary_event,prompt_conditioned_sample_label_rate,30,80,27,80,37.5%,33.8%,16,80,retrospective_conditional
+missing_sonic_component,prompt_conditioned_sample_label_rate,0,25,1,25,0.0%,4.0%,5,25,exploratory_small_n
+wrong_attribute,prompt_conditioned_sample_label_rate,37,200,25,200,18.5%,12.5%,40,200,retrospective_conditional
+wrong_temporal_order,prompt_conditioned_sample_label_rate,3,80,2,80,3.8%,2.5%,16,80,exploratory_provisional

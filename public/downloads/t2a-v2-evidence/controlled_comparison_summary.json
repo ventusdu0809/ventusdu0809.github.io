@@ -1,0 +1,20 @@
+{
+  "formal_n": 400,
+  "hidden_repeat_n": 40,
+  "delta_OVL": "-0.1387",
+  "delta_OVL_CI_low": "-0.3950",
+  "delta_OVL_CI_high": "0.1150",
+  "delta_REL": "-0.0496",
+  "delta_REL_CI_low": "-0.2950",
+  "delta_REL_CI_high": "0.1800",
+  "OVL_within_one": "38/40 (95%)",
+  "REL_within_one": "39/40 (98%)",
+  "primary_exact": "27/40 (68%)",
+  "wrong_source_delta": "+8.0 (SA3M higher)",
+  "artifact_noise_delta": "-4.5 (SAO1 higher)",
+  "texture_ambiguity_SA3M": "5.5/100",
+  "texture_ambiguity_SAO1": "8.5/100",
+  "qc_sensitivity_status": "PASS \u2014 direction unchanged after excluding 7 CHECK items",
+  "data_version": "v2.0.3",
+  "data_file": "formal_scores_audited_v2.0.2.csv"
+}

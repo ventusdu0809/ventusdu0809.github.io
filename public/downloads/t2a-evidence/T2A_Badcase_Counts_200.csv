@@ -1,0 +1,11 @@
+primary_badcase,count,share_pct,scope,derivation
+none,45,22.5,formal_n_200,canonical_groupby
+wrong_count,39,19.5,formal_n_200,canonical_groupby
+wrong_attribute,34,17.0,formal_n_200,canonical_groupby
+missing_secondary_event,32,16.0,formal_n_200,canonical_groupby
+wrong_source,16,8.0,formal_n_200,canonical_groupby
+abrupt_cutoff,13,6.5,formal_n_200,canonical_groupby
+artifact_noise,11,5.5,formal_n_200,canonical_groupby
+wrong_temporal_order,5,2.5,formal_n_200,canonical_groupby
+other,3,1.5,formal_n_200,canonical_groupby
+extra_event,2,1.0,formal_n_200,canonical_groupby

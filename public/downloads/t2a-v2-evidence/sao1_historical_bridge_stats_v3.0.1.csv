@@ -1,0 +1,16 @@
+﻿metric,value
+n_prompts,40
+OVL_H1_mean,4.2450
+OVL_C1_mean,3.7800
+OVL_delta,-0.4650
+OVL_Spearman_rho,0.5286
+OVL_Pearson_r,0.6655
+OVL_MAD,0.5850
+OVL_MedianAD,0.4000
+REL_H1_mean,3.4600
+REL_C1_mean,3.3550
+REL_delta,-0.1050
+REL_Spearman_rho,0.7565
+REL_Pearson_r,0.8523
+REL_MAD,0.3650
+REL_MedianAD,0.0000

@@ -1,0 +1,18 @@
+{
+  "version": "v3.2.3_r2_audit_r3",
+  "research_version": "v3.2.3_r2",
+  "SA3M_OVL": "3.640",
+  "SAO1_OVL": "3.780",
+  "SA3M_REL": "3.305",
+  "SAO1_REL": "3.355",
+  "delta_OVL": "-0.140",
+  "delta_REL": "-0.050",
+  "Bootstrap_OVL_CI": "[-0.395,+0.115]",
+  "Bootstrap_REL_CI": "[-0.295,+0.180]",
+  "Bootstrap_iterations": 10000,
+  "Bootstrap_seed": 42,
+  "Bootstrap_analysis_unit": "prompt",
+  "Bootstrap_paired_resampling": true,
+  "texture_SA3M": "5.5/100",
+  "texture_SAO1": "8.0/100"
+}

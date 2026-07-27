@@ -1,0 +1,52 @@
+{
+  "project": "T2A Audio Evaluation Program",
+  "version": "3.0",
+  "last_updated": "2026-07-25",
+  "overview": {
+    "models": 2,
+    "cohorts": 3,
+    "phases": 2,
+    "formal_samples_cumulative": 600,
+    "listening_events_cumulative": 660,
+    "single_rater": true
+  },
+  "phase_1": {
+    "title": "SAO1 Single-Model PoC",
+    "model": "Stable Audio Open 1.0",
+    "formal_samples": 200,
+    "hidden_repeats": 20,
+    "listening_events": 220,
+    "ovl_mean": 4.25,
+    "rel_mean": 3.46,
+    "key_achievements": [
+      "Established 40-prompt test set with 5 fixed seeds",
+      "Developed OVL/REL rubric with event-level diagnostics",
+      "Implemented five-layer diagnosis (L1-L5)",
+      "Validated blind review workflow with hidden repeats",
+      "Completed formal adjudication and data freeze"
+    ]
+  },
+  "phase_2": {
+    "title": "SAO1 vs SA3M Controlled Comparison",
+    "models": ["Stable Audio Open 1.0 (regenerated)", "Stable Audio 3 Medium"],
+    "formal_samples": 400,
+    "hidden_repeats": 40,
+    "listening_events": 440,
+    "key_findings": {
+      "delta_OVL_ci": "[-0.40, +0.12]",
+      "delta_REL_ci": "[-0.30, +0.18]",
+      "ovl_within_one": "95%",
+      "rel_within_one": "98%",
+      "primary_exact": "68%",
+      "wrong_source_delta": "SA3M +8.0/100",
+      "artifact_noise_delta": "SAO1 +4.5/100",
+      "texture_ambiguity_sa3m": "5.5/100",
+      "texture_ambiguity_sao1": "8.5/100"
+    }
+  },
+  "evidence_strength": {
+    "controlled": "C1 vs C2: same protocol, same rubric, same rater — formal comparison",
+    "historical_descriptive": "H1 vs C1: different phases, different protocols — baseline portability only",
+    "contextual": "H1 vs C2: not formally comparable — project context only"
+  }
+}

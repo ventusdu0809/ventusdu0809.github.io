@@ -1,0 +1,3 @@
+﻿subset,pair_n,OVL_exact_n,OVL_exact_rate,OVL_within_one_n,OVL_within_one_rate,REL_exact_n,REL_exact_rate,REL_within_one_n,REL_within_one_rate,decision_exact_n,decision_exact_rate,primary_exact_n,primary_exact_rate,same_session_n,later_minus_earlier_OVL_mean,later_OVL_lower_n,later_OVL_higher_n,later_OVL_same_n
+all_pairs,40,22,0.550000,38,0.950000,25,0.625000,39,0.975000,34,0.850000,27,0.675000,4,-0.150000,12,6,22
+gap_ge_30,34,17,0.500000,32,0.941176,20,0.588235,33,0.970588,29,0.852941,23,0.676471,0,-0.147059,11,6,17

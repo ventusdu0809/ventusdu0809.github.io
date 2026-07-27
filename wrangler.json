@@ -1,0 +1,8 @@
+{
+  "name": "sound-ventus",
+  "main": "worker/index.ts",
+  "assets": {
+    "directory": "dist/client",
+    "binding": "ASSETS"
+  }
+}

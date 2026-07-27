@@ -1,0 +1,12 @@
+sample_id,blind_id,prompt_id,category_key,category_cn,seed,OVL,REL,tech_pass,artifact_severity,primary_event,secondary_event,attribute_match,temporal_match,count_match,primary_badcase,human_decision,adjudication_applied
+MEC_006_S0123,B0008,MEC_006,mechanical_technology,机械科技,123,5,5,是,0,2,NA,2,2,NA,none,pass,False
+MEC_005_S0456,B0152,MEC_005,mechanical_technology,机械科技,456,4,1,是,1,1,NA,1,1,NA,wrong_source,needs_regeneration,False
+WPN_004_S0042,B0099,WPN_004,weapon_combat,武器战斗,42,4,3,是,1,1,1,1,1,NA,wrong_count,keep_as_badcase,False
+NAT_006_S0042,B0092,NAT_006,natural_environment,自然环境,42,1,1,否,2,0,NA,0,NA,NA,wrong_source,needs_regeneration,False
+ANI_001_S0042,B0012,ANI_001,animal,动物,42,4,5,是,1,2,NA,2,NA,0,wrong_count,keep_as_badcase,False
+FLY_001_S0042,B0104,FLY_001,action_foley,动作拟音,42,5,3,是,0,2,NA,1,NA,0,wrong_count,keep_as_badcase,False
+WPN_001_S0123,B0073,WPN_001,weapon_combat,武器战斗,123,5,5,是,0,2,NA,2,2,NA,none,pass,False
+MAG_001_S0042,B0131,MAG_001,magic_fantasy,魔法幻想,42,3,3,是,2,1,NA,1,1,NA,wrong_attribute,keep_as_badcase,False
+DLY_001_S0123,B0043,DLY_001,daily_life,日常生活,123,4,5,是,1,2,NA,2,NA,NA,none,pass,False
+NAT_001_S0042,B0047,NAT_001,natural_environment,自然环境,42,4,3,是,1,2,1,1,2,NA,missing_secondary_event,keep_as_badcase,False
+
