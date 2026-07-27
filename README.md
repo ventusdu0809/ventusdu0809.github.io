@@ -1,98 +1,121 @@
-# vinext-starter
+# 杜明｜生成式音频评测与游戏音频作品集
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+面向公开求职展示的静态作品集，内容包括两阶段 T2A 音效生成评测、人工听评与 Badcase 诊断、音频资产验收，以及游戏运行时音频案例。
 
-## Prerequisites
+本仓库只保存公开网页、代表性压缩试听和可公开的方法材料，不包含完整生成音频库、参考数据集、原始评分源或私密项目数据。
 
-- Node.js `>=22.13.0`
+## 在线入口
 
-## Quick Start
+- GitHub Pages：仓库发布后填写；工作流会输出正式网址。
+- Cloudflare 备用站：`https://sound-ventus.mingdu0809.workers.dev/`
+- 离线入口：运行 `npm run build:offline` 生成 ZIP。
 
-```bash
-npm install
+GitHub Pages 在中国大陆的速度和稳定性需要通过真实无 VPN 网络验证；在结果确认前，Cloudflare 与离线包继续作为备用入口。
+
+## 技术栈
+
+- React 19 + Next.js 16 App Router
+- vinext 0.0.50 + Vite 8
+- Cloudflare Worker（现有线上版本）
+- GitHub Actions + GitHub Pages（静态多页面版本）
+- Node.js 24 / npm 11（最低 Node.js 要求为 22.13）
+
+## 本地运行
+
+```powershell
+npm ci
 npm run dev
+```
+
+生产构建：
+
+```powershell
 npm run build
 ```
 
-This starter does not use `wrangler.jsonc`.
+现有 Cloudflare 构建输出为 `dist/client` 与 `dist/server`。GitHub Pages 不直接发布该目录，而是在完成生产构建后导出真实静态页面。
 
-## Included Shape
+## GitHub Pages 构建
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+用户主页仓库：
 
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```powershell
+$env:PAGES_BASE_PATH = "/"
+npm run build:pages
+npm run verify:pages
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+项目仓库：
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```powershell
+$env:PAGES_BASE_PATH = "/sound-ventus-portfolio/"
+npm run build:pages
+npm run verify:pages
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+输出目录为 `pages-dist/`。核心路由会生成真实文件：
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+```text
+pages-dist/
+├── index.html
+├── t2a-case-study/index.html
+├── t2a-formal-summary/index.html
+├── audio-validation-summary/index.html
+└── resume/index.html
+```
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+GitHub Actions 会根据仓库名自动选择 `/` 或 `/<repository>/`，页面组件不硬编码仓库名称或 `github.io` 域名。
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+## 自动部署
 
-## Useful Commands
+`.github/workflows/deploy-pages.yml` 在以下情况运行：
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm test`: build the starter and verify its rendered loading skeleton
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+- 推送到 `main`；
+- 在 GitHub Actions 页面手动触发。
 
-## Learn More
+流程使用锁文件执行 `npm ci`，随后构建、验证、上传 Pages artifact，并由 GitHub 官方 Pages Action 发布。仓库的 Pages 发布来源需要设置为 `GitHub Actions`。
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+## 离线包
+
+```powershell
+npm run build:offline
+npm run verify:offline
+```
+
+输出：`release/杜明_AI音频评测作品集_离线版.zip`。
+
+离线包与 Pages 共用页面和素材源；Bilibili 与飞书属于联网补充内容。详细说明见 `OFFLINE_PACKAGE.md`。
+
+## 目录
+
+```text
+app/                         页面、样式和公开数据映射
+public/                      图片、MP3、视频与公开下载材料
+worker/                      现有 Cloudflare Worker 入口
+scripts/export-static.mjs    Pages / 离线静态导出
+scripts/verify-static.mjs    路由、资源、路径、体积和隐私检查
+scripts/package-offline.ps1  离线 ZIP 生成
+.github/workflows/           GitHub Pages 自动部署
+tests/                       原 Cloudflare 渲染回归测试
+```
+
+## 音频与内容使用
+
+- T2A 页面只发布 4 条与评分锚点和 Badcase 说明对应的 10 秒 MP3；原 WAV 不进入 Pages 或离线产物。
+- 游戏项目视频和文档由杜明确认可公开展示。
+- 网站材料用于个人作品集与方法展示，不代表模型官方排名或第三方产品背书。
+- 完整七类 FAD / JS 保持 `NOT RUN`；客观指标不替代人工语义裁决。
+
+## 已知限制
+
+- GitHub Pages 是纯静态托管，不运行 Cloudflare Worker、D1、R2 或服务端接口。
+- Bilibili iframe 和飞书链接依赖外部网络；离线环境不可播放或打开。
+- 中国大陆网络可用性必须以真实家庭宽带和移动网络实测为准。
+- 当前项目是单评测员 T2A 评测 PoC；多评测员一致性与未执行专项测试不会表述为已完成。
+
+## 审计与验证
+
+- `GITHUB_PAGES_AUDIT.md`：迁移前技术、资源、路径与隐私审计。
+- `GITHUB_PAGES_VERIFICATION.md`：构建、部署、浏览器与网络验证记录。
+- 迁移前 Git 标签：`pre-github-pages-2026-07-27`。
+- 部署功能分支：`feat/github-pages-deployment`。

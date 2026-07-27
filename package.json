@@ -8,6 +8,11 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "vinext build",
+    "build:pages": "npm run build && node scripts/export-static.mjs --mode pages",
+    "build:offline:dir": "npm run build && node scripts/export-static.mjs --mode offline",
+    "build:offline": "npm run build:offline:dir && powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-offline.ps1",
+    "verify:pages": "node scripts/verify-static.mjs pages-dist",
+    "verify:offline": "node scripts/verify-static.mjs offline-dist --offline",
     "start": "vinext start",
     "test": "npm run build && node --test tests/rendered-html.test.mjs",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
@@ -37,5 +42,6 @@
     "vite": "8.0.13",
     "wrangler": "4.92.0"
   },
-  "type": "module"
+  "type": "module",
+  "packageManager": "npm@11.16.0"
 }

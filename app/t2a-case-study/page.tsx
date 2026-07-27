@@ -31,10 +31,10 @@ const layers = [
 ] as const;
 
 const historicalCases = [
-  { id: "C01 / B0008", sample: "MEC_006_S0123", title: "正向参照", score: "OVL 5 · REL 5 · pass", note: "音频质量与核心事件要求均满足。", audio: "/audio/B0008.wav" },
-  { id: "C02 / B0152", sample: "MEC_005_S0456", title: "空间方向反向", score: "OVL 4 · REL 1 · keep_as_badcase", note: "Prompt 要求左→右，人工听感为右→左。", audio: "/audio/B0152.wav" },
-  { id: "C03 / B0099", sample: "WPN_004_S0042", title: "目标事件结构外重复", score: "Primary Badcase · wrong_count", note: "Prompt 描述一次双剑碰撞，随后一把剑落地并在石面发声；输出出现超出目标事件结构的重复撞击，历史人工裁决保留为 wrong_count。", audio: "/audio/B0099.wav" },
-  { id: "C04 / B0092", sample: "NAT_006_S0042", title: "声源不符", score: "OVL 1 · REL 1 · needs_regeneration", note: "目标声源未能确认，输出主要呈现难以辨认的杂音。", audio: "/audio/B0092.wav" },
+  { id: "C01 / B0008", sample: "MEC_006_S0123", title: "正向参照", score: "OVL 5 · REL 5 · pass", note: "音频质量与核心事件要求均满足。", audio: "/audio/B0008.mp3" },
+  { id: "C02 / B0152", sample: "MEC_005_S0456", title: "空间方向反向", score: "OVL 4 · REL 1 · keep_as_badcase", note: "Prompt 要求左→右，人工听感为右→左。", audio: "/audio/B0152.mp3" },
+  { id: "C03 / B0099", sample: "WPN_004_S0042", title: "目标事件结构外重复", score: "Primary Badcase · wrong_count", note: "Prompt 描述一次双剑碰撞，随后一把剑落地并在石面发声；输出出现超出目标事件结构的重复撞击，历史人工裁决保留为 wrong_count。", audio: "/audio/B0099.mp3" },
+  { id: "C04 / B0092", sample: "NAT_006_S0042", title: "声源不符", score: "OVL 1 · REL 1 · needs_regeneration", note: "目标声源未能确认，输出主要呈现难以辨认的杂音。", audio: "/audio/B0092.mp3" },
 ] as const;
 
 const downloads = [
