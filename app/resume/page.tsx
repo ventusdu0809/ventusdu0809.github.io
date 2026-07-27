@@ -48,7 +48,7 @@ export default function ResumePage() {
         <h1 className="header-name">杜明</h1>
         <p className="header-role">AI 音频评测 / 生成式音频评测</p>
         <div className="header-contact">
-          mingdu0809@qq.com<span className="sep">|</span>sound-ventus.mingdu0809.workers.dev
+          mingdu0809@qq.com<span className="sep">|</span><Link href="/">在线作品集</Link>
         </div>
       </header>
 

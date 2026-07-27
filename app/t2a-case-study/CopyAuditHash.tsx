@@ -12,7 +12,7 @@ export default function CopyAuditHash({ value }: { value: string }) {
   }
 
   return (
-    <button className="audit-copy" type="button" onClick={copyHash} aria-live="polite">
+    <button className="audit-copy" type="button" onClick={copyHash} aria-live="polite" data-copy-sha={value}>
       {copied ? "已复制 SHA256" : "复制完整 SHA256"}
     </button>
   );

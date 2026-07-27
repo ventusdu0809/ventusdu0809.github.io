@@ -40,3 +40,9 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+/pages-dist/
+/offline-dist/
+/release/
+tsconfig.tsbuildinfo
+Thumbs.db
+*.tmp

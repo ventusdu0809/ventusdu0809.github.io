@@ -37,28 +37,28 @@ const listeningCases = [
     code: "MEC_006_S0123",
     title: "正向参照",
     outcome: "OVL 5 · REL 5 · 完整 10 秒播放",
-    src: "/audio/B0008.wav",
+    src: "/audio/B0008.mp3",
   },
   {
     id: "C02 / B0152",
     code: "MEC_005_S0456",
     title: "空间方向反向",
     outcome: "Prompt 要求左→右，人工听感为右→左",
-    src: "/audio/B0152.wav",
+    src: "/audio/B0152.mp3",
   },
   {
     id: "C03 / B0099",
     code: "WPN_004_S0042",
     title: "事件数量不符",
     outcome: "事件级诊断：wrong_count",
-    src: "/audio/B0099.wav",
+    src: "/audio/B0099.mp3",
   },
   {
     id: "C04 / B0092",
     code: "NAT_006_S0042",
     title: "声源不符",
     outcome: "wrong_source · needs_regeneration",
-    src: "/audio/B0092.wav",
+    src: "/audio/B0092.mp3",
   },
 ] as const;
 

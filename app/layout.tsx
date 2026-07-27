@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "杜明｜生成式音频评测与游戏音频",
   description:
     "杜明的声音作品集：两阶段 T2A Evaluation Program、SAO1 与 Stable Audio 3 Medium 受控比较、人工听评、Badcase、音频交付验收与游戏运行时案例。",
+  authors: [{ name: "杜明" }],
+  creator: "杜明",
+  keywords: ["AI 音频评测", "生成式音频评测", "T2A", "游戏音频", "Badcase"],
   openGraph: {
     title: "杜明｜生成式音频评测与游戏音频",
     description:
@@ -33,26 +36,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN">
-      <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-        />
-
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-
-        {/* App Router root layout is the document-level font declaration. */}
-        {/* eslint-disable-next-line @next/next/no-page-custom-font */}
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600&family=Noto+Serif+SC:wght@500;600;700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
-
+      <head />
       <body>{children}</body>
     </html>
   );
