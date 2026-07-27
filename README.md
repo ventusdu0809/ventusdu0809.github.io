@@ -6,7 +6,8 @@
 
 ## 在线入口
 
-- GitHub Pages：仓库发布后填写；工作流会输出正式网址。
+- GitHub Pages：<https://ventusdu0809.github.io/>
+- GitHub 仓库：<https://github.com/ventusdu0809/ventusdu0809.github.io>
 - Cloudflare 备用站：`https://sound-ventus.mingdu0809.workers.dev/`
 - 离线入口：运行 `npm run build:offline` 生成 ZIP。
 
@@ -73,7 +74,7 @@ GitHub Actions 会根据仓库名自动选择 `/` 或 `/<repository>/`，页面�
 - 推送到 `main`；
 - 在 GitHub Actions 页面手动触发。
 
-流程使用锁文件执行 `npm ci`，随后构建、验证、上传 Pages artifact，并由 GitHub 官方 Pages Action 发布。仓库的 Pages 发布来源需要设置为 `GitHub Actions`。
+流程使用锁文件执行 `npm ci`，随后构建、验证、上传 Pages artifact，并由 GitHub 官方 Pages Action 发布。当前仓库的 Pages 发布来源已设置为 `GitHub Actions`，并强制使用 HTTPS。
 
 ## 离线包
 

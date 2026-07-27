@@ -1,14 +1,17 @@
 # GitHub Pages 验证记录
 
-状态：本地构建与 Chrome 核心检查通过；正式部署项将在 GitHub Actions 发布后补全。  
-部署日期：待发布  
+状态：GitHub Pages 已发布；自动构建、静态资源与公开 HTTP 检查通过。
+
+部署日期：2026-07-27
+
 负责人：杜明
 
 ## 构建信息
 
 | 项目 | 记录 |
 |---|---|
-| Git 提交哈希 | 待最终提交后填写 |
+| 实施提交 | `f0a9f7b` |
+| PR 合并提交 | `76dec23c3d98b0bb3dd5fde45d0aca491475f5c5` |
 | Node.js | 本地 v24.18.0；Actions Node 24 |
 | npm | 本地 11.16.0 |
 | 安装命令 | `npm ci` |
@@ -16,7 +19,12 @@
 | 校验命令 | `npm run verify:pages` |
 | 构建输出 | `pages-dist/` |
 | 部署工作流 | `.github/workflows/deploy-pages.yml` |
-| 正式网址 | 待确认 GitHub 用户名并创建仓库后填写 |
+| 正式网址 | `https://ventusdu0809.github.io/` |
+| GitHub 仓库 | `https://github.com/ventusdu0809/ventusdu0809.github.io` |
+| Pull Request | `https://github.com/ventusdu0809/ventusdu0809.github.io/pull/1` |
+| Actions 运行 | `https://github.com/ventusdu0809/ventusdu0809.github.io/actions/runs/30238249225` |
+| 发布来源 | GitHub Actions workflow |
+| HTTPS | 强制启用 |
 | Pages 产物 | 54 个文件，32.48 MiB |
 | 离线 ZIP | 32.17 MiB |
 
@@ -41,11 +49,17 @@
 | Windows Edge | NOT RUN | 当前未建立可审计的 Edge 自动检查会话 |
 | 375 / 390 / 430 px | PASS | 无整页横向溢出；音频播放器不溢出；宽表格在容器内滚动 |
 | 125% / 150% 缩放 | 待人工复核 | 自动浏览器会话无法可靠读取实际缩放倍率 |
-| GitHub Actions | 待发布 |  |
-| Pages deployment | 待发布 |  |
+| GitHub Actions | PASS | Run `30238249225`，conclusion=`success` |
+| Pages deployment | PASS | Pages status=`built`，build_type=`workflow`，HTTPS enforced |
+| 正式首页 HTTP | PASS | HTTP 200；响应约 27 KB |
+| 正式案例页 HTTP | PASS | `/t2a-case-study/` HTTP 200，可直接访问 |
+| 正式 MP3 | PASS | `/audio/B0008.mp3` HTTP 200，`audio/mp3`，241,415 bytes |
+| 正式 PDF | PASS | 方法 PDF HTTP 200，`application/pdf`，277,864 bytes |
 | 无 VPN 家庭宽带 | NOT RUN | 必须由真实网络实测，不能用构建成功替代 |
 | 手机移动网络 | NOT RUN | 必须由真实移动网络实测 |
 | 两家大陆运营商 | NOT RUN | 当前执行环境不具备该网络条件 |
+
+正式站的命令行公开访问检查成功，但 Chrome 自动检查正式域名时连接超时；因此不能把本次检查当作中国大陆真实浏览器网络可用性的证据。投递前仍应在家庭宽带和手机移动网络中分别打开首页、案例页并播放音频。
 
 ## 本地资源统计
 
