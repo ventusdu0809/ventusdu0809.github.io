@@ -88,6 +88,25 @@ test("audio validation separates results, standards and review boundaries", asyn
   assert.match(html, /各项命中次数不能相加为不通过文件数/);
 });
 
+test("game audio link opens a dedicated sound practice page", async () => {
+  const [homeResponse, practiceResponse] = await Promise.all([render("/"), render("/sound-practice")]);
+  assert.equal(homeResponse.status, 200);
+  assert.equal(practiceResponse.status, 200);
+  const [home, practice] = await Promise.all([homeResponse.text(), practiceResponse.text()]);
+  assert.match(home, /href="\/sound-practice"[^>]*>查看游戏音频案例/);
+  assert.doesNotMatch(home, /href="\/resume#game-audio"/);
+  for (const text of [
+    "声音设计进入游戏后，才成为可验证的体验",
+    "GameKit3D + Wwise 全流程集成",
+    "Hitstop时缓与声音逻辑协同",
+    "动态混音与Snapshot切换",
+    "50 × 约2 MB",
+    "查看音频验收案例",
+  ]) assert.match(practice, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(practice, /\/video\/hitstop-before\.mp4/);
+  assert.match(practice, /\/video\/hitstop-after\.mp4/);
+});
+
 test("pages share the site copy source and keep public artifacts available", async () => {
   const root = new URL("../", import.meta.url);
   const [home, caseStudy, copy] = await Promise.all([

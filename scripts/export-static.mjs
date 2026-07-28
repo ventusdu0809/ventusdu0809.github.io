@@ -12,7 +12,7 @@ if (!new Set(["pages", "offline"]).has(mode)) {
 
 const outputDir = path.join(root, mode === "pages" ? "pages-dist" : "offline-dist");
 const basePath = normalizeBasePath(process.env.PAGES_BASE_PATH || "/");
-const routes = ["/", "/t2a-case-study", "/audio-validation-summary", "/resume"];
+const routes = ["/", "/t2a-case-study", "/audio-validation-summary", "/sound-practice", "/resume"];
 const routeSet = new Set([...routes, "/t2a-formal-summary"]);
 const serverEntry = path.join(root, "dist", "server", "index.js");
 

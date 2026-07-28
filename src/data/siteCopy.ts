@@ -62,7 +62,7 @@ export const siteCopy = {
       {
         title: "游戏音频与运行时诊断",
         body: "包括战斗音效、动态混音、Wwise / FMOD 集成、空间音频和运行时问题定位。",
-        href: "/resume#game-audio",
+        href: "/sound-practice",
         linkLabel: "查看游戏音频案例",
       },
       {

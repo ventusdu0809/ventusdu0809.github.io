@@ -12,6 +12,7 @@ const requiredPages = [
   "t2a-case-study/index.html",
   "t2a-formal-summary/index.html",
   "audio-validation-summary/index.html",
+  "sound-practice/index.html",
   "resume/index.html",
   "404.html",
 ];
