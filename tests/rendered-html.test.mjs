@@ -107,6 +107,31 @@ test("game audio link opens a dedicated sound practice page", async () => {
   assert.match(practice, /\/video\/hitstop-after\.mp4/);
 });
 
+test("public resume matches the reviewed ATS source and links to evidence", async () => {
+  const response = await render("/resume");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "杜明",
+    "AI 音频评测 / 生成式音频评测（Text-to-Audio）",
+    "600 条正式样本和 660 次试听事件",
+    "T2A 音效生成评测｜SAO1 PoC 与 SAO1–SA3M 受控比较",
+    "TheExplorer｜Unity 3D Game Kit 音频系统重构",
+    "杭州千乎网络｜游戏音频策划 - 声音设计｜《辉烬》",
+    "2026.03 — 2026.07",
+    "杭州伏腊｜游戏音效设计师 - 声音设计",
+    "爱丁堡大学｜声音设计硕士（MSc）",
+    "米兰布雷拉美术学院｜新技术艺术本科（BA）",
+    "AI 用于资料归纳、代码实现和批处理执行",
+  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  for (const href of ["/t2a-case-study", "/sound-practice", "/audio-validation-summary"]) {
+    assert.match(html, new RegExp(`href="${href}"`));
+  }
+  assert.doesNotMatch(html, /\/#game-detail/);
+  assert.doesNotMatch(html, /2026\.03 — 至今/);
+  assert.doesNotMatch(html, /50 个约 (?:2|20) MB/);
+});
+
 test("pages share the site copy source and keep public artifacts available", async () => {
   const root = new URL("../", import.meta.url);
   const [home, caseStudy, copy] = await Promise.all([
