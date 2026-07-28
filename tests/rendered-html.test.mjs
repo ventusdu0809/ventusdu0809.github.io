@@ -130,6 +130,8 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   assert.doesNotMatch(html, /\/#game-detail/);
   assert.doesNotMatch(html, /2026\.03 — 至今/);
   assert.doesNotMatch(html, /50 个约 (?:2|20) MB/);
+  assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
+  assert.doesNotMatch(html, /href="tel:/);
 });
 
 test("pages share the site copy source and keep public artifacts available", async () => {

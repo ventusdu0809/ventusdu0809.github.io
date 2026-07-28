@@ -94,7 +94,6 @@ export default function ResumePage() {
             <p className="header-role">AI 音频评测 / 生成式音频评测（Text-to-Audio）</p>
           </div>
           <div className="header-contact" aria-label="联系方式">
-            <a href="tel:+8615309993915">153 0999 3915</a>
             <a href="mailto:mingdu0809@qq.com">mingdu0809@qq.com</a>
             <Link href="/">ventusdu0809.github.io</Link>
           </div>
