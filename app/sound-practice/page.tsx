@@ -23,7 +23,7 @@ export default function SoundPracticePage() {
       <section className="sound-practice-hero">
         <div className="section-shell">
           <p className="eyebrow">GAME AUDIO &amp; SOUND PRACTICE</p>
-          <h1>声音设计进入游戏后，才成为可验证的体验</h1>
+          <h1>声音设计进入游戏后才是可验证的体验</h1>
           <p>这些案例覆盖声音制作、交互集成、动态混音和运行时问题定位。重点不是展示工具名称，而是说明我如何发现听觉问题并推动修改。</p>
           <div className="tag-row"><span>Wwise</span><span>FMOD</span><span>Unity</span><span>Unreal Engine</span><span>动态混音</span><span>空间音频</span></div>
         </div>
@@ -48,7 +48,7 @@ export default function SoundPracticePage() {
 
       <section className="content-section content-section--paper" aria-labelledby="runtime-title">
         <div className="section-shell">
-          <header className="section-heading"><p className="eyebrow">03 / RUNTIME CASES</p><h2 id="runtime-title">运行时问题要回到修改前后验证</h2><p className="section-lead">以下案例只描述可观察到的表现和修改目标，不把结果包装成无法证明的底层原因。</p></header>
+          <header className="section-heading"><p className="eyebrow">03 / RUNTIME CASES</p><h2 id="runtime-title">通过 QA 前后对比验证问题修复</h2><p className="section-lead">下面这些案例记录的是修改前后的实际变化——我只描述能观察到的东西，不推测引擎或底层原因。</p></header>
           <div className="runtime-case-list">
             <article className="runtime-case"><p className="eyebrow">案例01 / HITSTOP</p><h3>Hitstop时缓与声音逻辑协同</h3><p>通过修改前后视频检查时缓触发时的声音响应，让动作停顿、冲击反馈和底层逻辑保持一致。</p><div className="runtime-media-grid"><figure className="runtime-media"><figcaption>修改前</figcaption><video controls preload="none" aria-label="Hitstop修改前视频"><source src="/video/hitstop-before.mp4" type="video/mp4" /></video></figure><figure className="runtime-media"><figcaption>修改后</figcaption><video controls preload="none" aria-label="Hitstop修改后视频"><source src="/video/hitstop-after.mp4" type="video/mp4" /></video></figure></div></article>
             <article className="runtime-case"><p className="eyebrow">案例02 / DYNAMIC MIX</p><h3>动态混音与Snapshot切换</h3><p>通过混音调整SFX、音乐与人声的层级关系，并检查Snapshot切换时是否出现突兀的听感变化。</p><div className="runtime-media-grid"><figure className="runtime-media"><figcaption>混音案例一</figcaption><div className="runtime-embed"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116798179511695&bvid=BV1Wqjy6CEPF&cid=39335690503&p=2&autoplay=0" title="动态混音案例一" loading="lazy" allowFullScreen scrolling="no" /></div><a className="runtime-fallback" href="https://www.bilibili.com/video/BV1Wqjy6CEPF/?p=2" target="_blank" rel="noreferrer">在Bilibili打开</a></figure><figure className="runtime-media"><figcaption>混音案例二</figcaption><div className="runtime-embed"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116679816318744&bvid=BV1CAVz6DEwL&cid=38794496414&p=2&autoplay=0" title="动态混音案例二" loading="lazy" allowFullScreen scrolling="no" /></div><a className="runtime-fallback" href="https://www.bilibili.com/video/BV1CAVz6DEwL/?p=2" target="_blank" rel="noreferrer">在Bilibili打开</a></figure></div></article>

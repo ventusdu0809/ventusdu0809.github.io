@@ -1,14 +1,14 @@
 import { auditRecordHref, currentReportHref, t2aRelease } from "../../app/data/t2aRelease";
 
 export const siteCopy = {
-  role: "AI 音频评测 / 生成式音频评测（Text-to-Audio）",
+  role: "AI多模态音频评测 T2A",
   globalStatement:
-    "基于声音设计与游戏音频经验，我将生成音频的质量、语义符合度和具体错误分开评估，并把听感判断整理为可复查的评测结果。",
+    "从广播剧到游戏音频再到 T2A 评测，我一直在做一件事：把听到的东西拆开来看——质量好不好、内容对不对、错在哪里——然后把这些判断变成可以复查的记录，而不是停留在主观印象里。",
   heroCopy: {
     eyebrow: "AI AUDIO EVALUATION",
     title: "杜明",
     subtitle: "AI音频评测",
-    body: "我将音频自身质量、Prompt符合度和具体错误分开记录，再通过统一听评、隐藏重复和Badcase分析完成模型比较。",
+    body: "我把音频质量、Prompt符合度和具体错误分开记录，再用统一听评、隐藏重复和Badcase分析来做模型比较。",
     metrics: [
       { value: "600", label: "正式样本 · 两阶段累计" },
       { value: "400", label: "Phase 2受控比较" },
@@ -30,8 +30,8 @@ export const siteCopy = {
     {
       id: "listening-protocol",
       title: "把主观听感整理成统一的评测流程",
-      body: "我使用Blind ID隐藏模型和样本信息，按照统一的1–5分标准完成正式听评，并通过隐藏重复检查同一评测人的评分稳定性。",
-      note: "所有正式评分、复测和Badcase裁决均由本人完成；AI只辅助脚本、数据整理和统计实现。",
+      body: "我用 Blind ID 隐藏模型和样本信息，按统一的 1–5 分标准完成正式听评，再用隐藏重复检查同一评测人的评分稳不稳定。",
+      note: "所有正式评分、复测和 Badcase 裁决都是我自己做的；AI 只帮忙跑脚本、整理数据和做统计。",
       tags: ["Blind listening", "1–5分评分标准", "Hidden repeats"],
       href: "/t2a-case-study#protocol",
       linkLabel: "查看评测流程",
@@ -39,7 +39,7 @@ export const siteCopy = {
     {
       id: "comparison-and-badcases",
       title: "总体分数之外，还要看模型具体错在哪里",
-      body: "Phase 2 将 SAO1 与 Stable Audio 3 Medium 放入同一组 Prompt 的联合盲评。当前测试集未观察到明确的总体优势方向，但两者的错误类型不同。",
+      body: "Phase 2 让 SAO1 和 Stable Audio 3 Medium 在同一组 Prompt 下做联合盲评。当前测试集没看到明确的总体优势方向，但两个模型错的地方不一样。",
       note: "SA3M更常出现声源或属性错误；SAO1更常出现数量错误和伪影。两者都可能缺少复合事件中的子事件。",
       tags: ["模型比较", "Badcase", "专项复测"],
       href: "/t2a-case-study#badcase",
@@ -48,16 +48,16 @@ export const siteCopy = {
   ],
   projectSummary: {
     title: "T2A 音效生成评测",
-    body: "第一阶段以 Stable Audio Open 1.0 建立测试集、评分标准和 Badcase 规则；第二阶段重新生成 SAO1 基线，并与 Stable Audio 3 Medium 完成 400 条正式样本的受控比较。",
+    body: "第一阶段用 Stable Audio Open 1.0 搭建测试集、评分标准和 Badcase 规则；第二阶段重新生成 SAO1 基线，并与 Stable Audio 3 Medium 做了 400 条正式样本的受控比较。",
     scales: ["2个阶段", "600条正式样本（累计）", "660次试听事件（累计）", "Phase 2 n=400"],
-    finding: "在当前40条Prompt测试集中，两模型的OVL与REL没有显示明确的总体优势方向；事件级错误可用于模型选择和下一轮专项复测。",
+    finding: "在当前40条Prompt测试集中，两模型的OVL与REL没有显示明确的总体优势方向；事件级错误可以用来选模型和设计下一轮专项复测。",
     boundary: "600条与660次均为两阶段累计，不代表统一的三臂实验。正式模型比较只在Phase 2进行；项目由单一评测人完成，隐藏重复仅检查同一评测人的复测稳定性。",
     href: "/t2a-case-study",
     linkLabel: "查看完整案例",
   },
   supportingPractices: {
     title: "评测判断来自实际的声音工作",
-    body: "游戏音频、资产验收和运行时问题处理，让我能把抽象的评分标签落回可听、可查的具体问题。",
+    body: "游戏音频、资产验收和运行时问题处理——这些实际工作让我能把抽象的评分标签落回可听、可查的具体问题。",
     cards: [
       {
         title: "游戏音频与运行时诊断",
@@ -76,13 +76,13 @@ export const siteCopy = {
   auditTrustLine: {
     title: "研究版本与复算检查",
     status: `${t2aRelease.researchVersion} · audit ${t2aRelease.auditRevision} · ${t2aRelease.auditValidator} · ${t2aRelease.auditVerdict}`,
-    body: "复算检查补充了隐藏重复配对、统计重算和文件完整性核对；未修改人工评分、Badcase标签或裁决。",
+    body: "复算检查补了隐藏重复配对、统计重算和文件完整性核对；没改人工评分、Badcase标签或裁决。",
     href: auditRecordHref,
     linkLabel: "查看审计说明",
   },
   aboutCopy: {
     title: "关于杜明",
-    body: "声音设计硕士背景，具备游戏音频制作、交付和运行时问题定位经验；当前专注于生成式音频的人工听评、Badcase诊断和评测流程设计。",
+    body: "声音设计硕士，做过游戏音频制作、交付和运行时问题定位；现在主要做生成式音频的人工听评、Badcase 诊断和评测流程设计。",
   },
   links: { currentReportHref, auditRecordHref },
   evaluation: {

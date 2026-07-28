@@ -150,17 +150,17 @@ h3 {
 .narrative-note { margin-top: auto; padding: 12px 0 0; border-top: 1px solid var(--color-border); font-size: 11px !important; }
 .recruiter-narrative .tag-row { margin-top: 17px; }
 .recruiter-narrative .paper-link, .recruiter-practice-grid .paper-link { margin-top: 18px; }
-.recruiter-project { background: var(--color-primary-deep); color: var(--color-paper); }
-.content-section.recruiter-project .section-heading > h2 { color: #ffffff !important; }
-.content-section.recruiter-project .section-heading > .section-lead { color: #e4ebe8 !important; }
-.content-section.recruiter-project .section-heading > .eyebrow { color: #c8d8d3 !important; }
-.recruiter-project .recruiter-boundary { color: #d2ddd9; }
+.recruiter-project { background: var(--color-paper); color: var(--color-text); }
+.content-section.recruiter-project .section-heading > h2 { color: var(--color-text) !important; }
+.content-section.recruiter-project .section-heading > .section-lead { color: var(--color-text-secondary) !important; }
+.content-section.recruiter-project .section-heading > .eyebrow { color: var(--color-primary) !important; }
+.recruiter-project .recruiter-boundary { color: var(--color-text-secondary); }
 .recruiter-project-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(40px, 9vw, 145px); align-items: start; }
-.recruiter-scale-list { display: grid; gap: 0; border-top: 1px solid #70847f; }
-.recruiter-scale-list span { padding: 14px 0; border-bottom: 1px solid #70847f; font-family: var(--serif); font-size: 23px; }
+.recruiter-scale-list { display: grid; gap: 0; border-top: 1px solid var(--color-border); }
+.recruiter-scale-list span { padding: 14px 0; border-bottom: 1px solid var(--color-border); font-family: var(--serif); font-size: 23px; color: var(--color-primary); }
 .recruiter-finding { margin: 0; font-family: var(--serif); font-size: clamp(24px, 3vw, 38px); line-height: 1.38; }
 .recruiter-boundary { margin: 22px 0 26px; font-size: 12px; line-height: 1.8; }
-.recruiter-project .btn-primary { color: var(--color-primary-deep); background: var(--color-paper); }
+.recruiter-project .btn-primary { color: var(--color-paper); background: var(--color-primary); }
 .recruiter-practice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .recruiter-practice-grid article { min-height: 290px; padding: 28px; border: 1px solid var(--color-border); background: var(--color-paper); }
 .audit-trust { padding-block: 54px; border-top: 1px solid var(--color-border); background: var(--color-primary-soft); }

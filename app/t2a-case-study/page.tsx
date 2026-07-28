@@ -47,7 +47,7 @@ export default function T2AEvaluationProgramPage() {
       <section className="t2a-program-hero t2a-shell" id="overview">
         <div>
           <p className="eyebrow">T2A EVALUATION CASE STUDY</p>
-          <h1>听起来好，不等于生成正确</h1>
+          <h1>听起来好，<br />不等于生成正确</h1>
           <p className="t2a-program-subtitle">我如何从Stable Audio Open 1.0单模型PoC出发，完成SAO1与Stable Audio 3 Medium的受控音效评测。</p>
           <p className="t2a-lead">我把音频质量、Prompt符合度和具体错误分开记录。结果不只回答“平均分是多少”，也回答“模型在哪类要求上容易出错”。</p>
           <div className="t2a-hero-actions">

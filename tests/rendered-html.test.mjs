@@ -34,11 +34,11 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
-test("featured case study keeps explicit high-contrast text colors", async () => {
+test("featured case study keeps an explicit paper-background contrast scheme", async () => {
   const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(css, /\.content-section\.recruiter-project \.section-heading > h2 \{ color: #ffffff !important; \}/);
-  assert.match(css, /\.content-section\.recruiter-project \.section-heading > \.section-lead \{ color: #e4ebe8 !important; \}/);
-  assert.match(css, /\.content-section\.recruiter-project \.section-heading > \.eyebrow \{ color: #c8d8d3 !important; \}/);
+  assert.match(css, /\.recruiter-project \{ background: var\(--color-paper\); color: var\(--color-text\); \}/);
+  assert.match(css, /\.content-section\.recruiter-project \.section-heading > h2 \{ color: var\(--color-text\) !important; \}/);
+  assert.match(css, /\.content-section\.recruiter-project \.section-heading > \.section-lead \{ color: var\(--color-text-secondary\) !important; \}/);
 });
 
 test("case study keeps the essential evaluation story open and deep detail closed", async () => {
@@ -46,7 +46,7 @@ test("case study keeps the essential evaluation story open and deep detail close
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "听起来好，不等于生成正确",
+    "听起来好", "不等于生成正确",
     "先判断声音质量，再判断内容是否正确",
     "先盲听，再阅读Prompt",
     "当前测试集未观察到明确的总体优势方向",
@@ -96,7 +96,7 @@ test("game audio link opens a dedicated sound practice page", async () => {
   assert.match(home, /href="\/sound-practice"[^>]*>查看游戏音频案例/);
   assert.doesNotMatch(home, /href="\/resume#game-audio"/);
   for (const text of [
-    "声音设计进入游戏后，才成为可验证的体验",
+    "声音设计进入游戏后才是可验证的体验",
     "GameKit3D + Wwise 全流程集成",
     "Hitstop时缓与声音逻辑协同",
     "动态混音与Snapshot切换",
