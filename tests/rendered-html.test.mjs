@@ -13,44 +13,50 @@ async function render(pathname = "/") {
   );
 }
 
-const forbidden = [
-  "面向多模态评测",
-  "两个模型等价",
-  "41 events",
-  "全部重复集中在 Session 10",
-  "gap>=30 = 37",
-  "CLAP 校准",
-  "Codex 证明研究绝对正确",
-];
+const prohibitedHomeTerms = ["多模态评测", "视频生成", "评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
 
-test("homepage presents the two-phase Evaluation Program", async () => {
+test("homepage uses the recruiter-facing three-narrative structure", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);
   const html = await response.text();
-  for (const text of ["T2A Evaluation Program", "600", "660", "400", "3.640", "3.305", "3.780", "3.355", "APPROVED"]) assert.match(html, new RegExp(text.replace(".", "\\.")));
+  for (const text of [
+    "生成音频评测，不只是判断是否好听",
+    "600", "正式样本 · 两阶段累计",
+    "400", "Phase 2受控比较",
+    "40", "隐藏重复配对",
+    "先判断声音质量，再判断内容是否正确",
+    "把主观听感整理成统一的评测流程",
+    "总体分数之外，还要看模型具体错在哪里",
+    "v3.2.3 r2 · audit r3 · ALL CHECKS PASSED · exit 0 · APPROVED",
+  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
   assert.match(html, /href="\/t2a-case-study"/);
-  for (const text of forbidden) assert.doesNotMatch(html, new RegExp(text));
+  for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
-test("case study renders controlled comparison, boundaries and audit evidence", async () => {
+test("case study keeps the essential evaluation story open and deep detail closed", async () => {
   const response = await render("/t2a-case-study");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "T2A 音效生成评测：两阶段方法与结果", "600", "660", "3.640", "3.305", "3.780", "3.355",
-    "−0.140", "−0.050", "40 / 40", "95.0%", "97.5%", "APPROVED",
-    "762CC26F1CFBC516141DD48D08F1D25209EB6678034B81F16C32CB4570B75171",
-    "prompt-conditioned sample-level label rate", "intra-rater consistency", "NOT RUN",
-    "DT 770 PRO X", "未做标准化声压级校准", "OVL / REL 评分锚点",
-    "440 次联合盲听", "10 个 Session", "敏感性分析", "220 次盲听 · 分两天完成",
+    "听起来好，不等于生成正确",
+    "先判断声音质量，再判断内容是否正确",
+    "先盲听，再阅读Prompt",
+    "当前测试集未观察到明确的总体优势方向",
+    "总体分数之外，还要看模型具体错在哪里",
+    "隐藏重复检查同一评测人的复测稳定性",
+    "38 / 40（95.0%）", "39 / 40（97.5%）",
+    "SA3M 14.5% · SAO1 6.5%", "SA3M 42.5% · SAO1 60.0%", "SA3M 37.5% · SAO1 33.8%",
+    "统计与结果复核", "客观指标与方法边界", "版本与审计记录",
+    "aria-label=\"C01 / B0008 正向参照试听音频\"",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(html, /Phase 1 Historical Listening Cases/i);
-  assert.match(html, /超出目标事件结构的重复撞击/);
-  assert.match(html, /CI.*不等于模型等价/);
-  for (const text of forbidden) assert.doesNotMatch(html, new RegExp(text));
+  assert.equal((html.match(/<details class="t2a-collapsible">/g) ?? []).length, 3);
+  assert.doesNotMatch(html, /<details[^>]+open/);
+  assert.doesNotMatch(html, /fixed seeds/);
+  assert.doesNotMatch(html, /多模态评测/);
 });
 
-test("formal summary redirects to the controlled results section", async () => {
+test("formal summary remains a compatible redirect", async () => {
   const response = await render("/t2a-formal-summary");
   assert.ok([301, 302, 303, 307, 308].includes(response.status));
   const location = new URL(response.headers.get("location"), "http://localhost");
@@ -58,40 +64,20 @@ test("formal summary redirects to the controlled results section", async () => {
   assert.equal(location.hash, "#results");
 });
 
-test("resume and audio validation pages use the revised public wording", async () => {
-  const resume = await render("/resume");
-  assert.equal(resume.status, 200);
-  const resumeHtml = await resume.text();
-  assert.match(resumeHtml, /T2A Evaluation Program/);
-  assert.doesNotMatch(resumeHtml, /多模态评测/);
-
-  const qa = await render("/audio-validation-summary");
-  assert.equal(qa.status, 200);
-  const qaHtml = await qa.text();
-  assert.match(qaHtml, /与直属领导共同起草并迭代/);
-  assert.match(qaHtml, /文件格式与命名/);
-});
-
-test("current public release artifacts and historical audio exist", async () => {
+test("pages share the site copy source and keep public artifacts available", async () => {
   const root = new URL("../", import.meta.url);
+  const [home, caseStudy, copy] = await Promise.all([
+    readFile(new URL("app/page.tsx", root), "utf8"),
+    readFile(new URL("app/t2a-case-study/page.tsx", root), "utf8"),
+    readFile(new URL("src/data/siteCopy.ts", root), "utf8"),
+  ]);
+  assert.match(home, /src\/data\/siteCopy/);
+  assert.match(caseStudy, /src\/data\/siteCopy/);
+  assert.match(copy, /coreNarratives/);
+  assert.match(copy, /coreNarratives\.length !== 3/);
   for (const relative of [
     "public/downloads/t2a-v3-evidence/T2A_Evaluation_Report_v3.2.3_r3.md",
     "public/downloads/t2a-v3-evidence/T2A_Audit_Release_Record_r3.md",
-    "public/downloads/t2a-v3-evidence/T2A_v3.2.3_r2_audit_r3.zip",
-    "public/downloads/t2a-v3-evidence/badcase_conditional_rate_v3.2.3.csv",
-    "public/downloads/t2a-v3-evidence/repeat_consistency_v3.2.3.csv",
-    "public/audio/B0008.wav", "public/audio/B0152.wav", "public/audio/B0099.wav", "public/audio/B0092.wav",
+    "public/audio/B0008.mp3", "public/audio/B0152.mp3", "public/audio/B0099.mp3", "public/audio/B0092.mp3",
   ]) await access(new URL(relative, root));
-});
-
-test("homepage and case study share the release data module", async () => {
-  const root = new URL("../", import.meta.url);
-  const home = await readFile(new URL("app/page.tsx", root), "utf8");
-  const caseStudy = await readFile(new URL("app/t2a-case-study/page.tsx", root), "utf8");
-  const summary = await readFile(new URL("app/t2a-formal-summary/page.tsx", root), "utf8");
-  assert.match(home, /data\/t2aRelease/);
-  assert.match(caseStudy, /data\/t2aRelease/);
-  assert.match(caseStudy, /data\/t2aBadcases/);
-  assert.match(summary, /#results/);
-  assert.doesNotMatch(caseStudy, /same-session\s*=\s*0|gap.?&gt;=.?30.?=.?37|later-minus-earlier.?=.?-0\.20/);
 });

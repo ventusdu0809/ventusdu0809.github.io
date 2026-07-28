@@ -85,3 +85,18 @@ Bilibili 播放器与飞书技术文档为联网补充材料，不是核心案�
 - Cloudflare 的 `wrangler.json`、Worker 入口和域名保持不变；
 - 若 Pages 版本异常，可将公开入口切回 Cloudflare，并从上述标签恢复迁移前网站源代码；
 - 不使用强制覆盖主分支作为回滚手段。
+
+## 2026-07-28 内容架构更新
+
+本次更新将首页改为招聘导向的三项核心叙事，并重写 T2A 案例页的默认阅读层级。
+
+| 检查项 | 状态 | 证据或说明 |
+|---|---|---|
+| ESLint | PASS | `npm run lint` 成功 |
+| TypeScript | PASS | `npm run typecheck` 成功 |
+| 页面渲染测试 | PASS | 4/4；检查三个核心叙事、默认关闭折叠区、音频 aria-label 与共享文案源 |
+| Pages 静态导出 | PASS | `npm run build:pages` 成功 |
+| Pages 静态校验 | PASS | 54 个文件，32.46 MiB |
+| Cloudflare 源码包 | PASS | `npm run package:cloudflare-source`；32.27 MiB |
+
+待本次合并至 `main` 后，由 GitHub Actions 重新发布并补充新的工作流运行链接。

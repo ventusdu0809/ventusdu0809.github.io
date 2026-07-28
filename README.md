@@ -1,6 +1,6 @@
-# 杜明｜生成式音频评测与游戏音频作品集
+# 杜明｜AI 音频评测与生成式音频评测作品集
 
-面向公开求职展示的静态作品集，内容包括两阶段 T2A 音效生成评测、人工听评与 Badcase 诊断、音频资产验收，以及游戏运行时音频案例。
+面向公开求职展示的静态作品集，内容包括 Text-to-Audio 人工听评、评分标准、Badcase 分析、隐藏重复、受控模型比较、音频资产验收，以及游戏运行时音频案例。
 
 本仓库只保存公开网页、代表性压缩试听和可公开的方法材料，不包含完整生成音频库、参考数据集、原始评分源或私密项目数据。
 
@@ -87,6 +87,14 @@ npm run verify:offline
 
 离线包与 Pages 共用页面和素材源；Bilibili 与飞书属于联网补充内容。详细说明见 `OFFLINE_PACKAGE.md`。
 
+## Cloudflare 源码包
+
+```powershell
+npm run package:cloudflare-source
+```
+
+输出：`release/杜明_AI音频评测网站_Cloudflare源码包_2026-07-28.zip`。部署步骤见 `CLOUDFLARE_UPDATE_HANDOFF.md`。
+
 ## 目录
 
 ```text
@@ -96,6 +104,7 @@ worker/                      现有 Cloudflare Worker 入口
 scripts/export-static.mjs    Pages / 离线静态导出
 scripts/verify-static.mjs    路由、资源、路径、体积和隐私检查
 scripts/package-offline.ps1  离线 ZIP 生成
+scripts/package-cloudflare-source.ps1  Cloudflare 源码 ZIP 生成
 .github/workflows/           GitHub Pages 自动部署
 tests/                       原 Cloudflare 渲染回归测试
 ```

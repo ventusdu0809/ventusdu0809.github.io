@@ -3,23 +3,23 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "杜明｜生成式音频评测与游戏音频",
+  title: "杜明｜AI音频评测与生成式音频评测",
   description:
-    "杜明的声音作品集：两阶段 T2A Evaluation Program、SAO1 与 Stable Audio 3 Medium 受控比较、人工听评、Badcase、音频交付验收与游戏运行时案例。",
+    "杜明的AI音频评测作品集，展示Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
   authors: [{ name: "杜明" }],
   creator: "杜明",
   keywords: ["AI 音频评测", "生成式音频评测", "T2A", "游戏音频", "Badcase"],
   openGraph: {
-    title: "杜明｜生成式音频评测与游戏音频",
+    title: "杜明｜AI音频评测与生成式音频评测",
     description:
-      "两阶段 T2A 音效评测、受控模型比较、人工 OVL/REL、Badcase、隐藏重复、代码数据复核与游戏音频实践。",
+      "Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "杜明｜生成式音频评测与游戏音频",
+    title: "杜明｜AI音频评测与生成式音频评测",
     description:
-      "T2A Evaluation Program、受控模型比较、游戏音频设计与音频质量验收作品集。",
+      "Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
     images: ["/og.png"],
   },
 };
