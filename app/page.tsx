@@ -22,6 +22,7 @@ export default function Home() {
         <div className="hero-inner recruiter-hero-inner">
           <p className="eyebrow">{heroCopy.eyebrow}</p>
           <h1 id="hero-title">{heroCopy.title}</h1>
+          <p className="recruiter-roleline">{heroCopy.subtitle}</p>
           <p className="hero-intro recruiter-intro">{heroCopy.body}</p>
           <div className="hero-actions">
             <a className="btn btn-primary" href="/t2a-case-study">{heroCopy.primaryCta}</a>

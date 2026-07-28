@@ -20,7 +20,7 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "生成音频评测，不只是判断是否好听",
+    "杜明", "AI音频评测",
     "600", "正式样本 · 两阶段累计",
     "400", "Phase 2受控比较",
     "40", "隐藏重复配对",
@@ -62,6 +62,23 @@ test("formal summary remains a compatible redirect", async () => {
   const location = new URL(response.headers.get("location"), "http://localhost");
   assert.equal(location.pathname, "/t2a-case-study");
   assert.equal(location.hash, "#results");
+});
+
+test("audio validation separates results, standards and review boundaries", async () => {
+  const response = await render("/audio-validation-summary");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "音频资产验收：从交付标准到可复查结果",
+    "验收结果先回答哪些文件需要处理",
+    "问题主要集中在哪里",
+    "验收规范如何转成可执行规则",
+    "自动检查覆盖什么，又不能判断什么",
+    "仍需人工听审",
+    "7,872", "1,922", "5,904",
+  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(html, /代码实现与批量执行由AI辅助完成/);
+  assert.match(html, /各项命中次数不能相加为不通过文件数/);
 });
 
 test("pages share the site copy source and keep public artifacts available", async () => {

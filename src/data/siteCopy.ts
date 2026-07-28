@@ -6,7 +6,8 @@ export const siteCopy = {
     "基于声音设计与游戏音频经验，我将生成音频的质量、语义符合度和具体错误分开评估，并把听感判断整理为可复查的评测结果。",
   heroCopy: {
     eyebrow: "AI AUDIO EVALUATION",
-    title: "生成音频评测，不只是判断是否好听",
+    title: "杜明",
+    subtitle: "AI音频评测",
     body: "我将音频自身质量、Prompt符合度和具体错误分开记录，再通过统一听评、隐藏重复和Badcase分析完成模型比较。",
     metrics: [
       { value: "600", label: "正式样本 · 两阶段累计" },
