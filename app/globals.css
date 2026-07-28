@@ -151,9 +151,9 @@ h3 {
 .recruiter-narrative .tag-row { margin-top: 17px; }
 .recruiter-narrative .paper-link, .recruiter-practice-grid .paper-link { margin-top: 18px; }
 .recruiter-project { background: var(--color-primary-deep); color: var(--color-paper); }
-.content-section.recruiter-project .section-heading h2 { color: #fcfaf5; }
-.content-section.recruiter-project .section-heading .section-lead,
-.content-section.recruiter-project .section-heading .eyebrow,
+.content-section.recruiter-project .section-heading > h2 { color: #ffffff !important; }
+.content-section.recruiter-project .section-heading > .section-lead { color: #e4ebe8 !important; }
+.content-section.recruiter-project .section-heading > .eyebrow { color: #c8d8d3 !important; }
 .recruiter-project .recruiter-boundary { color: #d2ddd9; }
 .recruiter-project-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: clamp(40px, 9vw, 145px); align-items: start; }
 .recruiter-scale-list { display: grid; gap: 0; border-top: 1px solid #70847f; }

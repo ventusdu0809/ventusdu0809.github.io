@@ -34,6 +34,13 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
+test("featured case study keeps explicit high-contrast text colors", async () => {
+  const css = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
+  assert.match(css, /\.content-section\.recruiter-project \.section-heading > h2 \{ color: #ffffff !important; \}/);
+  assert.match(css, /\.content-section\.recruiter-project \.section-heading > \.section-lead \{ color: #e4ebe8 !important; \}/);
+  assert.match(css, /\.content-section\.recruiter-project \.section-heading > \.eyebrow \{ color: #c8d8d3 !important; \}/);
+});
+
 test("case study keeps the essential evaluation story open and deep detail closed", async () => {
   const response = await render("/t2a-case-study");
   assert.equal(response.status, 200);
