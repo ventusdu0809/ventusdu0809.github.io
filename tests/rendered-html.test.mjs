@@ -113,16 +113,19 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   const html = await response.text();
   for (const text of [
     "杜明",
-    "AI 音频评测 / 生成式音频评测（Text-to-Audio）",
-    "600 条正式样本和 660 次试听事件",
-    "T2A 音效生成评测｜SAO1 PoC 与 SAO1–SA3M 受控比较",
-    "TheExplorer｜Unity 3D Game Kit 音频系统重构",
-    "杭州千乎网络｜游戏音频策划 - 声音设计｜《辉烬》",
-    "2026.03 — 2026.07",
-    "杭州伏腊｜游戏音效设计师 - 声音设计",
-    "爱丁堡大学｜声音设计硕士（MSc）",
-    "米兰布雷拉美术学院｜新技术艺术本科（BA）",
-    "AI 用于资料归纳、代码实现和批处理执行",
+    "AI音频数据评测",
+    "600个正式样本和660次试听评测",
+    "Text-to-Audio专项评测",
+    "SAO1 PoC与SAO1 / SA3M受控对比",
+    "The Explorer",
+    "杭州千乎网络",
+    "2026.03—2026.07",
+    "杭州伏腊",
+    "凤凰艺术",
+    "爱丁堡大学",
+    "米兰布雷拉美术学院",
+    "与直属领导共同起草并迭代音频外包制作与交付规范",
+    "AI用于资料归纳、代码实现和批处理执行",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   for (const href of ["/t2a-case-study", "/sound-practice", "/audio-validation-summary"]) {
     assert.match(html, new RegExp(`href="${href}"`));
@@ -132,6 +135,7 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   assert.doesNotMatch(html, /50 个约 (?:2|20) MB/);
   assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
   assert.doesNotMatch(html, /href="tel:/);
+  assert.match(html, /<time[^>]*>2026\.07<\/time>/);
 });
 
 test("pages share the site copy source and keep public artifacts available", async () => {
