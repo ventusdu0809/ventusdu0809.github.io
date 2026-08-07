@@ -151,3 +151,39 @@ test("pages share the site copy source and keep public artifacts available", asy
     "public/audio/B0008.mp3", "public/audio/B0152.mp3", "public/audio/B0099.mp3", "public/audio/B0092.mp3",
   ]) await access(new URL(relative, root));
 });
+
+test("audio world framework page presents the four-layer method and keeps the truth boundary", async () => {
+  const response = await render("/audio-world-framework");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "点·线·面·境",
+    "AI 音频场景表示与分层评测框架",
+    "From Audio Events to Audio Worlds",
+    "从「生成一段音频」到「构建一个声音世界」",
+    "点、线、面、境：四层能力拆解",
+    "从 Wwise 到 AI Audio Scene Middleware",
+    "一种关于世界状态的文化类比",
+    "分层评测矩阵",
+    "从单标签走向层级结构",
+    "雨夜，一个人撑伞缓慢走过石板路，远处偶尔传来雷声。",
+    "从现有评测流程到下一阶段框架",
+    "我的角色不是只给模型打分，而是建立问题语言",
+    "我的能力组合",
+    "右上角可切换「面试演示」模式",
+    "不主张《易经》与现代 AI 在技术原理上等同",
+    "OVL within-1",
+    "Proposed / Next Step",
+    "已完成",
+  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  // 首页导航与页脚提供入口
+  const home = await (await render("/")).text();
+  assert.match(home, /href="\/audio-world-framework"[^>]*>场景框架/);
+  // 不虚构：未做过的内容必须标注 Proposed
+  assert.match(html, /scene_incoherence/);
+  assert.match(html, /AI 音频中间件不是直接替代生成模型/);
+  assert.doesNotMatch(html, /已成为行业标准/);
+  assert.doesNotMatch(html, /《易经》是 AI 的技术来源/);
+  assert.doesNotMatch(html, /用于模型训练/);
+});
+

@@ -12,6 +12,7 @@ export default function Home() {
         </a>
         <nav aria-label="主导航">
           <a href="/t2a-case-study">评测案例</a>
+          <a href="/audio-world-framework">场景框架</a>
           <a href="#sound-practice">声音实践</a>
           <a href="/resume">关于我</a>
         </nav>
@@ -134,6 +135,7 @@ export default function Home() {
         </div>
         <div>
           <a href="/t2a-case-study">评测案例</a>
+          <a href="/audio-world-framework">场景框架</a>
           <a href="/resume">关于我</a>
           <a href="https://space.bilibili.com/7927779" target="_blank" rel="noreferrer">Bilibili</a>
         </div>

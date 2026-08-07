@@ -12,7 +12,7 @@ if (!new Set(["pages", "offline"]).has(mode)) {
 
 const outputDir = path.join(root, mode === "pages" ? "pages-dist" : "offline-dist");
 const basePath = normalizeBasePath(process.env.PAGES_BASE_PATH || "/");
-const routes = ["/", "/t2a-case-study", "/audio-validation-summary", "/sound-practice", "/resume"];
+const routes = ["/", "/t2a-case-study", "/audio-validation-summary", "/sound-practice", "/resume", "/audio-world-framework"];
 const routeSet = new Set([...routes, "/t2a-formal-summary"]);
 const serverEntry = path.join(root, "dist", "server", "index.js");
 
@@ -89,7 +89,6 @@ function transformHtml(source, route) {
     .replace(/<link\b[^>]*rel=["']modulepreload["'][^>]*>/gi, "")
     .replace(/\sdata-rsc-css-href=["'][^"']*["']/gi, "")
     .replace(/\sdata-precedence=["'][^"']*["']/gi, "");
-
   if (mode === "offline") {
     html = html.replace(
       /<iframe\b[^>]*src=["']https:\/\/player\.bilibili\.com\/[^"']*["'][^>]*>[\s\S]*?<\/iframe>/gi,
@@ -126,9 +125,169 @@ document.addEventListener("click", async function (event) {
   button.textContent = "已复制 SHA256";
   window.setTimeout(function () { button.textContent = original; }, 1800);
 });
-</script>`;
+</script>
+${route === "/audio-world-framework" ? awfStaticEnhancement() : ""}`;
 
   return html.replace("</body>", `${enhancement}</body>`);
+}
+
+/**
+ * 《点·线·面·境》静态版交互增强脚本。
+ * 静态导出会剥离 React 运行时，这里用 vanilla JS 读取组件渲染出的
+ * data-* 属性，驱动：核心流程图点击、六爻阴阳切换、面试演示模式。
+ * 与 Cloudflare 版 React 交互行为保持一致。
+ */
+function awfStaticEnhancement() {
+  return `<script>
+(function () {
+  var flow = document.querySelector("[data-awf-flow]");
+  if (flow) {
+    var nodes = flow.querySelectorAll("[data-flow-id]");
+    var detail = flow.querySelector("[data-awf-flow-detail]");
+    function select(node) {
+      nodes.forEach(function (n) {
+        var item = n.closest("li");
+        var active = n === node;
+        item.classList.toggle("is-active", active);
+        n.setAttribute("aria-pressed", active ? "true" : "false");
+      });
+      detail.querySelector(".awf-flow-detail-eyebrow").textContent =
+        "LAYER " + node.getAttribute("data-flow-index") + " / " + node.getAttribute("data-flow-en").toUpperCase();
+      var h3 = detail.querySelector("h3");
+      h3.childNodes[0].textContent = node.getAttribute("data-flow-zh") + " ";
+      h3.querySelector(".awf-flow-detail-en").textContent = node.getAttribute("data-flow-en");
+      detail.querySelector(".awf-flow-detail-desc").textContent = node.getAttribute("data-flow-desc");
+      var grid = detail.querySelectorAll(".awf-flow-detail-grid p");
+      grid[0].textContent = node.getAttribute("data-flow-example");
+      grid[1].textContent = node.getAttribute("data-flow-question");
+    }
+    nodes.forEach(function (n) {
+      n.addEventListener("click", function () { select(n); });
+    });
+  }
+
+  var hex = document.querySelector("[data-awf-hexagram]");
+  if (hex) {
+    var lines = hex.querySelectorAll("[data-hex-index]");
+    var readout = hex.querySelector("[data-awf-hex-readout]");
+    function renderHex() {
+      var state = 0;
+      lines.forEach(function (line) {
+        if (line.getAttribute("data-hex-yang") === "1") {
+          state += 1 << parseInt(line.getAttribute("data-hex-index"), 10);
+        }
+      });
+      var binary = "";
+      for (var i = 5; i >= 0; i--) { binary += ((state >> i) & 1) ? "1" : "0"; }
+      readout.querySelector(".awf-hexagram-state-label strong").textContent = String(state);
+      readout.querySelector(".awf-hexagram-binary").textContent = "二进制 " + binary + "（自下而上为第 1–6 爻）";
+      readout.querySelector(".awf-hexagram-transition").textContent =
+        state === 0 ? "初始状态：全部爻为阴，State 0" : "Local State Change → Global State Transition";
+    }
+    lines.forEach(function (line) {
+      line.addEventListener("click", function () {
+        var yang = line.getAttribute("data-hex-yang") === "1";
+        line.setAttribute("data-hex-yang", yang ? "0" : "1");
+        line.classList.toggle("is-yang", !yang);
+        line.classList.toggle("is-yin", yang);
+        line.setAttribute("aria-pressed", yang ? "false" : "true");
+        renderHex();
+      });
+    });
+  }
+
+  var toggle = document.querySelector("[data-awf-interview-toggle]");
+  if (toggle) {
+    var slides = JSON.parse(toggle.getAttribute("data-awf-interview-data") || "[]");
+    var overlay = null;
+    var slideIndex = 0;
+    var tipOpen = false;
+    function buildSlide(slide) {
+      return (
+        '<div class="awf-interview-slide">' +
+          '<p class="awf-interview-section">第 ' + slide.section + ' 章 / ' + escapeHtml(slide.title) + '</p>' +
+          '<h2 class="awf-interview-big">' + escapeHtml(slide.big) + '</h2>' +
+          '<div class="awf-interview-detail"><p>' + escapeHtml(slide.detail) + '</p></div>' +
+          '<div class="awf-interview-tip-wrap">' +
+            '<button type="button" class="awf-interview-tip-button" aria-expanded="false">讲解提示<span aria-hidden="true">+</span></button>' +
+            (tipOpen ? '<p class="awf-interview-tip">' + escapeHtml(slide.tip) + '</p>' : '') +
+          '</div>' +
+        '</div>'
+      );
+    }
+    function progressMarkup() {
+      return slides.map(function (s, i) {
+        return '<button type="button" class="' + (i <= slideIndex ? "is-done" : "") + '" aria-label="跳到第 ' + s.section + ' 章 ' + escapeHtml(s.title) + '" data-slide="' + i + '"></button>';
+      }).join("");
+    }
+    function render() {
+      var slide = slides[slideIndex];
+      overlay.querySelector(".awf-interview-slide").outerHTML = buildSlide(slide);
+      overlay.querySelector(".awf-interview-progress").innerHTML = progressMarkup();
+      var navs = overlay.querySelectorAll(".awf-interview-nav");
+      navs[0].disabled = slideIndex === 0;
+      navs[1].disabled = slideIndex === slides.length - 1;
+      var tipButton = overlay.querySelector(".awf-interview-tip-button");
+      tipButton.addEventListener("click", function () {
+        tipOpen = !tipOpen;
+        render();
+      });
+      overlay.querySelectorAll("[data-slide]").forEach(function (b) {
+        b.addEventListener("click", function () {
+          slideIndex = parseInt(b.getAttribute("data-slide"), 10);
+          tipOpen = false;
+          render();
+        });
+      });
+    }
+    function start() {
+      slideIndex = 0;
+      tipOpen = false;
+      overlay = document.createElement("section");
+      overlay.className = "awf-interview";
+      overlay.setAttribute("aria-label", "面试演示模式");
+      overlay.innerHTML =
+        '<div class="awf-interview-topbar"><span class="awf-interview-brand">点·线·面·境 / INTERVIEW MODE</span>' +
+        '<button type="button" class="awf-interview-exit">退出演示</button></div>' +
+        '<div class="awf-interview-slide"></div>' +
+        '<div class="awf-interview-controls">' +
+          '<button type="button" class="awf-interview-nav" data-dir="prev">← 上一章</button>' +
+          '<div class="awf-interview-progress"></div>' +
+          '<button type="button" class="awf-interview-nav" data-dir="next">下一章 →</button>' +
+        '</div>' +
+        '<p class="awf-interview-kbd">← → 方向键切换章节 · Esc 退出</p>';
+      document.body.appendChild(overlay);
+      overlay.querySelector(".awf-interview-exit").addEventListener("click", stop);
+      var navs = overlay.querySelectorAll(".awf-interview-nav");
+      navs[0].addEventListener("click", function () {
+        slideIndex = Math.max(0, slideIndex - 1); tipOpen = false; render();
+      });
+      navs[1].addEventListener("click", function () {
+        slideIndex = Math.min(slides.length - 1, slideIndex + 1); tipOpen = false; render();
+      });
+      render();
+    }
+    function stop() {
+      if (overlay) { overlay.remove(); overlay = null; }
+    }
+    document.addEventListener("keydown", function (event) {
+      if (!overlay) return;
+      if (event.key === "ArrowRight") { slideIndex = Math.min(slides.length - 1, slideIndex + 1); tipOpen = false; render(); }
+      else if (event.key === "ArrowLeft") { slideIndex = Math.max(0, slideIndex - 1); tipOpen = false; render(); }
+      else if (event.key === "Escape") { stop(); }
+    });
+    toggle.querySelector("[data-awf-interview-start]").addEventListener("click", start);
+  }
+
+  function escapeHtml(value) {
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+})();
+</script>`;
 }
 
 function rewriteRootUrl(value, route) {

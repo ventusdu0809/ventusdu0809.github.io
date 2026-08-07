@@ -2,224 +2,340 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "杜明｜AI 音频评测 / 生成式音频评测",
+  title: "杜明｜AI音频数据评测与音频模型主观评测",
   description:
-    "杜明的公开简历：声音设计硕士背景，聚焦 AI 音频评测、Text-to-Audio 测试集设计、主观听评、数据校验与 Badcase 诊断。",
+    "爱丁堡大学声音设计硕士杜明的AI音频评测简历，包含Text-to-Audio评测集构建、主观听评、Bad Case分析、声画同步和环境音效判断经验。",
 };
-
-const projectLinks = [
-  { href: "/t2a-case-study", label: "查看 T2A 案例研究" },
-  { href: "/audio-validation-summary", label: "查看音频资产验收案例" },
-  { href: "/sound-practice", label: "查看游戏音频案例" },
-];
 
 export default function ResumePage() {
   return (
     <main className="resume-page">
-      <style>{`
-        *, *::before, *::after { box-sizing: border-box; }
-        :root {
-          --resume-ink: #202421;
-          --resume-muted: #626761;
-          --resume-accent: #355c57;
-          --resume-accent-soft: #e8efec;
-          --resume-line: #d8d4cc;
-          --resume-paper: #fff;
-          --resume-wash: #f5f4ef;
-        }
-        html { background: #efeee9; }
-        body { margin: 0; }
-        .resume-page {
-          width: min(880px, calc(100% - 32px));
-          min-height: 100vh;
-          margin: 0 auto;
-          padding: 34px 48px 56px;
-          color: var(--resume-ink);
-          background: var(--resume-paper);
-          font-family: "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei", sans-serif;
-        }
-        .resume-page a { color: var(--resume-accent); text-decoration: none; }
-        .resume-page a:hover { text-decoration: underline; text-underline-offset: 3px; }
-        .back { display: inline-flex; margin-bottom: 24px; font-size: .84rem; color: var(--resume-muted) !important; }
-        .resume-header { padding-bottom: 20px; border-bottom: 1px solid var(--resume-line); }
-        .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
-        .header-name { margin: 0; font-size: 2.15rem; line-height: 1.2; letter-spacing: .04em; }
-        .header-role { margin: 6px 0 0; color: var(--resume-accent); font-size: 1.05rem; font-weight: 700; }
-        .header-contact { display: grid; gap: 5px; text-align: right; color: var(--resume-muted); font-size: .84rem; line-height: 1.45; }
-        .keyword-strip { display: flex; flex-wrap: wrap; gap: 7px 16px; margin: 18px 0 0; color: #46504b; font-size: .8rem; }
-        .keyword-strip span { position: relative; }
-        .keyword-strip span:not(:last-child)::after { content: ""; position: absolute; right: -9px; top: 50%; width: 2px; height: 2px; border-radius: 50%; background: #969c97; }
-        .section { margin-top: 25px; }
-        .section-title { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; color: var(--resume-accent); font-size: 1rem; font-weight: 800; letter-spacing: .03em; }
-        .section-title::after { content: ""; flex: 1; height: 1px; background: var(--resume-line); }
-        .summary { margin: 0; padding: 14px 16px; border-left: 3px solid var(--resume-accent); background: var(--resume-wash); font-size: .91rem; line-height: 1.75; }
-        .item { margin-bottom: 19px; }
-        .item:last-child { margin-bottom: 0; }
-        .item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
-        .item-name { font-size: .95rem; font-weight: 800; }
-        .item-date { flex: 0 0 auto; color: var(--resume-muted); font-size: .79rem; white-space: nowrap; }
-        .item-sub { margin: 3px 0 7px; color: var(--resume-muted); font-size: .8rem; }
-        .bullets { list-style: none; margin: 0; padding: 0; }
-        .bullets li { position: relative; margin: 0 0 6px; padding-left: 16px; font-size: .88rem; line-height: 1.65; }
-        .bullets li::before { content: "–"; position: absolute; left: 0; color: var(--resume-accent); font-weight: 700; }
-        .project-links { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 9px; font-size: .81rem; font-weight: 650; }
-        .responsibility-note { margin: 10px 0 0; padding: 10px 12px; background: var(--resume-accent-soft); color: #35433e; font-size: .79rem; line-height: 1.6; }
-        .education-detail { margin: 4px 0 0; color: var(--resume-muted); font-size: .82rem; }
-        .skills { display: grid; grid-template-columns: 1fr; gap: 7px; margin: 0; }
-        .skill-row { display: grid; grid-template-columns: 112px 1fr; gap: 12px; font-size: .87rem; line-height: 1.58; }
-        .skill-row dt { font-weight: 800; }
-        .skill-row dd { margin: 0; }
-        .resume-footer { margin-top: 34px; padding-top: 16px; border-top: 1px solid var(--resume-line); color: var(--resume-muted); font-size: .75rem; line-height: 1.6; }
-        @media (max-width: 680px) {
-          .resume-page { width: 100%; padding: 22px 18px 42px; }
-          .header-top { display: block; }
-          .header-name { font-size: 1.75rem; }
-          .header-contact { margin-top: 14px; text-align: left; }
-          .item-head { align-items: flex-start; flex-direction: column; gap: 2px; }
-          .skill-row { grid-template-columns: 1fr; gap: 1px; }
-        }
-        @media print {
-          html { background: #fff; }
-          .resume-page { width: 100%; padding: 0; }
-          .back, .project-links { display: none; }
-        }
-      `}</style>
+      {/* ── 顶部导航 ── */}
+      <nav className="resume-nav no-print" aria-label="简历导航">
+        <Link href="/" className="resume-back">
+          ← 返回作品集
+        </Link>
+        <button
+          type="button"
+          className="resume-print-btn"
+          onClick={() => window.print()}
+          aria-label="打印或保存为 PDF"
+        >
+          打印 / 保存 PDF
+        </button>
+      </nav>
 
-      <Link className="back" href="/">← 返回作品集</Link>
-
-      <header className="resume-header">
-        <div className="header-top">
-          <div>
-            <h1 className="header-name">杜明</h1>
-            <p className="header-role">AI 音频评测 / 生成式音频评测（Text-to-Audio）</p>
+      <div className="resume-shell">
+        {/* ══════ Hero ══════ */}
+        <header className="resume-hero">
+          <div className="resume-hero-main">
+            <h1 className="resume-name">杜明</h1>
+            <p className="resume-role">AI 音频数据评测</p>
+            <p className="resume-tagline">
+              声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断
+            </p>
+            <p className="resume-bio">
+              爱丁堡大学声音设计硕士，具备游戏、影视及交互音频制作经历。独立完成
+              Text-to-Audio
+              模型评测项目，覆盖评测集构建、音频质检、盲听评分、Bad Case
+              标注、隐藏重复、复测裁决及基础统计，能够将专业听感转化为结构化、可复核的评测结论。
+            </p>
           </div>
-          <div className="header-contact" aria-label="联系方式">
+
+          <address className="resume-contact">
+            <a href="tel:15309993915">15309993915</a>
             <a href="mailto:mingdu0809@qq.com">mingdu0809@qq.com</a>
-            <Link href="/">ventusdu0809.github.io</Link>
+            <a
+              href="https://sound-ventus.mingdu0809.workers.dev"
+              target="_blank"
+              rel="noreferrer"
+            >
+              AI 音频评测作品集
+            </a>
+          </address>
+        </header>
+
+        {/* ══════ 数据成果条 ══════ */}
+        <section className="resume-stats" aria-label="项目核心数据">
+          <div>
+            <strong>40</strong>
+            <span>测试 Prompt</span>
           </div>
+          <div>
+            <strong>600</strong>
+            <span>正式样本</span>
+          </div>
+          <div>
+            <strong>660</strong>
+            <span>试听评测</span>
+          </div>
+          <div>
+            <strong>95% / 98%</strong>
+            <span>OVL / REL within-1</span>
+          </div>
+          <p className="resume-stats-note">
+            数据来自个人 Text-to-Audio
+            评测项目；隐藏重复为单评测员一致性，不代表多人评测员一致性。
+          </p>
+        </section>
+
+        {/* ══════ 核心能力 ══════ */}
+        <section className="resume-competencies" aria-labelledby="comp-title">
+          <h2 id="comp-title" className="resume-section-title">
+            核心能力
+          </h2>
+          <div className="resume-comp-grid">
+            <article>
+              <h3>音频模型评测</h3>
+              <p>
+                评测集构建、主观听评、OVL / REL 评分、Bad Case 分类、盲测、隐藏重复、复测裁决、评测报告
+              </p>
+            </article>
+            <article>
+              <h3>专业听感与问题判断</h3>
+              <p>
+                音质、音色、声场、底噪、爆音、失真、伪影、截断、材质与声源匹配、事件时间关系
+              </p>
+            </article>
+            <article>
+              <h3>声画同步与环境音效</h3>
+              <p>
+                声画同步、环境音效匹配、Foley、空间音频、多声源层次、声音遮蔽与音量平衡判断
+              </p>
+            </article>
+          </div>
+        </section>
+
+        {/* ══════ 主体双栏 ══════ */}
+        <div className="resume-body">
+          {/* ── 主栏 ── */}
+          <div className="resume-main-col">
+            {/* AI 音频评测项目 */}
+            <section
+              className="resume-featured"
+              aria-labelledby="featured-title"
+            >
+              <h2 id="featured-title" className="resume-section-title">
+                AI 音频模型评测项目
+              </h2>
+
+              <article className="resume-entry resume-entry--featured">
+                <header className="resume-entry-header">
+                  <div className="resume-entry-title-group">
+                    <h3>Text-to-Audio 专项评测</h3>
+                    <p>SAO1 PoC 与 SAO1 v2 / SA3M 受控对比</p>
+                    <p className="resume-entry-meta">
+                      个人项目 · 评测集构建 · 盲听评分 · Bad Case 分析 · 评测报告
+                    </p>
+                  </div>
+                  <time dateTime="2026-07">2026.07</time>
+                </header>
+
+                <ul className="resume-bullets">
+                  <li>
+                    独立搭建 Text-to-Audio
+                    音频模型评测流程，覆盖测试样本构建、音频质检、盲听评分、问题标注、隐藏重复、复测裁决及报告输出。
+                  </li>
+                  <li>
+                    围绕环境声、动作事件、材质、音色纹理、次数控制、时间顺序和次要事件等维度审核
+                    40 条 Prompt，累计完成 600 个正式样本和 660 次试听评测。
+                  </li>
+                  <li>
+                    建立 OVL 整体质量、REL 文本相关性评分及 Bad Case
+                    分类体系；通过单评测员隐藏重复验证评分稳定性，OVL within-1
+                    为 95%，REL within-1 为 98%。
+                  </li>
+                  <li>
+                    统计问题发生率、模型差异和变化趋势，识别声源错误、次要事件缺失、次数控制、噪声纹理及人工伪影等能力短板，并输出结构化报告和可追溯审计材料。
+                  </li>
+                </ul>
+
+                <Link className="resume-entry-link" href="/t2a-case-study">
+                  查看完整评测项目 →
+                </Link>
+              </article>
+            </section>
+
+            {/* 声画与声音设计项目 */}
+            <section aria-labelledby="sound-title">
+              <h2 id="sound-title" className="resume-section-title">
+                声画与声音设计项目
+              </h2>
+
+              <div className="resume-sub-projects">
+                <article className="resume-entry resume-entry--sub">
+                  <header className="resume-entry-header">
+                    <div className="resume-entry-title-group">
+                      <h3>The Explorer</h3>
+                      <p>Unity 3D Game Kit 音频系统重构</p>
+                      <p className="resume-entry-meta">
+                        个人项目 · 交互音频、动态混音与音频规范
+                      </p>
+                    </div>
+                    <time dateTime="2025-10/2026-02">2025.10 — 2026.02</time>
+                  </header>
+                  <ul className="resume-bullets">
+                    <li>
+                      整理音频命名、ID、优先级、响度及交付流程规范，建立可复核的音频资产质量标准；基于
+                      Wwise 与 Unity
+                      完成环境声、空间混响及动态混音配置，并通过 Profiler
+                      检查并发声音、声部优先级和性能异常。
+                    </li>
+                  </ul>
+                </article>
+
+                <article className="resume-entry resume-entry--sub">
+                  <header className="resume-entry-header">
+                    <div className="resume-entry-title-group">
+                      <h3>Backrooms</h3>
+                      <p>7.1.2 杜比全景声影视声音设计</p>
+                      <p className="resume-entry-meta">
+                        个人项目 · 空间声音、声画叙事与环境声设计
+                      </p>
+                    </div>
+                    <time dateTime="2024-03/2024-05">2024.03 — 2024.05</time>
+                  </header>
+                  <ul className="resume-bullets">
+                    <li>
+                      采用 7.1.2
+                      杜比全景声完成影视声音设计，从声源定位、空间层次、环境反射、低频控制及叙事节奏等维度设计并检查整体听觉体验。
+                    </li>
+                  </ul>
+                </article>
+              </div>
+            </section>
+
+            {/* 工作经历 */}
+            <section aria-labelledby="work-title">
+              <h2 id="work-title" className="resume-section-title">
+                工作经历
+              </h2>
+
+              <div className="resume-timeline">
+                <article className="resume-entry">
+                  <header className="resume-entry-header">
+                    <div className="resume-entry-title-group">
+                      <h3>杭州千乎网络</h3>
+                      <p>游戏音频策划 / 声音设计 · 《辉烬》</p>
+                    </div>
+                    <time dateTime="2026-03/2026-07">2026.03 — 2026.07</time>
+                  </header>
+                  <ul className="resume-bullets">
+                    <li>
+                      参与战斗音效设计、动态混音和音频效果实机评测，按动作、武器和战斗事件拆分声音层级；通过修改前后对比检查
+                      Snapshot、Sidechain Ducking 及高频战斗场景中关键声音的可辨识性。
+                    </li>
+                    <li>
+                      与直属领导共同起草并迭代音频外包制作与交付规范，明确文件格式、命名、短时响度、True
+                      Peak、瞬态对齐、循环零交叉及 Click
+                      风险等验收标准；参与将验收标准转化为自动检查规则，负责规则审核、样例核验、问题反馈与迭代。
+                    </li>
+                  </ul>
+                </article>
+
+                <article className="resume-entry">
+                  <header className="resume-entry-header">
+                    <div className="resume-entry-title-group">
+                      <h3>杭州伏腊</h3>
+                      <p>游戏音效设计师 / 声音设计</p>
+                    </div>
+                    <time dateTime="2025-03/2025-07">2025.03 — 2025.07</time>
+                  </header>
+                  <ul className="resume-bullets">
+                    <li>
+                      参与 UE5
+                      游戏及多款微信小游戏的音频需求梳理，整理音频需求文档与资产验收标准，检查音质、响度、触发逻辑及场景匹配。
+                    </li>
+                    <li>
+                      基于 Unity 与 Wwise 完成 UI
+                      及交互音频配置，围绕视觉动效、交互状态和声音触发时机检查声画协调性；负责过场动画和环境声音配置，从声源位置、空间衰减、遮挡、混响及前后景关系等维度判断场景声音合理性。
+                    </li>
+                  </ul>
+                </article>
+
+                <article className="resume-entry">
+                  <header className="resume-entry-header">
+                    <div className="resume-entry-title-group">
+                      <h3>凤凰艺术</h3>
+                      <p>多媒体视听内容编辑</p>
+                    </div>
+                    <time dateTime="2021-10/2022-01">2021.10 — 2022.01</time>
+                  </header>
+                  <ul className="resume-bullets">
+                    <li>
+                      负责艺术展览、采访及纪录片现场录音，在复杂环境中完成声音采集和素材质量检查；使用
+                      iZotope RX
+                      进行频谱检查、降噪和音频修复，识别并处理底噪、杂音、爆音、失真及其他音频缺陷。
+                    </li>
+                  </ul>
+                </article>
+              </div>
+            </section>
+          </div>
+
+          {/* ── 侧栏 ── */}
+          <aside className="resume-side-col">
+            {/* 教育背景 */}
+            <section aria-labelledby="edu-title">
+              <h2 id="edu-title" className="resume-section-title">
+                教育背景
+              </h2>
+              <article className="resume-side-entry">
+                <h3>爱丁堡大学</h3>
+                <p>声音设计硕士 MSc</p>
+                <time dateTime="2023-09/2024-11">2023.09 — 2024.11</time>
+                <p className="resume-side-detail">
+                  影视声音、交互音频、空间声音、声音与画面关系、创意声音技术
+                </p>
+              </article>
+              <article className="resume-side-entry">
+                <h3>米兰布雷拉美术学院</h3>
+                <p>新技术艺术本科 BA</p>
+                <time dateTime="2017-10/2022-03">2017.10 — 2022.03</time>
+                <p className="resume-side-detail">
+                  摄影、视频、动画、新媒体与装置艺术
+                </p>
+              </article>
+            </section>
+
+            {/* 工具与技能 */}
+            <section aria-labelledby="skills-title">
+              <h2 id="skills-title" className="resume-section-title">
+                工具与技能
+              </h2>
+
+              <div className="resume-side-entry">
+                <h3>音频工具</h3>
+                <p>
+                  Cubase、Reaper、Audition、iZotope RX、Wwise、Unity、Unreal
+                  Engine、Dolby Atmos Renderer
+                </p>
+              </div>
+
+              <div className="resume-side-entry">
+                <h3>数据工具</h3>
+                <p>Excel（数据筛选、排序、基础函数、条件格式、基础统计）</p>
+                <p className="resume-side-detail">
+                  Python / pandas
+                  基础：可在 AI
+                  辅助下完成评分表整理、字段检查与简单统计
+                </p>
+              </div>
+            </section>
+
+            {/* 语言 */}
+            <section aria-labelledby="lang-title">
+              <h2 id="lang-title" className="resume-section-title">
+                语言
+              </h2>
+              <ul className="resume-lang-list">
+                <li>英语</li>
+                <li>意大利语</li>
+              </ul>
+            </section>
+          </aside>
         </div>
-        <div className="keyword-strip" aria-label="专业关键词">
-          <span>通用 / 专项评测集</span>
-          <span>主观评估方案</span>
-          <span>Prompt-to-Audio 端到端评估</span>
-          <span>评测数据校验</span>
-          <span>Badcase 诊断</span>
-          <span>评测报告</span>
-        </div>
-      </header>
-
-      <section className="section" aria-labelledby="summary-title">
-        <h2 className="section-title" id="summary-title">个人摘要</h2>
-        <p className="summary">
-          爱丁堡大学声音设计硕士，具备游戏音频设计、音频效果评测、资产验收与运行时问题诊断经验。独立搭建两阶段 Text-to-Audio 音效评测流程，完成通用评测集、专项评测、主观评分方案、人工评分数据校验、Badcase 诊断与评测报告；累计覆盖 600 条正式样本和 660 次试听事件。使用 Python / pandas 整理并复核 OVL / REL 评分及 Badcase 标注数据，了解 Stable Audio 音效生成流程与 latent diffusion 基础原理。
-        </p>
-      </section>
-
-      <section className="section" aria-labelledby="projects-title">
-        <h2 className="section-title" id="projects-title">核心项目</h2>
-
-        <article className="item">
-          <div className="item-head">
-            <span className="item-name">T2A 音效生成评测｜SAO1 PoC 与 SAO1–SA3M 受控比较</span>
-            <span className="item-date">2026.07</span>
-          </div>
-          <p className="item-sub">个人项目｜评测集设计、主观听评、数据校验与 Badcase 裁决</p>
-          <ul className="bullets">
-            <li>设计 40 条原创英文 Prompt，覆盖 7 类音效与声源、属性、数量、时序等能力；第一阶段完成 200 条 Stable Audio Open 1.0 正式样本，第二阶段完成 SAO1 与 Stable Audio 3 Medium 共 400 条正式样本的受控比较。</li>
-            <li>建立 OVL / REL 1–5 分 Rubric、Blind ID、Primary / multi-label Badcase 与三类最终决策；先隐藏 Prompt 评价 OVL，再显示 Prompt 评价 REL，并通过隐藏重复检查同一评测人的复测稳定性。</li>
-            <li>本人完成全部正式听评、40 对隐藏重复的复测、语义复核与最终裁决；使用 Python / pandas 完成评分表筛选、字段一致性检查、Prompt 层级统计与结果复核。</li>
-            <li>当前测试集未观察到 SA3M 相对 SAO1 的明确总体优势，但两者呈现不同的失败分布；结论限定于当前数据、模型版本和听评协议，不进行模型内部归因。</li>
-          </ul>
-          <p className="responsibility-note"><strong>个人贡献边界：</strong>五层评测框架、听评方法、正式评分和 Badcase 裁决由本人完成；AI 用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
-          <div className="project-links">
-            <Link href="/t2a-case-study">→ 查看完整案例研究</Link>
-          </div>
-        </article>
-
-        <article className="item">
-          <div className="item-head">
-            <span className="item-name">TheExplorer｜Unity 3D Game Kit 音频系统重构</span>
-            <span className="item-date">2025.10 — 2026.02</span>
-          </div>
-          <p className="item-sub">个人项目｜Wwise 集成、动态混音与性能分析</p>
-          <ul className="bullets">
-            <li>基于 Unity 3D Game Kit 重新规划 Wwise 音频系统，整理命名、数字 ID、优先级与资产接入规范；配置 Actor-Mixer、State、HDR、Auto-ducking 与空间混响。</li>
-            <li>使用 Wwise Profiler 分析活跃声部和运行状态，通过 Virtual Voice 与 Playback Limit，将既定测试场景中的同屏活跃物理声部由 100+ 控制至 15 以内。</li>
-          </ul>
-          <div className="project-links">
-            <Link href="/sound-practice">→ 查看 Wwise 集成与游戏音频案例</Link>
-          </div>
-        </article>
-      </section>
-
-      <section className="section" aria-labelledby="experience-title">
-        <h2 className="section-title" id="experience-title">工作经历</h2>
-
-        <article className="item">
-          <div className="item-head">
-            <span className="item-name">杭州千乎网络｜游戏音频策划 - 声音设计｜《辉烬》</span>
-            <span className="item-date">2026.03 — 2026.07</span>
-          </div>
-          <ul className="bullets">
-            <li>参与战斗音效、动态混音与实机效果评测，按动作、武器及战斗事件拆分声音层级，并通过修改前后对比检查 Hitstop 协同、Snapshot 切换和高频战斗场景的听觉表现。</li>
-            <li>与负责人共同拟定并迭代音频外包制作与交付规范，明确格式、命名、短时响度、True Peak、瞬态对齐、循环零交叉和 Click 风险；AI 辅助实现验收工具，本人负责验收逻辑、规则审核、问题反馈与迭代。</li>
-            <li>针对自定义 FMOD Bank 转换为 Unity 可读取数据后无法使用 Stream 的限制，按剧情章节拆分为 50 个 Bank，减少单次加载压力与无关资源常驻。</li>
-          </ul>
-          <div className="project-links">
-            <Link href="/sound-practice">→ 查看游戏音频案例</Link>
-            <Link href="/audio-validation-summary">→ 查看音频资产验收结果</Link>
-          </div>
-        </article>
-
-        <article className="item">
-          <div className="item-head">
-            <span className="item-name">杭州伏腊｜游戏音效设计师 - 声音设计</span>
-            <span className="item-date">2025.03 — 2025.07</span>
-          </div>
-          <ul className="bullets">
-            <li>参与 UE5 恐怖游戏及多款小游戏的音频需求整理、声音制作与交付检查，编写音频需求文档并整理资产验收标准。</li>
-            <li>基于 Unity / Wwise 配置 UI 状态反馈和 RTPC；在 UE5 中处理 Attenuation、Occlusion 与空间音频，使声音响应交互状态、视觉动效和场景空间。</li>
-          </ul>
-        </article>
-      </section>
-
-      <section className="section" aria-labelledby="education-title">
-        <h2 className="section-title" id="education-title">教育经历</h2>
-        <div className="item">
-          <div className="item-head">
-            <span className="item-name">爱丁堡大学｜声音设计硕士（MSc）</span>
-            <span className="item-date">2023.09 — 2024.11</span>
-          </div>
-          <p className="education-detail">声音、画面与空间关系；视听理论与声音装置实践</p>
-        </div>
-        <div className="item">
-          <div className="item-head">
-            <span className="item-name">米兰布雷拉美术学院｜新技术艺术本科（BA）</span>
-            <span className="item-date">2017.10 — 2022.03</span>
-          </div>
-          <p className="education-detail">装置艺术、视听叙事与跨媒介创作</p>
-        </div>
-      </section>
-
-      <section className="section" aria-labelledby="skills-title">
-        <h2 className="section-title" id="skills-title">专业技能</h2>
-        <dl className="skills">
-          <div className="skill-row"><dt>音频评测</dt><dd>通用 / 专项评测集、主观评估方案、Prompt-to-Audio 端到端评估、人工偏好评分、事件级 Badcase、隐藏重复、数据校验与评测报告</dd></div>
-          <div className="skill-row"><dt>数据处理</dt><dd>Python / pandas（数据筛选、评分表整理、字段检查与结果复核）；CSV 数据治理、Blind ID 追溯与 SHA manifest</dd></div>
-          <div className="skill-row"><dt>音频检查</dt><dd>Adobe Audition（频谱、波形及异常点检查）；文件格式、响度、True Peak、瞬态与循环风险验收</dd></div>
-          <div className="skill-row"><dt>生成式音频</dt><dd>Text-to-Audio 评测流程；Stable Audio Open 1.0、Stable Audio 3 Medium 实测；了解 latent diffusion 基础原理</dd></div>
-          <div className="skill-row"><dt>交互音频</dt><dd>FMOD、Wwise、Unity、Unreal Engine；动态混音、RTPC / State、空间音频与性能分析</dd></div>
-          <div className="skill-row"><dt>音频制作</dt><dd>Cubase、Reaper；音效编辑、混音、循环处理与资产规范化</dd></div>
-          <div className="skill-row"><dt>语言</dt><dd>英语、意大利语</dd></div>
-        </dl>
-      </section>
-
-      <footer className="resume-footer">
-        <p>公开简历版本｜内容对应可展示的项目材料与案例页面。</p>
-        <div className="project-links">
-          {projectLinks.map((link) => <Link href={link.href} key={link.href}>→ {link.label}</Link>)}
-        </div>
-      </footer>
+      </div>
     </main>
   );
 }
