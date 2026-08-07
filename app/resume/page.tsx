@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import PrintButton from "./PrintButton";
 
 export const metadata: Metadata = {
   title: "杜明｜AI音频数据评测与音频模型主观评测",
@@ -15,14 +16,7 @@ export default function ResumePage() {
         <Link href="/" className="resume-back">
           ← 返回作品集
         </Link>
-        <button
-          type="button"
-          className="resume-print-btn"
-          onClick={() => window.print()}
-          aria-label="打印或保存为 PDF"
-        >
-          打印 / 保存 PDF
-        </button>
+        <PrintButton />
       </nav>
 
       <div className="resume-shell">
@@ -43,10 +37,9 @@ export default function ResumePage() {
           </div>
 
           <address className="resume-contact">
-            <a href="tel:15309993915">15309993915</a>
             <a href="mailto:mingdu0809@qq.com">mingdu0809@qq.com</a>
             <a
-              href="https://sound-ventus.mingdu0809.workers.dev"
+              href="https://ventusdu0809.github.io"
               target="_blank"
               rel="noreferrer"
             >
