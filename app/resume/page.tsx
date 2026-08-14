@@ -6,14 +6,14 @@ import "./resume.css";
 export const metadata: Metadata = {
   title: "杜明｜AI音频数据评测与音频模型主观评测",
   description:
-    "爱丁堡大学声音设计硕士杜明的AI音频评测简历，包含Text-to-Audio评测集构建、主观听评、Bad Case分析、声画同步和环境音效判断经验。",
+    "爱丁堡大学声音设计硕士杜明的AI音频评测简历，包含Text-to-Audio听评、音视频生成分层评测、Controlled Regression、Bad Case分析和失败定位经验。",
 };
 
 const abilities = [
   {
     number: "01",
-    title: "音频模型评测",
-    body: "评测集构建、主观听评、OVL / REL评分、Bad Case分类、盲测、隐藏重复、复测裁决、评测报告。",
+    title: "音频与音视频生成评测",
+    body: "主观听评、分层能力框架、Bad Case发现、Controlled Regression、Text→Visual / Visual→Audio失败定位与研发优先级。",
   },
   {
     number: "02",
@@ -79,7 +79,7 @@ export default function ResumePage() {
             <p className="resume-role">AI音频数据评测</p>
             <p className="resume-specialties">声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断</p>
             <p className="resume-intro">
-              爱丁堡大学声音设计硕士，具备游戏、影视及交互音频制作经历。独立完成Text-to-Audio模型评测项目，覆盖评测集构建、音频质检、盲听评分、Bad Case标注、隐藏重复、复测裁决及基础统计，能够将专业听感转化为结构化、可复核的评测结论。
+              爱丁堡大学声音设计硕士，具备游戏、影视及交互音频制作经历。完成Text-to-Audio主观听评及两轮Audio-Visual Generation Evaluation，能够将专业听感与声画观察转化为分层诊断、失败定位和可执行的研发优先级。
             </p>
           </div>
 
@@ -126,9 +126,29 @@ export default function ResumePage() {
             <section className="resume-section resume-primary-section" aria-labelledby="t2a-title">
               <div className="resume-section-heading">
                 <p>重点项目</p>
-                <h2 id="t2a-title">AI音频模型评测项目</h2>
+                <h2 id="t2a-title">AI音频与音视频生成评测项目</h2>
               </div>
               <article className="t2a-project">
+                <div className="entry-header">
+                  <div className="entry-title-group">
+                    <h3>Audio-Visual Generation Evaluation</h3>
+                    <p>Cross-Round Analysis v1.0</p>
+                  </div>
+                  <time dateTime="2026-07">2026.07</time>
+                </div>
+                <p className="entry-meta">个人项目 · 分层评测框架 · Bad Case分析 · Controlled Regression · 研发反馈</p>
+                <ol className="resume-points">
+                  <li>构建Point → Line → Scene + Quality分层评测框架，围绕事件完整性、计数、声画起点、时序、动态对应、场景一致性及音频质量完成两轮诊断性评测。</li>
+                  <li>基于Round-1 Discovery设计Round-2 Controlled Regression，拆分Text→Visual与Visual→Audio失败链路；在三个可精确判定案例中重复观察到<code>3→4→4</code>，避免将视觉数量偏差误归因为Audio Counting Failure。</li>
+                  <li>将结果区分为Repeated Diagnostic Pattern、Not Replicated、Mixed / Refined与独立Quality Gate，并转化为回归优先级、失败定位及后续专项验证方向。</li>
+                </ol>
+                <aside className="responsibility-boundary">
+                  <strong>个人贡献边界</strong>
+                  <p>评测框架、假设设计、视觉与音频观察、Bad Case判定、跨轮结果解释和研发优先级建议由本人完成；AI用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
+                </aside>
+                <Link className="resume-arrow-link" href="/t2a-case-study">查看完整音视频生成评测项目 →</Link>
+              </article>
+              <article className="t2a-project resume-project-secondary">
                 <div className="entry-header">
                   <div className="entry-title-group">
                     <h3>Text-to-Audio专项评测</h3>
@@ -138,16 +158,10 @@ export default function ResumePage() {
                 </div>
                 <p className="entry-meta">个人项目 · 评测集构建 · 盲听评分 · Bad Case分析 · 评测报告</p>
                 <ol className="resume-points">
-                  <li>独立搭建Text-to-Audio音频模型评测流程，覆盖测试样本构建、音频质检、盲听评分、问题标注、隐藏重复、复测裁决及报告输出。</li>
-                  <li>围绕环境声、动作事件、材质、音色纹理、次数控制、时间顺序和次要事件等维度审核40条Prompt，累计完成600个正式样本和660次试听评测。</li>
-                  <li>建立OVL整体质量、REL文本相关性评分及Bad Case分类体系；单评测员隐藏重复中，OVL within-1为95%，REL within-1为98%。</li>
-                  <li>统计问题发生率、模型差异和变化趋势，识别声源错误、次要事件缺失、次数控制、噪声纹理及人工伪影等能力短板，并输出结构化报告和可追溯审计材料。</li>
+                  <li>独立搭建Text-to-Audio评测流程，审核40条测试Prompt，覆盖音频质检、盲听评分、问题标注、隐藏重复与复测裁决，累计完成600个正式样本和660次试听评测。</li>
+                  <li>建立OVL整体质量、REL文本相关性及Bad Case分类体系；通过单评测员隐藏重复检查评分稳定性，OVL within-1为95%，REL within-1为98%。</li>
+                  <li>分析问题发生率、模型差异与变化趋势，识别声源错误、次要事件缺失、次数控制、噪声纹理及人工伪影等短板，并输出结构化评测报告。</li>
                 </ol>
-                <aside className="responsibility-boundary">
-                  <strong>个人贡献边界</strong>
-                  <p>五层评测框架、听评方法、正式评分和Bad Case裁决由本人完成；AI用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
-                </aside>
-                <Link className="resume-arrow-link" href="/t2a-case-study">查看完整评测项目 →</Link>
               </article>
             </section>
 
