@@ -4,7 +4,7 @@ import { PrintResumeButton } from "./PrintResumeButton";
 import "./resume.css";
 
 export const metadata: Metadata = {
-  title: "杜明｜AI音频数据评测与音频模型主观评测",
+  title: "杜明｜AI音频评测与音视频生成评测",
   description:
     "爱丁堡大学声音设计硕士杜明的AI音频评测简历，包含Text-to-Audio评测集构建、主观听评、Bad Case分析，以及新增的两轮音视频生成诊断性评测。",
 };
@@ -76,7 +76,7 @@ export default function ResumePage() {
           <div className="resume-hero-copy">
             <p className="resume-eyebrow">AI AUDIO EVALUATION</p>
             <h1>杜明</h1>
-            <p className="resume-role">AI音频数据评测</p>
+            <p className="resume-role">AI音频评测｜音视频生成评测</p>
             <p className="resume-specialties">声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断</p>
             <p className="resume-intro">
               爱丁堡大学声音设计硕士，具备游戏、影视及交互音频制作经历。独立完成Text-to-Audio模型评测项目，覆盖评测集构建、音频质检、盲听评分、Bad Case标注、隐藏重复、复测裁决及基础统计；并进一步扩展到两轮诊断性音视频生成评测，将专业视听判断转化为结构化、可复核的结论。
@@ -145,7 +145,7 @@ export default function ResumePage() {
                 </ol>
                 <aside className="responsibility-boundary">
                   <strong>个人贡献边界</strong>
-                  <p>五层评测框架、听评方法、正式评分和Bad Case裁决由本人完成；AI用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
+                  <p>T2A评测规则、听评方法、正式评分和Bad Case裁决由本人完成；AI用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
                 </aside>
                 <Link className="resume-arrow-link" href="/t2a-case-study">查看完整评测项目 →</Link>
               </article>
@@ -164,7 +164,7 @@ export default function ResumePage() {
                   <li>综合Not Replicated、Mixed / Refined与独立Quality Gate形成研发优先级：降低未复现问题优先级，细化动态专项测试，并持续关注音频质量风险。</li>
                 </ol>
                 <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看新增T2VA评测项目 →</Link>
-                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看PLS理论框架 →</Link>
+                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看PLS评测框架 →</Link>
               </article>
             </section>
 
@@ -265,7 +265,7 @@ export default function ResumePage() {
           <div>
             <Link href="/t2a-case-study">T2A评测案例</Link>
             <Link href="/audio-visual-evaluation">T2VA评测案例</Link>
-            <Link href="/point-line-scene-framework">PLS理论框架</Link>
+            <Link href="/point-line-scene-framework">PLS评测框架</Link>
             <Link href="/sound-practice">游戏音频案例</Link>
             <Link href="/audio-validation-summary">音频资产验收案例</Link>
           </div>

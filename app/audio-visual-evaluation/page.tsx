@@ -47,9 +47,9 @@ export default function AudioVisualEvaluationPage() {
 
       <section className="av-hero t2a-shell" id="overview">
         <div className="av-hero-copy">
-          <p className="eyebrow">AUDIO-VISUAL GENERATION EVALUATION</p>
-          <h1>从 Bad Case Discovery<br />到 Controlled Regression</h1>
-          <p className="av-hero-subtitle">面向生成式音视频的分层感知评测与失败定位</p>
+          <p className="eyebrow">主项目 / PRIMARY CASE</p>
+          <h1>Audio-Visual<br />Generation Evaluation</h1>
+          <p className="av-hero-subtitle">从问题发现（Bad Case Discovery）到受控回归（Controlled Regression）</p>
           <p className="t2a-lead">这是一项两轮诊断性评测：第一轮发现问题，第二轮以预先定义的假设、观察字段与判定规则进行受控回归，最后把证据转成下一步的研发与评测优先级。</p>
           <div className="t2a-status-row" aria-label="项目概况">
             <strong>Cross-Round Analysis v1.0</strong>
@@ -86,28 +86,60 @@ export default function AudioVisualEvaluationPage() {
         </div>
       </section>
 
+      <section className="t2a-section t2a-shell av-media-section" id="media-evidence" aria-labelledby="media-evidence-title">
+        <header className="t2a-section-heading">
+          <p>01 / 视频证据</p>
+          <h2 id="media-evidence-title">先看生成结果，再看诊断结论</h2>
+          <p>这里只展示两个代表性样本。视频不自动播放，评分与结论来自已冻结的 Round-2 记录。</p>
+        </header>
+        <div className="av-media-grid">
+          <figure className="av-media-card">
+            <video controls preload="metadata" playsInline aria-label="R2-H1-B 木筷敲陶瓷杯计数案例">
+              <source src="/video/t2va/R2-H1-B.mp4" type="video/mp4" />
+              当前浏览器不支持视频播放。
+            </video>
+            <figcaption>
+              <div className="av-media-heading"><span>R2-H1-B · Exact-count</span><strong>3 → 4 → 4</strong></div>
+              <p>Prompt 条件：木筷敲陶瓷杯，恰好 3 次。实际画面与音频均为 4 次。</p>
+              <div className="av-verdict-row"><b className="is-fail">Text→Visual：FAIL</b><b className="is-pass">Visual→Audio：PASS</b><b>P4 Event Counting：5</b></div>
+            </figcaption>
+          </figure>
+          <figure className="av-media-card">
+            <video controls preload="metadata" playsInline aria-label="R2-H3 吸尘器动态对应案例">
+              <source src="/video/t2va/R2-H3.mp4" type="video/mp4" />
+              当前浏览器不支持视频播放。
+            </video>
+            <figcaption>
+              <div className="av-media-heading"><span>R2-H3 · Dynamic Correspondence</span><strong>Mixed / Refined</strong></div>
+              <p>吸尘器持续运行，门从关闭到打开；开门后出现明显响应，但持续运动的声学变化较为阶跃。</p>
+              <div className="av-verdict-row"><b className="is-pass">Boundary Response：存在</b><b className="is-mixed">Source-motion：Partial Issue</b><b>L4：3</b></div>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
       <section className="t2a-section t2a-shell" id="method">
         <header className="t2a-section-heading">
-          <p>01 / METHOD</p>
+          <p>02 / 方法</p>
           <h2>把“声音不对”拆成可定位的问题</h2>
           <p>框架按 Point → Line → Scene + Quality（点→线→场景+质量）组织：既观察单个事件是否正确，也观察事件之间的时间关系、整体场景与独立音频质量。</p>
         </header>
         <div className="av-method-flow" aria-label="评测方法流程">
           {[
-            ["01", "Capability", "明确要验证的能力与研究问题。"],
-            ["02", "Scenario", "设计能够观察该能力的生成场景。"],
-            ["03", "Visual Facts", "先记录实际生成的视觉事实。"],
-            ["04", "Point · Line · Scene", "判定事件、时序与场景声画关系。"],
-            ["05", "Quality", "独立记录音色、响度、噪声等质量问题。"],
-            ["06", "Bad Case → Regression", "把发现转成可检验的后续条件。"],
+            ["01", "能力 / Capability", "明确要验证的能力与研究问题。"],
+            ["02", "场景 / Scenario", "设计能够观察该能力的生成场景。"],
+            ["03", "画面事实 / Visual Facts", "先记录实际生成的视觉事实。"],
+            ["04", "点、线、场景 / PLS", "判定事件、时序与场景声画关系。"],
+            ["05", "质量 / Quality", "独立记录音色、响度、噪声等质量问题。"],
+            ["06", "Bad Case → 回归", "把发现转成可检验的后续条件。"],
           ].map(([index, title, body]) => <article key={index}><span>{index}</span><h3>{title}</h3><p>{body}</p></article>)}
         </div>
-        <div className="av-method-note"><strong>关键诊断原则</strong><div><p>Prompt→Visual 与 Visual→Audio 分开判断。只有视觉事件数与音频事件数不一致时，才将其归为 Audio Event Counting Failure。</p><Link href="/point-line-scene-framework">查看 Point–Line–Scene 理论框架 →</Link></div></div>
+        <div className="av-method-note"><strong>关键诊断原则</strong><div><p>Prompt→Visual 与 Visual→Audio 分开判断。只有视觉事件数与音频事件数不一致时，才将其归为 Audio Event Counting Failure。</p><Link href="/point-line-scene-framework">查看PLS评测框架 →</Link></div></div>
       </section>
 
       <section className="t2a-section t2a-section-tint" id="rounds">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>02 / ROUND-1 → ROUND-2</p><h2>从问题发现到受控回归</h2><p>第二轮不是“再写几个 Prompt”，而是在生成前冻结要验证的问题、主要能力、观察字段与判定规则；结果再按 Support、Not Replicated 或 Mixed / Refined 解释。</p></header>
+          <header className="t2a-section-heading"><p>03 / ROUND-1 → ROUND-2</p><h2>从问题发现到受控回归</h2><p>第二轮不是“再写几个 Prompt”，而是在生成前冻结要验证的问题、主要能力、观察字段与判定规则；结果再按 Support、Not Replicated 或 Mixed / Refined 解释。</p></header>
           <div className="av-rounds-grid">
             <article><span>ROUND-1</span><h3>Discovery</h3><p>从生成结果中确认某个 Bad Case 在当次输出中发生过。</p><ul><li>Exact-count</li><li><code>audio_early</code></li><li>Dynamic Response</li><li>Sustained Audio Interruption</li></ul></article>
             <div className="av-round-arrow" aria-hidden="true"><span>Hypothesis</span><b>→</b><span>Controlled Regression</span></div>
@@ -117,15 +149,15 @@ export default function AudioVisualEvaluationPage() {
       </section>
 
       <section className="t2a-section t2a-shell" id="results">
-        <header className="t2a-section-heading"><p>03 / CROSS-ROUND RESULTS</p><h2>五条冻结结论，各自保留证据边界</h2><p>这里呈现 Cross-Round Analysis v1.0 的结论层，而非重新评分或新增统计推断。</p></header>
+        <header className="t2a-section-heading"><p>04 / 跨轮结果</p><h2>五条冻结结论，各自保留证据边界</h2><p>这里呈现 Cross-Round Analysis v1.0 的结论层，而非重新评分或新增统计推断。</p></header>
         <div className="av-findings">
-          {findings.map(([topic, verdict, detail]) => <article key={topic}><p>{topic}</p><h3>{verdict}</h3><span>{detail}</span></article>)}
+          {findings.map(([topic, verdict, detail], index) => <article key={topic} className={index === 0 ? "av-finding-primary" : undefined}><p>{topic}</p><h3>{verdict}</h3><span>{detail}</span></article>)}
         </div>
       </section>
 
       <section className="t2a-section t2a-section-tint" id="engineering">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>04 / RESEARCH → ENGINEERING</p><h2>评测结果应改变下一步查什么、测什么</h2><p>评测不止输出分数；它把“观察到什么”翻译为研发排查顺序与后续验证方向。</p></header>
+          <header className="t2a-section-heading"><p>05 / 研究 → 工程</p><h2>评测结果应改变下一步查什么、测什么</h2><p>评测不止输出分数；它把“观察到什么”翻译为研发排查顺序与后续验证方向。</p></header>
           <div className="av-engineering-list">
             {engineeringActions.map(([signal, action, detail]) => <article key={signal}><span>{signal}</span><h3>{action}</h3><p>{detail}</p></article>)}
           </div>
@@ -133,7 +165,7 @@ export default function AudioVisualEvaluationPage() {
       </section>
 
       <section className="t2a-section t2a-shell" id="boundary">
-        <header className="t2a-section-heading"><p>05 / EVIDENCE BOUNDARY</p><h2>小样本诊断，不做统计泛化</h2></header>
+        <header className="t2a-section-heading"><p>06 / 证据边界</p><h2>小样本诊断，不做统计泛化</h2></header>
         <div className="av-boundary-grid">
           <article><h3>它能说明什么</h3><p>哪些 Bad Case 在当前样本中发生过；哪些问题在受控条件下重复、未复现或需要细化；以及研发与下一轮测试应优先关注什么。</p></article>
           <article><h3>它不说明什么</h3><p>不推断模型内部生成机制，不把三例重复模式称为系统性缺陷，也不把未复现解释为 Round-1 的观察无效。</p></article>
@@ -141,7 +173,7 @@ export default function AudioVisualEvaluationPage() {
         </div>
       </section>
 
-      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回杜明音频作品集</Link><Link href="/t2a-case-study">查看 T2A 评测案例</Link><Link href="/point-line-scene-framework">查看 PLS 理论报告</Link><span>© 2026 杜明</span></footer>
+      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回杜明音频作品集</Link><Link href="/t2a-case-study">查看 T2A 评测案例</Link><Link href="/point-line-scene-framework">查看PLS评测框架</Link><span>© 2026 杜明</span></footer>
     </main>
   );
 }

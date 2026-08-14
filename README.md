@@ -113,7 +113,7 @@ tests/                       原 Cloudflare 渲染回归测试
 
 ## 《点·线·面·境》页面结构
 
-路由：`/audio-world-framework`（首页导航「场景框架」与页脚均有入口）。
+路由：`/audio-world-framework`。该页作为 PLS 形成之前的研究笔记保留，由 PLS 页面底部进入，不再与正式评测框架并列显示在首页导航。
 
 文件：
 

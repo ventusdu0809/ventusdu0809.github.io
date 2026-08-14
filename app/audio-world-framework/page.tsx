@@ -21,7 +21,7 @@ export default function AudioWorldFrameworkPage() {
         </Link>
         <nav aria-label="主导航">
           <Link href="/t2a-case-study">评测案例</Link>
-          <Link href="/audio-world-framework">场景框架</Link>
+          <Link href="/audio-world-framework">研究笔记</Link>
           <Link href="/#sound-practice">声音实践</Link>
           <Link href="/resume">关于我</Link>
         </nav>
@@ -394,7 +394,7 @@ export default function AudioWorldFrameworkPage() {
         </div>
         <p>{awf.footer.note}</p>
         <p>{awf.footer.boundary}</p>
-        <small>© 2026 杜明 · 点线面境框架</small>
+        <small>© 2026 杜明 · 点线面境研究笔记</small>
       </footer>
     </main>
   );

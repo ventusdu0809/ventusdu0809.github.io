@@ -4,7 +4,7 @@ import "../t2a-case-study/t2a-case-study.css";
 import "./point-line-scene-framework.css";
 
 export const metadata: Metadata = {
-  title: "Point–Line–Scene｜生成式音频与音视频分层感知评测框架",
+  title: "PLS评测框架｜生成式音频与音视频分层感知方法",
   description:
     "Point–Line–Scene 概念框架、文献支撑与 Audio-Visual Generation Evaluation 案例研究：从原子事件、关系和场景一致性到失败定位与受控回归。",
   keywords: ["Point-Line-Scene", "PLS", "生成式音频评测", "音视频生成评测", "Failure Localization", "Controlled Regression"],
@@ -78,7 +78,7 @@ export default function PointLineSceneFrameworkPage() {
 
       <section className="pls-hero t2a-shell">
         <div>
-          <p className="eyebrow">概念框架 + 案例研究</p>
+          <p className="eyebrow">评测框架 + 案例研究</p>
           <h1>Point<br />Line<br />Scene</h1>
         </div>
         <div className="pls-hero-copy">
@@ -190,11 +190,22 @@ export default function PointLineSceneFrameworkPage() {
         </div>
       </section>
 
+      <aside className="pls-research-note t2a-shell" aria-labelledby="research-note-title">
+        <div>
+          <p className="eyebrow">研究笔记 / RESEARCH NOTE</p>
+          <h2 id="research-note-title">PLS 形成之前的声音世界组织思考</h2>
+        </div>
+        <div>
+          <p>“点·线·面·境”记录了我从声音设计和游戏音频出发，对事件、关系、场景与整体表达的早期整理。它现在作为方法演进笔记保留，不与 PLS 评测框架并列。</p>
+          <Link className="paper-link" href="/audio-world-framework">阅读早期研究笔记 →</Link>
+        </div>
+      </aside>
+
       <footer className="t2a-footer t2a-shell">
         <Link href="/">← 返回作品集</Link>
         <Link href="/t2a-case-study">T2A 评测</Link>
         <Link href="/audio-visual-evaluation">T2VA 评测</Link>
-        <a href="/downloads/pls-framework/point_line_scene_framework_with_av_case_study.md" download>下载完整报告</a>
+        <a href="/downloads/pls-framework/point_line_scene_framework_with_av_case_study.md" download>下载完整方法报告</a>
         <span>© 2026 杜明</span>
       </footer>
     </main>

@@ -151,6 +151,9 @@ h3 {
 .recruiter-narrative .tag-row { margin-top: 17px; }
 .recruiter-narrative .paper-link, .recruiter-practice-grid .paper-link { margin-top: 18px; }
 .recruiter-project { background: var(--color-paper); color: var(--color-text); }
+.recruiter-project-primary { border-block: 1px solid rgba(63, 95, 90, .24); background: linear-gradient(135deg, var(--color-paper) 0%, var(--color-primary-faint) 100%); }
+.recruiter-project-primary .recruiter-finding { max-width: 760px; }
+.recruiter-project-foundation .section-heading h2 { font-size: clamp(34px, 4.2vw, 54px); }
 .content-section.recruiter-project .section-heading > h2 { color: var(--color-text) !important; }
 .content-section.recruiter-project .section-heading > .section-lead { color: var(--color-text-secondary) !important; }
 .content-section.recruiter-project .section-heading > .eyebrow { color: var(--color-primary) !important; }
@@ -168,12 +171,18 @@ h3 {
 .audit-trust h2 { margin: 7px 0 0; font-size: 27px; }
 .audit-trust p { color: var(--color-text-secondary); font-size: 12px; line-height: 1.8; }
 .audit-trust .audit-status { color: var(--color-primary); font-size: 11px; font-weight: 750; letter-spacing: .04em; }
+.audit-project-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid rgba(63, 95, 90, .32); border-left: 1px solid rgba(63, 95, 90, .32); }
+.audit-project-list article { min-height: 210px; padding: 22px; border-right: 1px solid rgba(63, 95, 90, .32); border-bottom: 1px solid rgba(63, 95, 90, .32); background: color-mix(in srgb, var(--color-paper) 80%, transparent); }
+.audit-project-list article > strong { display: block; color: var(--color-text); font-family: var(--serif); font-size: 20px; font-weight: 600; }
+.audit-project-list article .audit-status { margin: 28px 0 8px; }
+.audit-project-list article > p:not(.audit-status) { margin: 0 0 14px; }
 
 @media (max-width: 780px) {
   .recruiter-header { justify-content: space-between; }
   .recruiter-header nav { display: none; }
   .recruiter-hero { grid-template-columns: 1fr; min-height: auto; padding: 118px 32px 62px; }
   .recruiter-two-column, .recruiter-project-grid, .audit-trust-inner { grid-template-columns: 1fr; }
+  .audit-project-list { grid-template-columns: 1fr; }
   .recruiter-narratives, .recruiter-practice-grid { grid-template-columns: 1fr; }
   .recruiter-narrative { min-height: auto; }
   .recruiter-narrative h3, .recruiter-practice-grid h3 { margin-top: 30px; }

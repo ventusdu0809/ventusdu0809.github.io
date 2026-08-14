@@ -20,25 +20,28 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "杜明", "AI音频评测",
-    "600", "正式样本 · 两阶段累计",
-    "400", "Phase 2受控比较",
-    "40", "隐藏重复配对",
-    "先判断声音质量，再判断内容是否正确",
-    "把主观听感整理成统一的评测流程",
-    "总体分数之外，还要看模型具体错在哪里",
-    "v3.2.3 r2 · audit r3 · ALL CHECKS PASSED · exit 0 · APPROVED",
-    "NEW CASE STUDY · T2VA",
+    "杜明", "AI音频 / 音视频生成评测",
+    "600", "T2A正式样本 · 两阶段累计",
+    "2 Rounds", "T2VA诊断评测",
+    "3 Cases", "3→4→4重复诊断模式",
+    "把整体听感拆成独立诊断维度",
+    "让主观评测可以复查",
+    "从 Bad Case 进入受控回归",
+    "证据与版本 / EVIDENCE &amp; VERSIONING",
+    "Cross-Round Analysis v1.0 · Frozen",
+    "主项目 / PRIMARY CASE",
     "Audio-Visual Generation Evaluation",
     "3→4→4",
     "Repeated Diagnostic Pattern",
-    "RESEARCH FRAMEWORK · PLS v2.x",
+    "评测方法 / PLS v2.x",
     "Prompt → Visual Fact → Audio Event",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
   assert.match(html, /href="\/t2a-case-study"/);
   assert.match(html, /href="\/audio-visual-evaluation"/);
   assert.match(html, /href="\/point-line-scene-framework"/);
+  assert.ok(html.indexOf("主项目 / PRIMARY CASE") < html.indexOf("基础项目 / FOUNDATION CASE"));
+  assert.doesNotMatch(html, /href="\/audio-world-framework"[^>]*>场景框架/);
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
@@ -58,6 +61,7 @@ test("PLS framework separates literature, abstraction, project evidence and futu
     "7 项有项目案例支持", "0 项无依据主张",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/audio-visual-evaluation"/);
+  assert.match(html, /href="\/audio-world-framework"[^>]*>阅读早期研究笔记/);
   assert.match(html, /href="\/downloads\/pls-framework\/point_line_scene_framework_with_av_case_study\.md"/);
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
@@ -69,7 +73,7 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
   const html = await response.text();
   for (const text of [
     "Audio-Visual Generation Evaluation",
-    "从 Bad Case Discovery", "Controlled Regression",
+    "从问题发现（Bad Case Discovery）", "Controlled Regression",
     "3→4→4 不等于 Audio Counting Failure",
     "Point → Line → Scene + Quality",
     "Repeated Diagnostic Pattern", "Onset Alignment", "Not Replicated",
@@ -77,9 +81,14 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
     "Cross-shot Persistence", "Persistent / Exploratory Concern",
     "小样本诊断，不做统计泛化",
     "查看 T2A 评测案例",
-    "查看 Point–Line–Scene 理论框架",
+    "查看PLS评测框架",
+    "R2-H1-B · Exact-count", "Text→Visual：FAIL", "Visual→Audio：PASS", "P4 Event Counting：5",
+    "R2-H3 · Dynamic Correspondence", "Source-motion：Partial Issue", "L4：3",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/point-line-scene-framework"/);
+  assert.match(html, /src="\/video\/t2va\/R2-H1-B\.mp4"/);
+  assert.match(html, /src="\/video\/t2va\/R2-H3\.mp4"/);
+  assert.match(html, /preload="metadata"/);
   assert.doesNotMatch(html, /Systematic Failure/);
   assert.doesNotMatch(html, /统计性泛化结论/);
 });
@@ -163,7 +172,7 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   const html = await response.text();
   for (const text of [
     "杜明",
-    "AI音频数据评测",
+    "AI音频评测｜音视频生成评测",
     "600个正式样本和660次试听评测",
     "Text-to-Audio专项评测",
     "SAO1 PoC与SAO1 / SA3M受控对比",
@@ -171,7 +180,7 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
     "Cross-Round Analysis v1.0",
     "Point → Line → Scene + Quality",
     "Repeated Diagnostic Pattern",
-    "查看PLS理论框架",
+    "查看PLS评测框架",
     "The Explorer",
     "杭州千乎网络",
     "2026.03—2026.07",
@@ -190,6 +199,7 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   assert.doesNotMatch(html, /50 个约 (?:2|20) MB/);
   assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
   assert.doesNotMatch(html, /href="tel:/);
+  assert.doesNotMatch(html, /五层评测框架/);
   assert.match(html, /<time[^>]*>2026\.07<\/time>/);
   const projectPoints = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
   assert.ok(projectPoints.length >= 2);
@@ -212,6 +222,7 @@ test("pages share the site copy source and keep public artifacts available", asy
     "public/downloads/t2a-v3-evidence/T2A_Evaluation_Report_v3.2.3_r3.md",
     "public/downloads/t2a-v3-evidence/T2A_Audit_Release_Record_r3.md",
     "public/audio/B0008.mp3", "public/audio/B0152.mp3", "public/audio/B0099.mp3", "public/audio/B0092.mp3",
+    "public/video/t2va/R2-H1-B.mp4", "public/video/t2va/R2-H3.mp4",
     "public/downloads/pls-framework/point_line_scene_framework_with_av_case_study.md",
   ]) await access(new URL(relative, root));
 });
@@ -237,9 +248,11 @@ test("audio world framework page presents the four-layer method and keeps the tr
     "Proposed / Next Step",
     "已完成",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  // 首页导航与页脚提供入口
+  // 正式 PLS 页面提供早期研究笔记入口；首页不再与主框架并列展示
   const home = await (await render("/")).text();
-  assert.match(home, /href="\/audio-world-framework"[^>]*>场景框架/);
+  const pls = await (await render("/point-line-scene-framework")).text();
+  assert.doesNotMatch(home, /href="\/audio-world-framework"/);
+  assert.match(pls, /href="\/audio-world-framework"[^>]*>阅读早期研究笔记/);
   // 不虚构：未做过的内容必须标注 Proposed
   assert.match(html, /scene_incoherence/);
   assert.match(html, /补上 Prompt、场景状态和最终声音之间的组织与检查环节/);
