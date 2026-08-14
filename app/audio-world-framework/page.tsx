@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { awf } from "./data";
 import CoreFlowDiagram from "./core-flow";
-import HexagramWorldState from "./hexagram";
-import InterviewModeController from "./interview-mode";
 import "./audio-world-framework.css";
 
 export const metadata: Metadata = {
@@ -27,7 +25,6 @@ export default function AudioWorldFrameworkPage() {
           <Link href="/#sound-practice">声音实践</Link>
           <Link href="/resume">关于我</Link>
         </nav>
-        <InterviewModeController />
       </header>
 
       {/* 01 / HeroSection */}
@@ -57,7 +54,7 @@ export default function AudioWorldFrameworkPage() {
       {/* 02 / CoreFlowDiagram */}
       <section className="awf-section awf-shell" id="flow" aria-labelledby="flow-title">
         <header className="awf-section-heading">
-          <p>01 / CORE FLOW</p>
+          <p>01 / 核心链路</p>
           <h2 id="flow-title">从音频资产到意义</h2>
           <p>点击或悬停节点，查看每一层的声音设计定义、音频场景例子与评测问题。</p>
         </header>
@@ -68,7 +65,7 @@ export default function AudioWorldFrameworkPage() {
       <section className="awf-section awf-section-tint" id="problem" aria-labelledby="problem-title">
         <div className="awf-shell">
           <header className="awf-section-heading">
-            <p>02 / PROBLEM</p>
+            <p>02 / 问题</p>
             <h2 id="problem-title">{awf.problem.title}</h2>
             <p>{awf.problem.lead}</p>
           </header>
@@ -96,8 +93,8 @@ export default function AudioWorldFrameworkPage() {
       {/* 04 / PointLineSceneMeaningSection */}
       <section className="awf-section awf-shell" id="framework" aria-labelledby="framework-title">
         <header className="awf-section-heading">
-          <p>03 / FRAMEWORK</p>
-          <h2 id="framework-title">点、线、面、境：四层能力拆解</h2>
+          <p>03 / 分层框架</p>
+          <h2 id="framework-title">点、线、面、境：从事件到整体表达</h2>
           <p>每一层回答不同的问题，也对应不同的评测对象与标注粒度。</p>
         </header>
         <div className="awf-layer-grid">
@@ -129,7 +126,7 @@ export default function AudioWorldFrameworkPage() {
       <section className="awf-section awf-section-tint" id="middleware" aria-labelledby="middleware-title">
         <div className="awf-shell">
           <header className="awf-section-heading">
-            <p>04 / MIDDLEWARE</p>
+            <p>04 / 中间组织层</p>
             <h2 id="middleware-title">{awf.middleware.title}</h2>
             <p>{awf.middleware.lead}</p>
           </header>
@@ -153,7 +150,7 @@ export default function AudioWorldFrameworkPage() {
             </div>
           </div>
 
-          <h3 className="awf-subsection-title">AI Audio Scene Middleware 流程（概念）</h3>
+          <h3 className="awf-subsection-title">AI 音频场景中间层（AI Audio Scene Middleware，概念）</h3>
           <ol className="awf-ai-flow">
             {awf.middleware.aiFlow.map((item, index) => (
               <li key={item}>
@@ -168,21 +165,11 @@ export default function AudioWorldFrameworkPage() {
         </div>
       </section>
 
-      {/* 06 / WorldStateAnalogy */}
-      <section className="awf-section awf-shell" id="worldstate" aria-labelledby="worldstate-title">
-        <header className="awf-section-heading">
-          <p>05 / STATE ANALOGY</p>
-          <h2 id="worldstate-title">{awf.worldState.title}</h2>
-          <p>{awf.worldState.lead}</p>
-        </header>
-        <HexagramWorldState />
-      </section>
-
-      {/* 07 / EvaluationMatrix */}
+      {/* 06 / EvaluationMatrix */}
       <section className="awf-section awf-section-tint" id="evaluation" aria-labelledby="evaluation-title">
         <div className="awf-shell">
           <header className="awf-section-heading">
-            <p>06 / EVALUATION</p>
+            <p>05 / 分层评测</p>
             <h2 id="evaluation-title">{awf.evaluationMatrix.title}</h2>
             <p>{awf.evaluationMatrix.lead}</p>
           </header>
@@ -226,10 +213,10 @@ export default function AudioWorldFrameworkPage() {
         </div>
       </section>
 
-      {/* 08 / AnnotationSchema */}
+      {/* 07 / AnnotationSchema */}
       <section className="awf-section awf-shell" id="annotation" aria-labelledby="annotation-title">
         <header className="awf-section-heading">
-          <p>07 / ANNOTATION</p>
+          <p>06 / 标注结构</p>
           <h2 id="annotation-title">{awf.annotation.title}</h2>
           <p>{awf.annotation.lead}</p>
         </header>
@@ -251,11 +238,11 @@ export default function AudioWorldFrameworkPage() {
         <p className="awf-callout">{awf.annotation.caution}</p>
       </section>
 
-      {/* 09 / AudioSceneCaseStudy */}
+      {/* 08 / AudioSceneCaseStudy */}
       <section className="awf-section awf-section-tint" id="casestudy" aria-labelledby="casestudy-title">
         <div className="awf-shell">
           <header className="awf-section-heading">
-            <p>08 / CASE STUDY</p>
+            <p>07 / 案例拆解</p>
             <h2 id="casestudy-title">同一个 Prompt，四层拆解</h2>
             <blockquote className="awf-case-prompt">{awf.caseStudy.prompt}</blockquote>
           </header>
@@ -284,10 +271,10 @@ export default function AudioWorldFrameworkPage() {
         </div>
       </section>
 
-      {/* 10 / ExistingProjectEvidence */}
+      {/* 09 / ExistingProjectEvidence */}
       <section className="awf-section awf-shell" id="evidence" aria-labelledby="evidence-title">
         <header className="awf-section-heading">
-          <p>09 / EVIDENCE</p>
+          <p>08 / 已有证据</p>
           <h2 id="evidence-title">{awf.evidence.title}</h2>
           <p>{awf.evidence.lead}</p>
           <span className="awf-status-badge">{awf.evidence.status}</span>
@@ -355,11 +342,11 @@ export default function AudioWorldFrameworkPage() {
         </div>
       </section>
 
-      {/* 11 / RoleApplication */}
+      {/* 10 / RoleApplication */}
       <section className="awf-section awf-section-tint" id="role" aria-labelledby="role-title">
         <div className="awf-shell">
           <header className="awf-section-heading">
-            <p>10 / ROLE</p>
+            <p>09 / 工作应用</p>
             <h2 id="role-title">{awf.role.title}</h2>
             <p>{awf.role.lead}</p>
           </header>
@@ -379,10 +366,10 @@ export default function AudioWorldFrameworkPage() {
         </div>
       </section>
 
-      {/* 12 / WhyMeSection */}
+      {/* 11 / WhyMeSection */}
       <section className="awf-section awf-shell" id="whyme" aria-labelledby="whyme-title">
         <header className="awf-section-heading">
-          <p>11 / WHY ME</p>
+          <p>10 / 能力来源</p>
           <h2 id="whyme-title">{awf.whyMe.title}</h2>
           <p>{awf.whyMe.lead}</p>
         </header>
@@ -399,25 +386,7 @@ export default function AudioWorldFrameworkPage() {
         <p className="awf-footnote">{awf.whyMe.boundary}</p>
       </section>
 
-      {/* 13 / InterviewModeController — 渲染于顶栏；下方为演示说明 */}
-      <section className="awf-section awf-shell" id="interview-note" aria-labelledby="interview-note-title">
-        <header className="awf-section-heading">
-          <p>12 / INTERVIEW MODE</p>
-          <h2 id="interview-note-title">右上角可切换「面试演示」模式</h2>
-          <p>每屏只保留一个核心结论，大段内容默认折叠；底部显示进度，支持左右方向键切换章节，Esc 退出后恢复完整滚动浏览。</p>
-        </header>
-        <ol className="awf-interview-path">
-          {awf.interview.slides.map((slide) => (
-            <li key={slide.section}>
-              <span>{slide.section}</span>
-              <strong>{slide.title}</strong>
-              <p>{slide.big}</p>
-            </li>
-          ))}
-        </ol>
-      </section>
-
-      {/* 14 / FooterDisclaimer */}
+      {/* 12 / FooterDisclaimer */}
       <footer className="awf-footer awf-shell">
         <div>
           <Link href="/">返回作品集首页</Link>

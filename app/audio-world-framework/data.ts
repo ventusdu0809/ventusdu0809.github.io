@@ -20,24 +20,24 @@ export const awf = {
   },
 
   hero: {
-    eyebrow: "METHODOLOGY CASE STUDY",
+    eyebrow: "方法框架 / METHODOLOGY",
     title: "点·线·面·境",
-    subtitle: "AI 音频场景表示与分层评测框架",
-    en: "From Audio Events to Audio Worlds",
+    subtitle: "生成式音频的场景表示与分层评测框架",
+    en: "从声音事件到声音世界 / From Audio Events to Audio Worlds",
     core: [
       "声音不是若干音频素材的简单叠加。",
-      "单个声音事件只有进入时间、空间、状态和因果关系，才能形成完整场景；",
-      "场景通过对象之间的交互，进一步产生情绪、叙事和意境。",
+      "单个声音事件进入时间、空间、状态和因果关系后，才会形成完整场景。",
+      "场景中的对象继续发生交互，听者才会感到情绪、叙事和氛围。",
     ],
-    body: "我尝试将声音设计中的「点—线—面—境」、游戏音频中的「Asset—Event—State—Scene」，以及 AI 音频生成中的「Event—Relation—Scene—World State」连接起来，形成一套可用于评测、标注和问题诊断的分层框架。",
+    body: "这套框架从声音事件出发，逐步检查事件关系、场景组织和整体表达。它既可以用于设计评测项，也能帮助标注与研发定位问题。",
     tags: [
-      "Audio Evaluation",
-      "Scene Representation",
-      "Human Preference",
-      "Game Audio Middleware",
-      "Sound Design",
+      "音频评测 Audio Evaluation",
+      "场景表示 Scene Representation",
+      "人类偏好 Human Preference",
+      "游戏音频中间件 Game Audio Middleware",
+      "声音设计 Sound Design",
     ],
-    oneLiner: "研究的不只是「怎么把声音叠在一起」，而是「声音如何形成一个可理解、可交互、可评测的世界」。",
+    oneLiner: "重点不在素材叠了多少，而在这些声音是否组成了可信、可理解的场景。",
   },
 
   /** 首页主链路：Audio Asset → Event → Relation → Scene → Interaction → Meaning */
@@ -94,7 +94,7 @@ export const awf = {
 
   problem: {
     title: "从「生成一段音频」到「构建一个声音世界」",
-    lead: "传统 Text-to-Audio 流程经常被简化为 Prompt → Audio，评测也容易停留在：有没有明显噪声、声音像不像目标声源、整体是否可用、Prompt 是否基本满足。",
+    lead: "传统文本生成音频（Text-to-Audio，T2A）常被简化为 Prompt → Audio，评测也容易只问音质、声源和整体相关性。面对多事件场景，这些问题还不够。",
     missingTitle: "但复杂音频场景包含的不只是「有什么声音」",
     missing: [
       "哪些声音是独立事件；",
@@ -104,7 +104,7 @@ export const awf = {
       "当前环境处于什么状态；",
       "最终是否形成统一的情绪和叙事。",
     ],
-    targetTitle: "评测对象需要从单一波形扩展为",
+    targetTitle: "因此需要分别检查",
     target: [
       "事件正确性",
       "关系正确性",
@@ -119,7 +119,7 @@ export const awf = {
     {
       id: "point",
       char: "点",
-      en: "Point · Audio Event",
+      en: "声音事件 / Point",
       definition: "代表独立、可识别的声音事件。",
       examples: ["雨声", "雷声", "脚步", "开门", "鸟叫", "车辆经过", "一句人物对白"],
       question: "Prompt 要求的声音是否出现？声源、数量、属性是否正确？",
@@ -129,7 +129,7 @@ export const awf = {
     {
       id: "relation",
       char: "线",
-      en: "Relation",
+      en: "事件关系 / Relation",
       definition: "代表事件之间的关系：先后、持续、重叠、远近、强弱、因果与相互影响。",
       examples: ["雷声出现后，鸟叫停止", "人物接近后，脚步声逐渐增强", "门打开后，室外环境声进入室内"],
       question: "每一个声音都存在，但它们是否在正确的时间、位置和关系中出现？",
@@ -139,7 +139,7 @@ export const awf = {
     {
       id: "scene",
       char: "面",
-      en: "Scene",
+      en: "声音场景 / Scene",
       definition: "多个声音事件与关系共同形成的完整场景。",
       examples: ["风吹树叶", "远处鸟鸣", "昆虫底噪", "空间反射", "远近层次", "偶发树枝断裂"],
       question: "前景、背景是否合理？声源是否属于同一个世界？空间是否统一？",
@@ -149,7 +149,7 @@ export const awf = {
     {
       id: "meaning",
       char: "境",
-      en: "Meaning",
+      en: "整体表达 / Meaning",
       definition: "场景在整体上产生的高层意义：情绪、氛围、叙事阶段、紧张程度、孤独感、安全感、真实感、电影感、意境。",
       examples: ["情绪", "氛围", "叙事阶段", "紧张程度", "孤独感", "沉浸感"],
       question: "正确生成声音，不等于正确表达意义。",
@@ -184,29 +184,8 @@ export const awf = {
       "Mixing & Rendering",
       "Perception and Meaning",
     ],
-    conclusion: "AI 音频中间件不是直接替代生成模型，而是在 Prompt、世界状态和最终声音之间建立一个可解释的组织层。",
-    boundary: "「AI Audio Scene Middleware」是我提出的组织层概念，属于框架设想，不是已上线的工程产品。",
-  },
-
-  worldState: {
-    title: "一种关于世界状态的文化类比",
-    lead: "《易经》可以作为理解「状态、局部变量、状态迁移和语义解释」的文化类比。",
-    mapping: [
-      ["阴 / 阳", "二元局部状态"],
-      ["六爻", "六个状态变量或位置"],
-      ["卦", "多个局部变量组成的整体状态"],
-      ["动爻", "局部变量发生改变"],
-      ["变卦", "系统进入新的整体状态"],
-      ["卦辞", "对整体状态的语义描述"],
-      ["爻辞", "对局部位置及其变化的语义解释"],
-    ],
-    insight: [
-      "单独的阴或阳并没有固定意义。它的意义取决于所处位置、与其他爻的关系，以及整体处于哪一个卦象状态。",
-      "同样，一个声音事件也不能脱离场景单独理解。脚步声在卧室、战场、医院走廊或森林中，会产生完全不同的意义。",
-    ],
-    disclaimer:
-      "本部分是一种用于启发状态建模和关系思考的跨领域类比，不主张《易经》与现代 AI 在技术原理上等同，也不将其作为科学证明。",
-    binaryOnly: true,
+    conclusion: "这里的重点不是再造一个生成模型，而是补上 Prompt、场景状态和最终声音之间的组织与检查环节。",
+    boundary: "AI 音频场景中间层（AI Audio Scene Middleware）是概念设计，尚未实现为可运行产品。",
   },
 
   evaluationMatrix: {
@@ -389,8 +368,8 @@ meaning:
   },
 
   role: {
-    title: "我的角色不是只给模型打分，而是建立问题语言",
-    lead: "在 AI 音频评测岗位中，我希望承担的是连接模型、声音和人类听觉的中间角色。",
+    title: "把听感问题整理成可复查的评测语言",
+    lead: "这套框架把听感问题整理成研发、标注和评测都能复用的描述。",
     columns: [
       {
         en: "EVALUATION DESIGN",
@@ -427,7 +406,7 @@ meaning:
 
   whyMe: {
     title: "我的能力组合",
-    lead: "页面不写成自我吹嘘，而是写成能力来源。",
+    lead: "这套方法来自声音设计、游戏音频与实际评测工作的交叉经验。",
     items: [
       {
         title: "声音设计",
@@ -442,68 +421,18 @@ meaning:
         body: "独立搭建 Text-to-Audio 评测流程，覆盖测试集、盲听、隐藏重复、一致性分析、Bad Case 诊断和报告交付。",
       },
       {
-        title: "东方美学研究",
-        body: "本科阶段研究「元素—场景—意境」的层级关系，并持续将这一思路用于声音设计与 AI 音频场景理解。",
+        title: "跨媒介场景研究",
+        body: "本科阶段持续研究元素、空间与整体氛围之间的关系，这段训练后来进入声音设计与音频场景分析。",
       },
     ],
     conclusion:
-      "我的优势不是把美学概念停留在表达层，而是尝试将听感、关系和意境转化为可标注、可评测、可诊断的结构。",
+      "我习惯把主观听感拆成可观察的事件、关系与场景问题，再交给评测、标注和研发继续验证。",
     boundary:
-      "我没有多年 AI 产研经验、成熟 Python 工程经验、SQL 实战经验、模型训练经验或大规模团队管理经验——以上均不构成我的能力主张。",
-  },
-
-  interview: {
-    label: "面试演示",
-    normalLabel: "普通浏览",
-    slides: [
-      {
-        section: "01",
-        title: "问题",
-        big: "很多音频评测判断模型「生成了什么」，但对事件之间如何组成场景关注不足。",
-        detail: "复杂音频场景包含事件、先后关系、重叠、空间层次、状态变化与情绪叙事。只给一个总分，无法告诉研发问题出在哪一层。",
-        tip: "讲：现有评测大多停在「有没有噪声、像不像、可不可用」，缺的是事件之间如何组织成场景。",
-      },
-      {
-        section: "02",
-        title: "框架",
-        big: "我用「点、线、面、境」四个层级拆解音频能力：事件、关系、场景和意义。",
-        detail: "点：声音事件是否正确。线：事件之间的关系是否正确。面：多个事件是否构成统一场景。境：场景是否传达目标情绪与叙事。",
-        tip: "讲：点=事件，线=关系，面=场景，境=意义。每一层回答不同问题，也对应不同评测方法。",
-      },
-      {
-        section: "03",
-        title: "连接",
-        big: "游戏音频中间件的组织逻辑，可以平移到 AI 音频：Asset、Event、State、RTPC 对应场景表示。",
-        detail: "Wwise 的 Event / Switch / State / RTPC / Game Object 本质是「谁在什么状态、什么位置、什么条件下发声」。这为 AI 音频提供了一个可解释的组织层设想。",
-        tip: "讲：我做过 Wwise / Unity 实际项目，熟悉这套组织逻辑；它和 AI 音频的 Event—Relation—Scene 是同构的。",
-      },
-      {
-        section: "04",
-        title: "落地",
-        big: "这套框架可以用于评测集设计、层级标注、Bad Case 定位与研发反馈。",
-        detail: "评测矩阵：点查事件、线查关系、面查场景、境查意义。标注也分四层：事件 → 关系 → 场景 → 意义。",
-        tip: "讲：分层评测的价值是定位问题层级，比单个总分更有诊断价值。",
-      },
-      {
-        section: "05",
-        title: "证据",
-        big: "我现有的 T2A 项目已完成事件层与部分关系层评测；场景一致性与人类偏好是下一阶段。",
-        detail: "已完成：600 正式样本、660 次试听、2 模型、40 隐藏重复、20 复测；OVL within-1 95.0%、REL within-1 97.5%。下一阶段：Scene Coherence、Pairwise Preference、情绪与叙事匹配。",
-        tip: "讲：框架不是空谈——事件层和部分关系层已经在真实评测里跑过，场景和意义层是我的下一步。",
-      },
-      {
-        section: "06",
-        title: "价值",
-        big: "我希望把声音事件、关系、场景与人类感受之间的联系，转化成可标注、可评测、可研发使用的结构。",
-        detail: "我的能力来源：声音设计硕士、游戏音频中间件经验、独立 T2A 评测项目、对元素—场景—意境关系的长期研究。",
-        tip: "讲：我不只是给模型打分，而是建立模型、研发和人类听觉都能理解的问题语言。",
-      },
-    ],
-    hintLabel: "讲解提示",
+      "当前能力边界集中在人工听评、评测设计、声音制作与中间件实践；模型训练、大规模数据工程和自动 Judge 仍需与研发岗位协作完成。",
   },
 
   footer: {
-    note: "本页面的《易经》六爻部分为跨领域类比，用于启发状态建模思考，不构成技术等同主张。场景一致性、情绪与意境评测、AI Audio Middleware 均为下一阶段框架或设想，非已上线产品。",
-    boundary: "页面中「已完成」与「Proposed / Next Step」均按真实性边界标注，不虚构项目结果。",
+    note: "本页将“点、线、面、境”作为声音场景的组织方法。场景一致性（Scene Coherence）、情绪 / 叙事评测与 AI 音频场景中间层仍属于后续研究或概念设计，不写成已完成产品。",
+    boundary: "页面会明确区分已完成、计划中（Proposed / Next Step）与尚未测试的内容。",
   },
 } as const;

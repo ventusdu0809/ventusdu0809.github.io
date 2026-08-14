@@ -119,32 +119,28 @@ tests/                       原 Cloudflare 渲染回归测试
 
 ```text
 app/audio-world-framework/
-├── page.tsx                  页面主文件（14 个 section）
+├── page.tsx                  页面主文件（12 个 section）
 ├── data.ts                   全部文案、表格与真实性边界声明
 ├── audio-world-framework.css 页面样式（awf-* 前缀，独立配色变量）
-├── core-flow.tsx             核心流程图交互组件（client）
-├── hexagram.tsx              六爻二进制状态交互组件（client）
-└── interview-mode.tsx        面试演示模式控制器（client）
+└── core-flow.tsx             核心流程图交互组件（client）
 ```
 
-页面结构（14 个 section）：
+页面结构（12 个 section）：
 
 1. HeroSection — 点·线·面·境主视觉 + 标签 + 一句话定位
 2. CoreFlowDiagram — Audio Asset → Event → Relation → Scene → Interaction → Meaning 交互流程图
 3. ProblemStatement — 当前音频评测缺少什么
 4. PointLineSceneMeaningSection — 四层能力拆解（含点线面境各自 Bad Case 标签）
 5. MiddlewareComparison — Wwise ↔ AI 音频对应 + AI Audio Scene Middleware 流程
-6. WorldStateAnalogy — 六爻二进制状态交互 + 对应关系 + 免责声明
-7. EvaluationMatrix — 分层评测矩阵 + 问题定位示例
-8. AnnotationSchema — 四层标注流程 + YAML Schema
-9. AudioSceneCaseStudy — 同一 Prompt 四层拆解 + Bad Case 定位
-10. ExistingProjectEvidence — 已完成 T2A 数据 + 一致性 + 下一阶段（Proposed）
-11. RoleApplication — 评测设计 / 标注质控 / 研发协作
-12. WhyMeSection — 能力来源 + 边界声明
-13. InterviewModeController — 右上角「普通浏览 / 面试演示」切换
-14. FooterDisclaimer — 页脚 + 真实性免责声明
+6. EvaluationMatrix — 分层评测矩阵 + 问题定位示例
+7. AnnotationSchema — 四层标注流程 + YAML Schema
+8. AudioSceneCaseStudy — 同一 Prompt 四层拆解 + Bad Case 定位
+9. ExistingProjectEvidence — 已完成 T2A 数据 + 一致性 + 下一阶段（Proposed）
+10. RoleApplication — 评测设计 / 标注质控 / 研发协作
+11. WhyMeSection — 能力来源 + 边界声明
+12. FooterDisclaimer — 页脚 + 真实性免责声明
 
-静态版交互说明：GitHub Pages 是纯静态托管，`export-static.mjs` 会剥离 React 运行时。为此该页面的三个交互组件（流程图、六爻、面试演示）在静态导出时由注入的 vanilla 增强脚本（`awfStaticEnhancement()`）读取组件渲染出的 `data-*` 属性驱动，行为与 Cloudflare 版一致。修改这三个组件时，如改变 `data-*` 结构，需同步更新 `scripts/export-static.mjs` 中的增强脚本。
+静态版交互说明：GitHub Pages 是纯静态托管，`export-static.mjs` 会剥离 React 运行时。核心流程图在静态导出时由注入的增强脚本（`awfStaticEnhancement()`）读取组件渲染出的 `data-*` 属性驱动，行为与 Cloudflare 版一致。修改该组件的数据结构时，需同步更新 `scripts/export-static.mjs`。
 
 真实性边界：页面中「已完成」数据（600 样本 / 660 试听 / OVL within-1 95.0% / REL within-1 97.5% / Primary Bad Case Exact 67.5%）来自 T2A 评测项目；Scene Coherence、情绪意境评测、AI Audio Middleware 均为「Proposed / Next Step」，页面明确标注，不表述为已完成。
 

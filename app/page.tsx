@@ -11,7 +11,9 @@ export default function Home() {
           <span className="wordmark-text">DU MING / AUDIO</span>
         </a>
         <nav aria-label="主导航">
-          <a href="/t2a-case-study">评测案例</a>
+          <a href="/t2a-case-study">T2A评测</a>
+          <a href="/audio-visual-evaluation">T2VA评测</a>
+          <a href="/point-line-scene-framework">PLS框架</a>
           <a href="/audio-world-framework">场景框架</a>
           <a href="#sound-practice">声音实践</a>
           <a href="/resume">关于我</a>
@@ -94,6 +96,48 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="content-section content-section--paper recruiter-project" aria-labelledby="av-project-title">
+        <div className="section-shell">
+          <header className="section-heading">
+            <p className="eyebrow">NEW CASE STUDY · T2VA</p>
+            <h2 id="av-project-title">Audio-Visual Generation Evaluation</h2>
+            <p className="section-lead">在原有 T2A 评测基础上新增的两轮诊断性音视频生成评测：从 Round-1 Bad Case Discovery 进入 Round-2 Controlled Regression，并完成 Cross-Round Analysis v1.0。</p>
+          </header>
+          <div className="recruiter-project-grid">
+            <div className="recruiter-scale-list">
+              <span>Point → Line → Scene + Quality</span>
+              <span>2 Rounds · 16 Generated Samples</span>
+              <span>3 个可精确判定 Exact-count 案例</span>
+              <span>5 条跨轮冻结结论</span>
+            </div>
+            <div>
+              <p className="recruiter-finding">核心案例呈现 3→4→4：数量偏差首先发生在 Text→Visual，Visual→Audio 的事件计数与实际视觉保持一致，因此不能误判为 Audio Counting Failure。</p>
+              <p className="recruiter-boundary">Exact-count 结论为 Repeated Diagnostic Pattern；项目属于小样本诊断性 PoC，用于定位失败链路和调整研发优先级，不作统计泛化。</p>
+              <a className="btn btn-primary" href="/audio-visual-evaluation">查看新增 T2VA 案例</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="content-section pls-home-feature" aria-labelledby="pls-home-title">
+        <div className="section-shell">
+          <header className="section-heading">
+            <p className="eyebrow">RESEARCH FRAMEWORK · PLS v2.x</p>
+            <h2 id="pls-home-title">Point → Line → Scene</h2>
+            <p className="section-lead">把文献中的细粒度评测方向组织成分层感知框架，再用 Audio-Visual Generation Evaluation 作为案例研究，展示它如何进入失败定位、受控回归和研发优先级。</p>
+          </header>
+          <div className="pls-home-grid">
+            <article><span>POINT</span><strong>原子正确性</strong><p>事件、声源、材质、属性与数量是否正确。</p></article>
+            <article><span>LINE</span><strong>关系正确性</strong><p>时间、空间、因果、动态与交互关系是否成立。</p></article>
+            <article><span>SCENE</span><strong>整体场景一致性</strong><p>环境、前后景、显著性与世界内声音是否连贯。</p></article>
+          </div>
+          <div className="pls-home-note">
+            <p><strong>新增原则：</strong>先明确 Prompt → Visual Fact → Audio Event 的参考链，再判断 Point / Line / Scene，减少多模态错误归因。</p>
+            <a className="btn btn-primary" href="/point-line-scene-framework">阅读 PLS 理论报告</a>
+          </div>
+        </div>
+      </section>
+
       <section className="content-section content-section--paper" id="sound-practice" aria-labelledby="practice-title">
         <div className="section-shell">
           <header className="section-heading">
@@ -135,6 +179,8 @@ export default function Home() {
         </div>
         <div>
           <a href="/t2a-case-study">评测案例</a>
+          <a href="/audio-visual-evaluation">T2VA评测</a>
+          <a href="/point-line-scene-framework">PLS框架</a>
           <a href="/audio-world-framework">场景框架</a>
           <a href="/resume">关于我</a>
           <a href="https://space.bilibili.com/7927779" target="_blank" rel="noreferrer">Bilibili</a>

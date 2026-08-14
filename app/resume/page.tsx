@@ -6,7 +6,7 @@ import "./resume.css";
 export const metadata: Metadata = {
   title: "杜明｜AI音频数据评测与音频模型主观评测",
   description:
-    "爱丁堡大学声音设计硕士杜明的AI音频评测简历，包含Text-to-Audio评测集构建、主观听评、Bad Case分析、声画同步和环境音效判断经验。",
+    "爱丁堡大学声音设计硕士杜明的AI音频评测简历，包含Text-to-Audio评测集构建、主观听评、Bad Case分析，以及新增的两轮音视频生成诊断性评测。",
 };
 
 const abilities = [
@@ -79,7 +79,7 @@ export default function ResumePage() {
             <p className="resume-role">AI音频数据评测</p>
             <p className="resume-specialties">声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断</p>
             <p className="resume-intro">
-              爱丁堡大学声音设计硕士，具备游戏、影视及交互音频制作经历。独立完成Text-to-Audio模型评测项目，覆盖评测集构建、音频质检、盲听评分、Bad Case标注、隐藏重复、复测裁决及基础统计，能够将专业听感转化为结构化、可复核的评测结论。
+              爱丁堡大学声音设计硕士，具备游戏、影视及交互音频制作经历。独立完成Text-to-Audio模型评测项目，覆盖评测集构建、音频质检、盲听评分、Bad Case标注、隐藏重复、复测裁决及基础统计；并进一步扩展到两轮诊断性音视频生成评测，将专业视听判断转化为结构化、可复核的结论。
             </p>
           </div>
 
@@ -126,7 +126,7 @@ export default function ResumePage() {
             <section className="resume-section resume-primary-section" aria-labelledby="t2a-title">
               <div className="resume-section-heading">
                 <p>重点项目</p>
-                <h2 id="t2a-title">AI音频模型评测项目</h2>
+                <h2 id="t2a-title">AI音频与音视频生成评测项目</h2>
               </div>
               <article className="t2a-project">
                 <div className="entry-header">
@@ -148,6 +148,23 @@ export default function ResumePage() {
                   <p>五层评测框架、听评方法、正式评分和Bad Case裁决由本人完成；AI用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
                 </aside>
                 <Link className="resume-arrow-link" href="/t2a-case-study">查看完整评测项目 →</Link>
+              </article>
+              <article className="t2a-project resume-project-secondary">
+                <div className="entry-header">
+                  <div className="entry-title-group">
+                    <h3>Audio-Visual Generation Evaluation</h3>
+                    <p>Cross-Round Analysis v1.0 · 两轮诊断性 T2VA 评测</p>
+                  </div>
+                  <time dateTime="2026-08">2026.08</time>
+                </div>
+                <p className="entry-meta">个人项目 · Point → Line → Scene + Quality · Controlled Regression · Failure Localization</p>
+                <ol className="resume-points">
+                  <li>在原有T2A评测实践上扩展Point → Line → Scene + Quality分层框架，以Round-1 Discovery发现Bad Case，再通过Round-2 Controlled Regression按预先定义的观察字段与判定规则验证。</li>
+                  <li>将Text→Visual与Visual→Audio分开定位；三个可精确判定案例均呈现3→4→4，冻结为Repeated Diagnostic Pattern，避免将视觉阶段数量偏差误归为Audio Counting Failure。</li>
+                  <li>综合Not Replicated、Mixed / Refined与独立Quality Gate形成研发优先级：降低未复现问题优先级，细化动态专项测试，并持续关注音频质量风险。</li>
+                </ol>
+                <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看新增T2VA评测项目 →</Link>
+                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看PLS理论框架 →</Link>
               </article>
             </section>
 
@@ -247,6 +264,8 @@ export default function ResumePage() {
           <p>公开简历版本｜内容对应可展示的项目材料与案例页面。</p>
           <div>
             <Link href="/t2a-case-study">T2A评测案例</Link>
+            <Link href="/audio-visual-evaluation">T2VA评测案例</Link>
+            <Link href="/point-line-scene-framework">PLS理论框架</Link>
             <Link href="/sound-practice">游戏音频案例</Link>
             <Link href="/audio-validation-summary">音频资产验收案例</Link>
           </div>

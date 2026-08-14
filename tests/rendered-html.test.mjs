@@ -13,7 +13,7 @@ async function render(pathname = "/") {
   );
 }
 
-const prohibitedHomeTerms = ["多模态评测", "视频生成", "评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
+const prohibitedHomeTerms = ["评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
 
 test("homepage uses the recruiter-facing three-narrative structure", async () => {
   const response = await render("/");
@@ -28,10 +28,60 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "把主观听感整理成统一的评测流程",
     "总体分数之外，还要看模型具体错在哪里",
     "v3.2.3 r2 · audit r3 · ALL CHECKS PASSED · exit 0 · APPROVED",
+    "NEW CASE STUDY · T2VA",
+    "Audio-Visual Generation Evaluation",
+    "3→4→4",
+    "Repeated Diagnostic Pattern",
+    "RESEARCH FRAMEWORK · PLS v2.x",
+    "Prompt → Visual Fact → Audio Event",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
   assert.match(html, /href="\/t2a-case-study"/);
+  assert.match(html, /href="\/audio-visual-evaluation"/);
+  assert.match(html, /href="\/point-line-scene-framework"/);
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
+});
+
+test("PLS framework separates literature, abstraction, project evidence and future work", async () => {
+  const response = await render("/point-line-scene-framework");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "Point", "Line", "Scene",
+    "文献支撑（Literature-supported）", "PLS 方法论抽象（Conceptual Abstraction）", "项目案例证据（Project Case Evidence）",
+    "Prompt", "Visual Fact", "Audio Event",
+    "3→4→4 修正了错误归因", "Repeated Diagnostic Pattern",
+    "场景一致性（Scene Coherence）", "项目证据有限",
+    "制作可用性（Production Utility）", "后续研究",
+    "Preference / Reward", "Judge Reliability",
+    "诊断性案例研究 ≠ 框架验证基准",
+    "7 项有项目案例支持", "0 项无依据主张",
+  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(html, /href="\/audio-visual-evaluation"/);
+  assert.match(html, /href="\/downloads\/pls-framework\/point_line_scene_framework_with_av_case_study\.md"/);
+  assert.doesNotMatch(html, /PLS 已被统计证明/);
+  assert.doesNotMatch(html, /PLS 是行业标准/);
+});
+
+test("T2VA is an additive case study with frozen cross-round conclusions", async () => {
+  const response = await render("/audio-visual-evaluation");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "Audio-Visual Generation Evaluation",
+    "从 Bad Case Discovery", "Controlled Regression",
+    "3→4→4 不等于 Audio Counting Failure",
+    "Point → Line → Scene + Quality",
+    "Repeated Diagnostic Pattern", "Onset Alignment", "Not Replicated",
+    "Dynamic Correspondence", "Mixed / Refined",
+    "Cross-shot Persistence", "Persistent / Exploratory Concern",
+    "小样本诊断，不做统计泛化",
+    "查看 T2A 评测案例",
+    "查看 Point–Line–Scene 理论框架",
+  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(html, /href="\/point-line-scene-framework"/);
+  assert.doesNotMatch(html, /Systematic Failure/);
+  assert.doesNotMatch(html, /统计性泛化结论/);
 });
 
 test("featured case study keeps an explicit paper-background contrast scheme", async () => {
@@ -117,6 +167,11 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
     "600个正式样本和660次试听评测",
     "Text-to-Audio专项评测",
     "SAO1 PoC与SAO1 / SA3M受控对比",
+    "Audio-Visual Generation Evaluation",
+    "Cross-Round Analysis v1.0",
+    "Point → Line → Scene + Quality",
+    "Repeated Diagnostic Pattern",
+    "查看PLS理论框架",
     "The Explorer",
     "杭州千乎网络",
     "2026.03—2026.07",
@@ -127,7 +182,7 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
     "与直属领导共同起草并迭代音频外包制作与交付规范",
     "AI用于资料归纳、代码实现和批处理执行",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  for (const href of ["/t2a-case-study", "/sound-practice", "/audio-validation-summary"]) {
+  for (const href of ["/t2a-case-study", "/audio-visual-evaluation", "/point-line-scene-framework", "/sound-practice", "/audio-validation-summary"]) {
     assert.match(html, new RegExp(`href="${href}"`));
   }
   assert.doesNotMatch(html, /\/#game-detail/);
@@ -136,6 +191,10 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
   assert.doesNotMatch(html, /href="tel:/);
   assert.match(html, /<time[^>]*>2026\.07<\/time>/);
+  const projectPoints = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
+  assert.ok(projectPoints.length >= 2);
+  assert.equal((projectPoints[0][1].match(/<li>/g) ?? []).length, 4);
+  assert.equal((projectPoints[1][1].match(/<li>/g) ?? []).length, 3);
 });
 
 test("pages share the site copy source and keep public artifacts available", async () => {
@@ -153,6 +212,7 @@ test("pages share the site copy source and keep public artifacts available", asy
     "public/downloads/t2a-v3-evidence/T2A_Evaluation_Report_v3.2.3_r3.md",
     "public/downloads/t2a-v3-evidence/T2A_Audit_Release_Record_r3.md",
     "public/audio/B0008.mp3", "public/audio/B0152.mp3", "public/audio/B0099.mp3", "public/audio/B0092.mp3",
+    "public/downloads/pls-framework/point_line_scene_framework_with_av_case_study.md",
   ]) await access(new URL(relative, root));
 });
 
@@ -162,20 +222,17 @@ test("audio world framework page presents the four-layer method and keeps the tr
   const html = await response.text();
   for (const text of [
     "点·线·面·境",
-    "AI 音频场景表示与分层评测框架",
-    "From Audio Events to Audio Worlds",
+    "生成式音频的场景表示与分层评测框架",
+    "从声音事件到声音世界 / From Audio Events to Audio Worlds",
     "从「生成一段音频」到「构建一个声音世界」",
-    "点、线、面、境：四层能力拆解",
+    "点、线、面、境：从事件到整体表达",
     "从 Wwise 到 AI Audio Scene Middleware",
-    "一种关于世界状态的文化类比",
     "分层评测矩阵",
     "从单标签走向层级结构",
     "雨夜，一个人撑伞缓慢走过石板路，远处偶尔传来雷声。",
     "从现有评测流程到下一阶段框架",
-    "我的角色不是只给模型打分，而是建立问题语言",
+    "把听感问题整理成可复查的评测语言",
     "我的能力组合",
-    "右上角可切换「面试演示」模式",
-    "不主张《易经》与现代 AI 在技术原理上等同",
     "OVL within-1",
     "Proposed / Next Step",
     "已完成",
@@ -185,9 +242,9 @@ test("audio world framework page presents the four-layer method and keeps the tr
   assert.match(home, /href="\/audio-world-framework"[^>]*>场景框架/);
   // 不虚构：未做过的内容必须标注 Proposed
   assert.match(html, /scene_incoherence/);
-  assert.match(html, /AI 音频中间件不是直接替代生成模型/);
+  assert.match(html, /补上 Prompt、场景状态和最终声音之间的组织与检查环节/);
   assert.doesNotMatch(html, /已成为行业标准/);
-  assert.doesNotMatch(html, /《易经》是 AI 的技术来源/);
+  assert.doesNotMatch(html, /面试演示|INTERVIEW MODE|STATE ANALOGY|一种关于世界状态的文化类比|《易经》|data-awf-interview|data-awf-hexagram/);
   assert.doesNotMatch(html, /用于模型训练/);
 });
 

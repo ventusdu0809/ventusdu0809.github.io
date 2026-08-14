@@ -85,35 +85,6 @@
   border-bottom: 1px solid currentColor;
 }
 
-/* ---------- 面试模式切换 ---------- */
-
-.awf-interview-toggle {
-  display: inline-flex;
-  flex: none;
-  padding: 3px;
-  border: 1px solid var(--awf-line);
-  border-radius: 999px;
-  background: var(--awf-paper);
-}
-
-.awf-interview-toggle button {
-  padding: 6px 13px;
-  border: 0;
-  border-radius: 999px;
-  color: var(--awf-ink-soft);
-  background: transparent;
-  font: inherit;
-  font-size: 11px;
-  font-weight: 650;
-  cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.awf-interview-toggle button.is-active {
-  color: var(--awf-paper);
-  background: var(--awf-bluegray);
-}
-
 /* ---------- Hero ---------- */
 
 .awf-hero {
@@ -665,167 +636,6 @@
   line-height: 1.45;
 }
 
-/* ---------- 六爻状态类比 ---------- */
-
-.awf-hexagram-wrap {
-  max-width: 980px;
-}
-
-.awf-hexagram {
-  display: grid;
-  gap: 10px;
-  max-width: 420px;
-  padding: 26px 22px;
-  border: 1px solid var(--awf-line);
-  background: var(--awf-paper);
-}
-
-.awf-hexagram-line {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-  padding: 0;
-  border: 0;
-  background: transparent;
-  cursor: pointer;
-}
-
-.awf-hexagram-seg {
-  display: block;
-  height: 9px;
-  border-radius: 2px;
-  background: var(--awf-ink);
-  transition: background 0.2s ease, opacity 0.2s ease;
-}
-
-.awf-hexagram-line.is-yin .awf-hexagram-seg {
-  opacity: 0.55;
-}
-
-.awf-hexagram-line.is-yang .awf-hexagram-seg {
-  background: var(--awf-cinnabar);
-  opacity: 1;
-}
-
-.awf-hexagram-line:hover .awf-hexagram-seg {
-  background: var(--awf-cinnabar);
-  opacity: 0.8;
-}
-
-.awf-hexagram-readout {
-  display: flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 18px;
-  margin-top: 18px;
-  padding: 16px 20px;
-  border: 1px solid var(--awf-line);
-  background: var(--awf-bluegray-soft);
-}
-
-.awf-hexagram-state-label {
-  margin: 0;
-  color: var(--awf-bluegray);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-}
-
-.awf-hexagram-state-label strong {
-  margin-left: 8px;
-  color: var(--awf-ink);
-  font-family: var(--serif);
-  font-size: 30px;
-  line-height: 1;
-}
-
-.awf-hexagram-binary {
-  margin: 0;
-  color: var(--awf-ink-soft);
-  font-size: 12px;
-}
-
-.awf-hexagram-transition {
-  margin: 0 0 0 auto;
-  color: var(--awf-cinnabar);
-  font-family: var(--serif);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.awf-hexagram-mapping {
-  margin-top: 26px;
-}
-
-.awf-hexagram-mapping h4 {
-  margin-bottom: 14px;
-  font-size: 20px;
-  font-weight: 600;
-}
-
-.awf-hexagram-mapping dl {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  margin: 0;
-  border-top: 1px solid var(--awf-line);
-  border-left: 1px solid var(--awf-line);
-  background: var(--awf-line);
-}
-
-.awf-hexagram-mapping dl div {
-  display: grid;
-  grid-template-columns: 110px 1fr;
-  gap: 14px;
-  padding: 14px 16px;
-  background: var(--awf-paper);
-}
-
-.awf-hexagram-mapping dt {
-  color: var(--awf-cinnabar);
-  font-family: var(--serif);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.awf-hexagram-mapping dd {
-  margin: 0;
-  color: var(--awf-ink-soft);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.awf-hexagram-insight {
-  max-width: 860px;
-  margin-top: 26px;
-  padding: 18px 22px;
-  border-left: 3px solid var(--awf-bluegray);
-  background: var(--awf-bluegray-soft);
-}
-
-.awf-hexagram-insight p {
-  margin: 0;
-  color: var(--awf-ink);
-  font-family: var(--serif);
-  font-size: 15px;
-  line-height: 1.8;
-}
-
-.awf-hexagram-insight p + p {
-  margin-top: 8px;
-}
-
-.awf-disclaimer {
-  max-width: 860px;
-  margin: 18px 0 0;
-  padding: 13px 16px;
-  border: 1px dashed var(--awf-cinnabar);
-  color: var(--awf-ink-soft);
-  background: var(--awf-cinnabar-soft);
-  font-size: 11px;
-  line-height: 1.75;
-}
-
 /* ---------- 评测矩阵 ---------- */
 
 .awf-matrix-table table {
@@ -1263,243 +1073,6 @@
   line-height: 1.8;
 }
 
-/* ---------- 面试演示说明 ---------- */
-
-.awf-interview-path {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  border-top: 1px solid var(--awf-line-strong);
-  border-left: 1px solid var(--awf-line-strong);
-  background: var(--awf-line-strong);
-}
-
-.awf-interview-path li {
-  min-height: 170px;
-  padding: 20px;
-  background: var(--awf-paper);
-}
-
-.awf-interview-path span {
-  color: var(--awf-cinnabar);
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-}
-
-.awf-interview-path strong {
-  display: block;
-  margin: 24px 0 8px;
-  font-family: var(--serif);
-  font-size: 20px;
-}
-
-.awf-interview-path p {
-  margin: 0;
-  color: var(--awf-ink-soft);
-  font-size: 12px;
-  line-height: 1.7;
-}
-
-/* ---------- 面试演示模式（全屏覆盖） ---------- */
-
-.awf-interview {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: flex;
-  flex-direction: column;
-  padding: clamp(24px, 4vw, 48px);
-  color: var(--awf-ink);
-  background: var(--awf-bg);
-  overflow-y: auto;
-}
-
-.awf-interview-topbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid var(--awf-line);
-}
-
-.awf-interview-brand {
-  color: var(--awf-bluegray);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-.awf-interview-exit {
-  padding: 8px 14px;
-  border: 1px solid var(--awf-line-strong);
-  border-radius: 6px;
-  color: var(--awf-ink);
-  background: transparent;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 650;
-  cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.awf-interview-exit:hover {
-  color: var(--awf-paper);
-  background: var(--awf-cinnabar);
-}
-
-.awf-interview-slide {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 900px;
-  margin: 0 auto;
-  padding-block: clamp(40px, 7vw, 80px);
-  animation: awf-slide-in 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-@keyframes awf-slide-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.awf-interview-section {
-  margin-bottom: 18px;
-  color: var(--awf-cinnabar);
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-}
-
-.awf-interview-big {
-  margin: 0 0 28px;
-  font-size: clamp(30px, 5.4vw, 62px);
-  font-weight: 600;
-  letter-spacing: -0.05em;
-  line-height: 1.18;
-}
-
-.awf-interview-detail {
-  max-width: 720px;
-}
-
-.awf-interview-detail p {
-  margin: 0;
-  color: var(--awf-ink-soft);
-  font-size: clamp(15px, 1.8vw, 19px);
-  line-height: 1.85;
-}
-
-.awf-interview-tip-wrap {
-  margin-top: 30px;
-}
-
-.awf-interview-tip-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 15px;
-  border: 1px solid var(--awf-bluegray);
-  border-radius: 6px;
-  color: var(--awf-bluegray);
-  background: transparent;
-  font: inherit;
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
-}
-
-.awf-interview-tip-button:hover {
-  color: var(--awf-paper);
-  background: var(--awf-bluegray);
-}
-
-.awf-interview-tip-button span {
-  font-size: 16px;
-  line-height: 1;
-}
-
-.awf-interview-tip {
-  max-width: 720px;
-  margin: 14px 0 0;
-  padding: 16px 20px;
-  border-left: 3px solid var(--awf-cinnabar);
-  background: var(--awf-cinnabar-soft);
-  font-family: var(--serif);
-  font-size: 15px;
-  line-height: 1.8;
-}
-
-.awf-interview-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  max-width: 900px;
-  margin: 0 auto;
-  padding-top: 20px;
-  border-top: 1px solid var(--awf-line);
-}
-
-.awf-interview-nav {
-  flex: none;
-  padding: 10px 16px;
-  border: 1px solid var(--awf-line-strong);
-  border-radius: 6px;
-  color: var(--awf-ink);
-  background: var(--awf-paper);
-  font: inherit;
-  font-size: 12px;
-  font-weight: 650;
-  cursor: pointer;
-  transition: opacity 0.2s ease;
-}
-
-.awf-interview-nav:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
-
-.awf-interview-progress {
-  flex: 1;
-  display: flex;
-  gap: 6px;
-}
-
-.awf-interview-progress button {
-  flex: 1;
-  height: 4px;
-  padding: 0;
-  border: 0;
-  border-radius: 2px;
-  background: var(--awf-line);
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.awf-interview-progress button.is-done {
-  background: var(--awf-cinnabar);
-}
-
-.awf-interview-kbd {
-  margin: 10px auto 0;
-  color: var(--awf-ink-soft);
-  font-size: 11px;
-  text-align: center;
-}
-
 /* ---------- 页脚 ---------- */
 
 .awf-footer {
@@ -1591,9 +1164,6 @@
   .awf-case-card {
     min-height: 240px;
   }
-  .awf-interview-path {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }
 
 @media (max-width: 820px) {
@@ -1645,9 +1215,6 @@
   .awf-mapping-bridge {
     display: none;
   }
-  .awf-hexagram-mapping dl {
-    grid-template-columns: 1fr;
-  }
   .awf-diagnosis-list > div {
     align-items: flex-start;
     flex-direction: column;
@@ -1656,13 +1223,6 @@
   .awf-case-badcases,
   .awf-consistency-cards {
     grid-template-columns: 1fr;
-  }
-  .awf-interview-controls {
-    flex-wrap: wrap;
-  }
-  .awf-interview-progress {
-    order: 3;
-    width: 100%;
   }
 }
 
@@ -1676,23 +1236,12 @@
   .awf-layer-grid,
   .awf-evidence-stats,
   .awf-ai-flow,
-  .awf-case-layers,
-  .awf-interview-path {
+  .awf-case-layers {
     grid-template-columns: 1fr;
   }
   .awf-layer-card,
   .awf-case-card {
     min-height: auto;
-  }
-  .awf-hexagram-readout {
-    flex-direction: column;
-    gap: 6px;
-  }
-  .awf-hexagram-transition {
-    margin-left: 0;
-  }
-  .awf-interview-slide {
-    justify-content: flex-start;
   }
 }
 

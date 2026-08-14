@@ -3,23 +3,23 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "杜明｜AI音频评测与生成式音频评测",
+  title: "杜明｜T2A、音视频生成评测与PLS框架",
   description:
-    "杜明的AI音频评测作品集，展示Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
+    "杜明的AI音频评测作品集：Text-to-Audio人工听评、两轮诊断性音视频生成评测，以及Point–Line–Scene分层感知评测框架。",
   authors: [{ name: "杜明" }],
   creator: "杜明",
-  keywords: ["AI 音频评测", "生成式音频评测", "T2A", "游戏音频", "Badcase"],
+  keywords: ["AI 音频评测", "生成式音频评测", "T2A", "T2VA", "Point-Line-Scene", "PLS", "Audio-Visual Generation Evaluation", "Controlled Regression", "游戏音频", "Badcase"],
   openGraph: {
-    title: "杜明｜AI音频评测与生成式音频评测",
+    title: "杜明｜T2A、音视频生成评测与PLS框架",
     description:
-      "Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
+      "Text-to-Audio人工听评、两轮诊断性Audio-Visual Generation Evaluation与Point–Line–Scene框架。",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "杜明｜AI音频评测与生成式音频评测",
+    title: "杜明｜T2A、音视频生成评测与PLS框架",
     description:
-      "Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
+      "Text-to-Audio人工听评、两轮诊断性Audio-Visual Generation Evaluation与Point–Line–Scene框架。",
     images: ["/og.png"],
   },
 };
