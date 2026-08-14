@@ -120,18 +120,19 @@ export default function Home() {
       <section className="content-section pls-home-feature" aria-labelledby="pls-home-title">
         <div className="section-shell">
           <header className="section-heading">
-            <p className="eyebrow">评测方法 / PLS v2.x</p>
-            <h2 id="pls-home-title">Point → Line → Scene</h2>
-            <p className="section-lead">把文献中的细粒度评测方向组织成分层感知框架，再用 Audio-Visual Generation Evaluation 作为案例研究，展示它如何进入失败定位、受控回归和研发优先级。</p>
+            <p className="eyebrow">研究 / RESEARCH</p>
+            <h2 id="pls-home-title">Point–Line–Scene Research Narrative</h2>
+            <p className="section-lead">从近期生成式音频评测论文中提炼分层诊断结构，再用两轮 Audio-Visual Generation Evaluation 检验其中部分假设。</p>
           </header>
           <div className="pls-home-grid">
-            <article><span>POINT</span><strong>原子正确性</strong><p>事件、声源、材质、属性与数量是否正确。</p></article>
-            <article><span>LINE</span><strong>关系正确性</strong><p>时间、空间、因果、动态与交互关系是否成立。</p></article>
-            <article><span>SCENE</span><strong>整体场景一致性</strong><p>环境、前后景、显著性与世界内声音是否连贯。</p></article>
+            <article><span>01</span><strong>Literature</strong><p>阅读细粒度 rubric、时间关系、结构化声景、物理约束与 Judge 研究。</p></article>
+            <article><span>02</span><strong>Synthesis</strong><p>把分散对象组织为 Point → Line → Scene 的失败定位结构。</p></article>
+            <article><span>03</span><strong>Case Study</strong><p>用两轮 T2VA 项目检查受控回归与多模态错误归因。</p></article>
+            <article><span>04</span><strong>New Question</strong><p>从 3→4→4 反推 Reference-aware Diagnosis。</p></article>
           </div>
           <div className="pls-home-note">
-            <p><strong>新增原则：</strong>先明确 Prompt → Visual Fact → Audio Event 的参考链，再判断 Point / Line / Scene，减少多模态错误归因。</p>
-            <a className="btn btn-primary" href="/point-line-scene-framework">阅读PLS评测框架</a>
+            <p><strong>研究路径：</strong>Literature → Synthesis → Case Study → New Research Question。项目不是框架的装饰，而是会反过来修改方法。</p>
+            <a className="btn btn-primary" href="/point-line-scene-framework">阅读 Research Framework</a>
           </div>
         </div>
       </section>

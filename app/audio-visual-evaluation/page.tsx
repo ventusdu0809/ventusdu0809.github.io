@@ -37,7 +37,7 @@ export default function AudioVisualEvaluationPage() {
         </Link>
         <nav aria-label="项目页导航">
           <Link href="/t2a-case-study">T2A评测</Link>
-          <Link href="/point-line-scene-framework">PLS框架</Link>
+          <Link href="/point-line-scene-framework">PLS研究</Link>
           <a href="#method">方法</a>
           <a href="#results">结果</a>
           <a href="#boundary">边界</a>
@@ -134,7 +134,7 @@ export default function AudioVisualEvaluationPage() {
             ["06", "Bad Case → 回归", "把发现转成可检验的后续条件。"],
           ].map(([index, title, body]) => <article key={index}><span>{index}</span><h3>{title}</h3><p>{body}</p></article>)}
         </div>
-        <div className="av-method-note"><strong>关键诊断原则</strong><div><p>Prompt→Visual 与 Visual→Audio 分开判断。只有视觉事件数与音频事件数不一致时，才将其归为 Audio Event Counting Failure。</p><Link href="/point-line-scene-framework">查看PLS评测框架 →</Link></div></div>
+        <div className="av-method-note"><strong>关键诊断原则</strong><div><p>Prompt→Visual 与 Visual→Audio 分开判断。只有视觉事件数与音频事件数不一致时，才将其归为 Audio Event Counting Failure。</p><Link href="/point-line-scene-framework">查看 PLS Research Narrative →</Link></div></div>
       </section>
 
       <section className="t2a-section t2a-section-tint" id="rounds">
@@ -173,7 +173,7 @@ export default function AudioVisualEvaluationPage() {
         </div>
       </section>
 
-      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回杜明音频作品集</Link><Link href="/t2a-case-study">查看 T2A 评测案例</Link><Link href="/point-line-scene-framework">查看PLS评测框架</Link><span>© 2026 杜明</span></footer>
+      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回杜明音频作品集</Link><Link href="/t2a-case-study">查看 T2A 评测案例</Link><Link href="/point-line-scene-framework">查看 PLS Research Narrative</Link><span>© 2026 杜明</span></footer>
     </main>
   );
 }

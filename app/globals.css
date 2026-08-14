@@ -3456,10 +3456,10 @@ main {
 .pls-home-feature .section-heading h2 { color: var(--color-text) !important; }
 .pls-home-feature .section-heading .section-lead { max-width: 830px; color: var(--color-text-secondary) !important; }
 .pls-home-feature .eyebrow { color: var(--color-primary); }
-.pls-home-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(63, 95, 90, .42); border-left: 1px solid rgba(63, 95, 90, .42); }
+.pls-home-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(63, 95, 90, .42); border-left: 1px solid rgba(63, 95, 90, .42); }
 .pls-home-grid article { min-height: 250px; display: flex; flex-direction: column; justify-content: end; padding: 24px; border-right: 1px solid rgba(63, 95, 90, .42); border-bottom: 1px solid rgba(63, 95, 90, .42); background: color-mix(in srgb, var(--color-paper) 78%, transparent); }
 .pls-home-grid span { margin-bottom: auto; color: var(--color-primary); font-size: 10px; font-weight: 750; letter-spacing: .08em; }
-.pls-home-grid strong { font-family: var(--serif); font-size: 27px; font-weight: 600; }
+.pls-home-grid strong { font-family: var(--serif); font-size: 24px; font-weight: 600; }
 .pls-home-grid p { margin: 10px 0 0; color: var(--color-text-secondary); font-size: 12px; line-height: 1.7; }
 .pls-home-note { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; margin-top: 22px; padding: 20px 22px; border-left: 4px solid var(--color-primary); background: var(--color-primary-soft); color: var(--color-text); }
 .pls-home-note p { margin: 0; font-size: 13px; line-height: 1.75; }

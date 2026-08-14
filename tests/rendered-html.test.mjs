@@ -33,8 +33,9 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "Audio-Visual Generation Evaluation",
     "3→4→4",
     "Repeated Diagnostic Pattern",
-    "评测方法 / PLS v2.x",
-    "Prompt → Visual Fact → Audio Event",
+    "研究 / RESEARCH",
+    "Literature", "Synthesis", "Case Study", "New Question",
+    "阅读 Research Framework",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
   assert.match(html, /href="\/t2a-case-study"/);
@@ -45,26 +46,32 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
-test("PLS framework separates literature, abstraction, project evidence and future work", async () => {
+test("PLS research narrative connects literature, synthesis, case evidence and future work", async () => {
   const response = await render("/point-line-scene-framework");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "Point", "Line", "Scene",
-    "文献支撑（Literature-supported）", "PLS 方法论抽象（Conceptual Abstraction）", "项目案例证据（Project Case Evidence）",
-    "Prompt", "Visual Fact", "Audio Event",
-    "3→4→4 修正了错误归因", "Repeated Diagnostic Pattern",
-    "场景一致性（Scene Coherence）", "项目证据有限",
-    "制作可用性（Production Utility）", "后续研究",
-    "Preference / Reward", "Judge Reliability",
-    "诊断性案例研究 ≠ 框架验证基准",
-    "7 项有项目案例支持", "0 项无依据主张",
+    "从细粒度音频评测研究", "到多模态失败定位",
+    "Literature Synthesis", "Conceptual Framework", "Audio-Visual Case Study",
+    "RESEARCH GAP", "Failure Localization", "MY SYNTHESIS · Point → Line → Scene",
+    "AudioScape-TTA", "AnyAudio-Judge", "Fine-Grained Feedback / S3Bench", "MMAG",
+    "AcoustiTrace", "AVGen-Bench", "Production-Oriented Framework", "AudioRubrics", "LALM Judge Audit",
+    "WHAT LITERATURE SAYS", "WHAT I SYNTHESIZE", "Cross-layer Constraint",
+    "Prompt", "Visual Fact", "Audio Event", "Repeated Diagnostic Pattern",
+    "PLS v1", "PLS v2.x", "Reference-aware Evaluation", "Provenance-aware Diagnosis",
+    "audio_early", "Not Replicated", "Mixed / Refined", "Camera Cut Confound",
+    "R2-H2", "loudness_imbalance", "R2-H4-A", "artifact_noise",
+    "Evaluation → Diagnosis → Controlled Regression", "DPO · Reward Model · RL",
+    "Audio Removal / Mismatch", "A/B Swap", "Metadata Conflict", "Rephrasing Stability",
+    "PRELIMINARY CASE EVIDENCE", "Scene 证据有限", "不是既有学术标准",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/audio-visual-evaluation"/);
   assert.match(html, /href="\/audio-world-framework"[^>]*>阅读早期研究笔记/);
   assert.match(html, /href="\/downloads\/pls-framework\/point_line_scene_framework_with_av_case_study\.md"/);
+  assert.equal((html.match(/https:\/\/arxiv\.org\/abs\//g) ?? []).length >= 9, true);
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
+  assert.doesNotMatch(html, /提出全新理论|证明 PLS 有效|首次发现/);
 });
 
 test("T2VA is an additive case study with frozen cross-round conclusions", async () => {
@@ -81,7 +88,7 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
     "Cross-shot Persistence", "Persistent / Exploratory Concern",
     "小样本诊断，不做统计泛化",
     "查看 T2A 评测案例",
-    "查看PLS评测框架",
+    "查看 PLS Research Narrative",
     "R2-H1-B · Exact-count", "Text→Visual：FAIL", "Visual→Audio：PASS", "P4 Event Counting：5",
     "R2-H3 · Dynamic Correspondence", "Source-motion：Partial Issue", "L4：3",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
