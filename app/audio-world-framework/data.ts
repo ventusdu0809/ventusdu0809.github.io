@@ -95,7 +95,7 @@ export const awf = {
   problem: {
     title: "从「生成一段音频」到「构建一个声音世界」",
     lead: "传统文本生成音频（Text-to-Audio，T2A）常被简化为 Prompt → Audio，评测也容易只问音质、声源和整体相关性。面对多事件场景，这些问题还不够。",
-    missingTitle: "但复杂音频场景包含的不只是「有什么声音」",
+    missingTitle: "复杂音频场景还需要描述声音之间的组织关系",
     missing: [
       "哪些声音是独立事件；",
       "谁先发生、谁后发生；",
@@ -160,7 +160,7 @@ export const awf = {
 
   middleware: {
     title: "从 Wwise 到 AI Audio Scene Middleware",
-    lead: "游戏音频中间件的核心不是素材库，而是组织逻辑：谁在什么状态、什么位置、什么条件下发声。这套逻辑可以平移为 AI 音频的中间组织层。",
+    lead: "游戏音频中间件通过状态、位置与触发条件组织声音素材。这套逻辑可以转化为 AI 音频的中间组织层。",
     gameAudio: ["Audio Asset", "Event", "Switch", "State", "RTPC", "Game Object", "Scene", "Player Experience"],
     aiAudio: ["音频素材或潜空间表示", "语义声音事件", "离散条件选择", "当前场景或世界状态", "距离、速度、强度等连续参数", "场景中的声源对象", "事件图和时间关系", "人类偏好与听感结果"],
     mapping: [
@@ -184,13 +184,13 @@ export const awf = {
       "Mixing & Rendering",
       "Perception and Meaning",
     ],
-    conclusion: "这里的重点不是再造一个生成模型，而是补上 Prompt、场景状态和最终声音之间的组织与检查环节。",
+    conclusion: "这一方向补充 Prompt、场景状态和最终声音之间的组织与检查环节。",
     boundary: "AI 音频场景中间层（AI Audio Scene Middleware）是概念设计，尚未实现为可运行产品。",
   },
 
   evaluationMatrix: {
     title: "分层评测矩阵",
-    lead: "分层评测的价值不只是给模型一个总分，而是帮助研发定位问题发生在哪个层级。",
+    lead: "分层评测在整体分数之外，进一步帮助研发定位问题发生的层级。",
     rows: [
       {
         layer: "点",
@@ -398,7 +398,7 @@ meaning:
           "区分模型问题、Prompt 问题和评测问题",
           "根据 Bad Case 设计对照实验",
           "将听感问题转化为结构化证据",
-          "用回归集验证问题是否真正改善",
+          "用回归集验证问题是否稳定改善",
         ],
       },
     ],

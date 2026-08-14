@@ -24,7 +24,7 @@ export default function SoundPracticePage() {
         <div className="section-shell">
           <p className="eyebrow">GAME AUDIO &amp; SOUND PRACTICE</p>
           <h1>声音设计进入游戏后才是可验证的体验</h1>
-          <p>这些案例覆盖声音制作、交互集成、动态混音和运行时问题定位。重点不是展示工具名称，而是说明我如何发现听觉问题并推动修改。</p>
+          <p>这些案例覆盖声音制作、交互集成、动态混音和运行时问题定位，重点呈现听觉问题的发现、定位与修改过程。</p>
           <div className="tag-row"><span>Wwise</span><span>FMOD</span><span>Unity</span><span>Unreal Engine</span><span>动态混音</span><span>空间音频</span></div>
         </div>
       </section>

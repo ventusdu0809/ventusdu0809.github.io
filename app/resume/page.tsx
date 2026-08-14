@@ -136,16 +136,16 @@ export default function ResumePage() {
                   </div>
                   <time dateTime="2026-07">2026.07</time>
                 </div>
-                <p className="entry-meta">个人项目 · 评测集构建 · 盲听评分 · Bad Case分析 · 评测报告</p>
+                <p className="entry-meta">个人项目 · 评测集构建 · 盲听评分 · Bad Case 分析 · 评测报告</p>
                 <ol className="resume-points">
-                  <li>独立搭建Text-to-Audio音频模型评测流程，覆盖测试样本构建、音频质检、盲听评分、问题标注、隐藏重复、复测裁决及报告输出。</li>
+                  <li>独立搭建 Text-to-Audio 音频模型评测流程，覆盖测试样本构建、音频质检、盲听评分、问题标注、隐藏重复、复测裁决及报告输出。</li>
                   <li>围绕环境声、动作事件、材质、音色纹理、次数控制、时间顺序和次要事件等维度审核40条Prompt，累计完成600个正式样本和660次试听评测。</li>
-                  <li>建立OVL整体质量、REL文本相关性评分及Bad Case分类体系；单评测员隐藏重复中，OVL within-1为95%，REL within-1为98%。</li>
+                  <li>建立 OVL 整体质量、REL 文本相关性评分及 Bad Case 分类体系；单评测员隐藏重复中，OVL within-1 为95%，REL within-1 为98%。</li>
                   <li>统计问题发生率、模型差异和变化趋势，识别声源错误、次要事件缺失、次数控制、噪声纹理及人工伪影等能力短板，并输出结构化报告和可追溯审计材料。</li>
                 </ol>
                 <aside className="responsibility-boundary">
                   <strong>个人贡献边界</strong>
-                  <p>T2A评测规则、听评方法、正式评分和Bad Case裁决由本人完成；AI用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
+                  <p>T2A 评测规则、听评方法、正式评分和 Bad Case 裁决由本人完成；AI 用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
                 </aside>
                 <Link className="resume-arrow-link" href="/t2a-case-study">查看完整评测项目 →</Link>
               </article>
@@ -153,18 +153,18 @@ export default function ResumePage() {
                 <div className="entry-header">
                   <div className="entry-title-group">
                     <h3>Audio-Visual Generation Evaluation</h3>
-                    <p>Cross-Round Analysis v1.0 · 两轮诊断性 T2VA 评测</p>
+                    <p>Cross-Round Analysis v1.0 · 两轮诊断性音视频生成评测</p>
                   </div>
                   <time dateTime="2026-08">2026.08</time>
                 </div>
-                <p className="entry-meta">个人项目 · Point → Line → Scene + Quality · Controlled Regression · Failure Localization</p>
+                <p className="entry-meta">个人项目 · Point → Line → Scene + Quality · 受控回归（Controlled Regression）· 失败定位</p>
                 <ol className="resume-points">
-                  <li>在原有T2A评测实践上扩展Point → Line → Scene + Quality分层框架，以Round-1 Discovery发现Bad Case，再通过Round-2 Controlled Regression按预先定义的观察字段与判定规则验证。</li>
+                  <li>在原有 T2A 评测实践上扩展 Point → Line → Scene + Quality 分层方法，以 Round-1 Discovery 发现 Bad Case，再通过 Round-2 受控回归按预先定义的观察字段与判定规则验证。</li>
                   <li>将Text→Visual与Visual→Audio分开定位；三个可精确判定案例均呈现3→4→4，冻结为Repeated Diagnostic Pattern，避免将视觉阶段数量偏差误归为Audio Counting Failure。</li>
                   <li>综合Not Replicated、Mixed / Refined与独立Quality Gate形成研发优先级：降低未复现问题优先级，细化动态专项测试，并持续关注音频质量风险。</li>
                 </ol>
-                <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看新增T2VA评测项目 →</Link>
-                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看PLS评测框架 →</Link>
+                <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看音视频生成评测项目 →</Link>
+                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看 PLS 研究方法 →</Link>
               </article>
             </section>
 
@@ -264,8 +264,8 @@ export default function ResumePage() {
           <p>公开简历版本｜内容对应可展示的项目材料与案例页面。</p>
           <div>
             <Link href="/t2a-case-study">T2A评测案例</Link>
-            <Link href="/audio-visual-evaluation">T2VA评测案例</Link>
-            <Link href="/point-line-scene-framework">PLS评测框架</Link>
+            <Link href="/audio-visual-evaluation">音视频生成评测</Link>
+            <Link href="/point-line-scene-framework">PLS 研究方法</Link>
             <Link href="/sound-practice">游戏音频案例</Link>
             <Link href="/audio-validation-summary">音频资产验收案例</Link>
           </div>

@@ -6,8 +6,8 @@ import "./t2a-case-study.css";
 
 export const metadata: Metadata = {
   title: "T2A音效生成评测｜SAO1与Stable Audio 3 Medium",
-  description: "杜明的 T2A 音效生成评测案例：人工听评、评分标准、隐藏重复、Badcase分析与受控模型比较。",
-  keywords: ["AI 音频评测", "生成式音频评测", "Text-to-Audio", "音效生成", "Badcase", "人工听评"],
+  description: "杜明的 T2A 音效生成评测案例：人工听评、评分标准、隐藏重复、Bad Case 分析与受控模型比较。",
+  keywords: ["AI 音频评测", "生成式音频评测", "Text-to-Audio", "音效生成", "Bad Case", "人工听评"],
   alternates: { canonical: "/t2a-case-study" },
 };
 
@@ -22,7 +22,7 @@ const rubric = [
 const cases = [
   { id: "C01 / B0008", title: "正向参照", score: "OVL 5 · REL 5 · pass", note: "音频质量与核心事件要求均满足。", audio: "/audio/B0008.mp3" },
   { id: "C02 / B0152", title: "空间方向反向", score: "OVL 4 · REL 1 · keep_as_badcase", note: "Prompt要求左→右，人工听感为右→左。", audio: "/audio/B0152.mp3" },
-  { id: "C03 / B0099", title: "事件数量不符", score: "Primary Badcase · wrong_count", note: "目标事件结构之外出现重复撞击。", audio: "/audio/B0099.mp3" },
+  { id: "C03 / B0099", title: "事件数量不符", score: "Primary Bad Case · wrong_count", note: "目标事件结构之外出现重复撞击。", audio: "/audio/B0099.mp3" },
   { id: "C04 / B0092", title: "声源不符", score: "OVL 1 · REL 1 · needs_regeneration", note: "目标声源未能确认，输出主要呈现难以辨认的杂音。", audio: "/audio/B0092.mp3" },
 ] as const;
 
@@ -98,7 +98,7 @@ export default function T2AEvaluationProgramPage() {
             <div><span>边界</span><strong>单一评测人</strong><p>隐藏重复用于检查同一评测人的复测稳定性，不代表多人一致性。</p></div>
           </div>
           <div className="t2a-role-grid">
-            <article><h3>本人完成</h3><p>五层框架、评分标准、200条Phase 1正式听评、复测、Badcase语义裁决与报告审核。</p></article>
+            <article><h3>本人完成</h3><p>五层框架、评分标准、200条 Phase 1 正式听评、复测、Bad Case 语义裁决与报告审核。</p></article>
             <article><h3>AI辅助</h3><p>脚本执行、数据整理、统计实现和表格编排；所有正式评分、复测和最终裁决均由本人完成。</p></article>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function T2AEvaluationProgramPage() {
           <article><strong>{evaluation.repeats.ovl}</strong><span>OVL within-one</span></article>
           <article><strong>{evaluation.repeats.rel}</strong><span>REL within-one</span></article>
           <article><strong>{evaluation.repeats.decision}</strong><span>人工决策一致</span></article>
-          <article><strong>{evaluation.repeats.primary}</strong><span>Primary Badcase一致</span></article>
+          <article><strong>{evaluation.repeats.primary}</strong><span>Primary Bad Case 一致</span></article>
         </div>
         <p className="t2a-callout">{evaluation.repeats.detail}</p>
       </section>

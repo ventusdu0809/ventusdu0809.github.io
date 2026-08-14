@@ -89,9 +89,9 @@ export default function Home() {
               <span>5 条跨轮冻结结论</span>
             </div>
             <div>
-              <p className="recruiter-finding">核心案例呈现 3→4→4：数量偏差首先发生在 Text→Visual，Visual→Audio 的事件计数与实际画面保持一致，因此不能误判为 Audio Counting Failure。</p>
+              <p className="recruiter-finding">三个精确计数案例均呈现 Prompt=3、Visual=4、Audio=4：Prompt→Visual 的数量约束不一致，而 Visual→Audio 计数保持一致，因此不应归为 Audio Counting Failure。</p>
               <p className="recruiter-boundary">Exact-count 结论为 Repeated Diagnostic Pattern；项目属于小样本诊断性 PoC，用于定位失败链路和调整研发优先级，不作统计泛化。</p>
-              <a className="btn btn-primary" href="/audio-visual-evaluation">查看T2VA主项目</a>
+              <a className="btn btn-primary" href="/audio-visual-evaluation">查看音视频生成评测</a>
             </div>
           </div>
         </div>
@@ -121,18 +121,18 @@ export default function Home() {
         <div className="section-shell">
           <header className="section-heading">
             <p className="eyebrow">研究 / RESEARCH</p>
-            <h2 id="pls-home-title">Point–Line–Scene Research Narrative</h2>
-            <p className="section-lead">从近期生成式音频评测论文中提炼分层诊断结构，再用两轮 Audio-Visual Generation Evaluation 检验其中部分假设。</p>
+            <h2 id="pls-home-title">Point–Line–Scene：从文献综合到案例研究</h2>
+            <p className="section-lead">基于近期生成式音频与音视频评测研究，将事件、关系与场景层面的评价对象组织为分层诊断结构，并通过两轮 Audio-Visual Generation Evaluation 检查其中部分方法假设。</p>
           </header>
           <div className="pls-home-grid">
-            <article><span>01</span><strong>Literature</strong><p>阅读细粒度 rubric、时间关系、结构化声景、物理约束与 Judge 研究。</p></article>
-            <article><span>02</span><strong>Synthesis</strong><p>把分散对象组织为 Point → Line → Scene 的失败定位结构。</p></article>
-            <article><span>03</span><strong>Case Study</strong><p>用两轮 T2VA 项目检查受控回归与多模态错误归因。</p></article>
-            <article><span>04</span><strong>New Question</strong><p>从 3→4→4 反推 Reference-aware Diagnosis。</p></article>
+            <article><span>01 · LITERATURE</span><strong>文献观察</strong><p>梳理细粒度 rubric、时间关系、结构化声景、物理约束与 Judge 研究。</p></article>
+            <article><span>02 · SYNTHESIS</span><strong>方法综合</strong><p>把分散对象组织为 Point → Line → Scene 的失败定位结构。</p></article>
+            <article><span>03 · CASE STUDY</span><strong>案例研究</strong><p>用两轮音视频生成评测检查受控回归与错误归因。</p></article>
+            <article><span>04 · NEW QUESTION</span><strong>新研究问题</strong><p>从 3→4→4 形成显式参考链诊断。</p></article>
           </div>
           <div className="pls-home-note">
-            <p><strong>研究路径：</strong>Literature → Synthesis → Case Study → New Research Question。项目不是框架的装饰，而是会反过来修改方法。</p>
-            <a className="btn btn-primary" href="/point-line-scene-framework">阅读 Research Framework</a>
+            <p><strong>研究路径：</strong>Literature → Synthesis → Case Study → New Research Question。案例结果进一步修订了评价参照与诊断边界，并形成新的研究问题。</p>
+            <a className="btn btn-primary" href="/point-line-scene-framework">阅读研究方法</a>
           </div>
         </div>
       </section>
@@ -182,7 +182,7 @@ export default function Home() {
           <span>{siteCopy.role}</span>
         </div>
         <div>
-          <a href="/audio-visual-evaluation">T2VA主项目</a>
+          <a href="/audio-visual-evaluation">音视频生成评测</a>
           <a href="/t2a-case-study">T2A基础项目</a>
           <a href="/point-line-scene-framework">PLS评测方法</a>
           <a href="/resume">简历</a>

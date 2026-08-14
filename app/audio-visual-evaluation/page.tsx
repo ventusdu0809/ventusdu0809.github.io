@@ -60,7 +60,7 @@ export default function AudioVisualEvaluationPage() {
         </div>
         <aside className="av-hero-facts" aria-label="核心研究框架">
           <p>核心问题</p>
-          <strong>Prompt 要求 3 次，最终 Audio 出现 4 次——到底是哪一层发生了偏差？</strong>
+          <strong>Prompt 要求 3 次，Visual 与 Audio 均呈现 4 次：偏差应归入哪一段评价链？</strong>
           <dl>
             <div><dt>Prompt</dt><dd>3</dd></div>
             <div><dt>Visual</dt><dd className="av-fail">4 · FAIL</dd></div>
@@ -139,7 +139,7 @@ export default function AudioVisualEvaluationPage() {
 
       <section className="t2a-section t2a-section-tint" id="rounds">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>03 / ROUND-1 → ROUND-2</p><h2>从问题发现到受控回归</h2><p>第二轮不是“再写几个 Prompt”，而是在生成前冻结要验证的问题、主要能力、观察字段与判定规则；结果再按 Support、Not Replicated 或 Mixed / Refined 解释。</p></header>
+          <header className="t2a-section-heading"><p>03 / ROUND-1 → ROUND-2</p><h2>从问题发现到受控回归</h2><p>Round-2 在生成前冻结假设、主要能力、观察字段与判定规则，并按预设解释规则进行回归判断。</p></header>
           <div className="av-rounds-grid">
             <article><span>ROUND-1</span><h3>Discovery</h3><p>从生成结果中确认某个 Bad Case 在当次输出中发生过。</p><ul><li>Exact-count</li><li><code>audio_early</code></li><li>Dynamic Response</li><li>Sustained Audio Interruption</li></ul></article>
             <div className="av-round-arrow" aria-hidden="true"><span>Hypothesis</span><b>→</b><span>Controlled Regression</span></div>
@@ -157,7 +157,7 @@ export default function AudioVisualEvaluationPage() {
 
       <section className="t2a-section t2a-section-tint" id="engineering">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>05 / 研究 → 工程</p><h2>评测结果应改变下一步查什么、测什么</h2><p>评测不止输出分数；它把“观察到什么”翻译为研发排查顺序与后续验证方向。</p></header>
+          <header className="t2a-section-heading"><p>05 / 研究 → 工程</p><h2>将评测结论转化为研发排查与回归优先级</h2><p>把样本观察转换为可执行的排查顺序、回归条件与后续验证方向。</p></header>
           <div className="av-engineering-list">
             {engineeringActions.map(([signal, action, detail]) => <article key={signal}><span>{signal}</span><h3>{action}</h3><p>{detail}</p></article>)}
           </div>
@@ -167,9 +167,9 @@ export default function AudioVisualEvaluationPage() {
       <section className="t2a-section t2a-shell" id="boundary">
         <header className="t2a-section-heading"><p>06 / 证据边界</p><h2>小样本诊断，不做统计泛化</h2></header>
         <div className="av-boundary-grid">
-          <article><h3>它能说明什么</h3><p>哪些 Bad Case 在当前样本中发生过；哪些问题在受控条件下重复、未复现或需要细化；以及研发与下一轮测试应优先关注什么。</p></article>
-          <article><h3>它不说明什么</h3><p>不推断模型内部生成机制，不把三例重复模式称为系统性缺陷，也不把未复现解释为 Round-1 的观察无效。</p></article>
-          <article><h3>评测纪律</h3><p>Bad Sample 是可观察到的失败；Invalid / Unevaluable Sample 则不被重跑到“得到想要的结果”。判定规则应在生成结果出现之前定义。</p></article>
+          <article><h3>Supported Claims</h3><p>记录当前样本中发生的 Bad Case，并区分跨轮重复、未复现与需要细化的问题，用于确定后续回归优先级。</p></article>
+          <article><h3>Out of Scope</h3><p>不推断模型内部生成机制；三个精确计数案例属于 Repeated Diagnostic Pattern，不作系统性缺陷或总体性能结论。</p></article>
+          <article><h3>Evaluation Discipline</h3><p>Bad Sample 保留可观察失败；Invalid / Unevaluable Sample 不进入对应证据集。判定规则在生成结果出现前定义。</p></article>
         </div>
       </section>
 
