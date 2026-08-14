@@ -60,7 +60,6 @@
 .resume-content-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr); gap: clamp(28px, 4vw, 54px); align-items: start; }
 .resume-primary-section { margin-top: 50px; }
 .t2a-project { padding: clamp(22px, 3vw, 32px); border: 1px solid rgba(22, 140, 140, .42); border-top: 4px solid var(--resume-accent); background: var(--resume-card); box-shadow: 0 12px 30px rgba(23, 33, 38, .06); }
-.resume-project-secondary { margin-top: 16px; border-top-color: var(--resume-ink); }
 .entry-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 18px; }
 .entry-title-group { min-width: 0; }
 .entry-title-group h3 { margin: 0; color: var(--resume-ink); font-family: inherit; font-size: 17px; line-height: 1.45; }

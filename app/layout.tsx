@@ -3,24 +3,24 @@ import type { ReactNode } from "react";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "杜明｜AI音视频生成评测与声音设计",
+  title: "杜明｜AI音频评测与生成式音频评测",
   description:
-    "杜明的AI音视频生成评测作品集，展示两轮诊断性评测、Controlled Regression、Bad Case失败定位与音频质量判断。",
+    "杜明的AI音频评测作品集，展示Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
   authors: [{ name: "杜明" }],
   creator: "杜明",
-  keywords: ["AI 音视频生成评测", "Audio-Visual Generation Evaluation", "Controlled Regression", "游戏音频", "Bad Case"],
+  keywords: ["AI 音频评测", "生成式音频评测", "T2A", "游戏音频", "Badcase"],
   openGraph: {
-    title: "杜明｜AI音视频生成评测与声音设计",
+    title: "杜明｜AI音频评测与生成式音频评测",
     description:
-      "两轮诊断性评测、Controlled Regression、Bad Case失败定位与音频质量判断。",
-    images: ["/og-cross-round-v1.png"],
+      "Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
+    images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "杜明｜AI音视频生成评测与声音设计",
+    title: "杜明｜AI音频评测与生成式音频评测",
     description:
-      "两轮诊断性评测、Controlled Regression、Bad Case失败定位与音频质量判断。",
-    images: ["/og-cross-round-v1.png"],
+      "Text-to-Audio人工听评、评分标准、Badcase分析、隐藏重复和模型比较。",
+    images: ["/og.png"],
   },
 };
 

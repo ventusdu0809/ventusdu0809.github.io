@@ -13,19 +13,21 @@ async function render(pathname = "/") {
   );
 }
 
-const prohibitedHomeTerms = ["评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
+const prohibitedHomeTerms = ["多模态评测", "视频生成", "评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
 
 test("homepage uses the recruiter-facing three-narrative structure", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "杜明", "AI音视频生成评测",
-    "3→4→4", "重复诊断模式", "5", "跨轮冻结结论",
-    "先把 Prompt→Visual 与 Visual→Audio 拆开",
-    "Round-1 发现问题，Round-2 受控回归",
-    "未复现与混合结果同样有决策价值",
-    "Cross-Round Analysis v1.0 · Frozen conclusions",
+    "杜明", "AI音频评测",
+    "600", "正式样本 · 两阶段累计",
+    "400", "Phase 2受控比较",
+    "40", "隐藏重复配对",
+    "先判断声音质量，再判断内容是否正确",
+    "把主观听感整理成统一的评测流程",
+    "总体分数之外，还要看模型具体错在哪里",
+    "v3.2.3 r2 · audit r3 · ALL CHECKS PASSED · exit 0 · APPROVED",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
   assert.match(html, /href="\/t2a-case-study"/);
@@ -39,23 +41,26 @@ test("featured case study keeps an explicit paper-background contrast scheme", a
   assert.match(css, /\.content-section\.recruiter-project \.section-heading > \.section-lead \{ color: var\(--color-text-secondary\) !important; \}/);
 });
 
-test("case study presents the frozen cross-round findings and evidence boundary", async () => {
+test("case study keeps the essential evaluation story open and deep detail closed", async () => {
   const response = await render("/t2a-case-study");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "Audio-Visual Generation Evaluation",
-    "从 Bad Case Discovery", "Controlled Regression",
-    "3→4→4 不等于 Audio Counting Failure",
-    "Point → Line → Scene + Quality",
-    "Repeated Diagnostic Pattern", "Onset Alignment", "Not Replicated",
-    "Dynamic Correspondence", "Mixed / Refined",
-    "Cross-shot Persistence", "Persistent / Exploratory Concern",
-    "小样本诊断，不做统计泛化",
+    "听起来好", "不等于生成正确",
+    "先判断声音质量，再判断内容是否正确",
+    "先盲听，再阅读Prompt",
+    "当前测试集未观察到明确的总体优势方向",
+    "总体分数之外，还要看模型具体错在哪里",
+    "隐藏重复检查同一评测人的复测稳定性",
+    "38 / 40（95.0%）", "39 / 40（97.5%）",
+    "SA3M 14.5% · SAO1 6.5%", "SA3M 42.5% · SAO1 60.0%", "SA3M 37.5% · SAO1 33.8%",
+    "统计与结果复核", "客观指标与方法边界", "版本与审计记录",
+    "aria-label=\"C01 / B0008 正向参照试听音频\"",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.doesNotMatch(html, /Systematic Failure/);
-  assert.doesNotMatch(html, /统计性泛化结论/);
+  assert.equal((html.match(/<details class="t2a-collapsible">/g) ?? []).length, 3);
+  assert.doesNotMatch(html, /<details[^>]+open/);
   assert.doesNotMatch(html, /fixed seeds/);
+  assert.doesNotMatch(html, /多模态评测/);
 });
 
 test("formal summary remains a compatible redirect", async () => {
@@ -102,20 +107,16 @@ test("game audio link opens a dedicated sound practice page", async () => {
   assert.match(practice, /\/video\/hitstop-after\.mp4/);
 });
 
-test("public resume keeps T2A evidence and adds the cross-round project", async () => {
+test("public resume matches the reviewed ATS source and links to evidence", async () => {
   const response = await render("/resume");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
     "杜明",
     "AI音频数据评测",
-    "Audio-Visual Generation Evaluation",
-    "Point → Line → Scene + Quality",
-    "Round-1 Discovery", "Round-2 Controlled Regression",
-    "3→4→4", "Repeated Diagnostic Pattern", "Quality Gate",
-    "Text-to-Audio专项评测",
     "600个正式样本和660次试听评测",
-    "OVL within-1为95%", "REL within-1为98%",
+    "Text-to-Audio专项评测",
+    "SAO1 PoC与SAO1 / SA3M受控对比",
     "The Explorer",
     "杭州千乎网络",
     "2026.03—2026.07",
@@ -135,13 +136,9 @@ test("public resume keeps T2A evidence and adds the cross-round project", async 
   assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
   assert.doesNotMatch(html, /href="tel:/);
   assert.match(html, /<time[^>]*>2026\.07<\/time>/);
-  const projectPoints = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
-  assert.ok(projectPoints.length >= 2);
-  assert.equal((projectPoints[0][1].match(/<li>/g) ?? []).length, 3);
-  assert.equal((projectPoints[1][1].match(/<li>/g) ?? []).length, 3);
 });
 
-test("homepage shares copy data while the case study remains self-contained", async () => {
+test("pages share the site copy source and keep public artifacts available", async () => {
   const root = new URL("../", import.meta.url);
   const [home, caseStudy, copy] = await Promise.all([
     readFile(new URL("app/page.tsx", root), "utf8"),
@@ -149,12 +146,10 @@ test("homepage shares copy data while the case study remains self-contained", as
     readFile(new URL("src/data/siteCopy.ts", root), "utf8"),
   ]);
   assert.match(home, /src\/data\/siteCopy/);
-  assert.doesNotMatch(caseStudy, /src\/data\/siteCopy/);
-  assert.match(caseStudy, /const findings/);
+  assert.match(caseStudy, /src\/data\/siteCopy/);
   assert.match(copy, /coreNarratives/);
   assert.match(copy, /coreNarratives\.length !== 3/);
   for (const relative of [
-    "public/og-cross-round-v1.png",
     "public/downloads/t2a-v3-evidence/T2A_Evaluation_Report_v3.2.3_r3.md",
     "public/downloads/t2a-v3-evidence/T2A_Audit_Release_Record_r3.md",
     "public/audio/B0008.mp3", "public/audio/B0152.mp3", "public/audio/B0099.mp3", "public/audio/B0092.mp3",

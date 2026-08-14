@@ -123,7 +123,7 @@ export default function Home() {
           <div>
             <p className="audit-status">{auditTrustLine.status}</p>
             <p>{auditTrustLine.body}</p>
-            <a className="paper-link" href={auditTrustLine.href}>{auditTrustLine.linkLabel}</a>
+            <a className="paper-link" href={auditTrustLine.href} download>{auditTrustLine.linkLabel}</a>
           </div>
         </div>
       </section>
