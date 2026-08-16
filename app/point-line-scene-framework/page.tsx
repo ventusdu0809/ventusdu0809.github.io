@@ -133,7 +133,7 @@ export default function PointLineSceneFrameworkPage() {
           <h1>从细粒度音频评测研究<br />到多模态失败定位</h1>
           <p>基于近期生成式音频与音视频评测研究，将事件、关系与场景层面的评价对象组织为分层诊断结构，并通过两轮 Audio-Visual Generation Evaluation 检查其中部分方法假设。</p>
           <div className="pls-research-route" aria-label="研究路径"><span>文献综合</span><b>→</b><span>概念框架</span><b>→</b><span>音视频案例研究</span></div>
-          <div className="pls-hero-actions"><a className="btn btn-primary" href="#question">进入研究问题</a><a className="paper-link" href="/downloads/pls-framework/point_line_scene_framework_with_av_case_study.md" download>下载完整报告</a></div>
+          <div className="pls-hero-actions"><a className="btn btn-primary" href="#question">进入研究问题</a><Link className="paper-link" href="/point-line-scene-framework/report/">阅读完整报告</Link></div>
         </div>
       </section>
 
@@ -248,7 +248,7 @@ export default function PointLineSceneFrameworkPage() {
 
       <aside className="pls-research-note t2a-shell"><div><p className="eyebrow">方法起点 / ORIGIN NOTE</p><h2>从声音世界的组织思考，到可检验的评测问题</h2></div><div><p>“点·线·面·境”记录了我从声音设计与游戏音频出发的早期概念探索，并作为 Point–Line–Scene 方法演进的起点保留。</p><Link className="paper-link" href="/audio-world-framework">阅读早期研究笔记 →</Link></div></aside>
 
-      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回作品集</Link><Link href="/t2a-case-study">T2A 评测</Link><Link href="/audio-visual-evaluation">音视频生成评测</Link><a href="/downloads/pls-framework/point_line_scene_framework_with_av_case_study.md" download>下载完整报告</a><span>© 2026 杜明</span></footer>
+      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回作品集</Link><Link href="/t2a-case-study">T2A 评测</Link><Link href="/audio-visual-evaluation">音视频生成评测</Link><Link href="/point-line-scene-framework/report/">完整报告</Link><span>© 2026 杜明</span></footer>
     </main>
   );
 }

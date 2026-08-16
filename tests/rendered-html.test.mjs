@@ -13,6 +13,10 @@ async function render(pathname = "/") {
   );
 }
 
+function renderedDom(html) {
+  return html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+}
+
 const prohibitedHomeTerms = ["评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
 
 test("homepage uses the recruiter-facing three-narrative structure", async () => {
@@ -67,9 +71,14 @@ test("PLS research narrative connects literature, synthesis, case evidence and f
     "Audio Reasoning", "Speech Evaluation", "Physical Fidelity", "Perceptual Fidelity",
     "CASE-MOTIVATED", "误归因率尚未测量", "Scene 与评测者证据",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  const dom = renderedDom(html);
   assert.match(html, /href="\/audio-visual-evaluation"/);
-  assert.match(html, /href="\/audio-world-framework"[^>]*>阅读早期研究笔记/);
-  assert.match(html, /href="\/downloads\/pls-framework\/point_line_scene_framework_with_av_case_study\.md"/);
+  assert.equal((dom.match(/阅读早期研究笔记/g) ?? []).length, 1);
+  assert.equal((dom.match(/href="\/audio-world-framework"/g) ?? []).length, 1);
+  assert.equal((dom.match(/href="\/point-line-scene-framework\/report\/"/g) ?? []).length, 2);
+  assert.match(dom, /href="\/point-line-scene-framework\/report\/"[^>]*>阅读完整报告/);
+  assert.match(dom, /href="\/point-line-scene-framework\/report\/"[^>]*>完整报告/);
+  assert.doesNotMatch(dom, /下载完整报告|\sdownload(?:=|\s|>)/);
   assert.equal((html.match(/https:\/\/arxiv\.org\/abs\//g) ?? []).length >= 9, true);
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
@@ -80,6 +89,27 @@ test("PLS research narrative connects literature, synthesis, case evidence and f
   assert.match(css, /\.pls-hero-index \{[^}]*background: var\(--pls-green\)/s);
   assert.match(css, /\.pls-hero-index > span \{[^}]*color: #fcfaf5/s);
   assert.doesNotMatch(css, /\.pls-hero \{[^}]*radial-gradient/s);
+});
+
+test("PLS complete report is browsable and preserves the frozen research structure", async () => {
+  const response = await render("/point-line-scene-framework/report");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  for (const text of [
+    "Point–Line–Scene 完整研究报告",
+    "Point — 原子正确性",
+    "Line — 关系正确性",
+    "Scene — 整体场景一致性",
+    "Audio-Visual Generation Evaluation",
+    "Reference-aware / Provenance-aware Point Diagnosis",
+    "References",
+    "Repeated Diagnostic Pattern",
+    "Onset = Not Replicated",
+    "Dynamic = Mixed / Refined",
+    "Cross-shot = Not Replicated",
+    "Audio Quality = Persistent / Exploratory Concern",
+  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  assert.match(html, /href="\/point-line-scene-framework\/"[^>]*>← 返回 PLS 研究页/);
 });
 
 test("T2VA is an additive case study with frozen cross-round conclusions", async () => {

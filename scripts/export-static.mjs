@@ -17,6 +17,7 @@ const routes = [
   "/t2a-case-study",
   "/audio-visual-evaluation",
   "/point-line-scene-framework",
+  "/point-line-scene-framework/report",
   "/audio-validation-summary",
   "/sound-practice",
   "/resume",
