@@ -137,6 +137,25 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="audit-trust" aria-labelledby="audit-title">
+        <div className="section-shell audit-trust-inner">
+          <div>
+            <p className="eyebrow">证据与版本 / EVIDENCE & VERSIONING</p>
+            <h2 id="audit-title">{auditTrustLine.title}</h2>
+          </div>
+          <div className="audit-project-list">
+            {auditTrustLine.items.map((item) => (
+              <article key={item.name}>
+                <strong>{item.name}</strong>
+                <p className="audit-status">{item.status}</p>
+                <p>{item.body}</p>
+                <a className="paper-link" href={item.href}>{item.linkLabel}</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="content-section content-section--paper" id="sound-practice" aria-labelledby="practice-title">
         <div className="section-shell">
           <header className="section-heading">
@@ -151,25 +170,6 @@ export default function Home() {
                 <h3>{card.title}</h3>
                 <p>{card.body}</p>
                 <a className="paper-link" href={card.href}>{card.linkLabel}</a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="audit-trust" aria-labelledby="audit-title">
-        <div className="section-shell audit-trust-inner">
-          <div>
-            <p className="eyebrow">证据与版本 / EVIDENCE & VERSIONING</p>
-            <h2 id="audit-title">{auditTrustLine.title}</h2>
-          </div>
-          <div className="audit-project-list">
-            {auditTrustLine.items.map((item) => (
-              <article key={item.name}>
-                <strong>{item.name}</strong>
-                <p className="audit-status">{item.status}</p>
-                <p>{item.body}</p>
-                <a className="paper-link" href={item.href}>{item.linkLabel}</a>
               </article>
             ))}
           </div>

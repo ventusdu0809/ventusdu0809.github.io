@@ -126,7 +126,18 @@ h3 {
 /* Recruiter-facing home page: keep the existing paper system, reduce report density. */
 .recruiter-header { gap: 24px; }
 .header-contact { padding: 7px 12px; border: 1px solid var(--color-text); font-size: 12px; font-weight: 700; }
-.recruiter-hero { min-height: 72vh; display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(290px, .65fr); align-items: end; gap: clamp(36px, 8vw, 120px); padding: clamp(98px, 13vw, 168px) max(32px, calc((100vw - var(--page-width)) / 2)) 66px; background: var(--color-paper); }
+.recruiter-hero {
+  position: relative;
+  top: auto;
+  z-index: auto;
+  min-height: 72vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(290px, .65fr);
+  align-items: end;
+  gap: clamp(36px, 8vw, 120px);
+  padding: clamp(98px, 13vw, 168px) max(32px, calc((100vw - var(--page-width)) / 2)) 66px;
+  background: var(--color-paper);
+}
 .recruiter-hero-inner { max-width: 780px; }
 .recruiter-hero h1 { max-width: 800px; margin: 12px 0 22px; font-size: clamp(50px, 7.2vw, 92px); letter-spacing: -.065em; line-height: 1.02; }
 .recruiter-roleline { margin: -8px 0 22px; color: var(--color-primary); font-family: var(--serif); font-size: clamp(24px, 3.6vw, 43px); font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
@@ -280,9 +291,7 @@ nav a:hover {
 /* Hero */
 
 .hero {
-  position: sticky;
-  top: 0;
-  z-index: 1;
+  position: relative;
   min-height: 100svh;
   display: flex;
   align-items: center;
