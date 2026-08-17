@@ -217,10 +217,10 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   const html = await response.text();
   for (const text of [
     "杜明",
-    "AI音频评测｜音视频生成评测",
+    "AI音频数据评测 ｜ 音频模型主观评测",
     "600个正式样本和660次试听评测",
     "Text-to-Audio专项评测",
-    "SAO1 PoC与SAO1 / SA3M受控对比",
+    "SAO1 PoC 与 SAO1 v2 / SA3M 受控对比",
     "Audio-Visual Generation Evaluation",
     "Cross-Round Analysis v1.0",
     "Point → Line → Scene + Quality",
@@ -230,6 +230,7 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
     "杭州千乎网络",
     "2026.03—2026.07",
     "杭州伏腊",
+    "成都锦泰麓山丰田",
     "凤凰艺术",
     "爱丁堡大学",
     "米兰布雷拉美术学院",
@@ -245,10 +246,10 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
   assert.doesNotMatch(html, /href="tel:/);
   assert.doesNotMatch(html, /五层评测框架/);
-  assert.match(html, /<time[^>]*>2026\.07<\/time>/);
+  assert.match(html, /<time[^>]*>2026\.08<\/time>/);
   const projectPoints = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
   assert.ok(projectPoints.length >= 2);
-  assert.equal((projectPoints[0][1].match(/<li>/g) ?? []).length, 4);
+  assert.equal((projectPoints[0][1].match(/<li>/g) ?? []).length, 3);
   assert.equal((projectPoints[1][1].match(/<li>/g) ?? []).length, 3);
 });
 

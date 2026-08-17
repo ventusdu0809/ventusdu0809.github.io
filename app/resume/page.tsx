@@ -12,8 +12,8 @@ export const metadata: Metadata = {
 const abilities = [
   {
     number: "01",
-    title: "音频模型评测",
-    body: "评测集构建、主观听评、OVL / REL评分、Bad Case分类、盲测、隐藏重复、复测裁决、评测报告。",
+    title: "音频与音视频生成评测",
+    body: "主观听评、分层能力框架、Bad Case 发现、Controlled Regression、失败定位与研发优先级。",
   },
   {
     number: "02",
@@ -35,7 +35,6 @@ const workExperience = [
     points: [
       "参与战斗音效设计、动态混音和音频效果实机评测，按动作、武器和战斗事件拆分声音层级；通过修改前后对比检查Snapshot、Sidechain Ducking及高频战斗场景中关键声音的可辨识性。",
       "与直属领导共同起草并迭代音频外包制作与交付规范，明确文件格式、命名、短时响度、True Peak、瞬态对齐、循环零交叉及Click风险等验收标准；参与将验收标准转化为自动检查规则，负责规则审核、样例核验、问题反馈与迭代。",
-      "按剧情章节拆分50个FMOD Bank，降低单次加载压力与无关资源常驻。",
     ],
     links: [
       { href: "/sound-practice", label: "查看游戏音频案例" },
@@ -47,8 +46,17 @@ const workExperience = [
     role: "游戏音效设计师 / 声音设计",
     date: "2025.03—2025.07",
     points: [
-      "参与UE5恐怖游戏及多款小游戏的音频需求整理、声音制作与交付检查，编写音频需求文档并整理资产验收标准。",
-      "基于Unity / Wwise配置UI状态反馈和RTPC；在UE5中处理Attenuation、Occlusion与空间音频，使声音响应交互状态、视觉动效和场景空间。",
+      "参与UE5游戏及多款微信小游戏的音频需求梳理，整理音频需求文档与资产验收标准，检查音质、响度、触发逻辑及场景匹配。",
+      "基于Unity与Wwise完成UI及交互音频配置，围绕视觉动效、交互状态和声音触发时机检查声画协调性；负责过场动画和环境声音配置，从声源位置、空间衰减、遮挡、混响及前后景关系等维度判断场景声音合理性。",
+      "通过动态混音、优先级和并发限制处理复杂声场，积累多事件重叠、声音遮蔽、响度失衡及次要声音缺失的排查经验。",
+    ],
+  },
+  {
+    company: "成都锦泰麓山丰田",
+    role: "摄影摄像 / 视频制作",
+    date: "2022.08—2023.02",
+    points: [
+      "负责品牌活动、产品及直播内容的摄影摄像与现场视听环境搭建，参与灯光、音视频设备调试及素材制作，积累画面构图、动作时序、现场声音与视听内容协调的实际经验。",
     ],
   },
   {
@@ -56,7 +64,7 @@ const workExperience = [
     role: "多媒体视听内容编辑",
     date: "2021.10—2022.01",
     points: [
-      "负责艺术展览、采访及纪录片现场录音，在复杂环境中完成声音采集和素材质量检查；使用iZotope RX进行频谱检查、降噪和音频修复，识别并处理底噪、杂音、爆音、失真及其他音频缺陷。",
+      "负责艺术展览、采访及纪录片现场录音，在复杂环境中完成声音采集和素材质量检查；使用iZotope RX进行频谱检查、降噪和音频修复，识别并处理底噪、杂音、爆音、失真等音频缺陷；完成纪录片和采访内容的音频编辑及混音，检查声音清晰度、音量平衡和画面内容匹配。",
     ],
   },
 ];
@@ -76,10 +84,10 @@ export default function ResumePage() {
           <div className="resume-hero-copy">
             <p className="resume-eyebrow">AI AUDIO EVALUATION</p>
             <h1>杜明</h1>
-            <p className="resume-role">AI音频评测｜音视频生成评测</p>
+            <p className="resume-role">AI音频数据评测 ｜ 音频模型主观评测</p>
             <p className="resume-specialties">声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断</p>
             <p className="resume-intro">
-              爱丁堡大学声音设计硕士，具备游戏、影视及交互音频制作经历。独立完成Text-to-Audio模型评测项目，覆盖评测集构建、音频质检、盲听评分、Bad Case标注、隐藏重复、复测裁决及基础统计；并进一步扩展到两轮诊断性音视频生成评测，将专业视听判断转化为结构化、可复核的结论。
+              爱丁堡大学声音设计硕士，声音实践横跨广播剧制作、影视声画研究、交互装置与游戏音频，长期关注声音在叙事、画面、空间与交互中的关系。现聚焦AI音频模型与音视频生成评测，完成Text-to-Audio主观评测及两轮Audio-Visual Generation Evaluation，能够结合专业听感与声画经验进行分层诊断、定位跨模态失败链路，并将Bad Case转化为可复核的评测结论与研发优先级建议。
             </p>
           </div>
 
@@ -131,40 +139,39 @@ export default function ResumePage() {
               <article className="t2a-project">
                 <div className="entry-header">
                   <div className="entry-title-group">
-                    <h3>Text-to-Audio专项评测</h3>
-                    <p>SAO1 PoC与SAO1 / SA3M受控对比</p>
+                    <h3>Audio-Visual Generation Evaluation ｜ Cross-Round Analysis v1.0</h3>
+                    <p>分层评测框架 · Bad Case 分析 · Controlled Regression 与研发反馈</p>
+                  </div>
+                  <time dateTime="2026-08">2026.08</time>
+                </div>
+                <p className="entry-meta">个人项目 · 分层评测框架 · Bad Case 分析 · Controlled Regression · 研发反馈</p>
+                <ol className="resume-points">
+                  <li>构建Point → Line → Scene + Quality分层评测框架，围绕事件完整性、计数、声画起点、时序、动态对应、场景一致性及音频质量完成两轮诊断性评测。</li>
+                  <li>基于Round-1 Discovery设计Round-2 Controlled Regression，拆分Text→Visual与Visual→Audio失败链路；3个可精确判定案例均出现「Prompt要求3次 → Video生成4次 → Audio对应4次」，将计数偏差定位至视觉生成阶段，避免误判为Audio Counting Failure。</li>
+                  <li>将结果区分为Repeated Diagnostic Pattern、Not Replicated、Mixed / Refined与独立Quality Gate，并转化为回归优先级、失败定位及后续专项验证方向。</li>
+                </ol>
+                <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看音视频生成评测项目 →</Link>
+                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看 PLS 研究方法 →</Link>
+              </article>
+              <article className="t2a-project resume-project-secondary">
+                <div className="entry-header">
+                  <div className="entry-title-group">
+                    <h3>Text-to-Audio专项评测 ｜ SAO1 PoC 与 SAO1 v2 / SA3M 受控对比</h3>
+                    <p>评测集构建 · 盲听评分 · Bad Case 分析与评测报告</p>
                   </div>
                   <time dateTime="2026-07">2026.07</time>
                 </div>
                 <p className="entry-meta">个人项目 · 评测集构建 · 盲听评分 · Bad Case 分析 · 评测报告</p>
                 <ol className="resume-points">
-                  <li>独立搭建 Text-to-Audio 音频模型评测流程，覆盖测试样本构建、音频质检、盲听评分、问题标注、隐藏重复、复测裁决及报告输出。</li>
-                  <li>围绕环境声、动作事件、材质、音色纹理、次数控制、时间顺序和次要事件等维度审核40条Prompt，累计完成600个正式样本和660次试听评测。</li>
-                  <li>建立 OVL 整体质量、REL 文本相关性评分及 Bad Case 分类体系；单评测员隐藏重复中，OVL within-1 为95%，REL within-1 为98%。</li>
-                  <li>统计问题发生率、模型差异和变化趋势，识别声源错误、次要事件缺失、次数控制、噪声纹理及人工伪影等能力短板，并输出结构化报告和可追溯审计材料。</li>
+                  <li>独立搭建Text-to-Audio评测流程，审核40条测试Prompt，覆盖音频质检、盲听评分、问题标注、隐藏重复与复测裁决，累计完成600个正式样本和660次试听评测。</li>
+                  <li>建立OVL整体质量、REL文本相关性及Bad Case分类体系；通过单评测员隐藏重复检查评分稳定性，OVL within-1为95%，REL within-1为98%。</li>
+                  <li>分析问题发生率、模型差异与变化趋势，识别声源错误、次要事件缺失、次数控制、噪声纹理及人工伪影等短板，并输出结构化评测报告。</li>
                 </ol>
                 <aside className="responsibility-boundary">
                   <strong>个人贡献边界</strong>
                   <p>T2A 评测规则、听评方法、正式评分和 Bad Case 裁决由本人完成；AI 用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
                 </aside>
                 <Link className="resume-arrow-link" href="/t2a-case-study">查看完整评测项目 →</Link>
-              </article>
-              <article className="t2a-project resume-project-secondary">
-                <div className="entry-header">
-                  <div className="entry-title-group">
-                    <h3>Audio-Visual Generation Evaluation</h3>
-                    <p>Cross-Round Analysis v1.0 · 两轮诊断性音视频生成评测</p>
-                  </div>
-                  <time dateTime="2026-08">2026.08</time>
-                </div>
-                <p className="entry-meta">个人项目 · Point → Line → Scene + Quality · 受控回归（Controlled Regression）· 失败定位</p>
-                <ol className="resume-points">
-                  <li>在原有 T2A 评测实践上扩展 Point → Line → Scene + Quality 分层方法，以 Round-1 Discovery 发现 Bad Case，再通过 Round-2 受控回归按预先定义的观察字段与判定规则验证。</li>
-                  <li>将Text→Visual与Visual→Audio分开定位；三个可精确判定案例均呈现3→4→4，冻结为Repeated Diagnostic Pattern，避免将视觉阶段数量偏差误归为Audio Counting Failure。</li>
-                  <li>综合Not Replicated、Mixed / Refined与独立Quality Gate形成研发优先级：降低未复现问题优先级，细化动态专项测试，并持续关注音频质量风险。</li>
-                </ol>
-                <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看音视频生成评测项目 →</Link>
-                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看 PLS 研究方法 →</Link>
               </article>
             </section>
 
@@ -231,14 +238,14 @@ export default function ResumePage() {
             <section className="sidebar-section" aria-labelledby="education-title">
               <h2 id="education-title">教育背景</h2>
               <article className="education-entry">
-                <h3>爱丁堡大学</h3>
-                <p>声音设计硕士 MSc</p>
+                <h3>爱丁堡大学（University of Edinburgh）</h3>
+                <p>声音设计硕士（MSc）</p>
                 <time dateTime="2023-09">2023.09—2024.11</time>
                 <small>影视声音、交互音频、空间声音、声音与画面关系、创意声音技术</small>
               </article>
               <article className="education-entry">
-                <h3>米兰布雷拉美术学院</h3>
-                <p>新技术艺术本科 BA</p>
+                <h3>米兰布雷拉美术学院（Accademia Di Brera）</h3>
+                <p>新技术艺术本科（BA）</p>
                 <time dateTime="2017-10">2017.10—2022.03</time>
                 <small>摄影、视频、动画、新媒体与装置艺术</small>
               </article>
