@@ -57,7 +57,7 @@ const references = [
   ["5", "Li, S., et al.", "AcoustiTrace: When Plausible Sound Violates Physics", "arXiv:2608.02035, 2026", "https://arxiv.org/abs/2608.02035"],
   ["6", "Zhou, Z., et al.", "AVGen-Bench: A Task-Driven Benchmark for Multi-Granular Evaluation of Text-to-Audio-Video Generation", "arXiv:2604.08540, 2026", "https://arxiv.org/abs/2604.08540"],
   ["7", "Desbos, M., et al.", "A Production-Oriented Framework for Evaluation of SFX Generation", "DAFx26; arXiv:2607.09973", "https://arxiv.org/abs/2607.09973"],
-  ["8", "Manakul, P., et al.", "AudioJudge: Understanding Human Preferences in Speech Evaluation", "EACL 2026, pp. 3644–3663", "https://aclanthology.org/2026.eacl-long.168/"],
+  ["8", "Manakul, P., et al.", "AudioJudge: Understanding What Works in Large Audio Model Based Speech Evaluation", "EACL 2026, pp. 3644–3663", "https://aclanthology.org/2026.eacl-long.168/"],
   ["9", "Park, J., et al.", "Auditing Protocol-Level Shortcuts in Large Audio Language Model Judges for Speech Evaluation", "arXiv:2607.13477, 2026", "https://arxiv.org/abs/2607.13477"],
   ["10", "Yu, F., et al.", "Reinforcement Learning with Evolving Rubrics as Rewards for Audio Reasoning", "arXiv:2608.02831, 2026", "https://arxiv.org/abs/2608.02831"],
   ["11", "Elizalde, B., et al.", "CLAP: Learning Audio Concepts From Natural Language Supervision", "arXiv:2206.04769, 2022", "https://arxiv.org/abs/2206.04769"],
