@@ -106,7 +106,7 @@ test("PLS complete report presents the frozen research as a working paper", asyn
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "WORKING PAPER / RESEARCH NOTE",
+    "WORKING PAPER · METHODS &amp; CASE STUDY",
     "面向生成式音频与音视频模型的分层诊断评测框架",
     "作者", "杜明", "摘要", "ABSTRACT",
     "1. 引言", "2. 相关工作", "3. PLS 方法框架",
@@ -120,13 +120,22 @@ test("PLS complete report presents the frozen research as a working paper", asyn
     "附录 A", "附录 B",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/point-line-scene-framework\/"[^>]*>← 返回 PLS 研究页/);
+  assert.match(html, /<details class="paper-mobile-toc">/);
+  assert.match(html, /图 3\. 显式参考链诊断/);
+  assert.match(html, /表 3\. 执行层示例画像/);
+  assert.match(html, /class="record-list"/);
+  assert.doesNotMatch(html, /class="record-cards"/);
   assert.doesNotMatch(html, /Source Audit|五个必须回答的问题|Provenance-aware|freeze\//);
   const css = await readFile(new URL("../app/point-line-scene-framework/report/report.css", import.meta.url), "utf8");
-  assert.match(css, /@media \(max-width: 1050px\)/);
+  assert.match(css, /@media \(max-width: 1220px\)/);
   assert.match(css, /@media \(max-width: 430px\)/);
   assert.match(css, /@media print/);
   assert.match(css, /@page \{ size: A4; margin: 18mm 17mm 20mm; \}/);
   assert.match(css, /\.paper-table-wrap \{[^}]*overflow-x: auto/s);
+  assert.match(css, /\.paper-toc \{[^}]*max-height: calc\(100vh - 44px\)[^}]*overflow-y: auto/s);
+  assert.match(css, /\.paper-mobile-toc \{ display: none; \}/);
+  assert.match(css, /\.paper-sheet section > h2 \{[^}]*border: 0/s);
+  assert.match(css, /\.paper-sheet th \{[^}]*background: transparent/s);
 });
 
 test("T2VA is an additive case study with frozen cross-round conclusions", async () => {

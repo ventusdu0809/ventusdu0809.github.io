@@ -74,22 +74,26 @@ export default function PointLineSceneReportPage() {
       <header className="paper-utility"><Link href="/point-line-scene-framework/">← 返回 PLS 研究页</Link><span>WORKING PAPER · 2026.08</span></header>
       <div className="paper-layout">
         <aside className="paper-toc" aria-label="论文目录"><p>目录 / CONTENTS</p><nav>{toc.map(([id, title]) => <a key={id} href={`#${id}`}>{title}</a>)}</nav></aside>
+        <details className="paper-mobile-toc">
+          <summary>目录 / Contents</summary>
+          <nav>{toc.map(([id, title]) => <a key={id} href={`#${id}`}>{title}</a>)}</nav>
+        </details>
         <article className="paper-sheet">
           <header className="paper-header">
-            <p className="paper-type">WORKING PAPER / RESEARCH NOTE</p>
-            <h1>Point–Line–Scene：<br />面向生成式音频与音视频模型的分层诊断评测框架</h1>
+            <p className="paper-type">WORKING PAPER · METHODS &amp; CASE STUDY</p>
+            <h1>Point–Line–Scene：面向生成式音频与音视频模型的分层诊断评测框架</h1>
             <p className="paper-title-en">Point–Line–Scene: A Hierarchical Diagnostic Evaluation Framework for Generative Audio and Audio-Visual Models</p>
             <p className="paper-subtitle">从细粒度能力分解到显式参考链诊断与可执行评测</p>
-            <dl className="paper-meta"><div><dt>作者</dt><dd>杜明</dd></div><div><dt>领域</dt><dd>AI 音频与音视频生成评测</dd></div><div><dt>日期</dt><dd>2026.08</dd></div></dl>
+            <dl className="paper-meta"><div><dt>作者</dt><dd>杜明</dd></div><div><dt>研究方向</dt><dd>AI 音频与音视频生成评测 · 2026.08</dd></div></dl>
           </header>
           <section className="paper-abstract" aria-labelledby="abstract-title">
             <h2 id="abstract-title">摘要 <span>ABSTRACT</span></h2>
             <p>生成式音频与音视频模型常以整体相似度或总体质量概括表现，但单一结果难以回答事件是否缺失、关系何处失配以及错误发生在哪一条跨模态链路。本文提出 Point–Line–Scene（PLS）分层诊断框架，将评价对象组织为原子正确性、关系正确性与整体场景一致性，并保留独立的感知质量轴。在此基础上，本文固定 P1–P4、L1–L4、S1–S4 共 12 项能力，建立 PLS Evaluation Schema v1.0，将可观察事实、能力评分、维度画像、有效性、诊断门与 OVL 连接为结构化记录。两轮 Audio-Visual Generation Evaluation 由 Round-1 问题发现进入 Round-2 受控回归，形成 Exact-count、Onset、Dynamic、Cross-shot 与 Audio Quality 的跨轮证据状态。P06、P10 与 R2-H1-B 的 3→4→4 模式进一步促成显式参考链诊断（Reference-aware Diagnosis），将 Prompt↔Visual 与 Visual↔Audio 分开判断。Execution Layer v0.1 已支持 Schema 校验、Dimension Profile 派生、轻量一致性检查与人可读诊断摘要。当前结果基于诊断性案例研究，尚不用于模型总体性能估计。</p>
-            <p className="paper-keywords"><strong>关键词：</strong>Generative Audio Evaluation；Audio-Visual Generation；Fine-Grained Evaluation；Failure Localization；Reference-aware Diagnosis；Controlled Regression</p>
+            <p className="paper-keywords"><strong>关键词：</strong>生成式音频评测；音视频生成；细粒度评测；失败定位；显式参考链诊断；受控回归</p>
           </section>
           <section id="introduction"><h2><span>1</span> 引言 <small>INTRODUCTION</small></h2>
             <p>生成式音频评测正在从整体听感与语义相似度，转向事件、属性、时间关系和可验证指令的细粒度检查 <Cite>1–4</Cite>。在音视频生成中，评价对象还跨越文本要求、视觉事实与音频输出；若省略其中一层，最终不一致可能被归到错误的模型能力。</p>
-            <p>本文研究如何用一套紧凑、可执行的结构组织不同粒度的评价对象，使结果既保留专业判断空间，又能服务于失败定位、受控回归与研发优先级。PLS 由三层评价对象与一个独立质量轴构成，并通过 Capability Taxonomy、Evaluation Schema 和 Execution Layer 进入实际评测流程。</p>
+            <p>本文研究如何用一套紧凑、可执行的结构组织不同粒度的评价对象，使结果既保留专业判断空间，又能服务于失败定位、受控回归与研发优先级。PLS 由三层评价对象与一个独立质量轴构成，并通过能力分类（Capability Taxonomy）、评测结构（Evaluation Schema）和执行层（Execution Layer）进入实际评测流程。</p>
             <div className="paper-scope"><strong>研究范围</strong><p>本文将近期生成式音频与音视频评测中的细粒度评价对象组织为 Point–Line–Scene，并通过两轮诊断性 Audio-Visual Generation Evaluation 检查部分方法假设。当前结果用于方法设计与案例级诊断，不用于模型总体性能估计。</p></div>
           </section>
           <section id="related-work"><h2><span>2</span> 相关工作 <small>RELATED WORK</small></h2>
@@ -99,18 +103,18 @@ export default function PointLineSceneReportPage() {
             <h3>2.4 制作可用性与 Judge Reliability</h3><p>Production-Oriented SFX Evaluation 将可编辑性、瞬态完整性及时间/能量对齐纳入制作语境 <Cite>7</Cite>。AudioJudge 讨论多维语音评价及 Judge 偏差 <Cite>8</Cite>；协议级 shortcut audit 提示未来自动 Judge 还需确认判断确实依赖音频证据 <Cite>9</Cite>。</p>
           </section>
           <section id="method"><h2><span>3</span> Point–Line–Scene 方法框架 <small>METHOD</small></h2>
-            <figure className="paper-figure"><div className="figure-pls"><div><b>POINT</b><span>事件 / 声源 / 材质 / 数量</span></div><i>→</i><div><b>LINE</b><span>起点 / 顺序 / 持续 / 动态</span></div><i>→</i><div><b>SCENE</b><span>环境 / 空间 / 显著性 / 叙事内一致性</span></div></div><figcaption>Figure 1. Point–Line–Scene evaluation hierarchy.</figcaption></figure>
+            <figure className="paper-figure"><div className="figure-pls"><div><b>POINT</b><span>事件 / 声源 / 材质 / 数量</span></div><i>→</i><div><b>LINE</b><span>起点 / 顺序 / 持续 / 动态</span></div><i>→</i><div><b>SCENE</b><span>环境 / 空间 / 显著性 / 叙事内一致性</span></div></div><figcaption>图 1. Point–Line–Scene 分层评价结构。</figcaption></figure>
             <h3>3.1 Point：原子正确性</h3><p>Point 检查单个事件及其直接属性，包括事件完整性、声源、材质与数量。评价需要先确定 Reference；P4 以可观察的 Visual count 与 Audio count 为能力判断关系。</p>
             <h3>3.2 Line：关系正确性</h3><p>Line 检查多个事件或同一事件跨时间状态的关系，包括起点、顺序、持续/重叠与动态对应，并保留“主要关系成立但存在明显问题”的中间状态。</p>
             <h3>3.3 Scene：整体场景一致性</h3><p>Scene 检查环境、空间、显著性与叙事内声音能否共同形成可信声景。Scene 是整体关系的组织结果。</p>
             <h3>3.4 Quality 与跨层评价轴</h3><p>PLS 回答“哪里出了问题”，OVL 回答“最终听起来怎么样”。两者分别记录；MOS 术语采用 ITU-T P.800.1 的标准语境 <Cite>13</Cite>。</p>
           </section>
-          <section id="taxonomy-schema"><h2><span>4</span> Capability Taxonomy 与 Evaluation Schema</h2>
+          <section id="taxonomy-schema"><h2><span>4</span> 能力分类与评测结构 <small>CAPABILITY TAXONOMY · EVALUATION SCHEMA</small></h2>
             <h3>4.1 固定的 12 项 Capability</h3><p>能力分类由 P1–P4、L1–L4、S1–S4 组成。每条记录显式填写 12 项能力，适用项记为 SCORED，不适用项记为 N/A，视觉事实无法可靠判断时使用 UNEVALUABLE。</p>
-            <p className="table-caption">Table 1. Capability Taxonomy.</p><TableWrap><table><thead><tr><th>ID</th><th>能力</th><th>核心评测问题</th></tr></thead><tbody>{capabilities.map(([id, name, question]) => <tr key={id}><td><code>{id}</code></td><td>{name}</td><td>{question}</td></tr>)}</tbody></table></TableWrap>
+            <p className="table-caption">表 1. PLS 能力分类（Capability Taxonomy）。</p><TableWrap><table className="capability-table"><colgroup><col /><col /><col /></colgroup><thead><tr><th>ID</th><th>能力</th><th>核心评测问题</th></tr></thead><tbody>{capabilities.map(([id, name, question]) => <tr key={id}><td><code>{id}</code></td><td>{name}</td><td>{question}</td></tr>)}</tbody></table></TableWrap>
             <h3>4.2 评分语言</h3><p>1–5 分锚点描述目标关系的满足程度：5 表示完整满足，3 保留“主要关系成立但存在明显问题”的诊断空间。N/A 表示能力不适用；UNEVALUABLE 表示所需证据不足。</p>
-            <h3>4.3 PLS Evaluation Schema v1.0</h3><figure className="paper-figure"><div className="figure-flow">{["Facts", "Capability", "Dimension Profile", "Validity + Diagnostic Gate", "OVL", "Diagnosis"].map((item, index) => <span key={item}>{index > 0 && <i>↓</i>}<b>{item}</b></span>)}</div><figcaption>Figure 2. PLS Evaluation Schema v1.0 data flow.</figcaption></figure>
-            <p>Dimension Profile 由适用能力自动派生，输出 Point mean+n、Line mean+n 与 Scene mean+n，不生成 PLS Total Score。Validity 使用 VALID、PARTIAL、CONFOUNDED、UNEVALUABLE；Diagnostic Gate 记录 Primary Probe、Instruction Fidelity 与 Cross-modal Correspondence。Capability 下的 <code>bad_cases</code> 是 Bad Case 的正式来源。</p>
+            <h3>4.3 PLS Evaluation Schema v1.0</h3><figure className="paper-figure"><div className="figure-flow"><b>Facts</b><i>→</i><b>Capability</b><i>→</i><b>Dimension Profile</b><i>→</i><b>Validity / Gate</b><i>→</i><b>OVL</b><i>→</i><b>Diagnosis</b></div><figcaption>图 2. PLS Evaluation Schema v1.0 数据流。</figcaption></figure>
+            <p>维度画像（Dimension Profile）由适用能力自动派生，输出 Point mean+n、Line mean+n 与 Scene mean+n，不生成 PLS Total Score。有效性（Validity）使用 VALID、PARTIAL、CONFOUNDED、UNEVALUABLE；诊断门（Diagnostic Gate）记录 Primary Probe、Instruction Fidelity 与 Cross-modal Correspondence。能力项下的 <code>bad_cases</code> 是 Bad Case 的正式来源。</p>
           </section>
           <section id="case-study"><h2><span>5</span> Audio-Visual Generation Evaluation 案例研究</h2>
             <h3>5.1 Round-1 Problem Discovery</h3><p>Round-1 包含 10 个单次生成样本，用于发现问题并记录可观察事实、能力分数与 Bad Case。单条异常先作为案例证据保留。</p>
@@ -118,21 +122,21 @@ export default function PointLineSceneReportPage() {
             <h3>5.3 Cross-Round Analysis</h3><p>跨轮状态采用 Repeated Diagnostic Pattern、Not Replicated、Mixed / Refined 与 Persistent / Exploratory Concern。结果出来前定义观察项与判定规则，是 Controlled Regression 区别于重新生成样本的关键。</p>
           </section>
           <section id="reference-aware"><h2><span>6</span> 显式参考链诊断 <small>REFERENCE-AWARE DIAGNOSIS</small></h2>
-            <figure className="paper-figure"><div className="figure-reference"><div><small>原始要求</small><b>Prompt Requirement</b></div><i>→</i><div><small>视觉事实</small><b>Visual Fact</b><em>Instruction Fidelity</em></div><i>→</i><div><small>音频观察</small><b>Audio Observation</b><em>Cross-modal Correspondence</em></div></div><figcaption>Figure 3. Reference-aware evaluation chain.</figcaption></figure>
+            <figure className="paper-figure paper-figure-primary"><div className="figure-reference"><div><small>原始要求</small><b>Prompt Requirement</b></div><i><span>Instruction Fidelity</span>→</i><div><small>视觉事实</small><b>Visual Fact</b></div><i><span>Cross-modal Correspondence</span>→</i><div><small>音频观察</small><b>Audio Observation</b></div></div><figcaption>图 3. 显式参考链诊断（Reference-aware Diagnosis）。</figcaption></figure>
             <h3>6.1 Prompt → Visual → Audio</h3><p>显式参考链将 Text→Visual Instruction Fidelity 与 Visual→Audio Cross-modal Correspondence 分开判断。它描述评价关系，不涉及模型内部生成架构。</p>
             <h3>6.2 Exact-count 3→4→4</h3><p>P06、P10 与 R2-H1-B 均满足 <code>N_prompt=3</code>、<code>N_visual=4</code>、<code>N_audio=4</code>。因此 Instruction Fidelity=FAIL，Cross-modal Correspondence=PASS，P4=5。</p>
             <h3>6.3 Failure Attribution</h3><p>若只比较 Prompt 与 Audio，3≠4 容易被标记为 Audio Counting Failure。加入 Visual Fact 后，数量偏差被定位到 Prompt→Visual，Visual→Audio 的事件计数保持一致。</p>
           </section>
-          <section id="execution-layer"><h2><span>7</span> Execution Layer v0.1</h2>
+          <section id="execution-layer"><h2><span>7</span> 执行层（Execution Layer）v0.1</h2>
             <p>人工评测负责事实判定、能力评分与 Bad Case 归因；执行层负责 Schema 校验、Dimension Profile 派生、轻量一致性检查与诊断摘要生成。程序不替代评测员的专业判断。</p>
-            <figure className="paper-figure"><div className="figure-execution"><div><b>Human Evaluation</b><span>Facts · Scores · Bad Cases</span></div><i>→</i><div><b>Validation</b><span>Schema · Required Fields</span></div><i>→</i><div><b>Aggregation</b><span>Point · Line · Scene</span></div><i>→</i><div><b>Diagnostic Output</b><span>Summary · Case Profile</span></div></div><figcaption>Figure 4. Human-in-the-loop Execution Layer workflow.</figcaption></figure>
+            <figure className="paper-figure"><div className="figure-execution"><div><b>人工评测</b><span>Facts · Scores · Bad Cases</span></div><i>→</i><div><b>Schema 校验</b><span>Schema · Required Fields</span></div><i>→</i><div><b>维度聚合</b><span>Point · Line · Scene</span></div><i>→</i><div><b>诊断输出</b><span>Summary · Case Profile</span></div></div><figcaption>图 4. 人机协同的执行层工作流。</figcaption></figure>
             <h3>7.1–7.3 Human-in-the-loop、校验与聚合</h3><p>完整记录进入 Draft 2020-12 Schema 校验，12 项 Capability 必须显式存在。聚合只计算 SCORED 项的平均值与有效样本数 n，并由能力分数派生 Dimension Profile。</p>
             <h3>7.4–7.5 诊断摘要与案例画像</h3><p>执行层输出人可读摘要、Capability Breakdown、参考链判断和案例集合画像。四个迁移诊断案例得到 Point=5.00（n=10）、Line=4.25（n=8）、Scene=5.00（n=4），用于检查 Schema 与 Execution Layer 的聚合和展示流程，不作为模型整体能力估计。</p>
           </section>
           <section id="results"><h2><span>8</span> 结果与诊断发现 <small>RESULTS</small></h2>
-            <p className="table-caption">Table 2. Migrated diagnostic cases.</p><TableWrap><table><thead><tr><th>Case</th><th>Primary capability</th><th>结构化结果</th><th>诊断</th></tr></thead><tbody>{caseRows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></TableWrap>
+            <p className="table-caption">表 2. 迁移诊断案例（Migrated Diagnostic Cases）。</p><TableWrap><table><thead><tr><th>Case</th><th>Primary capability</th><th>结构化结果</th><th>诊断</th></tr></thead><tbody>{caseRows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></TableWrap>
             <div className="finding-list">{findings.map(([name, status, detail]) => <article key={name}><span>{name}</span><strong>{status}</strong><p>{detail}</p></article>)}</div>
-            <p className="table-caption">Table 3. Execution Demo Profile.</p><TableWrap><table className="profile-table"><thead><tr><th>Dimension</th><th>Mean</th><th>Valid n</th></tr></thead><tbody><tr><td>Point</td><td>5.00</td><td>10</td></tr><tr><td>Line</td><td>4.25</td><td>8</td></tr><tr><td>Scene</td><td>5.00</td><td>4</td></tr></tbody></table></TableWrap>
+            <p className="table-caption">表 3. 执行层示例画像（Execution Demo Profile）。</p><TableWrap><table className="profile-table"><thead><tr><th>Dimension</th><th>Mean</th><th>Valid n</th></tr></thead><tbody><tr><td>Point</td><td>5.00</td><td>10</td></tr><tr><td>Line</td><td>4.25</td><td>8</td></tr><tr><td>Scene</td><td>5.00</td><td>4</td></tr></tbody></table></TableWrap>
           </section>
           <section id="discussion"><h2><span>9</span> 讨论 <small>DISCUSSION</small></h2>
             <h3>9.1 Diagnostic-first Aggregation</h3><p>PLS 聚合保留维度均值与有效 n，服务于定位。研究者可以从 Dimension Profile 回到具体 Capability、Facts 与 Bad Case，避免单一总分遮蔽局部失败。</p>
@@ -143,17 +147,17 @@ export default function PointLineSceneReportPage() {
           <section id="limitations"><h2><span>10</span> 研究范围与限制 <small>LIMITATIONS</small></h2><p>当前案例由 Round-1 的 10 个与 Round-2 的 6 个单次生成样本组成，属于小样本诊断性研究；H1-A 因关键视觉事实不清晰记为 UNEVALUABLE，不进入 Exact-count 证据集。Scene 层案例少于 Point 与 Line，项目由单评测员完成，尚未测试 inter-rater reliability。四条迁移记录与 Demo Profile 用于验证记录、聚合与展示流程，不支持模型总体性能估计。</p></section>
           <section id="future-work"><h2><span>11</span> 后续研究 <small>FUTURE WORK</small></h2><p>下一阶段包括扩大 Scene 层与多评测员证据，比较 PLS 与 holistic-only 评价在失败定位上的差异；将制作可用性指标接入人类评测流程 <Cite>7</Cite>；探索细粒度 rubric 与 preference/reward 的连接 <Cite>2, 3, 10</Cite>。自动 Judge 若进入流程，还需用 Audio Removal / Mismatch、A/B Swap、Metadata Conflict 与 Rephrasing Stability 等 probe 检查证据依赖 <Cite>8, 9</Cite>。</p></section>
           <section id="conclusion"><h2><span>12</span> 结论 <small>CONCLUSION</small></h2><p>本文将生成式音频与音视频评测中的细粒度对象组织为 Point–Line–Scene + Quality，并以固定的 12 项 Capability、Evaluation Schema v1.0 与 Execution Layer v0.1 形成从人工判断到结构化诊断的完整链路。两轮案例研究显示，显式参考链可以改变 Exact-count 的错误归因；跨轮状态可以区分重复模式、未复现、待细化问题与持续质量关注。PLS 的当前价值在于提供可复查的能力语言和研发回归入口。</p></section>
-          <section id="references" className="paper-references"><h2>参考文献 <small>REFERENCES</small></h2><ol>{references.map(([id, authors, title, venue, href]) => <li key={id}><span>[{id}]</span><p>{authors} <a href={href} target="_blank" rel="noreferrer">{title}</a>. {venue}.</p></li>)}</ol></section>
+          <section id="references" className="paper-references"><h2>参考文献 <small>REFERENCES</small></h2><ol>{references.map(([id, authors, title, venue, href]) => <li id={`ref-${id}`} key={id}>[{id}] {authors} <a href={href} target="_blank" rel="noreferrer">{title}</a>. {venue}.</li>)}</ol></section>
           <section id="appendix-a" className="paper-appendix"><h2>附录 A <small>CAPABILITY TAXONOMY</small></h2><p>以下为评测记录中的固定能力与典型 Bad Case。定义、核心问题和评分语言不随单个案例改变。</p><TableWrap><table><thead><tr><th>ID</th><th>中文名称（English）</th><th>典型 Bad Case / 记录</th></tr></thead><tbody>{capabilities.map(([id, name, , badCase]) => <tr key={id}><td><code>{id}</code></td><td>{name}</td><td><code>{badCase}</code></td></tr>)}</tbody></table></TableWrap></section>
-          <section id="appendix-b" className="paper-appendix"><h2>附录 B <small>REPRESENTATIVE EVALUATION RECORDS</small></h2><div className="record-cards">
-            <article><span>P06 · REFERENCE-AWARE</span><p><code>Prompt=3 · Visual=4 · Audio=4</code></p><p>P4=5；L1=3；Instruction Fidelity=FAIL；Visual→Audio=PASS；<code>audio_early</code>。</p></article>
-            <article><span>H2 · QUALITY INDEPENDENCE</span><p><code>Point=5.00 · Line=5.00 · OVL=3</code></p><p>关系判断成立，音频存在 <code>loudness_imbalance</code>。</p></article>
-            <article><span>H3 · PARTIAL CAPABILITY</span><p><code>P2=5 · L3=5 · L4=3 · S1=5</code></p><p>Boundary Response=Present；Source-motion Tracking=Insufficiently Continuous；<code>static_audio_motion</code>。</p></article>
-            <article><span>P10 · PARTIAL VALIDITY</span><p><code>P4=5 · Validity=PARTIAL</code></p><p>Visual→Audio exact-count=PASS；L3 记录 <code>audio_duration_short</code>；camera cut 限制原因解释。</p></article>
+          <section id="appendix-b" className="paper-appendix"><h2>附录 B <small>REPRESENTATIVE EVALUATION RECORDS</small></h2><div className="record-list">
+            <article><h3>R1 P06 <small>REFERENCE-AWARE</small></h3><dl><div><dt>事实</dt><dd><code>Prompt=3 · Visual=4 · Audio=4</code></dd></div><div><dt>能力</dt><dd>P4=5；L1=3</dd></div><div><dt>诊断</dt><dd>Instruction Fidelity=FAIL；Visual→Audio=PASS；<code>audio_early</code></dd></div></dl></article>
+            <article><h3>R2 H2 <small>QUALITY INDEPENDENCE</small></h3><dl><div><dt>画像</dt><dd><code>Point=5.00 · Line=5.00 · OVL=3</code></dd></div><div><dt>发现</dt><dd>关系判断成立，音频存在 <code>loudness_imbalance</code></dd></div></dl></article>
+            <article><h3>R2 H3 <small>PARTIAL CAPABILITY</small></h3><dl><div><dt>能力</dt><dd><code>P2=5 · L3=5 · L4=3 · S1=5</code></dd></div><div><dt>发现</dt><dd>Boundary Response=Present；Source-motion Tracking=Insufficiently Continuous；<code>static_audio_motion</code></dd></div></dl></article>
+            <article><h3>R1 P10 <small>PARTIAL VALIDITY</small></h3><dl><div><dt>能力</dt><dd><code>P4=5 · Validity=PARTIAL</code></dd></div><div><dt>诊断</dt><dd>Visual→Audio exact-count=PASS；L3 记录 <code>audio_duration_short</code>；camera cut 限制原因解释</dd></div></dl></article>
           </div></section>
         </article>
       </div>
-      <footer className="paper-footer"><Link href="/point-line-scene-framework/">← 返回 PLS 研究页</Link><span>杜明 · Point–Line–Scene · Working Paper</span></footer>
+      <footer className="paper-footer"><Link href="/point-line-scene-framework/">← 返回 PLS 研究页</Link><span>杜明 · Point–Line–Scene · 2026</span></footer>
     </main>
   );
 }
