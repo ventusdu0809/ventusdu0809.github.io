@@ -38,7 +38,8 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "3→4→4",
     "Repeated Diagnostic Pattern",
     "研究 / RESEARCH",
-    "文献观察", "方法综合", "案例研究", "新研究问题",
+    "文献观察", "方法综合", "案例研究", "可执行评测",
+    "Literature → Synthesis → Case Study → Execution",
     "阅读研究方法",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
@@ -70,6 +71,9 @@ test("PLS research narrative connects literature, synthesis, case evidence and f
     "Audio Removal / Mismatch", "A/B Swap", "Metadata Conflict", "Rephrasing Stability",
     "Audio Reasoning", "Speech Evaluation", "Physical Fidelity", "Perceptual Fidelity",
     "CASE-MOTIVATED", "误归因率尚未测量", "Scene 与评测者证据",
+    "从方法框架到可执行评测", "Evaluation Schema", "Execution Layer", "专业判断由人完成",
+    "4 个迁移诊断案例中的适用能力评分汇总", "不作为模型总体能力统计",
+    "audio_duration_short", "Validity 与 Capability Judgment 分开记录",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   const dom = renderedDom(html);
   assert.match(html, /href="\/audio-visual-evaluation"/);
@@ -83,8 +87,8 @@ test("PLS research narrative connects literature, synthesis, case evidence and f
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
   assert.doesNotMatch(html, /提出全新理论|证明 PLS 有效|首次发现|论文不是 Sources，而是 Argument|方法论第一次遇到真实问题|PRELIMINARY CASE SUPPORT|Provenance-aware Diagnosis|Reference-aware Evaluation/);
-  for (let index = 1; index <= 10; index += 1) assert.match(html, new RegExp(`${String(index).padStart(2, "0")} \/`));
-  assert.doesNotMatch(html, /11 \/|12 \//);
+  for (let index = 1; index <= 11; index += 1) assert.match(html, new RegExp(`${String(index).padStart(2, "0")} \/`));
+  assert.doesNotMatch(html, /12 \//);
   const css = await readFile(new URL("../app/point-line-scene-framework/point-line-scene-framework.css", import.meta.url), "utf8");
   assert.match(css, /\.pls-hero-index \{[^}]*background: var\(--pls-green\)/s);
   assert.match(css, /\.pls-hero-index > span \{[^}]*color: #fcfaf5/s);

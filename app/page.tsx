@@ -121,17 +121,17 @@ export default function Home() {
         <div className="section-shell">
           <header className="section-heading">
             <p className="eyebrow">研究 / RESEARCH</p>
-            <h2 id="pls-home-title">Point–Line–Scene：从文献综合到案例研究</h2>
-            <p className="section-lead">基于近期生成式音频与音视频评测研究，将事件、关系与场景层面的评价对象组织为分层诊断结构，并通过两轮 Audio-Visual Generation Evaluation 检查其中部分方法假设。</p>
+            <h2 id="pls-home-title">Point–Line–Scene：从文献综合到可执行评测</h2>
+            <p className="section-lead">从近期生成式音频与音视频评测研究提炼分层诊断结构，再将 12 项能力、真实案例与轻量 Execution Layer 连接为可运行的评测流程。</p>
           </header>
           <div className="pls-home-grid">
             <article><span>01 · LITERATURE</span><strong>文献观察</strong><p>梳理细粒度 rubric、时间关系、结构化声景、物理约束与 Judge 研究。</p></article>
             <article><span>02 · SYNTHESIS</span><strong>方法综合</strong><p>把分散对象组织为 Point → Line → Scene 的失败定位结构。</p></article>
             <article><span>03 · CASE STUDY</span><strong>案例研究</strong><p>用两轮音视频生成评测检查受控回归与错误归因。</p></article>
-            <article><span>04 · NEW QUESTION</span><strong>新研究问题</strong><p>从 3→4→4 形成显式参考链诊断。</p></article>
+            <article><span>04 · EXECUTION</span><strong>可执行评测</strong><p>将人工评分转为结构化记录、自动聚合与诊断输出。</p></article>
           </div>
           <div className="pls-home-note">
-            <p><strong>研究路径：</strong>Literature → Synthesis → Case Study → New Research Question。案例结果进一步修订了评价参照与诊断边界，并形成新的研究问题。</p>
+            <p><strong>方法路径：</strong>Literature → Synthesis → Case Study → Execution。专业判断由评测员完成，程序负责校验、聚合与整理。</p>
             <a className="btn btn-primary" href="/point-line-scene-framework">阅读研究方法</a>
           </div>
         </div>

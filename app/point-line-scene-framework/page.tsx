@@ -4,10 +4,10 @@ import "../t2a-case-study/t2a-case-study.css";
 import "./point-line-scene-framework.css";
 
 export const metadata: Metadata = {
-  title: "Point–Line–Scene｜从音频评测研究到多模态失败定位",
+  title: "Point–Line–Scene｜从方法框架到可执行评测",
   description:
-    "从近期生成式音频评测研究提炼 Point–Line–Scene，再以两轮 Audio-Visual Generation Evaluation 检查失败定位、受控回归与参考链问题。",
-  keywords: ["Point-Line-Scene", "生成式音频评测", "音视频生成评测", "失败定位", "Reference-aware Diagnosis"],
+    "从近期生成式音频评测研究提炼 Point–Line–Scene，再以结构化 Evaluation Schema、轻量 Execution Layer 与真实音视频案例形成可执行的诊断评测流程。",
+  keywords: ["Point-Line-Scene", "生成式音频评测", "音视频生成评测", "Evaluation Schema", "Execution Layer", "Reference-aware Diagnosis"],
   alternates: { canonical: "/point-line-scene-framework" },
 };
 
@@ -81,6 +81,26 @@ const layers = [
   ["SCENE", "整体场景一致性", "环境、前后景、显著性与叙事内声音是否共同成立。"],
 ] as const;
 
+const executionLayers = [
+  ["01", "Framework", "评测框架", "Point → Line → Scene", "组织评价对象。"],
+  ["02", "Capability Taxonomy", "能力分类", "P1–P4 / L1–L4 / S1–S4", "定义具体检查什么。"],
+  ["03", "Evaluation Schema", "评测结构", "Facts → Capability → Profile", "把判断转成结构化记录。"],
+  ["04", "Execution Layer", "执行层", "Validation → Aggregation → Diagnosis", "让结构真正运行。"],
+] as const;
+
+const executionSteps = [
+  ["01", "Human Evaluation", "人工判断", "评测员记录 Prompt / Visual / Audio Facts，并完成人工 Capability Score 与 Bad Case 判断。", ["Facts", "Capability Score", "Bad Case"]],
+  ["02", "Evaluation Schema", "结构化记录", "12 项 Capability、Validity、Diagnostic Gate 与 OVL 被放入统一记录结构。", ["P1–S4", "Validity", "Diagnostic Gate", "OVL"]],
+  ["03", "Execution Layer", "自动处理", "程序执行格式校验、Dimension 聚合、轻量一致性检查与诊断摘要整理。", ["Schema Validation", "Aggregation", "Consistency Check", "Summary"]],
+  ["04", "Diagnostic Output", "诊断输出", "输出 PLS Profile、Capability Breakdown、参考链诊断与案例集合画像。", ["PLS Profile", "Capability Breakdown", "Reference-aware Diagnosis", "Demo Profile"]],
+] as const;
+
+const demoProfile = [
+  ["Point", "5.00", "10"],
+  ["Line", "4.25", "8"],
+  ["Scene", "5.00", "4"],
+] as const;
+
 const regressionCases = [
   {
     id: "H2",
@@ -123,7 +143,7 @@ export default function PointLineSceneFrameworkPage() {
     <main className="t2a-page pls-page">
       <header className="t2a-topbar">
         <Link className="wordmark" href="/" aria-label="返回作品集首页"><span className="wordmark-mark" aria-hidden="true" /><span>DU MING / AUDIO</span></Link>
-        <nav aria-label="研究页导航"><Link href="/t2a-case-study">T2A</Link><Link href="/audio-visual-evaluation">音视频评测</Link><a href="#landscape">文献</a><a href="#case-study">案例</a><a href="#references">参考文献</a></nav>
+        <nav aria-label="研究页导航"><Link href="/t2a-case-study">T2A</Link><Link href="/audio-visual-evaluation">音视频评测</Link><a href="#landscape">文献</a><a href="#case-study">案例</a><a href="#execution">执行层</a><a href="#references">参考文献</a></nav>
       </header>
 
       <section className="pls-hero t2a-shell">
@@ -131,8 +151,8 @@ export default function PointLineSceneFrameworkPage() {
         <div className="pls-hero-copy">
           <p className="pls-kicker">Point–Line–Scene：</p>
           <h1>从细粒度音频评测研究<br />到多模态失败定位</h1>
-          <p>基于近期生成式音频与音视频评测研究，将事件、关系与场景层面的评价对象组织为分层诊断结构，并通过两轮 Audio-Visual Generation Evaluation 检查其中部分方法假设。</p>
-          <div className="pls-research-route" aria-label="研究路径"><span>文献综合</span><b>→</b><span>概念框架</span><b>→</b><span>音视频案例研究</span></div>
+          <p>基于近期生成式音频与音视频评测研究，将事件、关系与场景层面的评价对象组织为分层诊断结构，并进一步形成可运行的结构化评测流程。</p>
+          <div className="pls-research-route" aria-label="研究路径"><span>文献综合</span><b>→</b><span>概念框架</span><b>→</b><span>音视频案例研究</span><b>→</b><span>可执行评测</span></div>
           <div className="pls-hero-actions"><a className="btn btn-primary" href="#question">进入研究问题</a><Link className="paper-link" href="/point-line-scene-framework/report/">阅读完整报告</Link></div>
         </div>
       </section>
@@ -200,8 +220,102 @@ export default function PointLineSceneFrameworkPage() {
         </div>
       </section>
 
+      <section className="t2a-section t2a-shell pls-execution-section" id="execution">
+        <header className="t2a-section-heading pls-execution-heading">
+          <p>06 / EXECUTION LAYER</p>
+          <h2>从方法框架到可执行评测</h2>
+          <p>Point–Line–Scene 最初用于组织不同粒度的评测对象。结合 Audio-Visual Generation Evaluation 的真实案例后，我进一步整理了结构化评测记录，并实现轻量执行层（Execution Layer）：人工负责事实判断与能力评分，程序负责格式校验、维度聚合、诊断摘要与案例集合画像。</p>
+        </header>
+
+        <div className="pls-four-layer-model" aria-label="PLS方法的四层结构">
+          {executionLayers.map(([index, english, chinese, structure, purpose]) => (
+            <article key={english}>
+              <span>{index} / {english}</span>
+              <h3>{chinese}</h3>
+              <strong>{structure}</strong>
+              <p>{purpose}</p>
+            </article>
+          ))}
+        </div>
+
+        <div className="pls-execution-pipeline">
+          <div className="pls-execution-pipeline-intro">
+            <p className="eyebrow">执行流程 / EXECUTION PIPELINE</p>
+            <h3>专业判断由人完成，程序负责计算与整理</h3>
+            <p>这不是自动评分系统。程序不决定 1–5 分、不生成 Bad Case，也不自动改写 N/A、UNEVALUABLE 或跨轮结论。</p>
+          </div>
+          <ol>
+            {executionSteps.map(([index, english, chinese, body, tags]) => (
+              <li key={english}>
+                <span>{index}</span>
+                <small>{english}</small>
+                <h3>{chinese}</h3>
+                <p>{body}</p>
+                <div>{tags.map((tag) => <code key={tag}>{tag}</code>)}</div>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        <div className="pls-record-example">
+          <header>
+            <p className="eyebrow">真实记录 / EVALUATION RECORD</p>
+            <h3>P06：同一输出如何形成不同关系判断</h3>
+          </header>
+          <div className="pls-record-columns">
+            <article>
+              <span>01 / OBSERVABLE FACTS</span>
+              <dl className="pls-fact-list"><div><dt>Prompt</dt><dd>3 次</dd></div><div><dt>Visual</dt><dd>4 次</dd></div><div><dt>Audio</dt><dd>4 次</dd></div></dl>
+            </article>
+            <article>
+              <span>02 / CAPABILITY</span>
+              <dl className="pls-capability-list"><div><dt>P4 Event Counting</dt><dd>5</dd></div><div><dt>L1 Onset Alignment</dt><dd>3</dd></div></dl>
+              <code>audio_early</code>
+            </article>
+            <article>
+              <span>03 / DIAGNOSIS</span>
+              <dl className="pls-diagnosis-list"><div><dt>Instruction Fidelity</dt><dd className="is-fail">FAIL</dd></div><div><dt>Visual → Audio</dt><dd className="is-pass">PASS</dd></div><div><dt>Point / Line / OVL</dt><dd>5.00 / 4.00 / 4</dd></div></dl>
+            </article>
+          </div>
+          <p className="pls-record-takeaway">同一输出在不同参考关系下可以得到不同结论：Prompt→Visual 未满足数量约束，但 Visual→Audio 的事件计数保持一致，因此不归因为 Audio Counting Failure。</p>
+        </div>
+
+        <div className="pls-execution-case-grid">
+          <article className="pls-execution-case pls-quality-case">
+            <header><span>CASE 02 / RELATION ≠ QUALITY</span><h3>H2：关系正确，听觉质量仍可较低</h3></header>
+            <div className="pls-case-score-row"><div><small>POINT</small><strong>5.00</strong></div><div><small>LINE</small><strong>5.00</strong></div><div className="is-quality"><small>QUALITY</small><strong>3 / 5</strong></div></div>
+            <code>loudness_imbalance</code>
+            <p>事件完整性、起点对齐与时间顺序均成立，但音频仍存在响度失衡。关系正确性（Relational Correctness）与感知质量（Perceptual Quality）是两个独立评价轴。</p>
+          </article>
+
+          <article className="pls-execution-case pls-partial-case">
+            <header><span>CASE 03 / PARTIAL CAPABILITY</span><h3>H3：保留部分成立的能力状态</h3></header>
+            <dl><div><dt>P2 Source Correctness</dt><dd>5</dd></div><div><dt>L3 Duration / Overlap</dt><dd>5</dd></div><div className="is-focus"><dt>L4 Dynamic Correspondence</dt><dd>3</dd></div><div><dt>S1 Environment Match</dt><dd>5</dd></div></dl>
+            <div className="pls-motion-split"><p><span>Boundary Response</span><strong>Present</strong></p><p><span>Source-motion Tracking</span><strong>Insufficiently Continuous</strong></p></div>
+            <p>模型已经形成可感知的状态边界响应，但连续 source-motion 对应仍不足。1–5 分保留了这种 Mixed / Refined 状态，而不是压缩成简单 PASS / FAIL。</p>
+          </article>
+        </div>
+
+        <aside className="pls-confounded-case">
+          <div><span>补充案例 / CONFOUNDED EVIDENCE</span><h3>P10：Validity 与 Capability Judgment 分开记录</h3></div>
+          <p>L3=<code>audio_duration_short</code> 可以记录，但非预期 camera cut 影响对中断原因的解释，因此 Validity=<strong>PARTIAL</strong>。与此同时，P4 的 Visual→Audio exact-count 仍为 <strong>PASS</strong>。</p>
+        </aside>
+
+        <div className="pls-demo-profile">
+          <div>
+            <p className="eyebrow">执行演示画像 / EXECUTION DEMO PROFILE</p>
+            <h3>4 个迁移诊断案例中的适用能力评分汇总</h3>
+            <p>该汇总用于验证 Execution Layer 的聚合与展示流程，仅反映四个迁移诊断案例，不作为模型总体能力统计。</p>
+          </div>
+          <div className="pls-demo-profile-table" role="table" aria-label="四个迁移案例的执行演示画像">
+            <div role="row" className="is-header"><span role="columnheader">Layer</span><span role="columnheader">Mean</span><span role="columnheader">Valid n</span></div>
+            {demoProfile.map(([layer, mean, n]) => <div role="row" key={layer}><strong role="cell">{layer}</strong><span role="cell">{mean}</span><span role="cell">{n}</span></div>)}
+          </div>
+        </div>
+      </section>
+
       <section className="t2a-section t2a-shell" id="quality">
-        <header className="t2a-section-heading"><p>06 / PLS + QUALITY</p><h2>关系正确性与感知质量是独立评价轴</h2><p>R2-H2 与 R2-H4-A 显示，Line 层关系评分可以保持较高水平，同时 OVL 仍因响度失衡或伪影下降。因此诊断层评分与整体音频质量不应直接合成为单一结论。</p></header>
+        <header className="t2a-section-heading"><p>07 / PLS + QUALITY</p><h2>关系正确性与感知质量是独立评价轴</h2><p>R2-H2 与 R2-H4-A 显示，Line 层关系评分可以保持较高水平，同时 OVL 仍因响度失衡或伪影下降。因此诊断层评分与整体音频质量不应直接合成为单一结论。</p></header>
         <div className="pls-quality-grid"><article><span>R2-H2</span><div><strong>L1 = 5</strong><strong>OVL = 3</strong></div><code>loudness_imbalance</code></article><article><span>R2-H4-A</span><div><strong>L3 = 5 · L4 = 5</strong><strong>OVL = 3</strong></div><code>artifact_noise</code></article></div>
         <div className="pls-quality-answer"><div><span>Point / Line / Scene</span><h3>哪里出了问题？</h3></div><b>≠</b><div><span>Quality / OVL</span><h3>最终听起来怎么样？</h3></div></div>
         <p className="pls-project-boundary">Evidence status · Project-supported design observation</p>
@@ -209,7 +323,7 @@ export default function PointLineSceneFrameworkPage() {
 
       <section className="t2a-section pls-future-section" id="future">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>07 / FUTURE RESEARCH</p><h2>从诊断评测扩展到生产、奖励与 Judge 审计</h2><p>以下方向由邻近研究提出方法线索，当前项目尚未进行正式验证。</p></header>
+          <header className="t2a-section-heading"><p>08 / FUTURE RESEARCH</p><h2>从诊断评测扩展到生产、奖励与 Judge 审计</h2><p>以下方向由邻近研究提出方法线索，当前项目尚未进行正式验证。</p></header>
           <div className="pls-future-routes">
             <article><span>A · PRODUCTION UTILITY</span><h3>制作流程适用性</h3><p>Desbos et al. [7] 从 production requirements 出发讨论 editability、transient integrity、temporal / energy alignment 与工作流适用性。当前 AV 项目未正式测试这些指标。</p><a href="https://arxiv.org/abs/2607.09973" target="_blank" rel="noreferrer">[7] Production-Oriented SFX Evaluation ↗</a></article>
             <article><span>B · PREFERENCE / REWARD</span><h3>从细粒度 rubric 到奖励信号</h3><p>Fine-Grained Feedback [3] 用于 TTA preference optimization；AnyAudio-Judge [2] 面向 audio instruction alignment reward；AudioRubrics [8] 则在<strong>音频推理（Audio Reasoning）</strong>任务中展示 adaptive rubric 作为 RL reward 的可行性。它们为生成式音频的 rubric-to-reward 提供邻近证据，当前 PLS 项目尚未验证这一迁移。</p><div><a href="https://arxiv.org/abs/2607.13408" target="_blank" rel="noreferrer">[3] Fine-Grained Feedback ↗</a><a href="https://arxiv.org/abs/2606.03116" target="_blank" rel="noreferrer">[2] AnyAudio-Judge ↗</a><a href="https://arxiv.org/abs/2608.02831" target="_blank" rel="noreferrer">[8] AudioRubrics ↗</a></div></article>
@@ -222,7 +336,7 @@ export default function PointLineSceneFrameworkPage() {
 
       <section className="t2a-section t2a-section-tint" id="contribution">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>08 / RESEARCH OUTPUTS &amp; OPEN QUESTIONS</p><h2>当前研究产出与开放问题</h2></header>
+          <header className="t2a-section-heading"><p>09 / RESEARCH OUTPUTS &amp; OPEN QUESTIONS</p><h2>当前研究产出与开放问题</h2></header>
           <div className="pls-contribution-grid">{[
             ["01", "Literature Synthesis", "把 Event、Attribute、Temporal、Soundscape、Physics 与 Judge 等近期研究方向放进同一论证链。"],
             ["02", "Conceptual Framework", "用 Point → Line → Scene 组织不同粒度的 Failure Localization。"],
@@ -235,13 +349,13 @@ export default function PointLineSceneFrameworkPage() {
       </section>
 
       <section className="t2a-section t2a-shell" id="boundary">
-        <header className="t2a-section-heading"><p>09 / EVIDENCE BOUNDARY</p><h2>证据范围与研究限制</h2></header>
+        <header className="t2a-section-heading"><p>10 / EVIDENCE BOUNDARY</p><h2>证据范围与研究限制</h2></header>
         <div className="pls-boundary-grid"><article><strong>10 + 6</strong><h3>两轮单次生成</h3><p>Round-1 10 个、Round-2 6 个；没有 multi-seed statistical experiment，不做总体性能泛化。</p></article><article><strong>UNEVALUABLE</strong><h3>H1-A 排除</h3><p>关键 Visual Fact 不清晰，不进入 Exact-count evidence set。</p></article><article><strong>LIMITED</strong><h3>Scene 与评测者证据</h3><p>Scene 案例有限；项目由单评测员完成，未测试 inter-rater reliability。</p></article><article><strong>NOT TESTED</strong><h3>后续方向</h3><p>Production Utility、Preference / Reward 与 automatic Judge 均未正式测试。</p></article></div>
       </section>
 
       <section className="t2a-section t2a-section-tint" id="references">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>10 / REFERENCES</p><h2>参考文献</h2><p>以下条目链接至 arXiv 原始页面；文献结论与本文的方法综合已在正文分别标注。</p></header>
+          <header className="t2a-section-heading"><p>11 / REFERENCES</p><h2>参考文献</h2><p>以下条目链接至 arXiv 原始页面；文献结论与本文的方法综合已在正文分别标注。</p></header>
           <ol className="pls-reference-list">{references.map(([authors, title, href]) => <li key={href}><span>{authors}</span><a href={href} target="_blank" rel="noreferrer">{title}</a><small>arXiv ↗</small></li>)}</ol>
         </div>
       </section>
