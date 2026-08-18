@@ -136,6 +136,15 @@ test("PLS complete report presents the frozen research as a working paper", asyn
   assert.match(css, /\.paper-mobile-toc \{ display: none; \}/);
   assert.match(css, /\.paper-sheet section > h2 \{[^}]*border: 0/s);
   assert.match(css, /\.paper-sheet th \{[^}]*background: transparent/s);
+  assert.match(css, /--paper-sans: "Microsoft YaHei", "微软雅黑", "PingFang SC"/);
+  assert.match(css, /\.paper-sheet \{[^}]*font-family: var\(--paper-sans\)[^}]*font-size: 16px[^}]*font-weight: 400/s);
+  assert.match(css, /\.paper-sheet section > h2 > span \{[^}]*font-size: 26px[^}]*font-weight: 600/s);
+  assert.match(css, /\.paper-sheet h3 \{[^}]*font-size: 19px[^}]*font-weight: 600/s);
+  assert.match(css, /\.table-caption \{[^}]*text-align: center/s);
+  assert.doesNotMatch(css, /Noto Serif SC|Source Han Serif SC|Songti SC/);
+  assert.ok(html.indexOf("表 1. PLS 能力分类") > html.indexOf("capability-table"));
+  assert.ok(html.indexOf("表 2. 迁移诊断案例") > html.indexOf("Primary capability"));
+  assert.ok(html.indexOf("表 3. 执行层示例画像") > html.indexOf("profile-table"));
 });
 
 test("T2VA is an additive case study with frozen cross-round conclusions", async () => {

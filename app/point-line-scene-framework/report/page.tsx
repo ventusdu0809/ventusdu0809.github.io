@@ -111,7 +111,7 @@ export default function PointLineSceneReportPage() {
           </section>
           <section id="taxonomy-schema"><h2><span>4</span> 能力分类与评测结构 <small>CAPABILITY TAXONOMY · EVALUATION SCHEMA</small></h2>
             <h3>4.1 固定的 12 项 Capability</h3><p>能力分类由 P1–P4、L1–L4、S1–S4 组成。每条记录显式填写 12 项能力，适用项记为 SCORED，不适用项记为 N/A，视觉事实无法可靠判断时使用 UNEVALUABLE。</p>
-            <p className="table-caption">表 1. PLS 能力分类（Capability Taxonomy）。</p><TableWrap><table className="capability-table"><colgroup><col /><col /><col /></colgroup><thead><tr><th>ID</th><th>能力</th><th>核心评测问题</th></tr></thead><tbody>{capabilities.map(([id, name, question]) => <tr key={id}><td><code>{id}</code></td><td>{name}</td><td>{question}</td></tr>)}</tbody></table></TableWrap>
+            <TableWrap><table className="capability-table"><colgroup><col /><col /><col /></colgroup><thead><tr><th>ID</th><th>能力</th><th>核心评测问题</th></tr></thead><tbody>{capabilities.map(([id, name, question]) => <tr key={id}><td><code>{id}</code></td><td>{name}</td><td>{question}</td></tr>)}</tbody></table></TableWrap><p className="table-caption">表 1. PLS 能力分类（Capability Taxonomy）。</p>
             <h3>4.2 评分语言</h3><p>1–5 分锚点描述目标关系的满足程度：5 表示完整满足，3 保留“主要关系成立但存在明显问题”的诊断空间。N/A 表示能力不适用；UNEVALUABLE 表示所需证据不足。</p>
             <h3>4.3 PLS Evaluation Schema v1.0</h3><figure className="paper-figure"><div className="figure-flow"><b>Facts</b><i>→</i><b>Capability</b><i>→</i><b>Dimension Profile</b><i>→</i><b>Validity / Gate</b><i>→</i><b>OVL</b><i>→</i><b>Diagnosis</b></div><figcaption>图 2. PLS Evaluation Schema v1.0 数据流。</figcaption></figure>
             <p>维度画像（Dimension Profile）由适用能力自动派生，输出 Point mean+n、Line mean+n 与 Scene mean+n，不生成 PLS Total Score。有效性（Validity）使用 VALID、PARTIAL、CONFOUNDED、UNEVALUABLE；诊断门（Diagnostic Gate）记录 Primary Probe、Instruction Fidelity 与 Cross-modal Correspondence。能力项下的 <code>bad_cases</code> 是 Bad Case 的正式来源。</p>
@@ -134,9 +134,9 @@ export default function PointLineSceneReportPage() {
             <h3>7.4–7.5 诊断摘要与案例画像</h3><p>执行层输出人可读摘要、Capability Breakdown、参考链判断和案例集合画像。四个迁移诊断案例得到 Point=5.00（n=10）、Line=4.25（n=8）、Scene=5.00（n=4），用于检查 Schema 与 Execution Layer 的聚合和展示流程，不作为模型整体能力估计。</p>
           </section>
           <section id="results"><h2><span>8</span> 结果与诊断发现 <small>RESULTS</small></h2>
-            <p className="table-caption">表 2. 迁移诊断案例（Migrated Diagnostic Cases）。</p><TableWrap><table><thead><tr><th>Case</th><th>Primary capability</th><th>结构化结果</th><th>诊断</th></tr></thead><tbody>{caseRows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></TableWrap>
+            <TableWrap><table><thead><tr><th>Case</th><th>Primary capability</th><th>结构化结果</th><th>诊断</th></tr></thead><tbody>{caseRows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></TableWrap><p className="table-caption">表 2. 迁移诊断案例（Migrated Diagnostic Cases）。</p>
             <div className="finding-list">{findings.map(([name, status, detail]) => <article key={name}><span>{name}</span><strong>{status}</strong><p>{detail}</p></article>)}</div>
-            <p className="table-caption">表 3. 执行层示例画像（Execution Demo Profile）。</p><TableWrap><table className="profile-table"><thead><tr><th>Dimension</th><th>Mean</th><th>Valid n</th></tr></thead><tbody><tr><td>Point</td><td>5.00</td><td>10</td></tr><tr><td>Line</td><td>4.25</td><td>8</td></tr><tr><td>Scene</td><td>5.00</td><td>4</td></tr></tbody></table></TableWrap>
+            <TableWrap><table className="profile-table"><thead><tr><th>Dimension</th><th>Mean</th><th>Valid n</th></tr></thead><tbody><tr><td>Point</td><td>5.00</td><td>10</td></tr><tr><td>Line</td><td>4.25</td><td>8</td></tr><tr><td>Scene</td><td>5.00</td><td>4</td></tr></tbody></table></TableWrap><p className="table-caption">表 3. 执行层示例画像（Execution Demo Profile）。</p>
           </section>
           <section id="discussion"><h2><span>9</span> 讨论 <small>DISCUSSION</small></h2>
             <h3>9.1 Diagnostic-first Aggregation</h3><p>PLS 聚合保留维度均值与有效 n，服务于定位。研究者可以从 Dimension Profile 回到具体 Capability、Facts 与 Bad Case，避免单一总分遮蔽局部失败。</p>
