@@ -159,8 +159,8 @@ export default function PointLineSceneFrameworkPage() {
 
       <section className="pls-positioning">
         <div className="t2a-shell pls-positioning-grid">
-          <div><p className="eyebrow">研究定位 / POSITIONING</p><h2>Conceptual Framework<br />+ Diagnostic Case Study</h2></div>
-          <div><p>Point–Line–Scene 是基于近期研究形成的方法综合；两轮 Audio-Visual Generation Evaluation 提供案例级经验依据，并进一步暴露了评价参照需要显式区分的问题。</p><strong>Conceptual Framework · Diagnostic Case Study · No Statistical Validation Claim</strong></div>
+          <div><p className="eyebrow">研究定位 / POSITIONING</p><h2>方法综合 · 诊断案例研究<br />· 可执行评测</h2></div>
+          <div><p>Point–Line–Scene 综合近期研究中的细粒度评价对象；两轮 Audio-Visual Generation Evaluation 提供案例级证据，并推动显式参考链与执行层的形成。</p><strong>Method Synthesis · Diagnostic Case Study · Executable Evaluation</strong></div>
         </div>
       </section>
 
@@ -170,7 +170,7 @@ export default function PointLineSceneFrameworkPage() {
         <div className="pls-gap">
           <div><span>RESEARCH GAP</span><p>在本文覆盖的代表性工作中，这些评价对象主要分散在不同 Benchmark、任务与协议中。本文进一步尝试将它们组织为统一的诊断层级。</p></div>
           <div><span>RESEARCH QUESTION</span><h3>这些细粒度评价对象能否被组织为一套支持失败定位的统一层级结构？</h3></div>
-          <strong>MY SYNTHESIS · Point → Line → Scene</strong>
+          <strong>方法综合 / SYNTHESIS · Point → Line → Scene</strong>
         </div>
       </section>
 
@@ -181,7 +181,7 @@ export default function PointLineSceneFrameworkPage() {
             <article key={item.index}>
               <div className="pls-landscape-label"><span>{item.index}</span><small>{item.theme}</small></div>
               <div className="pls-landscape-body"><h3>{item.title}</h3><div className="pls-citations">{item.papers.map(([name, href]) => <a key={name} href={href} target="_blank" rel="noreferrer">{name} ↗</a>)}</div><p>{item.evidence}</p>{"boundary" in item && <small className="pls-inline-boundary">边界：{item.boundary}</small>}</div>
-              <div className="pls-landscape-result"><span>MY SYNTHESIS</span><strong>{item.synthesis}</strong></div>
+              <div className="pls-landscape-result"><span>方法综合 / SYNTHESIS</span><strong>{item.synthesis}</strong></div>
             </article>
           ))}</div>
         </div>
@@ -190,9 +190,9 @@ export default function PointLineSceneFrameworkPage() {
       <section className="t2a-section t2a-shell" id="framework">
         <header className="t2a-section-heading"><p>03 / PLS SYNTHESIS</p><h2>把分散研究组织成失败定位结构</h2><p>PLS 的方法定位，是将分散的评价对象组织为统一的失败定位结构。</p></header>
         <div className="pls-synthesis-map">
-          <div className="pls-signal-column"><span>WHAT LITERATURE SAYS</span><p>Atomic Rubrics</p><p>Temporal / Interaction</p><p>Structured Soundscape</p><p>Acoustic Physics</p></div>
+          <div className="pls-signal-column"><span>文献观察 / LITERATURE</span><p>Atomic Rubrics</p><p>Temporal / Interaction</p><p>Structured Soundscape</p><p>Acoustic Physics</p></div>
           <div className="pls-map-arrows" aria-hidden="true"><i>→</i><i>→</i><i>→</i><i>→</i></div>
-          <div className="pls-output-column"><span>WHAT I SYNTHESIZE</span><strong>POINT</strong><strong>LINE</strong><strong>SCENE</strong><strong>Cross-layer Constraint</strong></div>
+          <div className="pls-output-column"><span>方法综合 / SYNTHESIS</span><strong>POINT</strong><strong>LINE</strong><strong>SCENE</strong><strong>Cross-layer Constraint</strong></div>
         </div>
         <div className="pls-layer-grid">{layers.map(([id, title, body], index) => <article key={id}><span>0{index + 1} / {id}</span><h3>{title}<small>{id}</small></h3><p>{body}</p></article>)}</div>
         <div className="pls-cross-axis"><span>跨层评价轴</span><strong>Physical Fidelity<br />Perceptual Fidelity</strong><p><b>Physical Fidelity</b> 由 AcoustiTrace 等物理诊断工作直接支持；<b>Perceptual Fidelity</b> 是本文更广的跨层感知评价抽象。Quality / OVL 独立呈现。</p></div>
@@ -203,12 +203,12 @@ export default function PointLineSceneFrameworkPage() {
           <header className="t2a-section-heading"><p>04 / AV CASE STUDY + FRAMEWORK REVISION</p><h2>案例研究：参考链如何改变错误归因</h2><p>P06、P10 与 R2-H1-B 跨两轮重复出现同一条可精确判定的诊断链。</p></header>
           <div className="pls-count-case"><div><span>Prompt</span><strong>3</strong><small>Instruction</small></div><i>→</i><div className="pls-count-fail"><span>Visual Fact</span><strong>4</strong><small>Text→Visual · Instruction Fidelity FAIL</small></div><i>→</i><div className="pls-count-pass"><span>Audio Event</span><strong>4</strong><small>Visual→Audio · Cross-modal Correspondence PASS</small></div></div>
           <div className="pls-attribution"><div><span>只看 Prompt→Audio</span><p><code>3 ≠ 4</code>，容易误判为 Audio Counting Failure。</p></div><div><span>加入 Visual Fact</span><p>先定位 Text→Visual，再判断 Visual→Audio，错误归因被修正。</p></div></div>
-          <div className="pls-case-conclusion"><strong>Repeated Diagnostic Pattern</strong><p>三个案例提高 Exact-count 的回归优先级；这里描述的是评价参考链，不推断模型内部生成顺序。</p><Link className="paper-link" href="/audio-visual-evaluation">查看完整两轮评测 →</Link></div>
+          <div className="pls-case-conclusion"><strong>Repeated Diagnostic Pattern</strong><p>三个案例提高 Exact-count 的回归优先级；结果用于描述评价参考链，不涉及模型内部生成顺序。</p><Link className="paper-link" href="/audio-visual-evaluation">查看完整两轮评测</Link></div>
           <div className="pls-revision-block" id="extension">
-            <header><p>PROJECT-DERIVED EXTENSION</p><h3>显式参考链诊断（Reference-aware Diagnosis）</h3><span>案例结果进一步暴露了初始框架中未明确处理的问题：正确性判断依赖哪一个 Reference？</span></header>
-            <div className="pls-version-shift"><article><span>INITIAL FORMULATION</span><h3>Point = Atomic Correctness</h3><p>判断单个事件或属性是否正确。</p></article><b>CASE OBSERVATION<br /><code>3→4→4</code></b><article><span>PROJECT-REFINED FORMULATION</span><h3>Point = Atomic Correctness<br />+ Explicit Reference</h3><p>先明确评价参照，再判断原子正确性。<small>PLS v2.x</small></p></article></div>
+            <header><p>案例驱动的方法扩展 / METHOD EXTENSION</p><h3>显式参考链诊断（Reference-aware Diagnosis）</h3><span>案例结果提出一个关键问题：正确性判断采用哪一层 Reference？</span></header>
+            <div className="pls-version-shift"><article><span>初始表达 / INITIAL</span><h3>Point = Atomic Correctness</h3><p>判断单个事件或属性是否正确。</p></article><b>案例观察 / CASE<br /><code>3→4→4</code></b><article><span>案例修订 / REFINED</span><h3>Point = Atomic Correctness<br />+ Explicit Reference</h3><p>先明确评价参照，再判断原子正确性。<small>PLS v2.x</small></p></article></div>
             <div className="pls-reference-chain"><div><span>原始指令</span><strong>Prompt</strong></div><b>→</b><div><span>指令保真</span><strong>Visual Fact</strong><small>Text→Visual</small></div><b>→</b><div><span>跨模态对应</span><strong>Audio Event</strong><small>Visual→Audio</small></div></div>
-            <p className="pls-method-label">Project-derived methodological extension · <strong>显式参考链诊断（Reference-aware Diagnosis）</strong></p>
+            <p className="pls-method-label">案例驱动的方法扩展 · <strong>显式参考链诊断（Reference-aware Diagnosis）</strong></p>
           </div>
         </div>
       </section>
@@ -242,7 +242,7 @@ export default function PointLineSceneFrameworkPage() {
           <div className="pls-execution-pipeline-intro">
             <p className="eyebrow">执行流程 / EXECUTION PIPELINE</p>
             <h3>专业判断由人完成，程序负责计算与整理</h3>
-            <p>这不是自动评分系统。程序不决定 1–5 分、不生成 Bad Case，也不自动改写 N/A、UNEVALUABLE 或跨轮结论。</p>
+            <p>人工评测负责事实判定、能力评分与 Bad Case 归因；执行层负责 Schema 校验、Dimension Profile 派生、轻量一致性检查与诊断摘要生成。程序不替代评测员的专业判断。</p>
           </div>
           <ol>
             {executionSteps.map(([index, english, chinese, body, tags]) => (
@@ -285,14 +285,15 @@ export default function PointLineSceneFrameworkPage() {
             <header><span>CASE 02 / RELATION ≠ QUALITY</span><h3>H2：关系正确，听觉质量仍可较低</h3></header>
             <div className="pls-case-score-row"><div><small>POINT</small><strong>5.00</strong></div><div><small>LINE</small><strong>5.00</strong></div><div className="is-quality"><small>QUALITY</small><strong>3 / 5</strong></div></div>
             <code>loudness_imbalance</code>
-            <p>事件完整性、起点对齐与时间顺序均成立，但音频仍存在响度失衡。关系正确性（Relational Correctness）与感知质量（Perceptual Quality）是两个独立评价轴。</p>
+            <p>事件完整性、起点对齐与时间顺序均成立，但音频仍存在响度失衡。关系正确性（Relational Correctness）与感知质量（Perceptual Quality）应作为独立评价轴记录。</p>
           </article>
 
           <article className="pls-execution-case pls-partial-case">
             <header><span>CASE 03 / PARTIAL CAPABILITY</span><h3>H3：保留部分成立的能力状态</h3></header>
             <dl><div><dt>P2 Source Correctness</dt><dd>5</dd></div><div><dt>L3 Duration / Overlap</dt><dd>5</dd></div><div className="is-focus"><dt>L4 Dynamic Correspondence</dt><dd>3</dd></div><div><dt>S1 Environment Match</dt><dd>5</dd></div></dl>
             <div className="pls-motion-split"><p><span>Boundary Response</span><strong>Present</strong></p><p><span>Source-motion Tracking</span><strong>Insufficiently Continuous</strong></p></div>
-            <p>模型已经形成可感知的状态边界响应，但连续 source-motion 对应仍不足。1–5 分保留了这种 Mixed / Refined 状态，而不是压缩成简单 PASS / FAIL。</p>
+            <code>static_audio_motion</code>
+            <p>状态边界变化已经产生可辨响应，但声音对连续 source motion 的细粒度跟随仍不足。1–5 分制保留了这种部分成立的能力状态。</p>
           </article>
         </div>
 
@@ -303,9 +304,9 @@ export default function PointLineSceneFrameworkPage() {
 
         <div className="pls-demo-profile">
           <div>
-            <p className="eyebrow">执行演示画像 / EXECUTION DEMO PROFILE</p>
-            <h3>4 个迁移诊断案例中的适用能力评分汇总</h3>
-            <p>该汇总用于验证 Execution Layer 的聚合与展示流程，仅反映四个迁移诊断案例，不作为模型总体能力统计。</p>
+            <p className="eyebrow">执行层示例画像 / EXECUTION DEMO PROFILE</p>
+            <h3>四个迁移诊断案例的适用能力评分汇总</h3>
+            <p>四个迁移诊断案例的适用能力评分汇总，用于检查 Evaluation Schema 与 Execution Layer 的聚合和展示流程。不作为模型整体能力估计。</p>
           </div>
           <div className="pls-demo-profile-table" role="table" aria-label="四个迁移案例的执行演示画像">
             <div role="row" className="is-header"><span role="columnheader">Layer</span><span role="columnheader">Mean</span><span role="columnheader">Valid n</span></div>
@@ -360,7 +361,7 @@ export default function PointLineSceneFrameworkPage() {
         </div>
       </section>
 
-      <aside className="pls-research-note t2a-shell"><div><p className="eyebrow">方法起点 / ORIGIN NOTE</p><h2>从声音世界的组织思考，到可检验的评测问题</h2></div><div><p>“点·线·面·境”记录了我从声音设计与游戏音频出发的早期概念探索，并作为 Point–Line–Scene 方法演进的起点保留。</p><Link className="paper-link" href="/audio-world-framework">阅读早期研究笔记 →</Link></div></aside>
+      <aside className="pls-research-note t2a-shell"><div><p className="eyebrow">方法起点 / ORIGIN NOTE</p><h2>从声音世界的组织思考，到可检验的评测问题</h2></div><div><p>“点·线·面·境”记录了我从声音设计与游戏音频出发的早期概念探索，并作为 Point–Line–Scene 方法演进的起点保留。</p><Link className="paper-link" href="/audio-world-framework">阅读早期研究笔记</Link></div></aside>
 
       <footer className="t2a-footer t2a-shell"><Link href="/">← 返回作品集</Link><Link href="/t2a-case-study">T2A 评测</Link><Link href="/audio-visual-evaluation">音视频生成评测</Link><Link href="/point-line-scene-framework/report/">完整报告</Link><span>© 2026 杜明</span></footer>
     </main>

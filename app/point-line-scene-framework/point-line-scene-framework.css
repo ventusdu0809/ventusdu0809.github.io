@@ -140,13 +140,10 @@
 
 .pls-four-layer-model { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--ink); border-left: 1px solid var(--ink); }
 .pls-four-layer-model article { min-height: 255px; display: flex; flex-direction: column; padding: 22px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); background: var(--white); }
-.pls-four-layer-model article:last-child { color: var(--white); background: var(--pls-green); }
 .pls-four-layer-model span { color: var(--pls-green); font-size: 9px; font-weight: 750; letter-spacing: .07em; line-height: 1.55; }
-.pls-four-layer-model article:last-child span { color: rgba(255, 255, 255, .72); }
 .pls-four-layer-model h3 { margin: 34px 0 8px; font-family: var(--serif); font-size: 23px; font-weight: 600; }
 .pls-four-layer-model strong { margin-top: auto; font-family: var(--serif); font-size: 17px; font-weight: 600; line-height: 1.55; }
 .pls-four-layer-model p { margin: 10px 0 0; color: var(--ink-soft); font-size: 12px; }
-.pls-four-layer-model article:last-child p { color: rgba(255, 255, 255, .76); }
 
 .pls-execution-pipeline { margin-top: clamp(58px, 7vw, 86px); }
 .pls-execution-pipeline-intro { display: grid; grid-template-columns: .8fr 1.2fr; gap: 16px 60px; margin-bottom: 26px; }
