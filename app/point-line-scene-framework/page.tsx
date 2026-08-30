@@ -2,12 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "../t2a-case-study/t2a-case-study.css";
 import "./point-line-scene-framework.css";
+import { evaluationSystemEvidence } from "../../src/data/evaluation-system-evidence";
 
 export const metadata: Metadata = {
   title: "Point–Line–Scene｜从方法框架到可执行评测",
   description:
-    "从近期生成式音频评测研究提炼 Point–Line–Scene，再以结构化 Evaluation Schema、轻量 Execution Layer 与真实音视频案例形成可执行的诊断评测流程。",
-  keywords: ["Point-Line-Scene", "生成式音频评测", "音视频生成评测", "Evaluation Schema", "Execution Layer", "Reference-aware Diagnosis"],
+    "Point–Line–Scene 生成式音频与音视频评测方法：连接 human-in-the-loop evaluation、signal diagnostics、structured evaluation schema、Execution Layer 与真实案例。",
+  keywords: ["Point-Line-Scene", "生成式音频评测", "音视频生成评测", "human-in-the-loop", "signal diagnostics", "structured evaluation", "Evaluation Schema", "Execution Layer", "Reference-aware Diagnosis"],
   alternates: { canonical: "/point-line-scene-framework" },
 };
 
@@ -143,7 +144,7 @@ export default function PointLineSceneFrameworkPage() {
     <main className="t2a-page pls-page">
       <header className="t2a-topbar">
         <Link className="wordmark" href="/" aria-label="返回作品集首页"><span className="wordmark-mark" aria-hidden="true" /><span>DU MING / AUDIO</span></Link>
-        <nav aria-label="研究页导航"><Link href="/t2a-case-study">T2A</Link><Link href="/audio-visual-evaluation">音视频评测</Link><a href="#landscape">文献</a><a href="#case-study">案例</a><a href="#execution">执行层</a><a href="#references">参考文献</a></nav>
+        <nav aria-label="研究页导航"><Link href="/t2a-case-study">T2A</Link><Link href="/audio-visual-evaluation">音视频评测</Link><a href="#landscape">文献</a><a href="#case-study">案例</a><a href="#execution">执行层</a><a href="#evaluation-system">系统</a><a href="#references">参考文献</a></nav>
       </header>
 
       <section className="pls-hero t2a-shell">
@@ -315,6 +316,66 @@ export default function PointLineSceneFrameworkPage() {
         </div>
       </section>
 
+      <section className="t2a-section t2a-section-tint pls-system-section" id="evaluation-system">
+        <div className="t2a-shell">
+          <header className="t2a-section-heading">
+            <p>06B / EVALUATION SYSTEM</p>
+            <h2>Human-in-the-loop Evaluation System</h2>
+            <p>将人工评测、自动声学测量和结构化执行连接为统一工作流。它是 T2A、AV、PLS 与 Execution Layer 的系统视图，不新增 Capability Taxonomy。</p>
+          </header>
+
+          <div className="pls-system-status" aria-label="Evaluation System implementation status">
+            {evaluationSystemEvidence.systemStatuses.map((item) => <article key={item.label}><span>{item.status}</span><strong>{item.label}</strong></article>)}
+          </div>
+
+          <figure className="pls-system-figure">
+            <div className="pls-system-prefix">
+              {['Requirement', 'Capability Taxonomy', 'Evaluation Set'].map((item, index) => <div key={item}>{index > 0 && <i>↓</i>}<strong>{item}</strong></div>)}
+            </div>
+            <div className="pls-system-branches">
+              <article>
+                <span>HUMAN EVALUATION</span>
+                <h3>关系与质量判断</h3>
+                <ul><li>Point</li><li>Line</li><li>Scene</li><li>Independent OVL</li></ul>
+              </article>
+              <b aria-hidden="true">+</b>
+              <article>
+                <span>SIGNAL DIAGNOSTICS</span>
+                <h3>输出信号证据</h3>
+                <ul><li>Technical</li><li>Spectral</li><li>Spatial</li><li>Dynamics</li></ul>
+              </article>
+            </div>
+            <div className="pls-system-converge">
+              {['Evidence / Evaluation Record', 'Evaluation Schema', 'Execution Layer', 'Dataset Analytics', 'Diagnosis / Regression'].map((item, index) => <div key={item}>{index > 0 && <i>↓</i>}<strong>{item}</strong></div>)}
+            </div>
+            <figcaption>Figure 4. Human Judgment × Signal Diagnostics × Structured Execution.</figcaption>
+          </figure>
+
+          <div className="pls-system-responsibility-grid">
+            <article><span>WHY SIGNAL EVIDENCE</span><h3>为人工观察增加可复核的信号证据</h3><p>人工听感能够发现问题；确定性测量可进一步检查 clipping、频谱分布、声道关系、响度与动态形态。</p></article>
+            <article><span>WHAT REMAINS HUMAN</span><h3>Capability 与 OVL 仍由评测员完成</h3><p>Event correctness、Material interpretation、Temporal relation、Scene plausibility 与 OVL 不由单一信号指标自动决定。</p></article>
+          </div>
+
+          <div className="pls-signal-groups">
+            {evaluationSystemEvidence.signalGroups.map((group) => <article key={group.id}><span>{group.id}</span><ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}
+          </div>
+
+          <div className="pls-signal-evidence-block">
+            <header><p className="eyebrow">BATCH ANALYSIS / SIGNAL EVIDENCE</p><h3>{evaluationSystemEvidence.acousticBatch.label}</h3><p>Generated N={evaluationSystemEvidence.acousticBatch.n} · Source: {evaluationSystemEvidence.acousticBatch.source}</p></header>
+            <div>{evaluationSystemEvidence.acousticBatch.metrics.map((metric) => <article key={metric.id}><span>{metric.statistic}</span><strong>{metric.value}{metric.unit ? ` ${metric.unit}` : ''}</strong><p>{metric.label}</p></article>)}</div>
+          </div>
+
+          <div className="pls-fusion-block">
+            <header><p className="eyebrow">EVIDENCE FUSION / METHOD INTEGRATION</p><h3>Human Note + Signal Evidence → Diagnosis</h3><p>以下为方法整合示例，不是自动评分规则。</p></header>
+            <div className="pls-fusion-grid">
+              {evaluationSystemEvidence.fusionExamples.map((item) => <article key={item.title}><span>{item.status}</span><h3>{item.title}</h3><dl><div><dt>Human Observation</dt><dd>{item.human}</dd></div><div><dt>Signal Evidence</dt><dd>{item.signal}</dd></div><div><dt>Interpretation</dt><dd>{item.interpretation}</dd></div><div><dt>Boundary</dt><dd>{item.boundary}</dd></div></dl></article>)}
+            </div>
+          </div>
+
+          <aside className="pls-system-boundary">{evaluationSystemEvidence.publicBoundary}</aside>
+        </div>
+      </section>
+
       <section className="t2a-section t2a-shell" id="quality">
         <header className="t2a-section-heading"><p>07 / PLS + QUALITY</p><h2>关系正确性与感知质量是独立评价轴</h2><p>R2-H2 与 R2-H4-A 显示，Line 层关系评分可以保持较高水平，同时 OVL 仍因响度失衡或伪影下降。因此诊断层评分与整体音频质量不应直接合成为单一结论。</p></header>
         <div className="pls-quality-grid"><article><span>R2-H2</span><div><strong>L1 = 5</strong><strong>OVL = 3</strong></div><code>loudness_imbalance</code></article><article><span>R2-H4-A</span><div><strong>L3 = 5 · L4 = 5</strong><strong>OVL = 3</strong></div><code>artifact_noise</code></article></div>
@@ -322,9 +383,23 @@ export default function PointLineSceneFrameworkPage() {
         <p className="pls-project-boundary">Evidence status · Project-supported design observation</p>
       </section>
 
+      <section className="t2a-section t2a-section-tint pls-operational-section" id="operationalization">
+        <div className="t2a-shell">
+          <header className="t2a-section-heading"><p>07B / OPERATIONALIZATION</p><h2>Evaluation Standard Lifecycle</h2><p>将 Capability、Rubric、评测执行、QA Feedback 与 Regression 连接为可修订的标准生命周期。</p></header>
+          <div className="pls-lifecycle" aria-label="Evaluation Standard Lifecycle">
+            {evaluationSystemEvidence.lifecycle.map((item, index) => <div key={item}>{index > 0 && <i>→</i>}<strong>{item}</strong></div>)}
+          </div>
+          <div className="pls-operational-evidence">
+            <article><span>EXECUTED / 项目中已实践</span><ul>{evaluationSystemEvidence.lifecycleEvidence.executed.map((item) => <li key={item}>{item}</li>)}</ul></article>
+            <article><span>FUTURE EXTENSION / SCALE-OUT DESIGN</span><ul>{evaluationSystemEvidence.lifecycleEvidence.future.map((item) => <li key={item}>{item}</li>)}</ul></article>
+          </div>
+          <p className="pls-operational-note">在个人项目中，Capability 定义、Rubric、Blind Evaluation、Hidden Repeat 与 Controlled Regression 已形成闭环；多人 Calibration 与 QA 保留为规模化执行方案。</p>
+        </div>
+      </section>
+
       <section className="t2a-section pls-future-section" id="future">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>08 / FUTURE RESEARCH</p><h2>从诊断评测扩展到生产、奖励与 Judge 审计</h2><p>以下方向由邻近研究提出方法线索，当前项目尚未进行正式验证。</p></header>
+          <header className="t2a-section-heading"><p>08 / FUTURE RESEARCH</p><h2>从诊断评测扩展到生产、奖励与 Judge 审计</h2><p>以下方向由邻近研究提出方法线索，当前项目尚未进行正式验证。Corpus-level distribution metrics 也保留为后续扩展方向。</p></header>
           <div className="pls-future-routes">
             <article><span>A · PRODUCTION UTILITY</span><h3>制作流程适用性</h3><p>Desbos et al. [7] 从 production requirements 出发讨论 editability、transient integrity、temporal / energy alignment 与工作流适用性。当前 AV 项目未正式测试这些指标。</p><a href="https://arxiv.org/abs/2607.09973" target="_blank" rel="noreferrer">[7] Production-Oriented SFX Evaluation ↗</a></article>
             <article><span>B · PREFERENCE / REWARD</span><h3>从细粒度 rubric 到奖励信号</h3><p>Fine-Grained Feedback [3] 用于 TTA preference optimization；AnyAudio-Judge [2] 面向 audio instruction alignment reward；AudioRubrics [8] 则在<strong>音频推理（Audio Reasoning）</strong>任务中展示 adaptive rubric 作为 RL reward 的可行性。它们为生成式音频的 rubric-to-reward 提供邻近证据，当前 PLS 项目尚未验证这一迁移。</p><div><a href="https://arxiv.org/abs/2607.13408" target="_blank" rel="noreferrer">[3] Fine-Grained Feedback ↗</a><a href="https://arxiv.org/abs/2606.03116" target="_blank" rel="noreferrer">[2] AnyAudio-Judge ↗</a><a href="https://arxiv.org/abs/2608.02831" target="_blank" rel="noreferrer">[8] AudioRubrics ↗</a></div></article>

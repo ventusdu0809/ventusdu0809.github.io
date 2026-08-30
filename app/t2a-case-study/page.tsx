@@ -152,7 +152,7 @@ export default function T2AEvaluationProgramPage() {
         </details>
         <details className="t2a-collapsible">
           <summary>客观指标与方法边界</summary>
-          <div><p>文件、频率、空间、能量与感知五层分别用于检查解码、频谱、声道、响度和人工听评风险。客观指标只用于定位与复听，不替代人工语义裁决。</p><p>CLAP仅作前5秒工作流的边界检查，未显示与人工评分的有效单调关系。完整七类FAD/JS保持NOT RUN。</p></div>
+          <div><p>早期 Acoustic Diagnostics（声学诊断）从文件、频谱、空间与能量等角度检查解码、声道和响度风险。客观指标只用于定位与复听，不替代人工语义裁决。</p><p>CLAP仅作前5秒工作流的边界检查，未显示与人工评分的有效单调关系。完整七类FAD/JS保持NOT RUN。</p><p><Link href="/point-line-scene-framework#evaluation-system">查看自动声学诊断如何补充主观听评 →</Link></p></div>
         </details>
         <details className="t2a-collapsible">
           <summary>版本与审计记录</summary>

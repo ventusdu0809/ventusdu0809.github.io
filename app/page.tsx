@@ -1,4 +1,5 @@
 import { siteCopy } from "../src/data/siteCopy";
+import { evaluationSystemEvidence } from "../src/data/evaluation-system-evidence";
 
 export default function Home() {
   const { heroCopy, coreNarratives, projectSummary, supportingPractices, auditTrustLine } = siteCopy;
@@ -133,6 +134,40 @@ export default function Home() {
           <div className="pls-home-note">
             <p><strong>方法路径：</strong>Literature → Synthesis → Case Study → Execution。专业判断由评测员完成，程序负责校验、聚合与整理。</p>
             <a className="btn btn-primary" href="/point-line-scene-framework">阅读研究方法</a>
+          </div>
+        </div>
+      </section>
+
+      <section className="content-section content-section--paper evaluation-system-home" id="evaluation-system" aria-labelledby="evaluation-system-title">
+        <div className="section-shell">
+          <header className="section-heading evaluation-system-heading">
+            <p className="eyebrow">方法整合 / EVALUATION SYSTEM</p>
+            <h2 id="evaluation-system-title">Human Judgment × Signal Diagnostics × Structured Execution</h2>
+            <p className="section-lead">将人工细粒度评测、自动声学测量与结构化执行流程连接起来，从听感判断走向可定位、可复查的诊断证据。</p>
+          </header>
+
+          <div className="evaluation-system-home-grid">
+            {evaluationSystemEvidence.homeColumns.map((column) => (
+              <article key={column.title}>
+                <span>{column.status}</span>
+                <h3>{column.title}</h3>
+                <ul>{column.items.map((item) => <li key={item}>{item}</li>)}</ul>
+              </article>
+            ))}
+          </div>
+
+          <div className="evaluation-system-home-actions">
+            <p><strong>从听感判断到诊断证据。</strong> Evaluation System 是既有 T2A、AV、PLS 与 Execution Layer 的系统视图，不是新的独立理论。</p>
+            <div><a className="btn btn-primary" href="/point-line-scene-framework#evaluation-system">查看评测方法</a><a className="paper-link" href="/audio-visual-evaluation">查看案例研究 →</a></div>
+          </div>
+
+          <div className="research-evolution" aria-label="Research Evolution">
+            <header><span>RESEARCH EVOLUTION</span><h3>从主观听评到结构化诊断</h3></header>
+            <ol>
+              {evaluationSystemEvidence.researchEvolution.map(([title, body]) => (
+                <li key={title}><strong>{title}</strong><p>{body}</p></li>
+              ))}
+            </ol>
           </div>
         </div>
       </section>

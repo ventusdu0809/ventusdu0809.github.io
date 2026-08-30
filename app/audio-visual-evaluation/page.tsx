@@ -134,7 +134,7 @@ export default function AudioVisualEvaluationPage() {
             ["06", "Bad Case → 回归", "把发现转成可检验的后续条件。"],
           ].map(([index, title, body]) => <article key={index}><span>{index}</span><h3>{title}</h3><p>{body}</p></article>)}
         </div>
-        <div className="av-method-note"><strong>关键诊断原则</strong><div><p>Prompt→Visual 与 Visual→Audio 分开判断。只有视觉事件数与音频事件数不一致时，才将其归为 Audio Event Counting Failure。</p><Link href="/point-line-scene-framework">查看 PLS Research Narrative →</Link></div></div>
+        <div className="av-method-note"><strong>关键诊断原则</strong><div><p>Prompt→Visual 与 Visual→Audio 分开判断。只有视觉事件数与音频事件数不一致时，才将其归为 Audio Event Counting Failure。PLS 负责关系诊断；Signal Diagnostics（信号诊断）作为音频输出的补充证据层。</p><Link href="/point-line-scene-framework#evaluation-system">查看完整 Evaluation System →</Link></div></div>
       </section>
 
       <section className="t2a-section t2a-section-tint" id="rounds">

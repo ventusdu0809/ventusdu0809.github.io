@@ -188,6 +188,53 @@ h3 {
 .audit-project-list article .audit-status { margin: 28px 0 8px; }
 .audit-project-list article > p:not(.audit-status) { margin: 0 0 14px; }
 
+/* Evaluation System: a light research-method module, not a new product hero. */
+.evaluation-system-home { border-top: 1px solid var(--color-border); }
+.evaluation-system-heading h2 { max-width: 850px; }
+.evaluation-system-home-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--color-text);
+  border-left: 1px solid var(--color-text);
+}
+.evaluation-system-home-grid article {
+  min-height: 270px;
+  padding: 25px;
+  border-right: 1px solid var(--color-text);
+  border-bottom: 1px solid var(--color-text);
+  background: var(--color-paper);
+}
+.evaluation-system-home-grid article > span {
+  color: var(--color-primary);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.evaluation-system-home-grid h3 { margin: 46px 0 18px; font-size: 25px; font-weight: 600; }
+.evaluation-system-home-grid ul { margin: 0; padding: 0; list-style: none; }
+.evaluation-system-home-grid li { padding: 7px 0; border-top: 1px solid var(--color-border); color: var(--color-text-secondary); font-size: 12px; }
+.evaluation-system-home-actions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 30px;
+  align-items: center;
+  padding: 24px 0 52px;
+  border-bottom: 1px solid var(--color-border);
+}
+.evaluation-system-home-actions p { max-width: 700px; margin: 0; color: var(--color-text-secondary); font-size: 13px; line-height: 1.8; }
+.evaluation-system-home-actions p strong { color: var(--color-text); }
+.evaluation-system-home-actions > div { display: flex; align-items: center; gap: 18px; }
+.research-evolution { display: grid; grid-template-columns: .7fr 1.3fr; gap: clamp(38px, 8vw, 110px); padding-top: 52px; }
+.research-evolution header > span { color: var(--color-primary); font-size: 10px; font-weight: 750; letter-spacing: .08em; }
+.research-evolution h3 { margin: 12px 0 0; font-size: 31px; line-height: 1.2; }
+.research-evolution ol { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--color-text); }
+.research-evolution li { position: relative; display: grid; grid-template-columns: 210px 1fr; gap: 22px; padding: 17px 0 17px 24px; border-bottom: 1px solid var(--color-border); }
+.research-evolution li::before { content: ""; position: absolute; left: 0; top: 24px; width: 7px; height: 7px; border-radius: 50%; background: var(--color-primary); }
+.research-evolution li:not(:last-child)::after { content: ""; position: absolute; left: 3px; top: 31px; bottom: -25px; width: 1px; background: var(--color-border); }
+.research-evolution strong { font-family: var(--serif); font-size: 16px; font-weight: 600; }
+.research-evolution p { margin: 0; color: var(--color-text-secondary); font-size: 12px; line-height: 1.75; }
+
 @media (max-width: 780px) {
   .recruiter-header { justify-content: space-between; }
   .recruiter-header nav { display: none; }
@@ -197,6 +244,12 @@ h3 {
   .recruiter-narratives, .recruiter-practice-grid { grid-template-columns: 1fr; }
   .recruiter-narrative { min-height: auto; }
   .recruiter-narrative h3, .recruiter-practice-grid h3 { margin-top: 30px; }
+  .evaluation-system-home-grid, .research-evolution { grid-template-columns: 1fr; }
+  .evaluation-system-home-grid article { min-height: auto; }
+  .evaluation-system-home-grid h3 { margin-top: 28px; }
+  .evaluation-system-home-actions { grid-template-columns: 1fr; align-items: start; }
+  .evaluation-system-home-actions > div { align-items: flex-start; flex-direction: column; }
+  .research-evolution li { grid-template-columns: 1fr; gap: 4px; }
 }
 
 .section-shell,

@@ -5,7 +5,7 @@ import "./report.css";
 
 export const metadata: Metadata = {
   title: "Point–Line–Scene｜生成式音频与音视频模型分层诊断评测框架｜杜明",
-  description: "Point–Line–Scene 完整研究报告：从细粒度音频评测、Capability Taxonomy 与 Evaluation Schema，到 Audio-Visual Generation 案例、Reference-aware Diagnosis、Controlled Regression 与 Execution Layer。",
+  description: "Point–Line–Scene 完整研究报告：从 Capability Taxonomy 与 Evaluation Schema，到 Human-in-the-loop Evaluation System、Signal Diagnostics、Controlled Regression 与 Execution Layer。",
   alternates: { canonical: "/point-line-scene-framework/report/" },
   openGraph: { title: "Point–Line–Scene｜生成式音频与音视频模型分层诊断评测框架", description: "从细粒度能力分解到显式参考链诊断与可执行评测。", type: "article", images: [] },
   twitter: { card: "summary", title: "Point–Line–Scene｜生成式音频与音视频模型分层诊断评测框架", description: "从细粒度能力分解到显式参考链诊断与可执行评测。", images: [] },
@@ -14,8 +14,9 @@ export const metadata: Metadata = {
 const toc = [
   ["introduction", "1. 引言"], ["related-work", "2. 相关工作"], ["method", "3. PLS 方法框架"],
   ["taxonomy-schema", "4. Taxonomy 与 Schema"], ["case-study", "5. 音视频案例研究"], ["reference-aware", "6. 显式参考链诊断"],
-  ["execution-layer", "7. Execution Layer v0.1"], ["results", "8. 结果与诊断发现"], ["discussion", "9. 讨论"],
-  ["limitations", "10. 研究范围与限制"], ["future-work", "11. 后续研究"], ["conclusion", "12. 结论"],
+  ["execution-layer", "7. Execution Layer v0.1"], ["evaluation-system", "8. Human-in-the-loop Evaluation System"],
+  ["results", "9. 结果与诊断发现"], ["discussion", "10. 讨论"],
+  ["limitations", "11. 研究范围与限制"], ["future-work", "12. 后续研究"], ["conclusion", "13. 结论"],
   ["references", "参考文献"], ["appendix-a", "附录 A · Taxonomy"], ["appendix-b", "附录 B · 记录"],
 ] as const;
 
@@ -88,7 +89,7 @@ export default function PointLineSceneReportPage() {
           </header>
           <section className="paper-abstract" aria-labelledby="abstract-title">
             <h2 id="abstract-title">摘要 <span>ABSTRACT</span></h2>
-            <p>生成式音频与音视频模型常以整体相似度或总体质量概括表现，但单一结果难以回答事件是否缺失、关系何处失配以及错误发生在哪一条跨模态链路。本文提出 Point–Line–Scene（PLS）分层诊断框架，将评价对象组织为原子正确性、关系正确性与整体场景一致性，并保留独立的感知质量轴。在此基础上，本文固定 P1–P4、L1–L4、S1–S4 共 12 项能力，建立 PLS Evaluation Schema v1.0，将可观察事实、能力评分、维度画像、有效性、诊断门与 OVL 连接为结构化记录。两轮 Audio-Visual Generation Evaluation 由 Round-1 问题发现进入 Round-2 受控回归，形成 Exact-count、Onset、Dynamic、Cross-shot 与 Audio Quality 的跨轮证据状态。P06、P10 与 R2-H1-B 的 3→4→4 模式进一步促成显式参考链诊断（Reference-aware Diagnosis），将 Prompt↔Visual 与 Visual↔Audio 分开判断。Execution Layer v0.1 已支持 Schema 校验、Dimension Profile 派生、轻量一致性检查与人可读诊断摘要。当前结果基于诊断性案例研究，尚不用于模型总体性能估计。</p>
+            <p>生成式音频与音视频模型常以整体相似度或总体质量概括表现，但单一结果难以回答事件是否缺失、关系何处失配以及错误发生在哪一条跨模态链路。本文提出 Point–Line–Scene（PLS）分层诊断框架，将评价对象组织为原子正确性、关系正确性与整体场景一致性，并保留独立的感知质量轴。在此基础上，本文固定 P1–P4、L1–L4、S1–S4 共 12 项能力，建立 PLS Evaluation Schema v1.0，将可观察事实、能力评分、维度画像、有效性、诊断门与 OVL 连接为结构化记录。两轮 Audio-Visual Generation Evaluation 由 Round-1 问题发现进入 Round-2 受控回归，形成 Exact-count、Onset、Dynamic、Cross-shot 与 Audio Quality 的跨轮证据状态。P06、P10 与 R2-H1-B 的 3→4→4 模式进一步促成显式参考链诊断（Reference-aware Diagnosis），将 Prompt↔Visual 与 Visual↔Audio 分开判断。Execution Layer v0.1 已支持 Schema 校验、Dimension Profile 派生、轻量一致性检查与人可读诊断摘要；Human-in-the-loop Evaluation System 将人工关系判断与辅助信号证据并行组织。当前结果基于诊断性案例研究，尚不用于模型总体性能估计。</p>
             <p className="paper-keywords"><strong>关键词：</strong>生成式音频评测；音视频生成；细粒度评测；失败定位；显式参考链诊断；受控回归</p>
           </section>
           <section id="introduction"><h2><span>1</span> 引言 <small>INTRODUCTION</small></h2>
@@ -133,20 +134,26 @@ export default function PointLineSceneReportPage() {
             <h3>7.1–7.3 Human-in-the-loop、校验与聚合</h3><p>完整记录进入 Draft 2020-12 Schema 校验，12 项 Capability 必须显式存在。聚合只计算 SCORED 项的平均值与有效样本数 n，并由能力分数派生 Dimension Profile。</p>
             <h3>7.4–7.5 诊断摘要与案例画像</h3><p>执行层输出人可读摘要、Capability Breakdown、参考链判断和案例集合画像。四个迁移诊断案例得到 Point=5.00（n=10）、Line=4.25（n=8）、Scene=5.00（n=4），用于检查 Schema 与 Execution Layer 的聚合和展示流程，不作为模型整体能力估计。</p>
           </section>
-          <section id="results"><h2><span>8</span> 结果与诊断发现 <small>RESULTS</small></h2>
+          <section id="evaluation-system"><h2><span>8</span> 人在回路的评测系统 <small>HUMAN-IN-THE-LOOP EVALUATION SYSTEM</small></h2>
+            <p>PLS 的执行对象不是单一分数，而是一条可复查的证据链。人工评测负责识别事实、判断关系与给出 Capability 评分；信号诊断（Signal Diagnostics）从文件、频谱、空间与能量四组测量中提供补充证据。两条分支在 Evaluation Record 汇合，再由 Schema、Execution Layer 与数据集级分析支持诊断和回归。</p>
+            <figure className="paper-figure"><div className="figure-system"><div className="figure-system-input"><b>Requirement</b><i>→</i><b>Capability Taxonomy</b><i>→</i><b>Evaluation Set</b></div><div className="figure-system-branches"><div><small>Human Evaluation</small><strong>Facts · PLS · OVL · Bad Case</strong></div><span>+</span><div><small>Signal Diagnostics</small><strong>File · Spectrum · Spatial · Energy</strong></div></div><div className="figure-system-output"><b>Evidence / Evaluation Record</b><i>→</i><b>Schema &amp; Execution</b><i>→</i><b>Diagnosis &amp; Regression</b></div></div><figcaption>图 5. 人工判断与信号证据并行进入结构化评测记录。</figcaption></figure>
+            <p>信号级测量用于定位异常、选择复听样本和补充诊断证据，不替代 Capability Judgment。尤其是语义是否正确、声画关系是否成立、问题是否构成 Bad Case，仍需由评测员结合任务要求与可观察事实判断。</p>
+            <p>当前公开实现包括 PLS Schema、Execution Layer 与批量声学分析；Signal→PLS 记录连接属于 Integrated Concept，多评测员 QA 与更大规模相关性验证属于 Future Extension。正式 T2A 样本的 200 条批量声学分析为信号分支提供了已执行的数据来源，但本文不据此推导统一阈值或替代主观结论。</p>
+          </section>
+          <section id="results"><h2><span>9</span> 结果与诊断发现 <small>RESULTS</small></h2>
             <TableWrap><table><thead><tr><th>Case</th><th>Primary capability</th><th>结构化结果</th><th>诊断</th></tr></thead><tbody>{caseRows.map((row) => <tr key={row[0]}>{row.map((cell) => <td key={cell}>{cell}</td>)}</tr>)}</tbody></table></TableWrap><p className="table-caption">表 2. 迁移诊断案例（Migrated Diagnostic Cases）。</p>
             <div className="finding-list">{findings.map(([name, status, detail]) => <article key={name}><span>{name}</span><strong>{status}</strong><p>{detail}</p></article>)}</div>
             <TableWrap><table className="profile-table"><thead><tr><th>Dimension</th><th>Mean</th><th>Valid n</th></tr></thead><tbody><tr><td>Point</td><td>5.00</td><td>10</td></tr><tr><td>Line</td><td>4.25</td><td>8</td></tr><tr><td>Scene</td><td>5.00</td><td>4</td></tr></tbody></table></TableWrap><p className="table-caption">表 3. 执行层示例画像（Execution Demo Profile）。</p>
           </section>
-          <section id="discussion"><h2><span>9</span> 讨论 <small>DISCUSSION</small></h2>
+          <section id="discussion"><h2><span>10</span> 讨论 <small>DISCUSSION</small></h2>
             <h3>9.1 Diagnostic-first Aggregation</h3><p>PLS 聚合保留维度均值与有效 n，服务于定位。研究者可以从 Dimension Profile 回到具体 Capability、Facts 与 Bad Case，避免单一总分遮蔽局部失败。</p>
             <h3>9.2 Relation Correctness vs Perceptual Quality</h3><p>H2 的 Point=5.00、Line=5.00 与 OVL=3 表明，关系正确性（Relational Correctness）和感知质量（Perceptual Quality）需要独立记录。</p>
             <h3>9.3 Failure Localization 与模型回归</h3><p>Exact-count 的参考链拆分把研发优先级从“音频计数失败”修正为 Text→Visual 数量约束问题；Not Replicated 与 Mixed / Refined 则区分稳定回归项、条件性问题与待细化现象。</p>
             <h3>9.4 工业评测流程中的应用位置</h3><p>PLS 适合放在人工评测与研发回归之间：评测员给出证据和能力判断，执行层整理结构，研发团队按 Capability 与证据状态安排复现、修复和后续测试。</p>
           </section>
-          <section id="limitations"><h2><span>10</span> 研究范围与限制 <small>LIMITATIONS</small></h2><p>当前案例由 Round-1 的 10 个与 Round-2 的 6 个单次生成样本组成，属于小样本诊断性研究；H1-A 因关键视觉事实不清晰记为 UNEVALUABLE，不进入 Exact-count 证据集。Scene 层案例少于 Point 与 Line，项目由单评测员完成，尚未测试 inter-rater reliability。四条迁移记录与 Demo Profile 用于验证记录、聚合与展示流程，不支持模型总体性能估计。</p></section>
-          <section id="future-work"><h2><span>11</span> 后续研究 <small>FUTURE WORK</small></h2><p>下一阶段包括扩大 Scene 层与多评测员证据，比较 PLS 与 holistic-only 评价在失败定位上的差异；将制作可用性指标接入人类评测流程 <Cite>7</Cite>；探索细粒度 rubric 与 preference/reward 的连接 <Cite>2, 3, 10</Cite>。自动 Judge 若进入流程，还需用 Audio Removal / Mismatch、A/B Swap、Metadata Conflict 与 Rephrasing Stability 等 probe 检查证据依赖 <Cite>8, 9</Cite>。</p></section>
-          <section id="conclusion"><h2><span>12</span> 结论 <small>CONCLUSION</small></h2><p>本文将生成式音频与音视频评测中的细粒度对象组织为 Point–Line–Scene + Quality，并以固定的 12 项 Capability、Evaluation Schema v1.0 与 Execution Layer v0.1 形成从人工判断到结构化诊断的完整链路。两轮案例研究显示，显式参考链可以改变 Exact-count 的错误归因；跨轮状态可以区分重复模式、未复现、待细化问题与持续质量关注。PLS 的当前价值在于提供可复查的能力语言和研发回归入口。</p></section>
+          <section id="limitations"><h2><span>11</span> 研究范围与限制 <small>LIMITATIONS</small></h2><p>当前案例由 Round-1 的 10 个与 Round-2 的 6 个单次生成样本组成，属于小样本诊断性研究；H1-A 因关键视觉事实不清晰记为 UNEVALUABLE，不进入 Exact-count 证据集。Scene 层案例少于 Point 与 Line，项目由单评测员完成，尚未测试 inter-rater reliability。四条迁移记录与 Demo Profile 用于验证记录、聚合与展示流程，不支持模型总体性能估计。</p></section>
+          <section id="future-work"><h2><span>12</span> 后续研究 <small>FUTURE WORK</small></h2><p>下一阶段包括扩大 Scene 层与多评测员证据，比较 PLS 与 holistic-only 评价在失败定位上的差异；将制作可用性指标接入人类评测流程 <Cite>7</Cite>；探索细粒度 rubric 与 preference/reward 的连接 <Cite>2, 3, 10</Cite>。自动 Judge 若进入流程，还需用 Audio Removal / Mismatch、A/B Swap、Metadata Conflict 与 Rephrasing Stability 等 probe 检查证据依赖 <Cite>8, 9</Cite>。</p></section>
+          <section id="conclusion"><h2><span>13</span> 结论 <small>CONCLUSION</small></h2><p>本文将生成式音频与音视频评测中的细粒度对象组织为 Point–Line–Scene + Quality，并以固定的 12 项 Capability、Evaluation Schema v1.0 与 Execution Layer v0.1 形成从人工判断到结构化诊断的完整链路。两轮案例研究显示，显式参考链可以改变 Exact-count 的错误归因；跨轮状态可以区分重复模式、未复现、待细化问题与持续质量关注。人在回路的评测系统进一步把人工关系判断与辅助信号证据汇入同一记录。PLS 的当前价值在于提供可复查的能力语言和研发回归入口。</p></section>
           <section id="references" className="paper-references"><h2>参考文献 <small>REFERENCES</small></h2><ol>{references.map(([id, authors, title, venue, href]) => <li id={`ref-${id}`} key={id}>[{id}] {authors} <a href={href} target="_blank" rel="noreferrer">{title}</a>. {venue}.</li>)}</ol></section>
           <section id="appendix-a" className="paper-appendix"><h2>附录 A <small>CAPABILITY TAXONOMY</small></h2><p>以下为评测记录中的固定能力与典型 Bad Case。定义、核心问题和评分语言不随单个案例改变。</p><TableWrap><table><thead><tr><th>ID</th><th>中文名称（English）</th><th>典型 Bad Case / 记录</th></tr></thead><tbody>{capabilities.map(([id, name, , badCase]) => <tr key={id}><td><code>{id}</code></td><td>{name}</td><td><code>{badCase}</code></td></tr>)}</tbody></table></TableWrap></section>
           <section id="appendix-b" className="paper-appendix"><h2>附录 B <small>REPRESENTATIVE EVALUATION RECORDS</small></h2><div className="record-list">
