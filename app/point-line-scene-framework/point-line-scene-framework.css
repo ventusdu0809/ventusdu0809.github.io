@@ -333,6 +333,14 @@
 .pls-research-note h2 { max-width: 510px; margin: 10px 0 0; font-family: var(--serif); font-size: clamp(28px, 3.6vw, 44px); font-weight: 600; letter-spacing: -.045em; line-height: 1.14; }
 .pls-research-note > div:last-child p { margin: 0 0 20px; color: var(--ink-soft); font-size: 13px; line-height: 1.8; }
 
+.pls-landing-details { margin-top: 28px; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--line); }
+.pls-landing-details > summary { padding: 17px 4px; color: var(--pls-green); cursor: pointer; font-size: 13px; font-weight: 750; letter-spacing: .02em; list-style-position: inside; }
+.pls-landing-details[open] > summary { border-bottom: 1px solid var(--line); }
+.pls-landing-details > summary:hover { color: var(--ink); }
+.pls-landing-details > :not(summary) { margin-top: 26px; }
+.pls-execution-details { margin-top: 64px; }
+.pls-execution-details .pls-record-example { margin-top: 28px; }
+
 @media (max-width: 980px) {
   .pls-landscape article { grid-template-columns: 160px 1fr; }
   .pls-landscape-result { grid-column: 2; padding: 20px 0 0; border-left: 0; border-top: 1px solid var(--line); }

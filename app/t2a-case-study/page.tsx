@@ -22,7 +22,7 @@ const rubric = [
 const cases = [
   { id: "C01 / B0008", title: "正向参照", score: "OVL 5 · REL 5 · pass", note: "音频质量与核心事件要求均满足。", audio: "/audio/B0008.mp3" },
   { id: "C02 / B0152", title: "空间方向反向", score: "OVL 4 · REL 1 · keep_as_badcase", note: "Prompt要求左→右，人工听感为右→左。", audio: "/audio/B0152.mp3" },
-  { id: "C03 / B0099", title: "事件数量不符", score: "Primary Bad Case · wrong_count", note: "目标事件结构之外出现重复撞击。", audio: "/audio/B0099.mp3" },
+  { id: "C03 / B0099", title: "事件数量不符", score: "主要失败类型 · wrong_count", note: "目标事件结构之外出现重复撞击。", audio: "/audio/B0099.mp3" },
   { id: "C04 / B0092", title: "声源不符", score: "OVL 1 · REL 1 · needs_regeneration", note: "目标声源未能确认，输出主要呈现难以辨认的杂音。", audio: "/audio/B0092.mp3" },
 ] as const;
 
@@ -46,7 +46,7 @@ export default function T2AEvaluationProgramPage() {
 
       <section className="t2a-program-hero t2a-shell" id="overview">
         <div>
-          <p className="eyebrow">T2A EVALUATION CASE STUDY</p>
+          <p className="eyebrow">T2A 音效生成评测 / EVALUATION CASE STUDY</p>
           <h1>听起来好，<br />不等于生成正确</h1>
           <p className="t2a-program-subtitle">我如何从Stable Audio Open 1.0单模型PoC出发，完成SAO1与Stable Audio 3 Medium的受控音效评测。</p>
           <p className="t2a-lead">我把音频质量、Prompt符合度和具体错误分开记录。结果不只回答“平均分是多少”，也回答“模型在哪类要求上容易出错”。</p>
@@ -61,20 +61,20 @@ export default function T2AEvaluationProgramPage() {
       <section className="t2a-scale-strip" aria-label="项目规模">
         <div><strong>2</strong><span>评测阶段</span><small>PoC + 受控比较</small></div>
         <div><strong>600</strong><span>正式样本 · 累计</span><small>不是统一三臂实验</small></div>
-        <div><strong>400</strong><span>Phase 2正式比较</span><small>SAO1与SA3M</small></div>
-        <div><strong>40</strong><span>隐藏重复配对</span><small>单一评测人复测</small></div>
+        <div><strong>400</strong><span>第二阶段正式比较</span><small>SAO1 与 SA3M</small></div>
+        <div><strong>40 对</strong><span>第二阶段隐藏重复</span><small>40 条重复样本与原样本配对</small></div>
       </section>
 
       <section className="t2a-section t2a-shell" id="rubric">
         <header className="t2a-section-heading">
           <p>01 / SCORING</p>
           <h2>先判断声音质量，再判断内容是否正确</h2>
-          <p>OVL在不看Prompt时判断音频本身；REL在显示英文Prompt后判断声源、事件和结构是否符合要求。</p>
+          <p>整体质量（Overall Quality, OVL）在不看 Prompt 时判断音频本身；文本符合度（Relevance, REL）在显示英文 Prompt 后判断声源、事件和结构是否符合要求。</p>
         </header>
         <div className="t2a-question-grid">
           <article><span>OVL</span><h3>整体质量</h3><p>是否自然、完整、清晰，并具备实际使用价值。</p></article>
-          <article><span>REL</span><h3>语义符合度</h3><p>声源、属性、次数、时序和空间要求是否被满足。</p></article>
-          <article><span>BADCASE</span><h3>事件级诊断</h3><p>将声源、属性、数量、子事件和伪影分开记录。</p></article>
+          <article><span>REL</span><h3>文本符合度</h3><p>声源、属性、次数、时序和空间要求是否被满足。</p></article>
+          <article><span>BAD CASE</span><h3>失败类型</h3><p>将声源、属性、数量、子事件和伪影分开记录。</p></article>
         </div>
         <div className="table-wrap t2a-rubric-table">
           <table><thead><tr><th>分数</th><th>OVL：整体质量</th><th>REL：文本—音频符合度</th></tr></thead><tbody>
@@ -85,7 +85,7 @@ export default function T2AEvaluationProgramPage() {
 
       <section className="t2a-section t2a-section-tint" id="protocol">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>02 / LISTENING PROTOCOL</p><h2>先盲听，再阅读Prompt</h2><p>正式听评在安静室内完成。系统音量保持不变，但未进行标准化声压级校准。</p></header>
+          <header className="t2a-section-heading"><p>02 / 盲听流程 / LISTENING PROTOCOL</p><h2>先盲听，再阅读 Prompt</h2><p>正式听评在安静室内完成。系统音量保持不变，但未进行标准化声压级校准。</p></header>
           <ol className="t2a-protocol-steps">
             <li><span>01</span><div><strong>Blind ID</strong><p>隐藏模型与样本信息，避免先验判断影响评分。</p></div></li>
             <li><span>02</span><div><strong>先评OVL</strong><p>不看Prompt，可重复播放，只判断音频自身质量。</p></div></li>
@@ -98,23 +98,23 @@ export default function T2AEvaluationProgramPage() {
             <div><span>边界</span><strong>单一评测人</strong><p>隐藏重复用于检查同一评测人的复测稳定性，不代表多人一致性。</p></div>
           </div>
           <div className="t2a-role-grid">
-            <article><h3>本人完成</h3><p>五层框架、评分标准、200条 Phase 1 正式听评、复测、Bad Case 语义裁决与报告审核。</p></article>
-            <article><h3>AI辅助</h3><p>脚本执行、数据整理、统计实现和表格编排；所有正式评分、复测和最终裁决均由本人完成。</p></article>
+            <article><h3>本人完成</h3><p>评测维度、评分标准、两阶段共 600 条正式样本听评、隐藏重复复测、失败案例语义裁决与报告审核。</p></article>
+            <article><h3>AI 辅助</h3><p>脚本执行、数据整理、统计实现和表格编排；所有正式评分、复测和最终裁决均由本人完成。</p></article>
           </div>
         </div>
       </section>
 
       <section className="t2a-section t2a-shell" id="results">
-        <header className="t2a-section-heading"><p>03 / CONTROLLED COMPARISON</p><h2>当前测试集未观察到明确的总体优势方向</h2><p>{evaluation.phase2.conclusion}</p></header>
+        <header className="t2a-section-heading"><p>03 / 受控比较 / CONTROLLED COMPARISON</p><h2>当前测试集未观察到明确的总体优势方向</h2><p>{evaluation.phase2.conclusion}</p></header>
         <div className="t2a-model-grid">
           {phase2.models.map((model) => <article key={model.id}><span>{model.id}</span><h3>{model.name}</h3><dl><div><dt>OVL</dt><dd>{model.ovl.toFixed(3)}</dd></div><div><dt>REL</dt><dd>{model.rel.toFixed(3)}</dd></div><div><dt>正式样本</dt><dd>{model.formalN}</dd></div></dl></article>)}
         </div>
-        <p className="t2a-result-boundary">比较使用同一组40条Prompt的五次生成重复。结果只适用于当前测试集与该听评流程，不用于推断模型的内部机制。</p>
+        <p className="t2a-result-boundary">比较使用同一组 40 条 Prompt 的五次生成重复。结果只适用于当前测试集与该听评流程，不用于推断模型的内部机制。</p>
       </section>
 
       <section className="t2a-section t2a-section-tint" id="badcase">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>04 / BADCASE</p><h2>总体分数之外，还要看模型具体错在哪里</h2><p>以下观察描述当前输出行为，不归因于训练数据、模型结构或采样机制。</p></header>
+          <header className="t2a-section-heading"><p>04 / 失败类型 / BAD CASE</p><h2>总体分数之外，还要看模型具体错在哪里</h2><p>以下观察描述当前输出行为，不归因于训练数据、模型结构或采样机制。</p></header>
           <div className="t2a-badcase-summary">
             <article><span>声源错误</span><strong>SA3M 14.5% · SAO1 6.5%</strong><p>SA3M在当前样本中更常出现目标声源或属性不符。</p></article>
             <article><span>显式数量错误</span><strong>SA3M 42.5% · SAO1 60.0%</strong><p>仅在8条明确要求事件数量的Prompt中统计。</p></article>
@@ -125,12 +125,12 @@ export default function T2AEvaluationProgramPage() {
       </section>
 
       <section className="t2a-section t2a-shell" id="repeat">
-        <header className="t2a-section-heading"><p>05 / HIDDEN REPEATS</p><h2>隐藏重复检查同一评测人的复测稳定性</h2><p>20条隐藏重复不进入正式统计。Phase 2使用40对隐藏重复进行主分析。</p></header>
+        <header className="t2a-section-heading"><p>05 / 隐藏重复 / HIDDEN REPEAT</p><h2>隐藏重复检查同一评测人的复测稳定性</h2><p>第一阶段加入 20 条隐藏重复；第二阶段加入 40 条重复样本，与对应原样本构成 40 对并用于主分析。两阶段隐藏重复均不进入正式样本统计。</p></header>
         <div className="t2a-retest-grid">
-          <article><strong>{evaluation.repeats.ovl}</strong><span>OVL within-one</span></article>
-          <article><strong>{evaluation.repeats.rel}</strong><span>REL within-one</span></article>
+          <article><strong>{evaluation.repeats.ovl}</strong><span>OVL ±1 分复测一致率（within-1）</span></article>
+          <article><strong>{evaluation.repeats.rel}</strong><span>REL ±1 分复测一致率（within-1）</span></article>
           <article><strong>{evaluation.repeats.decision}</strong><span>人工决策一致</span></article>
-          <article><strong>{evaluation.repeats.primary}</strong><span>Primary Bad Case 一致</span></article>
+          <article><strong>{evaluation.repeats.primary}</strong><span>主要失败类型（Primary Bad Case）一致</span></article>
         </div>
         <p className="t2a-callout">{evaluation.repeats.detail}</p>
       </section>
@@ -148,7 +148,7 @@ export default function T2AEvaluationProgramPage() {
         <header className="t2a-section-heading"><p>SUPPORTING MATERIALS</p><h2 id="details-title">需要时再展开查看方法与版本材料</h2></header>
         <details className="t2a-collapsible">
           <summary>统计与结果复核</summary>
-          <div><p>主比较以40条Prompt为成对分析单位。Bootstrap、Wilcoxon、历史桥接和同一Prompt五次生成中的问题持续性，均作为补充复核材料。</p><p>持续性用于区分偶发输出与重复出现的问题：同一标签在五次生成中出现4–5次时，可优先纳入专项回归Prompt。</p></div>
+          <div><p>主比较以 40 条 Prompt 为成对分析单位。Bootstrap、Wilcoxon、历史桥接和同一 Prompt 五次生成中的问题持续性，均作为补充复核材料。</p><p>持续性用于区分偶发输出与重复出现的问题：同一标签在五次生成中出现 4–5 次时，可优先纳入专项回归 Prompt。</p></div>
         </details>
         <details className="t2a-collapsible">
           <summary>客观指标与方法边界</summary>

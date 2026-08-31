@@ -17,17 +17,17 @@ export const evaluationSystemEvidence = {
     ],
   },
   homeColumns: [
-    { title: "Human Evaluation", status: "Implemented" as PublicEvidenceStatus, items: ["Point", "Line", "Scene", "Independent OVL"] },
-    { title: "Signal Diagnostics", status: "Implemented" as PublicEvidenceStatus, items: ["Technical", "Spectral", "Spatial", "Dynamics"] },
-    { title: "Execution & Analytics", status: "Implemented" as PublicEvidenceStatus, items: ["Schema Validation", "Dimension Profile", "Diagnostic Summary", "Regression Evidence"] },
+    { title: "人工评测（Human Evaluation）", status: "Implemented" as PublicEvidenceStatus, items: ["点", "线", "面", "独立 OVL"] },
+    { title: "信号诊断（Signal Diagnostics）", status: "Implemented" as PublicEvidenceStatus, items: ["技术", "频谱", "空间", "动态"] },
+    { title: "执行与分析（Execution & Analytics）", status: "Implemented" as PublicEvidenceStatus, items: ["结构校验", "维度画像", "诊断摘要", "回归证据"] },
   ],
   researchEvolution: [
-    ["T2A Evaluation", "建立受控生成、Blinded Listening 与 Bad Case 分析基础。"],
-    ["Acoustic Diagnostics", "将确定性声学测量加入人工听感证据。"],
-    ["Audio-Visual Evaluation", "把评测对象扩展到跨模态事件与时间关系。"],
-    ["Point–Line–Scene", "以 Point、Line、Scene 组织细粒度诊断。"],
-    ["Reference-aware Diagnosis", "显式区分 Prompt→Visual 与 Visual→Audio 参考关系。"],
-    ["Execution Layer", "将记录、校验、聚合和诊断摘要结构化。"],
+    ["T2A 音效生成评测", "建立受控生成、盲听与失败案例分析基础。"],
+    ["声学诊断（Acoustic Diagnostics）", "将确定性声学测量加入人工听感证据。"],
+    ["音视频生成评测", "把评测对象扩展到跨模态事件与时间关系。"],
+    ["点—线—面（Point–Line–Scene）", "以点、线、面组织细粒度诊断。"],
+    ["显式参考链诊断", "显式区分文本 → 画面与画面 → 音频参考关系。"],
+    ["执行层（Execution Layer）", "将记录、校验、聚合和诊断摘要结构化。"],
   ],
   signalGroups: [
     { id: "Technical", items: ["Sample Rate", "Bit Depth", "DC Offset", "Clipping", "Boundary Integrity", "Silence / Abnormal Level"] },
@@ -36,11 +36,11 @@ export const evaluationSystemEvidence = {
     { id: "Dynamics", items: ["Integrated LUFS", "Crest Factor", "True Peak"] },
   ],
   systemStatuses: [
-    { label: "PLS Human Evaluation", status: "Implemented" as PublicEvidenceStatus },
-    { label: "Execution Layer v0.1", status: "Implemented" as PublicEvidenceStatus },
-    { label: "Signal Diagnostics batch analysis", status: "Implemented" as PublicEvidenceStatus },
-    { label: "Signal → PLS record connection", status: "Integrated Concept" as PublicEvidenceStatus },
-    { label: "Multi-evaluator QA", status: "Future Extension" as PublicEvidenceStatus },
+    { label: "PLS 人工评测", status: "Implemented" as PublicEvidenceStatus },
+    { label: "执行层 v0.1", status: "Implemented" as PublicEvidenceStatus },
+    { label: "信号诊断批量分析", status: "Implemented" as PublicEvidenceStatus },
+    { label: "信号证据 → PLS 记录连接", status: "Integrated Concept" as PublicEvidenceStatus },
+    { label: "多评测员 QA", status: "Future Extension" as PublicEvidenceStatus },
   ],
   fusionExamples: [
     {
@@ -66,6 +66,5 @@ export const evaluationSystemEvidence = {
     future: ["Multi-evaluator Calibration", "Gold Samples", "Sampling QA", "Adjudication"],
   },
   publicBoundary:
-    "Signal Diagnostics 提供输出信号层面的辅助证据；PLS Capability 与 OVL 仍由人工评测完成。当前系统用于诊断性评测与方法验证，不代表全自动模型质量判定系统。",
+    "信号诊断（Signal Diagnostics）提供输出信号层面的辅助证据；PLS 能力项与 OVL 仍由人工评测完成。当前系统用于诊断性评测与方法验证，不代表全自动模型质量判定系统。",
 } as const;
-

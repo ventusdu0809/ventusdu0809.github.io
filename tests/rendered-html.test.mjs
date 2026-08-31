@@ -24,22 +24,22 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "杜明", "AI音频 / 音视频生成评测",
-    "600", "T2A正式样本 · 两阶段累计",
-    "2 Rounds", "音视频诊断评测",
-    "3 Cases", "3→4→4重复诊断模式",
+    "杜明", "AI 音频 / 音视频生成评测",
+    "600", "T2A 正式样本 · 两阶段累计",
+    "2 轮", "音视频诊断评测",
+    "3 个案例", "重复出现 3→4→4 诊断模式",
     "把整体听感拆成独立诊断维度",
     "让主观评测可以复查",
-    "从 Bad Case 进入受控回归",
+    "从失败案例进入受控回归",
     "证据与版本 / EVIDENCE &amp; VERSIONING",
     "Cross-Round Analysis v1.0 · Frozen",
     "主项目 / PRIMARY CASE",
     "Audio-Visual Generation Evaluation",
     "3→4→4",
-    "Repeated Diagnostic Pattern",
-    "研究 / RESEARCH",
-    "文献观察", "方法综合", "案例研究", "可执行评测",
-    "Literature → Synthesis → Case Study → Execution",
+    "重复诊断模式（Repeated Diagnostic Pattern）",
+    "评测方法 / EVALUATION METHOD",
+    "点：事件是否正确", "线：关系是否成立", "面：整体是否可信", "执行：结果是否可复查",
+    "人工判断 × 信号诊断 × 结构化执行",
     "阅读研究方法",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
@@ -47,6 +47,8 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   assert.match(html, /href="\/audio-visual-evaluation"/);
   assert.match(html, /href="\/point-line-scene-framework"/);
   assert.ok(html.indexOf("主项目 / PRIMARY CASE") < html.indexOf("基础项目 / FOUNDATION CASE"));
+  assert.ok(html.indexOf("声音实践 / SOUND PRACTICE") < html.indexOf("评测方法 / EVALUATION METHOD"));
+  assert.doesNotMatch(html, /RESEARCH EVOLUTION/);
   assert.doesNotMatch(html, /href="\/audio-world-framework"[^>]*>场景框架/);
   assert.doesNotMatch(html, /项目不是框架的装饰|数量偏差首先发生|查看T2VA主项目/);
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
@@ -57,17 +59,17 @@ test("PLS research narrative connects literature, synthesis, case evidence and f
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "从细粒度音频评测研究", "到多模态失败定位",
-    "文献综合", "方法综合 · 诊断案例研究", "音视频案例研究",
-    "RESEARCH GAP", "支持失败定位", "方法综合 / SYNTHESIS · Point → Line → Scene",
+    "从整体分数", "到多模态失败定位",
+    "点—线—面（Point–Line–Scene）", "方法综合 · 诊断案例研究",
+    "研究观察 / RESEARCH GAP", "支持失败定位", "方法综合 / METHOD SYNTHESIS · 点 → 线 → 面",
     "AudioScape-TTA", "AnyAudio-Judge", "Fine-Grained Feedback / S3Bench", "MMAG",
     "AcoustiTrace", "AVGen-Bench", "Production-Oriented Framework", "AudioRubrics", "LALM Judge Audit",
     "文献观察 / LITERATURE", "方法综合 / SYNTHESIS", "Cross-layer Constraint",
-    "Prompt", "Visual Fact", "Audio Event", "Repeated Diagnostic Pattern",
+    "文本提示（Prompt）", "画面事实（Visual Fact）", "音频事件（Audio Event）", "重复诊断模式（Repeated Diagnostic Pattern）",
     "初始表达 / INITIAL", "PLS v2.x", "Reference-aware Diagnosis", "Explicit Reference",
     "audio_early", "Not Replicated", "Mixed / Refined", "Camera Cut Confound",
     "R2-H2", "loudness_imbalance", "R2-H4-A", "artifact_noise",
-    "Evaluation → Diagnosis → Controlled Regression", "Production Utility · Preference / Reward · Automatic Judge",
+    "评测 → 诊断 → 受控回归", "制作可用性 · 偏好 / 奖励 · 自动评测模型",
     "Audio Removal / Mismatch", "A/B Swap", "Metadata Conflict", "Rephrasing Stability",
     "Audio Reasoning", "Speech Evaluation", "Physical Fidelity", "Perceptual Fidelity",
     "CASE-MOTIVATED", "误归因率尚未测量", "Scene 与评测者证据",
@@ -89,8 +91,9 @@ test("PLS research narrative connects literature, synthesis, case evidence and f
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
   assert.doesNotMatch(html, /提出全新理论|证明 PLS 有效|首次发现|论文不是 Sources，而是 Argument|方法论第一次遇到真实问题|PRELIMINARY CASE SUPPORT|Provenance-aware Diagnosis|Reference-aware Evaluation/);
-  for (let index = 1; index <= 11; index += 1) assert.match(html, new RegExp(`${String(index).padStart(2, "0")} \/`));
-  assert.doesNotMatch(html, /12 \//);
+  assert.equal((html.match(/class="pls-landing-details/g) ?? []).length >= 7, true);
+  assert.doesNotMatch(html, /是作者的方法论扩展/);
+  assert.match(html, /它不是用于替代已有 Benchmark、Metric 或行业评测协议的独立理论/);
   const css = await readFile(new URL("../app/point-line-scene-framework/point-line-scene-framework.css", import.meta.url), "utf8");
   const globalCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.pls-hero-index \{[^}]*background: var\(--pls-green\)/s);
@@ -153,17 +156,17 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
   const html = await response.text();
   for (const text of [
     "Audio-Visual Generation Evaluation",
-    "从问题发现（Bad Case Discovery）", "Controlled Regression",
-    "3→4→4 不等于 Audio Counting Failure",
-    "Point → Line → Scene + Quality",
-    "Repeated Diagnostic Pattern", "Onset Alignment", "Not Replicated",
-    "Dynamic Correspondence", "Mixed / Refined",
-    "Cross-shot Persistence", "Persistent / Exploratory Concern",
+    "从失败案例发现（Bad Case Discovery）", "受控回归（Controlled Regression）",
+    "3→4→4 不等于音频计数失败（Audio Counting Failure）",
+    "点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）",
+    "重复诊断模式（Repeated Diagnostic Pattern）", "起点对齐（Onset Alignment）", "未复现（Not Replicated）",
+    "动态对应（Dynamic Correspondence）", "部分成立 / 需细化（Mixed / Refined）",
+    "跨镜头持续性（Cross-shot Persistence）", "持续 / 探索性关注（Persistent / Exploratory Concern）",
     "小样本诊断，不做统计泛化",
     "查看 T2A 评测案例",
-    "查看 PLS Research Narrative",
-    "R2-H1-B · Exact-count", "Text→Visual：FAIL", "Visual→Audio：PASS", "P4 Event Counting：5",
-    "R2-H3 · Dynamic Correspondence", "Source-motion：Partial Issue", "L4：3",
+    "查看 PLS 评测方法",
+    "R2-H1-B · Exact-count", "文本 → 画面：失败（FAIL）", "画面 → 音频：通过（PASS）", "P4 事件计数（Event Counting）：5 / 5",
+    "R2-H3 · 动态对应（Dynamic Correspondence）", "声源运动跟随（Source-motion Tracking）：部分问题", "L4 动态对应：3 / 5",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/point-line-scene-framework"/);
   assert.match(html, /src="\/video\/t2va\/R2-H1-B\.mp4"/);
@@ -187,7 +190,7 @@ test("case study keeps the essential evaluation story open and deep detail close
   for (const text of [
     "听起来好", "不等于生成正确",
     "先判断声音质量，再判断内容是否正确",
-    "先盲听，再阅读Prompt",
+    "先盲听，再阅读 Prompt",
     "当前测试集未观察到明确的总体优势方向",
     "总体分数之外，还要看模型具体错在哪里",
     "隐藏重复检查同一评测人的复测稳定性",
@@ -197,6 +200,8 @@ test("case study keeps the essential evaluation story open and deep detail close
     "aria-label=\"C01 / B0008 正向参照试听音频\"",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/<details class="t2a-collapsible">/g) ?? []).length, 3);
+  assert.match(html, /第一阶段加入 20 条隐藏重复；第二阶段加入 40 条重复样本，与对应原样本构成 40 对/);
+  assert.doesNotMatch(html, /within-one|within 1/);
   assert.doesNotMatch(html, /<details[^>]+open/);
   assert.doesNotMatch(html, /fixed seeds/);
   assert.doesNotMatch(html, /多模态评测/);
@@ -223,7 +228,7 @@ test("audio validation separates results, standards and review boundaries", asyn
     "仍需人工听审",
     "7,872", "1,922", "5,904",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(html, /代码实现与批量执行由AI辅助完成/);
+  assert.match(html, /代码实现与批量执行由 AI 辅助完成/);
   assert.match(html, /各项命中次数不能相加为不通过文件数/);
 });
 
@@ -252,14 +257,14 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   const html = await response.text();
   for (const text of [
     "杜明",
-    "AI音频数据评测 ｜ 音频模型主观评测",
-    "600个正式样本和660次试听评测",
-    "Text-to-Audio专项评测",
+    "AI 音频 / 音视频生成评测",
+    "600 个正式样本和 660 次试听评测",
+    "Text-to-Audio 专项评测",
     "SAO1 PoC 与 SAO1 v2 / SA3M 受控对比",
     "Audio-Visual Generation Evaluation",
     "Cross-Round Analysis v1.0",
-    "Point → Line → Scene + Quality",
-    "Repeated Diagnostic Pattern",
+    "点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）",
+    "重复诊断模式（Repeated Diagnostic Pattern）",
     "查看 PLS 研究方法",
     "The Explorer",
     "杭州千乎网络",
@@ -281,6 +286,7 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
   assert.doesNotMatch(html, /href="tel:/);
   assert.doesNotMatch(html, /五层评测框架/);
+  assert.match(html, /Accademia di Belle Arti di Brera/);
   assert.match(html, /<time[^>]*>2026\.08<\/time>/);
   const projectPoints = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
   assert.ok(projectPoints.length >= 2);
@@ -341,4 +347,3 @@ test("audio world framework page presents the four-layer method and keeps the tr
   assert.doesNotMatch(html, /面试演示|INTERVIEW MODE|STATE ANALOGY|一种关于世界状态的文化类比|《易经》|data-awf-interview|data-awf-hexagram/);
   assert.doesNotMatch(html, /用于模型训练/);
 });
-

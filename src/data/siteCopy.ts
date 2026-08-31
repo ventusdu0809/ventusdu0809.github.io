@@ -1,18 +1,19 @@
 import { auditRecordHref, currentReportHref, t2aRelease } from "../../app/data/t2aRelease";
 
 export const siteCopy = {
-  role: "AI音频与音视频生成评测",
+  role: "AI 音频与音视频生成评测",
   globalStatement:
     "从声音制作到 T2A 主观听评，再到音视频生成的两轮诊断性评测，我持续把听感与声画判断拆成可观察、可复查的问题，帮助定位失败发生在哪一层。",
   heroCopy: {
-    eyebrow: "AI AUDIO + AUDIO-VISUAL EVALUATION",
+    eyebrow: "AI 音频与音视频生成评测",
+    eyebrowEn: "AI AUDIO & AUDIO-VISUAL EVALUATION",
     title: "杜明",
-    subtitle: "AI音频 / 音视频生成评测",
-    body: "从 Text-to-Audio 主观听评到 Audio-Visual Generation 两轮诊断性评测，我将听感与声画判断转化为可复查证据，用于失败定位、回归验证与评测优先级判断。",
+    subtitle: "AI 音频 / 音视频生成评测",
+    body: "从文本生成音频（Text-to-Audio, T2A）的主观听评，到音视频生成（Audio-Visual Generation）的两轮诊断评测，我将专业听感与声画判断转化为可复查证据，用于定位失败、验证回归并确定下一步评测优先级。",
     metrics: [
-      { value: "600", label: "T2A正式样本 · 两阶段累计" },
-      { value: "2 Rounds", label: "音视频诊断评测" },
-      { value: "3 Cases", label: "3→4→4重复诊断模式" },
+      { value: "600", label: "T2A 正式样本 · 两阶段累计" },
+      { value: "2 轮", label: "音视频诊断评测" },
+      { value: "3 个案例", label: "重复出现 3→4→4 诊断模式" },
     ],
     support: "T2A规模化听评基础 · 音视频跨轮失败定位 · PLS评测方法",
     primaryCta: "查看音视频生成评测",
@@ -23,26 +24,26 @@ export const siteCopy = {
     {
       id: "diagnostic-dimensions",
       title: "把整体听感拆成独立诊断维度",
-      body: "按 Point → Line → Scene + Quality 分别检查单个事件、事件关系、整体场景与音频质量，避免一个总分掩盖失败发生的位置。",
-      tags: ["Point / Line / Scene", "Quality Gate", "Failure Localization"],
+      body: "按点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）分别检查单个事件、事件关系、整体场景与音频质量，避免一个总分掩盖失败发生的位置。",
+      tags: ["点 / 线 / 面", "质量门槛", "失败定位"],
       href: "/point-line-scene-framework",
       linkLabel: "查看PLS评测方法",
     },
     {
       id: "reviewable-evaluation",
       title: "让主观评测可以复查",
-      body: "我用 Blind ID 隐藏模型和样本信息，按统一的 1–5 分标准完成正式听评，并通过隐藏重复评估单评测员的复测一致性。",
-      note: "工作边界：正式评分、复测与 Bad Case 裁决由本人完成；AI 用于脚本辅助、数据整理与统计计算，最终结果由本人复核。",
-      tags: ["Blind Listening", "Hidden Repeat", "Evidence Note"],
+      body: "我用盲测编号（Blind ID）隐藏模型和样本信息，按统一的 1–5 分标准完成正式听评，并通过隐藏重复（Hidden Repeat）评估单评测员的复测一致性。",
+      note: "工作边界：正式评分、复测与失败案例（Bad Case）裁决由本人完成；AI 用于脚本辅助、数据整理与统计计算，最终结果由本人复核。",
+      tags: ["盲听", "隐藏重复", "证据说明"],
       href: "/t2a-case-study#protocol",
       linkLabel: "查看评测流程",
     },
     {
       id: "controlled-regression",
-      title: "从 Bad Case 进入受控回归",
-      body: "Round-1 用于发现问题；Round-2 在生成前冻结假设、观察字段和判定规则，再按 Repeated、Not Replicated 或 Mixed / Refined 调整研发与评测优先级。",
-      note: "Not Replicated 不否定原始单例观察，但会降低其作为稳定失效模式的证据强度，并调整后续回归优先级。",
-      tags: ["Discovery", "Controlled Regression", "Engineering Priority"],
+      title: "从失败案例进入受控回归",
+      body: "第一轮用于问题发现（Discovery）；第二轮在生成前冻结假设、观察字段和判定规则，再按重复、未复现或部分成立 / 需细化调整研发与评测优先级。",
+      note: "未复现（Not Replicated）不否定原始单例观察，但会降低其作为稳定失效模式的证据强度，并调整后续回归优先级。",
+      tags: ["问题发现", "受控回归", "研发优先级"],
       href: "/audio-visual-evaluation#rounds",
       linkLabel: "查看两轮诊断设计",
     },
@@ -50,9 +51,9 @@ export const siteCopy = {
   projectSummary: {
     title: "T2A 音效生成评测",
     body: "第一阶段用 Stable Audio Open 1.0 搭建测试集、评分标准和 Bad Case 规则；第二阶段重新生成 SAO1 基线，并与 Stable Audio 3 Medium 做了 400 条正式样本的受控比较。",
-    scales: ["2个阶段", "600条正式样本（累计）", "660次试听事件（累计）", "Phase 2 n=400"],
-    finding: "在当前40条Prompt测试集中，两模型的OVL与REL没有显示明确的总体优势方向；事件级错误可以用来选模型和设计下一轮专项复测。",
-    boundary: "600条与660次均为两阶段累计，不代表统一的三臂实验。正式模型比较只在Phase 2进行；项目由单一评测人完成，隐藏重复仅检查同一评测人的复测稳定性。",
+    scales: ["2 个阶段", "600 条正式样本（累计）", "660 次试听事件（累计）", "第二阶段 n=400"],
+    finding: "在当前 40 条 Prompt 测试集中，两模型的整体质量（Overall Quality, OVL）与文本符合度（Relevance, REL）没有显示明确的总体优势方向；事件级错误可以用来选模型和设计下一轮专项复测。",
+    boundary: "600 条正式样本与 660 次试听事件均为两阶段累计，不代表统一的三臂实验。正式模型比较只在第二阶段进行；项目由单一评测人完成，隐藏重复仅检查同一评测人的复测稳定性。",
     href: "/t2a-case-study",
     linkLabel: "查看完整案例",
   },
@@ -82,14 +83,14 @@ export const siteCopy = {
     linkLabel: "查看审计说明",
     items: [
       {
-        name: "T2A Evaluation",
+        name: "T2A 音效生成评测",
         status: `${t2aRelease.researchVersion} · audit ${t2aRelease.auditRevision} · ${t2aRelease.auditVerdict}`,
         body: "保留人工评分、Bad Case 裁决、隐藏重复复核与复算记录。",
         href: auditRecordHref,
         linkLabel: "查看T2A审计说明",
       },
       {
-        name: "Audio-Visual Evaluation",
+        name: "音视频生成诊断评测",
         status: "Cross-Round Analysis v1.0 · Frozen",
         body: "Round-1、Round-2 与跨轮结论分别冻结；案例证据不写成统计泛化。",
         href: "/audio-visual-evaluation#boundary",
@@ -105,7 +106,7 @@ export const siteCopy = {
   evaluation: {
     phase2: {
       models: t2aRelease.phase2.models,
-      conclusion: "在当前40条Prompt测试集中，未观察到明确的总体优势方向。置信区间跨越0不等于模型相等，只表示当前样本不足以支持明确的总体差异结论。",
+      conclusion: "在当前 40 条 Prompt 测试集中，未观察到明确的总体优势方向。置信区间跨越 0 不等于模型相等，只表示当前样本不足以支持明确的总体差异结论。",
     },
     repeats: {
       pairN: t2aRelease.repeatConsistency.pairN,

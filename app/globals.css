@@ -125,7 +125,7 @@ h3 {
 
 /* Recruiter-facing home page: keep the existing paper system, reduce report density. */
 .recruiter-header { gap: 24px; }
-.header-contact { padding: 7px 12px; border: 1px solid var(--color-text); font-size: 12px; font-weight: 700; }
+.header-contact { padding: 7px 12px; border: 1px solid var(--color-text); font-size: 12px; font-weight: 700; white-space: nowrap; }
 .recruiter-hero {
   position: relative;
   top: auto;
@@ -139,6 +139,9 @@ h3 {
   background: var(--color-paper);
 }
 .recruiter-hero-inner { max-width: 780px; }
+.recruiter-hero-eyebrow { display: grid; gap: 4px; }
+.recruiter-hero-eyebrow strong { color: var(--color-primary); font-size: 11px; letter-spacing: .08em; }
+.recruiter-hero-eyebrow small { color: var(--color-text-secondary); font-size: 9px; font-weight: 650; letter-spacing: .1em; }
 .recruiter-hero h1 { max-width: 800px; margin: 12px 0 22px; font-size: clamp(50px, 7.2vw, 92px); letter-spacing: -.065em; line-height: 1.02; }
 .recruiter-roleline { margin: -8px 0 22px; color: var(--color-primary); font-family: var(--serif); font-size: clamp(24px, 3.6vw, 43px); font-weight: 600; letter-spacing: -.035em; line-height: 1.2; }
 .recruiter-intro { max-width: 650px; margin-bottom: 28px; color: var(--color-text-secondary); font-size: clamp(17px, 2vw, 22px); line-height: 1.8; }
@@ -191,6 +194,7 @@ h3 {
 /* Evaluation System: a light research-method module, not a new product hero. */
 .evaluation-system-home { border-top: 1px solid var(--color-border); }
 .evaluation-system-heading h2 { max-width: 850px; }
+.section-subtitle-en { margin: -14px 0 22px; color: var(--color-text-secondary); font-family: var(--serif); font-size: clamp(16px, 2vw, 22px); line-height: 1.4; }
 .evaluation-system-home-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -237,7 +241,9 @@ h3 {
 
 @media (max-width: 780px) {
   .recruiter-header { justify-content: space-between; }
-  .recruiter-header nav { display: none; }
+  .recruiter-header nav { display: flex; margin-left: auto; gap: 12px; }
+  .recruiter-header nav a { font-size: 11px; }
+  .recruiter-header nav a:nth-child(2), .recruiter-header nav a:nth-child(3) { display: none; }
   .recruiter-hero { grid-template-columns: 1fr; min-height: auto; padding: 118px 32px 62px; }
   .recruiter-two-column, .recruiter-project-grid, .audit-trust-inner { grid-template-columns: 1fr; }
   .audit-project-list { grid-template-columns: 1fr; }
@@ -250,6 +256,13 @@ h3 {
   .evaluation-system-home-actions { grid-template-columns: 1fr; align-items: start; }
   .evaluation-system-home-actions > div { align-items: flex-start; flex-direction: column; }
   .research-evolution li { grid-template-columns: 1fr; gap: 4px; }
+}
+
+@media (max-width: 430px) {
+  .recruiter-header { gap: 10px; padding-inline: 16px; }
+  .recruiter-header .wordmark-text { display: none; }
+  .recruiter-header nav { gap: 10px; }
+  .recruiter-header .header-contact { padding-inline: 10px; }
 }
 
 .section-shell,
@@ -3522,6 +3535,36 @@ main {
 .pls-home-grid article { min-height: 250px; display: flex; flex-direction: column; justify-content: end; padding: 24px; border-right: 1px solid rgba(63, 95, 90, .42); border-bottom: 1px solid rgba(63, 95, 90, .42); background: color-mix(in srgb, var(--color-paper) 78%, transparent); }
 .pls-home-grid span { margin-bottom: auto; color: var(--color-primary); font-size: 10px; font-weight: 750; letter-spacing: .08em; }
 .pls-home-grid strong { font-family: var(--serif); font-size: 24px; font-weight: 600; }
+
+/* Keep the recruiter hero layout authoritative over the legacy generic hero rules below it. */
+.hero.recruiter-hero {
+  min-height: 72vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, .65fr);
+  align-items: end;
+  justify-content: stretch;
+  gap: clamp(36px, 8vw, 120px);
+  padding: clamp(98px, 13vw, 168px) max(32px, calc((100vw - var(--page-width)) / 2)) 66px;
+  text-align: left;
+  background: var(--color-paper);
+}
+.hero.recruiter-hero .recruiter-hero-inner { width: 100%; margin: 0; }
+.hero.recruiter-hero .hero-actions { justify-content: flex-start; }
+.hero.recruiter-hero .recruiter-hero-facts > div { grid-template-columns: 136px 1fr; }
+.hero.recruiter-hero .recruiter-hero-facts > div:nth-child(3) strong { font-size: 31px; }
+.hero.recruiter-hero::before { display: none; }
+
+@media (max-width: 780px) {
+  .hero.recruiter-hero { grid-template-columns: 1fr; align-items: start; gap: 46px; min-height: auto; padding: 112px 32px 62px; }
+  .hero.recruiter-hero .recruiter-hero-facts > div { grid-template-columns: 128px 1fr; }
+}
+
+@media (max-width: 430px) {
+  .hero.recruiter-hero { padding: 100px 20px 52px; }
+  .hero.recruiter-hero .recruiter-hero-facts > div { grid-template-columns: 118px 1fr; }
+  .hero.recruiter-hero .recruiter-hero-facts strong { font-size: 38px; }
+  .hero.recruiter-hero .recruiter-hero-facts > div:nth-child(3) strong { font-size: 28px; }
+}
 .pls-home-grid p { margin: 10px 0 0; color: var(--color-text-secondary); font-size: 12px; line-height: 1.7; }
 .pls-home-note { display: grid; grid-template-columns: 1fr auto; gap: 30px; align-items: center; margin-top: 22px; padding: 20px 22px; border-left: 4px solid var(--color-primary); background: var(--color-primary-soft); color: var(--color-text); }
 .pls-home-note p { margin: 0; font-size: 13px; line-height: 1.75; }

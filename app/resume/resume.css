@@ -126,7 +126,7 @@
   .resume-shell { width: min(100% - 32px, 720px); }
   .resume-hero { grid-template-columns: 1fr; gap: 24px; padding: 30px 26px; }
   .resume-hero::after { display: none; }
-  .resume-contact { grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 18px 0 0; border-top: 1px solid var(--resume-line); border-left: 0; }
+  .resume-contact { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 18px 0 0; border-top: 1px solid var(--resume-line); border-left: 0; }
   .resume-metrics-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .resume-metrics-grid > div:nth-child(2) { border-right: 0; }
   .resume-metrics-grid > div:nth-child(-n + 2) { border-bottom: 1px solid var(--resume-line); }

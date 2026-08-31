@@ -22,7 +22,7 @@ export default function Home() {
 
       <section className="hero recruiter-hero" aria-labelledby="hero-title">
         <div className="hero-inner recruiter-hero-inner">
-          <p className="eyebrow">{heroCopy.eyebrow}</p>
+          <p className="eyebrow recruiter-hero-eyebrow"><strong>{heroCopy.eyebrow}</strong><small>{heroCopy.eyebrowEn}</small></p>
           <h1 id="hero-title">{heroCopy.title}</h1>
           <p className="recruiter-roleline">{heroCopy.subtitle}</p>
           <p className="hero-intro recruiter-intro">{heroCopy.body}</p>
@@ -79,19 +79,20 @@ export default function Home() {
         <div className="section-shell">
           <header className="section-heading">
             <p className="eyebrow">主项目 / PRIMARY CASE</p>
-            <h2 id="project-title">Audio-Visual Generation Evaluation</h2>
-            <p className="section-lead">两轮诊断性音视频生成评测：从 Round-1 问题发现进入 Round-2 受控回归，并完成 Cross-Round Analysis v1.0。</p>
+            <h2 id="project-title">音视频生成诊断评测</h2>
+            <p className="section-subtitle-en">Audio-Visual Generation Evaluation</p>
+            <p className="section-lead">两轮诊断性音视频生成评测：从第一轮（Round 1）问题发现进入第二轮（Round 2）受控回归，并完成 Cross-Round Analysis v1.0。</p>
           </header>
           <div className="recruiter-project-grid">
             <div className="recruiter-scale-list">
-              <span>Point → Line → Scene + Quality</span>
-              <span>2 Rounds · 16 Generated Samples</span>
-              <span>3 个可精确判定 Exact-count 案例</span>
+              <span>点 → 线 → 面 + 独立质量</span>
+              <span>2 轮 · 16 个生成样本</span>
+              <span>3 个可精确判定的精确计数案例</span>
               <span>5 条跨轮冻结结论</span>
             </div>
             <div>
-              <p className="recruiter-finding">三个精确计数案例均呈现 Prompt=3、Visual=4、Audio=4：Prompt→Visual 的数量约束不一致，而 Visual→Audio 计数保持一致，因此不应归为 Audio Counting Failure。</p>
-              <p className="recruiter-boundary">Exact-count 结论为 Repeated Diagnostic Pattern；项目属于小样本诊断性 PoC，用于定位失败链路和调整研发优先级，不作统计泛化。</p>
+              <p className="recruiter-finding">三个精确计数（Exact-count）案例均呈现 Prompt=3、Visual=4、Audio=4：文本 → 画面的数量约束不一致，而画面 → 音频计数保持一致，因此不应归为音频计数失败（Audio Counting Failure）。</p>
+              <p className="recruiter-boundary">精确计数结论为重复诊断模式（Repeated Diagnostic Pattern）；项目属于小样本诊断性 PoC，用于定位失败链路和调整研发优先级，不作统计泛化。</p>
               <a className="btn btn-primary" href="/audio-visual-evaluation">查看音视频生成评测</a>
             </div>
           </div>
@@ -118,21 +119,41 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="content-section content-section--paper" id="sound-practice" aria-labelledby="practice-title">
+        <div className="section-shell">
+          <header className="section-heading">
+            <p className="eyebrow">声音实践 / SOUND PRACTICE</p>
+            <h2 id="practice-title">{supportingPractices.title}</h2>
+            <p className="section-lead">{supportingPractices.body}</p>
+          </header>
+          <div className="recruiter-practice-grid">
+            {supportingPractices.cards.map((card, index) => (
+              <article key={card.title}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <h3>{card.title}</h3>
+                <p>{card.body}</p>
+                <a className="paper-link" href={card.href}>{card.linkLabel}</a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="content-section pls-home-feature" aria-labelledby="pls-home-title">
         <div className="section-shell">
           <header className="section-heading">
-            <p className="eyebrow">研究 / RESEARCH</p>
-            <h2 id="pls-home-title">Point–Line–Scene：从文献综合到可执行评测</h2>
-            <p className="section-lead">从近期生成式音频与音视频评测研究提炼分层诊断结构，再将 12 项能力、真实案例与轻量 Execution Layer 连接为可运行的评测流程。</p>
+            <p className="eyebrow">评测方法 / EVALUATION METHOD</p>
+            <h2 id="pls-home-title">点—线—面（Point–Line–Scene）评测方法</h2>
+            <p className="section-lead">把事件、关系、场景与独立质量分开检查，再通过评测结构（Evaluation Schema）与执行层（Execution Layer）形成可复查的诊断记录。</p>
           </header>
           <div className="pls-home-grid">
-            <article><span>01 · LITERATURE</span><strong>文献观察</strong><p>梳理细粒度 rubric、时间关系、结构化声景、物理约束与 Judge 研究。</p></article>
-            <article><span>02 · SYNTHESIS</span><strong>方法综合</strong><p>把分散对象组织为 Point → Line → Scene 的失败定位结构。</p></article>
-            <article><span>03 · CASE STUDY</span><strong>案例研究</strong><p>用两轮音视频生成评测检查受控回归与错误归因。</p></article>
-            <article><span>04 · EXECUTION</span><strong>可执行评测</strong><p>将人工评分转为结构化记录、自动聚合与诊断输出。</p></article>
+            <article><span>01 · POINT</span><strong>点：事件是否正确</strong><p>检查事件、声源、材质、属性与数量。</p></article>
+            <article><span>02 · LINE</span><strong>线：关系是否成立</strong><p>检查时间、空间、因果与动态对应。</p></article>
+            <article><span>03 · SCENE</span><strong>面：整体是否可信</strong><p>检查环境、前后景、显著性与场景一致性。</p></article>
+            <article><span>04 · EXECUTION</span><strong>执行：结果是否可复查</strong><p>将人工评分转为结构化记录、自动聚合与诊断输出。</p></article>
           </div>
           <div className="pls-home-note">
-            <p><strong>方法路径：</strong>Literature → Synthesis → Case Study → Execution。专业判断由评测员完成，程序负责校验、聚合与整理。</p>
+            <p><strong>方法边界：</strong>PLS 是对现有细粒度评测对象的一种组织方式，用于帮助定位问题；它不替代已有 Benchmark、Metric 或行业评测协议。</p>
             <a className="btn btn-primary" href="/point-line-scene-framework">阅读研究方法</a>
           </div>
         </div>
@@ -142,7 +163,8 @@ export default function Home() {
         <div className="section-shell">
           <header className="section-heading evaluation-system-heading">
             <p className="eyebrow">方法整合 / EVALUATION SYSTEM</p>
-            <h2 id="evaluation-system-title">Human Judgment × Signal Diagnostics × Structured Execution</h2>
+            <h2 id="evaluation-system-title">人工判断 × 信号诊断 × 结构化执行</h2>
+            <p className="section-subtitle-en">Human Judgment × Signal Diagnostics × Structured Execution</p>
             <p className="section-lead">将人工细粒度评测、自动声学测量与结构化执行流程连接起来，从听感判断走向可定位、可复查的诊断证据。</p>
           </header>
 
@@ -157,18 +179,10 @@ export default function Home() {
           </div>
 
           <div className="evaluation-system-home-actions">
-            <p><strong>从听感判断到诊断证据。</strong> Evaluation System 是既有 T2A、AV、PLS 与 Execution Layer 的系统视图，不是新的独立理论。</p>
+            <p><strong>从听感判断到诊断证据。</strong> 该评测系统是对现有 T2A、音视频评测、PLS 与执行层的整体工作流整理，不是额外提出的一套独立理论。</p>
             <div><a className="btn btn-primary" href="/point-line-scene-framework#evaluation-system">查看评测方法</a><a className="paper-link" href="/audio-visual-evaluation">查看案例研究 →</a></div>
           </div>
 
-          <div className="research-evolution" aria-label="Research Evolution">
-            <header><span>RESEARCH EVOLUTION</span><h3>从主观听评到结构化诊断</h3></header>
-            <ol>
-              {evaluationSystemEvidence.researchEvolution.map(([title, body]) => (
-                <li key={title}><strong>{title}</strong><p>{body}</p></li>
-              ))}
-            </ol>
-          </div>
         </div>
       </section>
 
@@ -185,26 +199,6 @@ export default function Home() {
                 <p className="audit-status">{item.status}</p>
                 <p>{item.body}</p>
                 <a className="paper-link" href={item.href}>{item.linkLabel}</a>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="content-section content-section--paper" id="sound-practice" aria-labelledby="practice-title">
-        <div className="section-shell">
-          <header className="section-heading">
-            <p className="eyebrow">声音实践 / SOUND PRACTICE</p>
-            <h2 id="practice-title">{supportingPractices.title}</h2>
-            <p className="section-lead">{supportingPractices.body}</p>
-          </header>
-          <div className="recruiter-practice-grid">
-            {supportingPractices.cards.map((card, index) => (
-              <article key={card.title}>
-                <span>{String(index + 1).padStart(2, "0")}</span>
-                <h3>{card.title}</h3>
-                <p>{card.body}</p>
-                <a className="paper-link" href={card.href}>{card.linkLabel}</a>
               </article>
             ))}
           </div>
