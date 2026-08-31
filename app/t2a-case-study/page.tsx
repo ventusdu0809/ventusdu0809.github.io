@@ -20,10 +20,10 @@ const rubric = [
 ] as const;
 
 const cases = [
-  { id: "C01 / B0008", title: "正向参照", score: "OVL 5 · REL 5 · pass", note: "音频质量与核心事件要求均满足。", audio: "/audio/B0008.mp3" },
-  { id: "C02 / B0152", title: "空间方向反向", score: "OVL 4 · REL 1 · keep_as_badcase", note: "Prompt要求左→右，人工听感为右→左。", audio: "/audio/B0152.mp3" },
-  { id: "C03 / B0099", title: "事件数量不符", score: "主要失败类型 · wrong_count", note: "目标事件结构之外出现重复撞击。", audio: "/audio/B0099.mp3" },
-  { id: "C04 / B0092", title: "声源不符", score: "OVL 1 · REL 1 · needs_regeneration", note: "目标声源未能确认，输出主要呈现难以辨认的杂音。", audio: "/audio/B0092.mp3" },
+  { id: "C01 / B0008", title: "正向参照", score: "OVL 5 · REL 5", statusLabel: "通过", statusCode: "pass", note: "音频质量与核心事件要求均满足。", audio: "/audio/B0008.mp3" },
+  { id: "C02 / B0152", title: "空间方向反向", score: "OVL 4 · REL 1", statusLabel: "保留为失败案例", statusCode: "keep_as_badcase", note: "Prompt 要求左→右，人工听感为右→左。", audio: "/audio/B0152.mp3" },
+  { id: "C03 / B0099", title: "事件数量不符", score: "主要失败类型", statusLabel: "数量错误", statusCode: "wrong_count", note: "目标事件结构之外出现重复撞击。", audio: "/audio/B0099.mp3" },
+  { id: "C04 / B0092", title: "声源不符", score: "OVL 1 · REL 1", statusLabel: "需要重新生成", statusCode: "needs_regeneration", note: "目标声源未能确认，输出主要呈现难以辨认的杂音。", audio: "/audio/B0092.mp3" },
 ] as const;
 
 export default function T2AEvaluationProgramPage() {
@@ -38,9 +38,11 @@ export default function T2AEvaluationProgramPage() {
           <span>DU MING / AUDIO</span>
         </Link>
         <nav aria-label="主导航">
-          <Link href="/t2a-case-study">评测案例</Link>
-          <Link href="/#sound-practice">声音实践</Link>
-          <Link href="/resume">关于我</Link>
+          <Link className="topbar-mobile-only" href="/">首页</Link>
+          <Link className="topbar-desktop-only" href="/t2a-case-study">评测案例</Link>
+          <Link className="topbar-desktop-only" href="/#sound-practice">声音实践</Link>
+          <a className="topbar-mobile-only" href="#cases">试听案例</a>
+          <Link href="/resume">简历</Link>
         </nav>
       </header>
 
@@ -67,7 +69,7 @@ export default function T2AEvaluationProgramPage() {
 
       <section className="t2a-section t2a-shell" id="rubric">
         <header className="t2a-section-heading">
-          <p>01 / SCORING</p>
+          <p>01 / 评分标准 / SCORING</p>
           <h2>先判断声音质量，再判断内容是否正确</h2>
           <p>整体质量（Overall Quality, OVL）在不看 Prompt 时判断音频本身；文本符合度（Relevance, REL）在显示英文 Prompt 后判断声源、事件和结构是否符合要求。</p>
         </header>
@@ -137,15 +139,15 @@ export default function T2AEvaluationProgramPage() {
 
       <section className="t2a-section t2a-section-tint" id="cases">
         <div className="t2a-shell">
-          <header className="t2a-section-heading"><p>06 / LISTENING EXAMPLES</p><h2>评分与问题类型可以回到单条音频复听</h2><p>四条10秒案例用于展示正向参照、方向、数量和声源问题。</p></header>
+          <header className="t2a-section-heading"><p>06 / 试听案例 / LISTENING EXAMPLES</p><h2>评分与问题类型可以回到单条音频复听</h2><p>四条 10 秒案例用于展示正向参照、方向、数量和声源问题。</p></header>
           <div className="t2a-audio-grid">
-            {cases.map((item) => <article key={item.id}><span>{item.id}</span><h3>{item.title}</h3><strong className="t2a-scoreline">{item.score}</strong><p>{item.note}</p><audio controls preload="none" aria-label={`${item.id} ${item.title}试听音频`}><source src={item.audio} type="audio/mpeg" />你的浏览器不支持音频播放。</audio></article>)}
+            {cases.map((item) => <article key={item.id}><span>{item.id}</span><h3>{item.title}</h3><strong className="t2a-scoreline">{item.score} · {item.statusLabel}（<code>{item.statusCode}</code>）</strong><p>{item.note}</p><audio controls preload="none" aria-label={`${item.id} ${item.title}试听音频`}><source src={item.audio} type="audio/mpeg" />你的浏览器不支持音频播放。</audio></article>)}
           </div>
         </div>
       </section>
 
       <section className="t2a-section t2a-shell t2a-details-section" aria-labelledby="details-title">
-        <header className="t2a-section-heading"><p>SUPPORTING MATERIALS</p><h2 id="details-title">需要时再展开查看方法与版本材料</h2></header>
+        <header className="t2a-section-heading"><p>补充材料 / SUPPORTING MATERIALS</p><h2 id="details-title">需要时再展开查看方法与版本材料</h2></header>
         <details className="t2a-collapsible">
           <summary>统计与结果复核</summary>
           <div><p>主比较以 40 条 Prompt 为成对分析单位。Bootstrap、Wilcoxon、历史桥接和同一 Prompt 五次生成中的问题持续性，均作为补充复核材料。</p><p>持续性用于区分偶发输出与重复出现的问题：同一标签在五次生成中出现 4–5 次时，可优先纳入专项回归 Prompt。</p></div>
@@ -160,7 +162,7 @@ export default function T2AEvaluationProgramPage() {
         </details>
       </section>
 
-      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回杜明音频作品集</Link><span>© 2026 杜明</span></footer>
+      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回作品集首页</Link><span>© 2026 杜明</span></footer>
     </main>
   );
 }

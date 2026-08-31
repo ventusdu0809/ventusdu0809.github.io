@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "../t2a-case-study/t2a-case-study.css";
 import "./point-line-scene-framework.css";
-import { evaluationSystemEvidence } from "../../src/data/evaluation-system-evidence";
+import { evaluationSystemEvidence, publicEvidenceStatusLabels } from "../../src/data/evaluation-system-evidence";
 
 export const metadata: Metadata = {
   title: "Point–Line–Scene｜从方法框架到可执行评测",
@@ -79,7 +79,7 @@ const literature = [
 const layers = [
   ["POINT", "点（Point）：原子正确性", "事件、声源、材质、属性与数量是否正确。"],
   ["LINE", "线（Line）：关系正确性", "时间、空间、因果、交互与动态对应是否成立。"],
-  ["SCENE", "面（Scene）：整体一致性", "环境、前后景、显著性与叙事内声音是否共同成立。"],
+  ["SCENE", "面（Scene，整体场景）：整体一致性", "环境、前后景、显著性与叙事内声音是否共同成立。"],
 ] as const;
 
 const executionLayers = [
@@ -144,11 +144,11 @@ export default function PointLineSceneFrameworkPage() {
     <main className="t2a-page pls-page">
       <header className="t2a-topbar">
         <Link className="wordmark" href="/" aria-label="返回作品集首页"><span className="wordmark-mark" aria-hidden="true" /><span>DU MING / AUDIO</span></Link>
-        <nav aria-label="研究页导航"><Link href="/t2a-case-study">T2A</Link><Link href="/audio-visual-evaluation">音视频评测</Link><a href="#landscape">文献</a><a href="#case-study">案例</a><a href="#execution">执行层</a><a href="#evaluation-system">系统</a><a href="#references">参考文献</a></nav>
+        <nav aria-label="研究页导航"><Link className="topbar-mobile-only" href="/">首页</Link><a className="topbar-mobile-only" href="#framework">PLS 方法</a><Link className="topbar-mobile-only" href="/point-line-scene-framework/report/">完整报告</Link><Link className="topbar-desktop-only" href="/t2a-case-study">T2A</Link><Link className="topbar-desktop-only" href="/audio-visual-evaluation">音视频评测</Link><a className="topbar-desktop-only" href="#landscape">文献</a><a className="topbar-desktop-only" href="#case-study">案例</a><a className="topbar-desktop-only" href="#execution">执行层</a><a className="topbar-desktop-only" href="#evaluation-system">系统</a><a className="topbar-desktop-only" href="#references">参考文献</a></nav>
       </header>
 
       <section className="pls-hero t2a-shell">
-        <div className="pls-hero-index"><p className="eyebrow">研究 / RESEARCH</p><span>POINT</span><span>LINE</span><span>SCENE</span></div>
+        <div className="pls-hero-index"><p className="eyebrow">研究 / RESEARCH</p><span>点 / POINT</span><span>线 / LINE</span><span>面 / SCENE</span></div>
         <div className="pls-hero-copy">
           <p className="pls-kicker">点—线—面（Point–Line–Scene）</p>
           <h1>从整体分数<br />到多模态失败定位</h1>
@@ -191,12 +191,12 @@ export default function PointLineSceneFrameworkPage() {
       <section className="t2a-section t2a-shell" id="framework">
         <header className="t2a-section-heading"><p>03 / PLS 方法</p><h2>点、线、面分别回答不同问题</h2><p>PLS 将分散的评价对象组织为统一的失败定位结构，独立质量（Quality）继续单独记录。</p></header>
         <div className="pls-synthesis-map">
-          <div className="pls-signal-column"><span>文献观察 / LITERATURE</span><p>Atomic Rubrics</p><p>Temporal / Interaction</p><p>Structured Soundscape</p><p>Acoustic Physics</p></div>
+          <div className="pls-signal-column"><span>文献观察 / LITERATURE</span><p>原子级评分（Atomic Rubrics）</p><p>时间 / 交互（Temporal / Interaction）</p><p>结构化声景（Structured Soundscape）</p><p>声学物理（Acoustic Physics）</p></div>
           <div className="pls-map-arrows" aria-hidden="true"><i>→</i><i>→</i><i>→</i><i>→</i></div>
-          <div className="pls-output-column"><span>方法综合 / SYNTHESIS</span><strong>POINT</strong><strong>LINE</strong><strong>SCENE</strong><strong>Cross-layer Constraint</strong></div>
+          <div className="pls-output-column"><span>方法综合 / SYNTHESIS</span><strong>点（Point）</strong><strong>线（Line）</strong><strong>面（Scene）</strong><strong>跨层约束（Cross-layer Constraint）</strong></div>
         </div>
         <div className="pls-layer-grid">{layers.map(([id, title, body], index) => <article key={id}><span>0{index + 1} / {id}</span><h3>{title}<small>{id}</small></h3><p>{body}</p></article>)}</div>
-        <div className="pls-cross-axis"><span>跨层评价轴</span><strong>Physical Fidelity<br />Perceptual Fidelity</strong><p><b>Physical Fidelity</b> 由 AcoustiTrace 等物理诊断工作直接支持；<b>Perceptual Fidelity</b> 是本文更广的跨层感知评价抽象。Quality / OVL 独立呈现。</p></div>
+        <div className="pls-cross-axis"><span>跨层评价轴</span><strong>物理保真（Physical Fidelity）<br />感知保真（Perceptual Fidelity）</strong><p><b>物理保真</b>由 AcoustiTrace 等物理诊断工作直接支持；<b>感知保真</b>是本文更广的跨层感知评价抽象。独立质量（Quality）/ OVL 单独呈现。</p></div>
       </section>
 
       <section className="pls-case-band" id="case-study">
@@ -265,17 +265,17 @@ export default function PointLineSceneFrameworkPage() {
           </header>
           <div className="pls-record-columns">
             <article>
-              <span>01 / OBSERVABLE FACTS</span>
+              <span>01 / 可观察事实（OBSERVABLE FACTS）</span>
               <dl className="pls-fact-list"><div><dt>Prompt</dt><dd>3 次</dd></div><div><dt>Visual</dt><dd>4 次</dd></div><div><dt>Audio</dt><dd>4 次</dd></div></dl>
             </article>
             <article>
-              <span>02 / CAPABILITY</span>
+              <span>02 / 能力项（CAPABILITY）</span>
               <dl className="pls-capability-list"><div><dt>P4 事件计数（Event Counting）</dt><dd>5 / 5</dd></div><div><dt>L1 起点对齐（Onset Alignment）</dt><dd>3 / 5</dd></div></dl>
               <code>audio_early</code>
             </article>
             <article>
-              <span>03 / DIAGNOSIS</span>
-              <dl className="pls-diagnosis-list"><div><dt>Instruction Fidelity</dt><dd className="is-fail">FAIL</dd></div><div><dt>Visual → Audio</dt><dd className="is-pass">PASS</dd></div><div><dt>Point / Line / OVL</dt><dd>5.00 / 4.00 / 4</dd></div></dl>
+              <span>03 / 诊断（DIAGNOSIS）</span>
+              <dl className="pls-diagnosis-list"><div><dt>指令符合度（Instruction Fidelity）</dt><dd className="is-fail">失败（FAIL）</dd></div><div><dt>画面 → 音频（Visual → Audio）</dt><dd className="is-pass">通过（PASS）</dd></div><div><dt>点 / 线 / OVL</dt><dd>5.00 / 4.00 / 4</dd></div></dl>
             </article>
           </div>
           <p className="pls-record-takeaway">同一输出在不同参考关系下可以得到不同结论：Prompt→Visual 未满足数量约束，但 Visual→Audio 的事件计数保持一致，因此不归因为 Audio Counting Failure。</p>
@@ -284,7 +284,7 @@ export default function PointLineSceneFrameworkPage() {
         <div className="pls-execution-case-grid">
           <article className="pls-execution-case pls-quality-case">
             <header><span>CASE 02 / RELATION ≠ QUALITY</span><h3>H2：关系正确，听觉质量仍可较低</h3></header>
-            <div className="pls-case-score-row"><div><small>POINT</small><strong>5.00</strong></div><div><small>LINE</small><strong>5.00</strong></div><div className="is-quality"><small>QUALITY</small><strong>3 / 5</strong></div></div>
+            <div className="pls-case-score-row"><div><small>点 / POINT</small><strong>5.00</strong></div><div><small>线 / LINE</small><strong>5.00</strong></div><div className="is-quality"><small>独立质量 / QUALITY</small><strong>3 / 5</strong></div></div>
             <code>loudness_imbalance</code>
             <p>事件完整性、起点对齐与时间顺序均成立，但音频仍存在响度失衡。关系正确性（Relational Correctness）与感知质量（Perceptual Quality）应作为独立评价轴记录。</p>
           </article>
@@ -292,7 +292,7 @@ export default function PointLineSceneFrameworkPage() {
           <article className="pls-execution-case pls-partial-case">
             <header><span>CASE 03 / PARTIAL CAPABILITY</span><h3>H3：保留部分成立的能力状态</h3></header>
             <dl><div><dt>P2 Source Correctness</dt><dd>5</dd></div><div><dt>L3 Duration / Overlap</dt><dd>5</dd></div><div className="is-focus"><dt>L4 Dynamic Correspondence</dt><dd>3</dd></div><div><dt>S1 Environment Match</dt><dd>5</dd></div></dl>
-            <div className="pls-motion-split"><p><span>Boundary Response</span><strong>Present</strong></p><p><span>Source-motion Tracking</span><strong>Insufficiently Continuous</strong></p></div>
+            <div className="pls-motion-split"><p><span>边界响应（Boundary Response）</span><strong>存在（Present）</strong></p><p><span>声源运动跟随（Source-motion Tracking）</span><strong>连续性不足（Insufficiently Continuous）</strong></p></div>
             <code>static_audio_motion</code>
             <p>状态边界变化已经产生可辨响应，但声音对连续 source motion 的细粒度跟随仍不足。1–5 分制保留了这种部分成立的能力状态。</p>
           </article>
@@ -310,7 +310,7 @@ export default function PointLineSceneFrameworkPage() {
             <p>四个迁移诊断案例的适用能力评分汇总，用于检查 Evaluation Schema 与 Execution Layer 的聚合和展示流程。不作为模型整体能力估计。</p>
           </div>
           <div className="pls-demo-profile-table" role="table" aria-label="四个迁移案例的执行演示画像">
-            <div role="row" className="is-header"><span role="columnheader">Layer</span><span role="columnheader">Mean</span><span role="columnheader">Valid n</span></div>
+            <div role="row" className="is-header"><span role="columnheader">层级（Layer）</span><span role="columnheader">均值（Mean）</span><span role="columnheader">有效 n（Valid n）</span></div>
             {demoProfile.map(([layer, mean, n]) => <div role="row" key={layer}><strong role="cell">{layer}</strong><span role="cell">{mean}</span><span role="cell">{n}</span></div>)}
           </div>
         </div></details>
@@ -325,7 +325,7 @@ export default function PointLineSceneFrameworkPage() {
           </header>
 
           <div className="pls-system-status" aria-label="Evaluation System implementation status">
-            {evaluationSystemEvidence.systemStatuses.map((item) => <article key={item.label}><span>{item.status}</span><strong>{item.label}</strong></article>)}
+            {evaluationSystemEvidence.systemStatuses.map((item) => <article key={item.label}><span>{publicEvidenceStatusLabels[item.status]}</span><strong>{item.label}</strong></article>)}
           </div>
 
           <figure className="pls-system-figure">
@@ -352,8 +352,8 @@ export default function PointLineSceneFrameworkPage() {
           </figure>
 
           <details className="pls-landing-details"><summary>展开信号证据、批量分析与方法整合</summary><div className="pls-system-responsibility-grid">
-            <article><span>WHY SIGNAL EVIDENCE</span><h3>为人工观察增加可复核的信号证据</h3><p>人工听感能够发现问题；确定性测量可进一步检查 clipping、频谱分布、声道关系、响度与动态形态。</p></article>
-            <article><span>WHAT REMAINS HUMAN</span><h3>Capability 与 OVL 仍由评测员完成</h3><p>Event correctness、Material interpretation、Temporal relation、Scene plausibility 与 OVL 不由单一信号指标自动决定。</p></article>
+            <article><span>为什么需要信号证据（WHY SIGNAL EVIDENCE）</span><h3>为人工观察增加可复核的信号证据</h3><p>人工听感能够发现问题；确定性测量可进一步检查 clipping、频谱分布、声道关系、响度与动态形态。</p></article>
+            <article><span>哪些判断仍由人完成（WHAT REMAINS HUMAN）</span><h3>能力项与 OVL 仍由评测员完成</h3><p>事件正确性、材质解释、时间关系、场景合理性与 OVL 不由单一信号指标自动决定。</p></article>
           </div>
 
           <div className="pls-signal-groups">
@@ -368,7 +368,7 @@ export default function PointLineSceneFrameworkPage() {
           <div className="pls-fusion-block">
             <header><p className="eyebrow">EVIDENCE FUSION / METHOD INTEGRATION</p><h3>Human Note + Signal Evidence → Diagnosis</h3><p>以下为方法整合示例，不是自动评分规则。</p></header>
             <div className="pls-fusion-grid">
-              {evaluationSystemEvidence.fusionExamples.map((item) => <article key={item.title}><span>{item.status}</span><h3>{item.title}</h3><dl><div><dt>Human Observation</dt><dd>{item.human}</dd></div><div><dt>Signal Evidence</dt><dd>{item.signal}</dd></div><div><dt>Interpretation</dt><dd>{item.interpretation}</dd></div><div><dt>Boundary</dt><dd>{item.boundary}</dd></div></dl></article>)}
+              {evaluationSystemEvidence.fusionExamples.map((item) => <article key={item.title}><span>{publicEvidenceStatusLabels[item.status]}</span><h3>{item.title}</h3><dl><div><dt>人工观察（Human Observation）</dt><dd>{item.human}</dd></div><div><dt>信号证据（Signal Evidence）</dt><dd>{item.signal}</dd></div><div><dt>解释（Interpretation）</dt><dd>{item.interpretation}</dd></div><div><dt>边界（Boundary）</dt><dd>{item.boundary}</dd></div></dl></article>)}
             </div>
           </div>
 

@@ -82,7 +82,7 @@ test("PLS research narrative connects literature, synthesis, case evidence and f
   assert.equal((dom.match(/阅读早期研究笔记/g) ?? []).length, 1);
   assert.equal((dom.match(/href="\/audio-world-framework"/g) ?? []).length, 1);
   assert.doesNotMatch(dom, /阅读早期研究笔记\s*→/);
-  assert.equal((dom.match(/href="\/point-line-scene-framework\/report\/"/g) ?? []).length, 2);
+  assert.equal((dom.match(/href="\/point-line-scene-framework\/report\/"/g) ?? []).length, 3);
   assert.match(dom, /href="\/point-line-scene-framework\/report\/"[^>]*>阅读完整报告/);
   assert.match(dom, /href="\/point-line-scene-framework\/report\/"[^>]*>完整报告/);
   assert.doesNotMatch(dom, /下载完整报告|\sdownload(?:=|\s|>)/);
@@ -165,7 +165,7 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
     "小样本诊断，不做统计泛化",
     "查看 T2A 评测案例",
     "查看 PLS 评测方法",
-    "R2-H1-B · Exact-count", "文本 → 画面：失败（FAIL）", "画面 → 音频：通过（PASS）", "P4 事件计数（Event Counting）：5 / 5",
+    "R2-H1-B · 精确计数（Exact-count）", "文本 → 画面：失败（FAIL）", "画面 → 音频：通过（PASS）", "P4 事件计数（Event Counting）：5 / 5",
     "R2-H3 · 动态对应（Dynamic Correspondence）", "声源运动跟随（Source-motion Tracking）：部分问题", "L4 动态对应：3 / 5",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/point-line-scene-framework"/);
@@ -174,6 +174,7 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
   assert.match(html, /preload="metadata"/);
   assert.doesNotMatch(html, /Systematic Failure/);
   assert.doesNotMatch(html, /统计性泛化结论/);
+  assert.match(html, /href="\/" class="topbar-mobile-only">首页/);
 });
 
 test("featured case study keeps an explicit paper-background contrast scheme", async () => {
@@ -205,6 +206,7 @@ test("case study keeps the essential evaluation story open and deep detail close
   assert.doesNotMatch(html, /<details[^>]+open/);
   assert.doesNotMatch(html, /fixed seeds/);
   assert.doesNotMatch(html, /多模态评测/);
+  for (const text of ["通过", "保留为失败案例", "数量错误", "需要重新生成", "pass", "keep_as_badcase", "wrong_count", "needs_regeneration"]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
 });
 
 test("formal summary remains a compatible redirect", async () => {
@@ -242,9 +244,9 @@ test("game audio link opens a dedicated sound practice page", async () => {
   for (const text of [
     "声音设计进入游戏后才是可验证的体验",
     "GameKit3D + Wwise 全流程集成",
-    "Hitstop时缓与声音逻辑协同",
-    "动态混音与Snapshot切换",
-    "50 × 约2 MB",
+    "Hitstop 时缓与声音逻辑协同",
+    "动态混音与 Snapshot 切换",
+    "50 × 约 2 MB",
     "查看音频验收案例",
   ]) assert.match(practice, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(practice, /\/video\/hitstop-before\.mp4/);

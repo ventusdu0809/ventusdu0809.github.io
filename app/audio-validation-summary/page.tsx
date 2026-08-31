@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "音频资产验收｜杜明",
-  description: "基于项目交付规范的音频资产批量验收：格式、响度、真实峰值、瞬态、循环零交叉与Click风险。",
+  description: "基于项目交付规范的音频资产批量验收：格式、响度、真实峰值、瞬态、循环零交叉与爆点风险（Click）。",
 };
 
 const fileTotal = 7872;
@@ -27,11 +27,11 @@ const loudnessTargets = [
 
 const automatedChecks = [
   { code: "01", title: "文件格式", rule: "WAV · 24-bit · 48 kHz", boundary: "不符合时归入待优化，不直接判断听感质量。" },
-  { code: "02", title: "短时响度", rule: "ITU-R BS.1770窗口测量", boundary: "按13个FMOD目录映射类别目标，允许±1 LUFS测量容差。" },
-  { code: "03", title: "真实峰值", rule: "≤ −1.0 dBTP", boundary: "使用4倍过采样检查峰值风险，防止削波失真。" },
-  { code: "04", title: "瞬态对齐", rule: "Hit / Attack开头静音", boundary: "核心发力点应贴近波形开头；超过3 ms进入复核。" },
+  { code: "02", title: "短时响度", rule: "ITU-R BS.1770 窗口测量", boundary: "按 13 个 FMOD 目录映射类别目标，允许 ±1 LUFS 测量容差。" },
+  { code: "03", title: "真实峰值", rule: "≤ −1.0 dBTP", boundary: "使用 4 倍过采样检查峰值风险，防止削波失真。" },
+  { code: "04", title: "瞬态对齐", rule: "Hit / Attack 开头静音", boundary: "核心发力点应贴近波形开头；超过 3 ms 进入复核。" },
   { code: "05", title: "循环零交叉", rule: "Loop首尾过零点", boundary: "定位潜在不连续，但最终仍需循环播放确认。" },
-  { code: "06", title: "循环Click", rule: "衔接处RMS跳变", boundary: "用于提示爆点风险，不替代人工听审。" },
+  { code: "06", title: "循环爆点（Click）", rule: "衔接处均方根（RMS）跳变", boundary: "用于提示爆点风险，不替代人工听审。" },
 ] as const;
 
 export default function AudioValidationSummaryPage() {
@@ -43,7 +43,7 @@ export default function AudioValidationSummaryPage() {
         <Link className="back-link" href="/">返回作品集</Link>
         <p className="eyebrow">音频资产质量控制 / AUDIO ASSET QUALITY CONTROL</p>
         <h1>音频资产验收：从交付标准到可复查结果</h1>
-        <p className="document-lead">基于与直属领导共同起草并迭代的交付规范，我定义验收口径、审核检测逻辑，并对7,872条音频资产进行批量检查。</p>
+        <p className="document-lead">基于与直属领导共同起草并迭代的交付规范，我定义验收口径、审核检测逻辑，并对 7,872 条音频资产进行批量检查。</p>
         <div className="qa-hero-note"><strong>我的职责</strong><span>规则定义 · 逻辑审核 · 问题反馈 · 迭代验收</span><small>代码实现与批量执行由 AI 辅助完成。</small></div>
       </header>
 
@@ -83,7 +83,7 @@ export default function AudioValidationSummaryPage() {
           <div className="qa-standard-block">
             <article><span>基础格式</span><h3>WAV · 24-bit · 48 kHz</h3><p>统一进入引擎前的交付格式，减少采样率和位深混用。</p></article>
             <article><span>绝对红线</span><h3>True Peak ≤ −1.0 dBTP</h3><p>任何类别均不得超过真实峰值上限，避免削波与爆音。</p></article>
-            <article><span>编辑要求</span><h3>瞬态贴头 · Loop无缝</h3><p>Hit和Attack应快速响应；Loop需兼顾零交叉与实际循环听感。</p></article>
+            <article><span>编辑要求</span><h3>瞬态贴头 · Loop 无缝</h3><p>Hit / Attack 应快速响应；Loop 需兼顾零交叉与实际循环听感。</p></article>
           </div>
           <div className="table-wrap qa-loudness-table">
             <table><thead><tr><th>资产类别</th><th>短时响度目标</th></tr></thead><tbody>
@@ -99,8 +99,8 @@ export default function AudioValidationSummaryPage() {
             {automatedChecks.map((check) => <article className="validation-card" key={check.code}><span className="validation-card-number">{check.code}</span><h3>{check.title}</h3><strong>{check.rule}</strong><p>{check.boundary}</p></article>)}
           </div>
           <div className="qa-review-boundary">
-            <div><span>自动筛查</span><p>格式、响度、真实峰值、开头静音、循环零交叉和衔接RMS跳变。</p></div>
-            <div><span>仍需人工听审</span><p>口水音、齿音、喷麦、底噪、过度降噪、呼吸、混响尾音和实际Click听感。</p></div>
+            <div><span>自动筛查</span><p>格式、响度、真实峰值、开头静音、循环零交叉和衔接均方根（RMS）跳变。</p></div>
+            <div><span>仍需人工听审</span><p>口水音、齿音、喷麦、底噪、过度降噪、呼吸、混响尾音和实际 Click 听感。</p></div>
           </div>
         </section>
 
@@ -109,7 +109,7 @@ export default function AudioValidationSummaryPage() {
           <h2 id="qa-process-title">一次验收如何形成返修依据</h2>
           <div className="validation-process qa-process">
             <div className="validation-process-step"><strong>1</strong><h3>读取规范</h3><p>确认格式、类别响度和编辑红线。</p></div>
-            <div className="validation-process-step"><strong>2</strong><h3>映射类别</h3><p>按13个FMOD目录选择对应规则。</p></div>
+            <div className="validation-process-step"><strong>2</strong><h3>映射类别</h3><p>按 13 个 FMOD 目录选择对应规则。</p></div>
             <div className="validation-process-step"><strong>3</strong><h3>批量筛查</h3><p>生成逐文件结果和问题标签。</p></div>
             <div className="validation-process-step"><strong>4</strong><h3>复核迭代</h3><p>根据误报与边界样本调整逻辑。</p></div>
           </div>

@@ -1,5 +1,12 @@
 export type PublicEvidenceStatus = "Implemented" | "Case-supported" | "Integrated Concept" | "Future Extension";
 
+export const publicEvidenceStatusLabels: Record<PublicEvidenceStatus, string> = {
+  Implemented: "已实现（Implemented）",
+  "Case-supported": "案例支持（Case-supported）",
+  "Integrated Concept": "已整合概念（Integrated Concept）",
+  "Future Extension": "后续扩展（Future Extension）",
+};
+
 export const evaluationSystemEvidence = {
   acousticBatch: {
     id: "acoustic-report-200",

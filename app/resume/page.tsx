@@ -34,7 +34,7 @@ const workExperience = [
     date: "2026.03—2026.07",
     points: [
       "参与战斗音效设计、动态混音和音频效果实机评测，按动作、武器和战斗事件拆分声音层级；通过修改前后对比检查Snapshot、Sidechain Ducking及高频战斗场景中关键声音的可辨识性。",
-      "与直属领导共同起草并迭代音频外包制作与交付规范，明确文件格式、命名、短时响度、True Peak、瞬态对齐、循环零交叉及Click风险等验收标准；参与将验收标准转化为自动检查规则，负责规则审核、样例核验、问题反馈与迭代。",
+      "与直属领导共同起草并迭代音频外包制作与交付规范，明确文件格式、命名、短时响度、True Peak、瞬态对齐、循环零交叉及爆点风险（Click）等验收标准；参与将验收标准转化为自动检查规则，负责规则审核、样例核验、问题反馈与迭代。",
     ],
     links: [
       { href: "/sound-practice", label: "查看游戏音频案例" },
@@ -82,7 +82,7 @@ export default function ResumePage() {
 
         <header className="resume-hero">
           <div className="resume-hero-copy">
-            <p className="resume-eyebrow">AI 音频与音视频生成评测 / AI AUDIO EVALUATION</p>
+            <p className="resume-eyebrow">AI 音频与音视频生成评测 / AI AUDIO &amp; AUDIO-VISUAL EVALUATION</p>
             <h1>杜明</h1>
             <p className="resume-role">AI 音频 / 音视频生成评测</p>
             <p className="resume-specialties">声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断</p>
@@ -146,7 +146,7 @@ export default function ResumePage() {
                 </div>
                 <ol className="resume-points">
                   <li>构建点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）分层评测框架，围绕事件完整性、计数、声画起点、时序、动态对应、场景一致性及音频质量完成两轮诊断性评测。</li>
-                  <li>基于第一轮问题发现（Discovery）设计第二轮受控回归（Controlled Regression），拆分文本 → 画面与画面 → 音频失败链路；3 个可精确判定案例均出现「Prompt 要求 3 次 → Video 生成 4 次 → Audio 对应 4 次」，将计数偏差定位至视觉生成阶段，避免误判为音频计数失败（Audio Counting Failure）。</li>
+                  <li>基于第一轮问题发现（Discovery）设计第二轮受控回归（Controlled Regression），拆分文本 → 画面与画面 → 音频失败链路；3 个可精确判定案例均出现「文本提示（Prompt）要求 3 次 → 画面（Video）生成 4 次 → 音频（Audio）对应 4 次」，将计数偏差定位至视觉生成阶段，避免误判为音频计数失败（Audio Counting Failure）。</li>
                   <li>将结果区分为重复诊断模式（Repeated Diagnostic Pattern）、未复现（Not Replicated）、部分成立 / 需细化（Mixed / Refined）与独立质量门槛（Quality Gate），并转化为回归优先级、失败定位及后续专项验证方向。</li>
                 </ol>
                 <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看音视频生成评测项目 →</Link>

@@ -182,35 +182,35 @@
   .resume-contact a { font-size: 10px; }
   .resume-contact span { font-size: 8px; }
   .resume-metrics { margin-top: 10px; border-width: 1px; }
-  .resume-metrics-note { padding: 6px 10px; font-size: 8px; line-height: 1.4; }
+  .resume-metrics-note { padding: 6px 10px; font-size: 8.5px; line-height: 1.45; }
   .resume-metrics-grid > div { min-height: 59px; padding: 9px 10px; }
   .resume-metrics-grid strong { font-size: 18px; }
-  .resume-metrics-grid span { font-size: 8px; }
-  .resume-section { margin-top: 20px; break-inside: avoid; page-break-inside: avoid; }
+  .resume-metrics-grid span { font-size: 8.5px; }
+  .resume-section { margin-top: 20px; }
   .resume-section-heading { margin-bottom: 8px; }
-  .resume-section-heading > p { margin-bottom: 4px; font-size: 8px; }
+  .resume-section-heading > p { margin-bottom: 4px; font-size: 8.5px; }
   .resume-section-heading h2 { font-size: 14px; }
   .ability-grid { gap: 7px; }
   .ability-card { min-height: 100px; padding: 12px; }
-  .ability-card > span { font-size: 8px; }
+  .ability-card > span { font-size: 8.5px; }
   .ability-card h3 { margin: 10px 0 4px; font-size: 11px; }
-  .ability-card p { font-size: 9px; line-height: 1.45; }
+  .ability-card p { font-size: 9.5px; line-height: 1.5; }
   .resume-content-grid { grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr); gap: 22px; }
   .resume-primary-section, .resume-sidebar { margin-top: 24px; }
   .t2a-project { padding: 14px; border-top-width: 3px; box-shadow: none; }
   .entry-title-group h3 { font-size: 12px; }
   .entry-title-group p, .entry-meta { font-size: 9px; }
-  .entry-header time, .education-entry time { font-size: 8px; }
+  .entry-header time, .education-entry time { font-size: 8.5px; }
   .entry-meta { margin-top: 6px; }
   .resume-points { gap: 6px; margin-top: 10px; }
-  .resume-points li { min-height: auto; padding-left: 24px; font-size: 9px; line-height: 1.5; }
-  .resume-points li::before { font-size: 8px; }
+  .resume-points li { min-height: auto; padding-left: 24px; font-size: 10px; line-height: 1.52; }
+  .resume-points li::before { font-size: 8.5px; }
   .responsibility-boundary { margin-top: 10px; padding: 8px 10px; }
-  .responsibility-boundary strong, .responsibility-boundary p { font-size: 8px; line-height: 1.45; }
+  .responsibility-boundary strong, .responsibility-boundary p { font-size: 8.8px; line-height: 1.48; }
   .supporting-projects { gap: 7px; }
   .supporting-project { padding: 11px; }
   .supporting-project .entry-title-group h3 { font-size: 10px; }
-  .supporting-project .entry-title-group p, .supporting-project > p { font-size: 8px; line-height: 1.45; }
+  .supporting-project .entry-title-group p, .supporting-project > p { font-size: 8.8px; line-height: 1.48; }
   .supporting-project > p { margin-top: 6px; }
   .resume-work-section { margin-top: 22px; }
   .experience-timeline { padding-left: 17px; }
@@ -218,16 +218,18 @@
   .experience-entry { padding-bottom: 13px; }
   .experience-entry::before { top: 5px; left: -17px; width: 8px; height: 8px; }
   .experience-points { gap: 3px; margin-top: 7px; }
-  .experience-points li { padding-left: 9px; font-size: 8.5px; line-height: 1.45; }
+  .experience-points li { padding-left: 9px; font-size: 9.5px; line-height: 1.5; }
   .experience-points li::before { width: 3px; height: 3px; }
   .sidebar-section { padding: 11px 0; }
   .sidebar-section h2 { margin-bottom: 9px; font-size: 10px; }
   .education-entry + .education-entry { margin-top: 11px; }
-  .education-entry h3 { font-size: 9px; }
-  .education-entry p, .education-entry small, .sidebar-definition-list dt, .sidebar-definition-list dd, .language-list { font-size: 8px; line-height: 1.45; }
+  .education-entry h3 { font-size: 9.5px; }
+  .education-entry p, .education-entry small, .sidebar-definition-list dt, .sidebar-definition-list dd, .language-list { font-size: 8.8px; line-height: 1.48; }
   .education-entry p { margin: 2px 0; }
   .education-entry time { margin-bottom: 3px; }
   .sidebar-definition-list { gap: 9px; }
   .sidebar-definition-list div { gap: 2px; }
+  .resume-section-heading, .entry-header, .education-entry h3 { break-after: avoid; page-break-after: avoid; }
+  .t2a-project, .supporting-project, .education-entry, .experience-entry { break-inside: avoid; page-break-inside: avoid; }
   a { text-decoration: none !important; }
 }

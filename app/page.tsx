@@ -1,5 +1,5 @@
 import { siteCopy } from "../src/data/siteCopy";
-import { evaluationSystemEvidence } from "../src/data/evaluation-system-evidence";
+import { evaluationSystemEvidence, publicEvidenceStatusLabels } from "../src/data/evaluation-system-evidence";
 
 export default function Home() {
   const { heroCopy, coreNarratives, projectSummary, supportingPractices, auditTrustLine } = siteCopy;
@@ -87,7 +87,7 @@ export default function Home() {
             <div className="recruiter-scale-list">
               <span>点 → 线 → 面 + 独立质量</span>
               <span>2 轮 · 16 个生成样本</span>
-              <span>3 个可精确判定的精确计数案例</span>
+              <span>3 个精确计数案例</span>
               <span>5 条跨轮冻结结论</span>
             </div>
             <div>
@@ -171,7 +171,7 @@ export default function Home() {
           <div className="evaluation-system-home-grid">
             {evaluationSystemEvidence.homeColumns.map((column) => (
               <article key={column.title}>
-                <span>{column.status}</span>
+                <span>{publicEvidenceStatusLabels[column.status]}</span>
                 <h3>{column.title}</h3>
                 <ul>{column.items.map((item) => <li key={item}>{item}</li>)}</ul>
               </article>

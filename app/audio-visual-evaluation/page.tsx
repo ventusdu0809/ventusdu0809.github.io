@@ -36,12 +36,13 @@ export default function AudioVisualEvaluationPage() {
           <span>DU MING / AUDIO</span>
         </Link>
         <nav aria-label="项目页导航">
-          <Link href="/t2a-case-study">T2A评测</Link>
-          <Link href="/point-line-scene-framework">PLS研究</Link>
-          <a href="#method">方法</a>
+          <Link className="topbar-mobile-only" href="/">首页</Link>
+          <Link className="topbar-desktop-only" href="/t2a-case-study">T2A 评测</Link>
+          <Link className="topbar-desktop-only" href="/point-line-scene-framework">PLS 方法</Link>
+          <a className="topbar-desktop-only" href="#method">方法</a>
           <a href="#results">结果</a>
-          <a href="#boundary">边界</a>
-          <Link href="/resume">关于我</Link>
+          <a className="topbar-desktop-only" href="#boundary">边界</a>
+          <Link href="/resume">简历</Link>
         </nav>
       </header>
 
@@ -100,7 +101,7 @@ export default function AudioVisualEvaluationPage() {
               当前浏览器不支持视频播放。
             </video>
             <figcaption>
-              <div className="av-media-heading"><span>R2-H1-B · Exact-count</span><strong>3 → 4 → 4</strong></div>
+              <div className="av-media-heading"><span>R2-H1-B · 精确计数（Exact-count）</span><strong>3 → 4 → 4</strong></div>
               <p>Prompt 条件：木筷敲陶瓷杯，恰好 3 次。实际画面与音频均为 4 次。</p>
               <div className="av-verdict-row"><b className="is-fail">文本 → 画面：失败（FAIL）</b><b className="is-pass">画面 → 音频：通过（PASS）</b><b>P4 事件计数（Event Counting）：5 / 5</b></div>
             </figcaption>
@@ -174,7 +175,7 @@ export default function AudioVisualEvaluationPage() {
         </div>
       </section>
 
-      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回杜明音频作品集</Link><Link href="/t2a-case-study">查看 T2A 评测案例</Link><Link href="/point-line-scene-framework">查看 PLS 评测方法</Link><span>© 2026 杜明</span></footer>
+      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回作品集首页</Link><Link href="/t2a-case-study">查看 T2A 评测案例</Link><Link href="/point-line-scene-framework">查看 PLS 评测方法</Link><span>© 2026 杜明</span></footer>
     </main>
   );
 }
