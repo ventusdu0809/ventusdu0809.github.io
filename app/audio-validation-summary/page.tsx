@@ -10,9 +10,9 @@ const fileTotal = 7872;
 
 const issueCounts = [
   { label: "短时响度", count: 4057, note: "未落入所属类别的目标范围" },
-  { label: "真实峰值", count: 3494, note: "超过−1.0 dBTP红线" },
-  { label: "瞬态对齐", count: 1609, note: "Hit / Attack开头存在延迟风险" },
-  { label: "循环零交叉", count: 108, note: "Loop首尾存在衔接风险" },
+  { label: "真实峰值", count: 3494, note: "超过 −1.0 dBTP 红线" },
+  { label: "瞬态对齐", count: 1609, note: "Hit / Attack 开头存在延迟风险" },
+  { label: "循环零交叉", count: 108, note: "Loop 首尾存在衔接风险" },
   { label: "格式待优化", count: 46, note: "格式问题可通过批量转换修正" },
 ] as const;
 
@@ -30,7 +30,7 @@ const automatedChecks = [
   { code: "02", title: "短时响度", rule: "ITU-R BS.1770 窗口测量", boundary: "按 13 个 FMOD 目录映射类别目标，允许 ±1 LUFS 测量容差。" },
   { code: "03", title: "真实峰值", rule: "≤ −1.0 dBTP", boundary: "使用 4 倍过采样检查峰值风险，防止削波失真。" },
   { code: "04", title: "瞬态对齐", rule: "Hit / Attack 开头静音", boundary: "核心发力点应贴近波形开头；超过 3 ms 进入复核。" },
-  { code: "05", title: "循环零交叉", rule: "Loop首尾过零点", boundary: "定位潜在不连续，但最终仍需循环播放确认。" },
+  { code: "05", title: "循环零交叉", rule: "Loop 首尾过零点", boundary: "定位潜在不连续，但最终仍需循环播放确认。" },
   { code: "06", title: "循环爆点（Click）", rule: "衔接处均方根（RMS）跳变", boundary: "用于提示爆点风险，不替代人工听审。" },
 ] as const;
 
@@ -67,13 +67,13 @@ export default function AudioValidationSummaryPage() {
           <div className="issue-bars qa-issue-bars" aria-label="问题分布横向条形图">
             {issueCounts.map((issue) => (
               <div className="qa-issue-item" key={issue.label}>
-                <div className="qa-issue-heading"><strong>{issue.label}</strong><span>{issue.count.toLocaleString()}个文件 · {((issue.count / fileTotal) * 100).toFixed(1)}%</span></div>
+                <div className="qa-issue-heading"><strong>{issue.label}</strong><span>{issue.count.toLocaleString()} 个文件 · {((issue.count / fileTotal) * 100).toFixed(1)}%</span></div>
                 <div className="issue-bar-track" aria-hidden="true"><span className="issue-bar-fill" style={{ width: `${(issue.count / maxIssueCount) * 100}%` }} /></div>
                 <p>{issue.note}</p>
               </div>
             ))}
           </div>
-          <p className="document-small">各项命中次数不能相加为不通过文件数；比例以7,872条资产为分母，仅表示该规则的覆盖情况。</p>
+          <p className="document-small">各项命中次数不能相加为不通过文件数；比例以 7,872 条资产为分母，仅表示该规则的覆盖情况。</p>
         </section>
 
         <section aria-labelledby="qa-standard-title">
@@ -118,7 +118,7 @@ export default function AudioValidationSummaryPage() {
 
         <nav className="document-footer-nav" aria-label="页面跳转">
           <Link href="/">返回首页</Link>
-          <Link href="/t2a-case-study">查看T2A评测案例</Link>
+          <Link href="/t2a-case-study">查看 T2A 评测案例</Link>
         </nav>
       </article>
     </main>

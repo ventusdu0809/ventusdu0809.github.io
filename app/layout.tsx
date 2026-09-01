@@ -12,14 +12,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "杜明｜AI音频与音视频生成评测作品集",
     description:
-      "Text-to-Audio 主观听评、两轮音视频生成诊断评测、游戏音频与音频资产质量控制实践。",
+      "Text-to-Audio 主观听评、两轮音视频生成受控评测、游戏音频与音频资产质量控制实践。",
     images: ["/og.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "杜明｜AI音频与音视频生成评测作品集",
     description:
-      "Text-to-Audio 主观听评、两轮音视频生成诊断评测、游戏音频与音频资产质量控制实践。",
+      "Text-to-Audio 主观听评、两轮音视频生成受控评测、游戏音频与音频资产质量控制实践。",
     images: ["/og.png"],
   },
 };

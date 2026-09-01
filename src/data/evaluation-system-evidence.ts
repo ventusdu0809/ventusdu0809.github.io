@@ -26,7 +26,7 @@ export const evaluationSystemEvidence = {
   homeColumns: [
     { title: "人工评测（Human Evaluation）", status: "Implemented" as PublicEvidenceStatus, items: ["点", "线", "面", "独立 OVL"] },
     { title: "信号诊断（Signal Diagnostics）", status: "Implemented" as PublicEvidenceStatus, items: ["技术", "频谱", "空间", "动态"] },
-    { title: "执行与分析（Execution & Analytics）", status: "Implemented" as PublicEvidenceStatus, items: ["结构校验", "维度画像", "诊断摘要", "回归证据"] },
+    { title: "执行与分析（Execution & Analytics）", status: "Implemented" as PublicEvidenceStatus, items: ["结构校验", "维度概况", "诊断摘要", "回归证据"] },
   ],
   researchEvolution: [
     ["T2A 音效生成评测", "建立受控生成、盲听与失败案例分析基础。"],

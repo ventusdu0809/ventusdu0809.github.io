@@ -22,7 +22,7 @@ export default function Home() {
 
       <section className="hero recruiter-hero" aria-labelledby="hero-title">
         <div className="hero-inner recruiter-hero-inner">
-          <p className="eyebrow recruiter-hero-eyebrow"><strong>{heroCopy.eyebrow}</strong><small>{heroCopy.eyebrowEn}</small></p>
+          <p className="eyebrow recruiter-hero-eyebrow"><strong>{heroCopy.eyebrow}</strong></p>
           <h1 id="hero-title">{heroCopy.title}</h1>
           <p className="recruiter-roleline">{heroCopy.subtitle}</p>
           <p className="hero-intro recruiter-intro">{heroCopy.body}</p>
@@ -79,7 +79,7 @@ export default function Home() {
         <div className="section-shell">
           <header className="section-heading">
             <p className="eyebrow">主项目 / PRIMARY CASE</p>
-            <h2 id="project-title">音视频生成诊断评测</h2>
+            <h2 id="project-title">音视频生成两轮评测</h2>
             <p className="section-subtitle-en">Audio-Visual Generation Evaluation</p>
             <p className="section-lead">两轮诊断性音视频生成评测：从第一轮（Round 1）问题发现进入第二轮（Round 2）受控回归，并完成 Cross-Round Analysis v1.0。</p>
           </header>
@@ -150,7 +150,7 @@ export default function Home() {
             <article><span>01 · POINT</span><strong>点：事件是否正确</strong><p>检查事件、声源、材质、属性与数量。</p></article>
             <article><span>02 · LINE</span><strong>线：关系是否成立</strong><p>检查时间、空间、因果与动态对应。</p></article>
             <article><span>03 · SCENE</span><strong>面：整体是否可信</strong><p>检查环境、前后景、显著性与场景一致性。</p></article>
-            <article><span>04 · EXECUTION</span><strong>执行：结果是否可复查</strong><p>将人工评分转为结构化记录、自动聚合与诊断输出。</p></article>
+            <article><span>04 · EXECUTION</span><strong>执行：结果是否可追溯</strong><p>程序整理人工评分，完成结构化记录、自动聚合与诊断输出。</p></article>
           </div>
           <div className="pls-home-note">
             <p><strong>方法边界：</strong>PLS 是对现有细粒度评测对象的一种组织方式，用于帮助定位问题；它不替代已有 Benchmark、Metric 或行业评测协议。</p>
@@ -165,7 +165,7 @@ export default function Home() {
             <p className="eyebrow">方法整合 / EVALUATION SYSTEM</p>
             <h2 id="evaluation-system-title">人工判断 × 信号诊断 × 结构化执行</h2>
             <p className="section-subtitle-en">Human Judgment × Signal Diagnostics × Structured Execution</p>
-            <p className="section-lead">将人工细粒度评测、自动声学测量与结构化执行流程连接起来，从听感判断走向可定位、可复查的诊断证据。</p>
+            <p className="section-lead">把人工细粒度评测、自动声学测量与结构化执行流程连接起来，形成可定位、可复查的诊断证据。</p>
           </header>
 
           <div className="evaluation-system-home-grid">
@@ -212,8 +212,8 @@ export default function Home() {
         </div>
         <div>
           <a href="/audio-visual-evaluation">音视频生成评测</a>
-          <a href="/t2a-case-study">T2A基础项目</a>
-          <a href="/point-line-scene-framework">PLS评测方法</a>
+          <a href="/t2a-case-study">T2A 基础项目</a>
+          <a href="/point-line-scene-framework">PLS 评测方法</a>
           <a href="/resume">简历</a>
           <a href="https://space.bilibili.com/7927779" target="_blank" rel="noreferrer">Bilibili</a>
         </div>

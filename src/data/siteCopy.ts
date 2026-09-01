@@ -3,16 +3,15 @@ import { auditRecordHref, currentReportHref, t2aRelease } from "../../app/data/t
 export const siteCopy = {
   role: "AI 音频与音视频生成评测",
   globalStatement:
-    "从声音制作到 T2A 主观听评，再到音视频生成的两轮诊断性评测，我持续把听感与声画判断拆成可观察、可复查的问题，帮助定位失败发生在哪一层。",
+    "从声音制作到 T2A 主观听评，再到音视频生成的两轮受控评测，我持续把听感与声画判断拆成可观察、有明确记录的问题，帮助定位失败发生在哪一层。",
   heroCopy: {
-    eyebrow: "AI 音频与音视频生成评测",
-    eyebrowEn: "AI AUDIO & AUDIO-VISUAL EVALUATION",
+    eyebrow: "AI AUDIO & AUDIO-VISUAL EVALUATION",
     title: "杜明",
-    subtitle: "AI 音频 / 音视频生成评测",
-    body: "从文本生成音频（Text-to-Audio, T2A）的主观听评，到音视频生成（Audio-Visual Generation）的两轮诊断评测，我将专业听感与声画判断转化为可复查证据，用于定位失败、验证回归并确定下一步评测优先级。",
+    subtitle: "AI 音频与音视频生成评测",
+    body: "从文本生成音频（Text-to-Audio, T2A）的主观听评，到音视频生成（Audio-Visual Generation）的两轮受控评测，我把专业听感与声画判断整理为可复查证据，用于定位失败、验证回归并确定下一步评测优先级。",
     metrics: [
       { value: "600", label: "T2A 正式样本 · 两阶段累计" },
-      { value: "2 轮", label: "音视频诊断评测" },
+      { value: "2 轮", label: "音视频受控评测" },
       { value: "3 个案例", label: "重复出现 3→4→4 诊断模式" },
     ],
     support: "T2A 系统化听评基础 · 音视频跨轮失败定位 · PLS 评测方法",
@@ -23,9 +22,9 @@ export const siteCopy = {
   coreNarratives: [
     {
       id: "diagnostic-dimensions",
-      title: "把整体听感拆成独立诊断维度",
-      body: "按点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）分别检查单个事件、事件关系、整体场景与音频质量，避免一个总分掩盖失败发生的位置。",
-      tags: ["点 / 线 / 面", "质量门槛", "失败定位"],
+      title: "Point–Line–Scene / PLS-Eval",
+      body: "把“整体听起来不错”拆成“哪一项要求正确、哪一项失败”：按点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）检查局部事实、关系、整体场景与输出质量。",
+      tags: ["Atomic Decomposition", "Failure Localization", "Reference-aware Diagnosis", "Judge-ready Schema"],
       href: "/point-line-scene-framework",
       linkLabel: "查看 PLS 评测方法",
     },
@@ -41,11 +40,11 @@ export const siteCopy = {
     {
       id: "controlled-regression",
       title: "从失败案例进入受控回归",
-      body: "第一轮用于问题发现（Discovery）；第二轮在生成前冻结假设、观察字段和判定规则，再按重复、未复现或部分成立 / 需细化调整研发与评测优先级。",
+      body: "第一轮用于问题发现（Discovery）；第二轮在生成前冻结假设、观察字段和判定规则，再根据重复、未复现和部分成立 / 需细化三类结果，调整后续排查与评测优先级。",
       note: "未复现（Not Replicated）不否定原始单例观察，但会降低其作为稳定失效模式的证据强度，并调整后续回归优先级。",
-      tags: ["问题发现", "受控回归", "研发优先级"],
+      tags: ["问题发现", "受控回归", "排查优先级"],
       href: "/audio-visual-evaluation#rounds",
-      linkLabel: "查看两轮诊断设计",
+      linkLabel: "查看两轮评测设计",
     },
   ],
   projectSummary: {
@@ -62,7 +61,7 @@ export const siteCopy = {
     body: "游戏音频、资产验收和运行时问题处理——这些实际工作让我能把抽象的评分标签落回可听、可查的具体问题。",
     cards: [
       {
-        title: "游戏音频与运行时诊断",
+        title: "游戏音频与运行时排查",
         body: "包括战斗音效、动态混音、Wwise / FMOD 集成、空间音频和运行时问题定位。",
         href: "/sound-practice",
         linkLabel: "查看游戏音频案例",
@@ -87,10 +86,10 @@ export const siteCopy = {
         status: `${t2aRelease.researchVersion} · audit ${t2aRelease.auditRevision} · ${t2aRelease.auditVerdict}`,
         body: "保留人工评分、Bad Case 裁决、隐藏重复复核与复算记录。",
         href: auditRecordHref,
-        linkLabel: "查看T2A审计说明",
+        linkLabel: "查看 T2A 审计说明",
       },
       {
-        name: "音视频生成诊断评测",
+        name: "音视频生成两轮评测",
         status: "Cross-Round Analysis v1.0 · Frozen",
         body: "Round-1、Round-2 与跨轮结论分别冻结；案例证据不写成统计泛化。",
         href: "/audio-visual-evaluation#boundary",
@@ -100,7 +99,7 @@ export const siteCopy = {
   },
   aboutCopy: {
     title: "关于杜明",
-    body: "声音设计硕士，做过游戏音频制作、交付和运行时问题定位；现在主要做生成式音频的人工听评、Bad Case 诊断和评测流程设计。",
+    body: "声音设计硕士，做过游戏音频制作、交付和运行时问题定位；现在主要做生成式音频的人工听评、Bad Case 分析和评测流程设计。",
   },
   links: { currentReportHref, auditRecordHref },
   evaluation: {

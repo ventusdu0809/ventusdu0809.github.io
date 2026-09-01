@@ -6,7 +6,7 @@ import "./resume.css";
 export const metadata: Metadata = {
   title: "杜明｜AI 音频与音视频生成评测",
   description:
-    "爱丁堡大学声音设计硕士杜明的 AI 音频评测简历，包含 Text-to-Audio 评测集构建、主观听评、失败案例分析，以及两轮音视频生成诊断评测。",
+    "爱丁堡大学声音设计硕士杜明的 AI 音频评测简历，包含 Text-to-Audio 评测集构建、主观听评、失败案例分析，以及两轮音视频生成受控评测。",
 };
 
 const abilities = [
@@ -34,7 +34,7 @@ const workExperience = [
     date: "2026.03—2026.07",
     points: [
       "参与战斗音效设计、动态混音和音频效果实机评测，按动作、武器和战斗事件拆分声音层级；通过修改前后对比检查 Snapshot、Sidechain Ducking 及高频战斗场景中关键声音的可辨识性。",
-      "与直属领导共同起草并迭代音频外包制作与交付规范，明确文件格式、命名、短时响度、True Peak、瞬态对齐、循环零交叉及爆点风险（Click）等验收标准；参与将验收标准转化为自动检查规则，负责规则审核、样例核验、问题反馈与迭代。",
+      "与直属领导共同起草并迭代音频外包制作与交付规范，明确文件格式、命名、短时响度、True Peak、瞬态对齐、循环零交叉及爆点风险（Click）等验收标准；参与把验收标准整理为自动检查规则，负责规则审核、样例核验、问题反馈与迭代。",
     ],
     links: [
       { href: "/sound-practice", label: "查看游戏音频案例" },
@@ -87,7 +87,7 @@ export default function ResumePage() {
             <p className="resume-role">AI 音频 / 音视频生成评测</p>
             <p className="resume-specialties">声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断</p>
             <p className="resume-intro">
-              爱丁堡大学声音设计硕士，具备游戏音频、影视声音与声画内容制作经验，目前聚焦 AI 音频与音视频生成评测。独立完成 T2A 主观评测及两轮音视频生成诊断评测，能够将专业听感与声画判断转化为结构化评分、失败案例（Bad Case）诊断和可复核的评测结论。
+              爱丁堡大学声音设计硕士，具备游戏音频、影视声音与声画内容制作经验，目前聚焦 AI 音频与音视频生成评测。独立完成 T2A 主观评测及两轮音视频生成评测，能以结构化评分、失败案例（Bad Case）分析和可复核结论记录专业听感与声画判断。
             </p>
           </div>
 
@@ -116,7 +116,7 @@ export default function ResumePage() {
         <section className="resume-section" aria-labelledby="abilities-title">
           <div className="resume-section-heading">
             <p>核心能力</p>
-            <h2 id="abilities-title">将听感判断转化为可复核的评测记录</h2>
+            <h2 id="abilities-title">让听感判断留下结构化评测记录</h2>
           </div>
           <div className="ability-grid">
             {abilities.map((ability) => (
@@ -139,7 +139,7 @@ export default function ResumePage() {
               <article className="t2a-project">
                 <div className="entry-header">
                   <div className="entry-title-group">
-                    <h3>音视频生成诊断评测</h3>
+                    <h3>音视频生成两轮评测</h3>
                     <p>Audio-Visual Generation Evaluation · Cross-Round Analysis v1.0</p>
                   </div>
                   <time dateTime="2026-08">2026.08</time>
@@ -147,7 +147,7 @@ export default function ResumePage() {
                 <ol className="resume-points">
                   <li>构建点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）分层评测框架，围绕事件完整性、计数、声画起点、时序、动态对应、场景一致性及音频质量完成两轮诊断性评测。</li>
                   <li>基于第一轮问题发现（Discovery）设计第二轮受控回归（Controlled Regression），拆分文本 → 画面与画面 → 音频失败链路；3 个可精确判定案例均出现「文本提示（Prompt）要求 3 次 → 画面（Video）生成 4 次 → 音频（Audio）对应 4 次」，将计数偏差定位到“文本 → 画面”的指令满足环节，避免误判为音频计数失败（Audio Counting Failure）。</li>
-                  <li>将结果区分为重复诊断模式（Repeated Diagnostic Pattern）、未复现（Not Replicated）、部分成立 / 需细化（Mixed / Refined）与独立质量门槛（Quality Gate），并转化为回归优先级、失败定位及后续专项验证方向。</li>
+                  <li>将结果区分为重复诊断模式（Repeated Diagnostic Pattern）、未复现（Not Replicated）、部分成立 / 需细化（Mixed / Refined）与独立质量门槛（Quality Gate），据此确定回归优先级、失败定位及后续专项验证方向。</li>
                 </ol>
                 <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看音视频生成评测项目 →</Link>
                 <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看 PLS 研究方法 →</Link>
@@ -187,7 +187,7 @@ export default function ResumePage() {
                     </div>
                     <time dateTime="2025-10">2025.10—2026.02</time>
                   </div>
-                  <p>整理音频命名、ID、优先级、响度及交付流程规范，建立可复核的音频资产质量标准；基于 Wwise 与 Unity 完成环境声、空间混响及动态混音配置，并通过 Profiler 检查并发声音、声部优先级和性能异常。</p>
+                  <p>整理音频命名、ID、优先级、响度及交付流程规范，建立有明确验收依据的音频资产质量标准；基于 Wwise 与 Unity 完成环境声、空间混响及动态混音配置，并通过 Profiler 检查并发声音、声部优先级和性能异常。</p>
                   <Link className="resume-arrow-link" href="/sound-practice">查看相关案例 →</Link>
                 </article>
                 <article className="supporting-project">

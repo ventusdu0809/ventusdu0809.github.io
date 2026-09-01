@@ -101,7 +101,7 @@ export default function AudioVisualEvaluationPage() {
               当前浏览器不支持视频播放。
             </video>
             <figcaption>
-              <div className="av-media-heading"><span>R2-H1-B · 精确计数（Exact-count）</span><strong>3 → 4 → 4</strong></div>
+              <div className="av-media-heading"><span>R2-H1-B · 精确计数（Exact-count）</span><strong>3→4→4</strong></div>
               <p>Prompt 条件：木筷敲陶瓷杯，恰好 3 次。实际画面与音频均为 4 次。</p>
               <div className="av-verdict-row"><b className="is-fail">文本 → 画面：失败（FAIL）</b><b className="is-pass">画面 → 音频：通过（PASS）</b><b>P4 事件计数（Event Counting）：5 / 5</b></div>
             </figcaption>
