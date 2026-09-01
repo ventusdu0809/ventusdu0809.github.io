@@ -154,7 +154,7 @@ export default function Home() {
           </div>
           <div className="pls-home-note">
             <p><strong>方法边界：</strong>PLS 是对现有细粒度评测对象的一种组织方式，用于帮助定位问题；它不替代已有 Benchmark、Metric 或行业评测协议。</p>
-            <a className="btn btn-primary" href="/point-line-scene-framework">阅读研究方法</a>
+            <a className="btn btn-primary" href="/point-line-scene-framework">查看评测方法</a>
           </div>
         </div>
       </section>

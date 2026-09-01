@@ -52,7 +52,7 @@ export default function AudioVisualEvaluationPage() {
           <h1>音视频生成<br />诊断评测</h1>
           <p className="av-hero-title-en">Audio-Visual Generation Evaluation</p>
           <p className="av-hero-subtitle">从失败案例发现（Bad Case Discovery）到受控回归（Controlled Regression）</p>
-          <p className="t2a-lead">这是一项两轮诊断性评测：第一轮发现问题，第二轮以预先定义的假设、观察字段与判定规则进行受控回归，最后把证据转成下一步的研发与评测优先级。</p>
+          <p className="t2a-lead">这是一项两轮诊断性评测：第一轮发现问题，第二轮以预先定义的假设、观察字段与判定规则进行受控回归，最后把证据转成下一步的研发排查与评测优先级。</p>
           <div className="t2a-status-row" aria-label="项目概况">
             <strong>Cross-Round Analysis v1.0</strong>
             <span>2 轮</span>
@@ -62,7 +62,7 @@ export default function AudioVisualEvaluationPage() {
         </div>
         <aside className="av-hero-facts" aria-label="核心研究框架">
           <p>核心问题</p>
-          <strong>Prompt 要求 3 次，Visual 与 Audio 均呈现 4 次：偏差应归入哪一段评价链？</strong>
+          <strong>文本提示（Prompt）要求 3 次，画面（Visual）与音频（Audio）均呈现 4 次：偏差应归入哪一段评价链？</strong>
           <dl>
             <div><dt>文本提示（Prompt）</dt><dd>3</dd></div>
             <div><dt>画面（Visual）</dt><dd className="av-fail">4 · 失败</dd></div>

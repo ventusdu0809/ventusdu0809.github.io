@@ -40,7 +40,9 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "评测方法 / EVALUATION METHOD",
     "点：事件是否正确", "线：关系是否成立", "面：整体是否可信", "执行：结果是否可复查",
     "人工判断 × 信号诊断 × 结构化执行",
-    "阅读研究方法",
+    "查看评测方法",
+    "T2A 系统化听评基础",
+    "事件级错误可以用于定位能力差异",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
   assert.match(html, /href="\/t2a-case-study"/);
@@ -260,7 +262,9 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   for (const text of [
     "杜明",
     "AI 音频 / 音视频生成评测",
-    "600 个正式样本和 660 次试听评测",
+    "600 个正式样本和 660 次试听事件",
+    "660", "试听事件（累计）",
+    "AI 音频与音视频评测作品集",
     "Text-to-Audio 专项评测",
     "SAO1 PoC 与 SAO1 v2 / SA3M 受控对比",
     "Audio-Visual Generation Evaluation",
@@ -290,6 +294,10 @@ test("public resume matches the reviewed ATS source and links to evidence", asyn
   assert.doesNotMatch(html, /五层评测框架/);
   assert.match(html, /Accademia di Belle Arti di Brera/);
   assert.match(html, /<time[^>]*>2026\.08<\/time>/);
+  const resumeCss = await readFile(new URL("../app/resume/resume.css", import.meta.url), "utf8");
+  assert.match(resumeCss, /@media print[\s\S]*\.resume-metrics-grid \{ grid-template-columns: repeat\(4, minmax\(0, 1fr\)\); \}/);
+  assert.match(resumeCss, /@media print[\s\S]*\.ability-grid \{ grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
+  assert.match(resumeCss, /@media print[\s\S]*\.resume-sidebar \{ display: block; \}/);
   const projectPoints = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
   assert.ok(projectPoints.length >= 2);
   assert.equal((projectPoints[0][1].match(/<li>/g) ?? []).length, 3);

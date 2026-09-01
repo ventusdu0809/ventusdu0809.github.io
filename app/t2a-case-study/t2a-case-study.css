@@ -50,11 +50,11 @@
 .t2a-metric-strip strong { margin: 11px 0 9px; color: #9bb5ff; font-family: var(--serif); font-size: clamp(33px, 4vw, 50px); font-weight: 550; letter-spacing: -.055em; line-height: 1; white-space: nowrap; }
 .t2a-section { padding-block: clamp(80px, 11vw, 142px); border-bottom: 1px solid var(--line); }
 .t2a-section-heading { max-width: 780px; margin-bottom: clamp(44px, 6vw, 72px); }
-.t2a-section-heading h2 { margin-bottom: 18px; font-family: var(--serif); font-size: clamp(36px, 4.6vw, 58px); font-weight: 600; letter-spacing: -.052em; line-height: 1.08; }
+.t2a-section-heading h2 { margin-bottom: 18px; font-family: var(--serif); font-size: clamp(36px, 4.6vw, 58px); font-weight: 600; letter-spacing: -.02em; line-height: 1.08; }
 .t2a-section-heading > p:last-child:not(.eyebrow) { max-width: 720px; margin-bottom: 0; color: var(--ink-soft); font-size: 15px; line-height: 1.8; }
 .t2a-two-column { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
 .t2a-outline-card { padding: 28px; border: 1px solid var(--line); background: var(--white); }
-.t2a-outline-card h3 { margin-bottom: 19px; font-family: var(--serif); font-size: 25px; font-weight: 600; letter-spacing: -.035em; }
+.t2a-outline-card h3 { margin-bottom: 19px; font-family: var(--serif); font-size: 25px; font-weight: 600; letter-spacing: -.01em; }
 .t2a-outline-card ul { margin: 0; padding-left: 18px; color: var(--ink-soft); font-size: 14px; }
 .t2a-outline-card li + li { margin-top: 10px; }
 .t2a-outline-card p { margin-bottom: 11px; color: var(--ink-soft); font-size: 14px; }
@@ -256,7 +256,7 @@
 .t2a-topbar nav { display: flex; gap: 22px; scrollbar-width: thin; }
 .t2a-program-hero { min-height: 76vh; display: flex; align-items: center; padding-block: clamp(76px, 10vw, 132px); }
 .t2a-program-hero > div { max-width: 960px; }
-.t2a-program-hero h1 { max-width: 920px; margin: 16px 0 20px; font-family: var(--serif); font-size: clamp(50px, 7.4vw, 94px); font-weight: 600; letter-spacing: -.065em; line-height: .98; }
+.t2a-program-hero h1 { max-width: 920px; margin: 16px 0 20px; font-family: var(--serif); font-size: clamp(50px, 7.4vw, 94px); font-weight: 600; letter-spacing: -.025em; line-height: .98; }
 .t2a-program-subtitle { margin: 0 0 24px; color: var(--cobalt); font-family: var(--serif); font-size: clamp(24px, 3.4vw, 42px); line-height: 1.25; }
 .t2a-status-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
 .t2a-status-row span, .t2a-status-row strong { padding: 8px 12px; border: 1px solid var(--line); font-size: 10px; letter-spacing: .06em; }
@@ -435,6 +435,7 @@
   .t2a-topbar nav .topbar-mobile-only { display: inline; }
   .t2a-program-hero { min-height: auto; padding-block: 74px 82px; }
   .t2a-program-hero h1 { font-size: clamp(43px, 13vw, 62px); }
+  .t2a-program-subtitle { font-size: 22px; line-height: 1.4; }
   .t2a-timeline, .t2a-question-grid, .t2a-protocol-summary, .t2a-role-grid,
   .t2a-model-grid, .t2a-ci-grid, .t2a-history-grid, .t2a-audio-grid,
   .t2a-method-boundaries, .t2a-listening-protocol, .t2a-phase2-execution { grid-template-columns: 1fr; }

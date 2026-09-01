@@ -5,7 +5,7 @@ import { t2aRelease } from "../data/t2aRelease";
 import "./t2a-case-study.css";
 
 export const metadata: Metadata = {
-  title: "T2A音效生成评测｜SAO1与Stable Audio 3 Medium",
+  title: "T2A 音效生成评测｜SAO1 与 Stable Audio 3 Medium",
   description: "杜明的 T2A 音效生成评测案例：人工听评、评分标准、隐藏重复、Bad Case 分析与受控模型比较。",
   keywords: ["AI 音频评测", "生成式音频评测", "Text-to-Audio", "音效生成", "Bad Case", "人工听评"],
   alternates: { canonical: "/t2a-case-study" },
@@ -16,7 +16,7 @@ const rubric = [
   ["4", "整体可用，只有轻微瑕疵或局部不自然。", "核心语义正确，只有轻微属性或细节偏差。"],
   ["3", "可以辨认，但存在明显质量问题，需要筛选或修改。", "主体相关，但缺少一项重要要求。"],
   ["2", "多处明显问题，使用价值较低。", "仅部分相关，关键声源或事件结构存在明显偏差。"],
-  ["1", "严重失真、声源不可辨认或不具备使用价值。", "与Prompt基本无关，或核心声源错误。"],
+  ["1", "严重失真、声源不可辨认或不具备使用价值。", "与 Prompt 基本无关，或核心声源错误。"],
 ] as const;
 
 const cases = [
@@ -50,8 +50,8 @@ export default function T2AEvaluationProgramPage() {
         <div>
           <p className="eyebrow">T2A 音效生成评测 / EVALUATION CASE STUDY</p>
           <h1>听起来好，<br />不等于生成正确</h1>
-          <p className="t2a-program-subtitle">我如何从Stable Audio Open 1.0单模型PoC出发，完成SAO1与Stable Audio 3 Medium的受控音效评测。</p>
-          <p className="t2a-lead">我把音频质量、Prompt符合度和具体错误分开记录。结果不只回答“平均分是多少”，也回答“模型在哪类要求上容易出错”。</p>
+          <p className="t2a-program-subtitle">我如何从 Stable Audio Open 1.0 单模型 PoC 出发，完成 SAO1 与 Stable Audio 3 Medium 的受控音效评测。</p>
+          <p className="t2a-lead">我把音频质量、Prompt 符合度和具体错误分开记录。结果不只回答“平均分是多少”，也回答“模型在哪类要求上容易出错”。</p>
           <div className="t2a-hero-actions">
             <a href="#results">查看模型比较</a>
             <a href="#cases">试听评分案例</a>
@@ -90,13 +90,13 @@ export default function T2AEvaluationProgramPage() {
           <header className="t2a-section-heading"><p>02 / 盲听流程 / LISTENING PROTOCOL</p><h2>先盲听，再阅读 Prompt</h2><p>正式听评在安静室内完成。系统音量保持不变，但未进行标准化声压级校准。</p></header>
           <ol className="t2a-protocol-steps">
             <li><span>01</span><div><strong>Blind ID</strong><p>隐藏模型与样本信息，避免先验判断影响评分。</p></div></li>
-            <li><span>02</span><div><strong>先评OVL</strong><p>不看Prompt，可重复播放，只判断音频自身质量。</p></div></li>
-            <li><span>03</span><div><strong>再评REL</strong><p>显示英文Prompt，复听后判断内容是否正确。</p></div></li>
+            <li><span>02</span><div><strong>先评 OVL</strong><p>不看 Prompt，可重复播放，只判断音频自身质量。</p></div></li>
+            <li><span>03</span><div><strong>再评 REL</strong><p>显示英文 Prompt，复听后判断内容是否正确。</p></div></li>
             <li><span>04</span><div><strong>填写诊断</strong><p>复听后记录事件级问题，并完成最终人工裁决。</p></div></li>
           </ol>
           <div className="t2a-listening-protocol">
             <div><span>播放链路</span><strong>Adobe Audition · MOTU M4 · DT 770 PRO X</strong><p>安静室内完成听评。</p></div>
-            <div><span>会话安排</span><strong>每轮约30条 · 约45分钟</strong><p>轮间休息约15分钟，分两天完成。</p></div>
+            <div><span>会话安排</span><strong>每轮约 30 条 · 约 45 分钟</strong><p>轮间休息约 15 分钟，分两天完成。</p></div>
             <div><span>边界</span><strong>单一评测人</strong><p>隐藏重复用于检查同一评测人的复测稳定性，不代表多人一致性。</p></div>
           </div>
           <div className="t2a-role-grid">
@@ -118,11 +118,11 @@ export default function T2AEvaluationProgramPage() {
         <div className="t2a-shell">
           <header className="t2a-section-heading"><p>04 / 失败类型 / BAD CASE</p><h2>总体分数之外，还要看模型具体错在哪里</h2><p>以下观察描述当前输出行为，不归因于训练数据、模型结构或采样机制。</p></header>
           <div className="t2a-badcase-summary">
-            <article><span>声源错误</span><strong>SA3M 14.5% · SAO1 6.5%</strong><p>SA3M在当前样本中更常出现目标声源或属性不符。</p></article>
-            <article><span>显式数量错误</span><strong>SA3M 42.5% · SAO1 60.0%</strong><p>仅在8条明确要求事件数量的Prompt中统计。</p></article>
-            <article><span>子事件缺失</span><strong>SA3M 37.5% · SAO1 33.8%</strong><p>仅在16条复合事件Prompt中统计。</p></article>
+            <article><span>声源错误</span><strong>SA3M 14.5% · SAO1 6.5%</strong><p>SA3M 在当前样本中更常出现目标声源不符或无法确认的情况。</p></article>
+            <article><span>显式数量错误</span><strong>SA3M 42.5% · SAO1 60.0%</strong><p>仅在 8 条明确要求事件数量的 Prompt 中统计。</p></article>
+            <article><span>子事件缺失</span><strong>SA3M 37.5% · SAO1 33.8%</strong><p>仅在 16 条复合事件 Prompt 中统计。</p></article>
           </div>
-          <p className="t2a-footnote">后两项是基于相应Prompt子集的事后条件分析，用于选择下一轮专项复测，不作为预注册的总体错误率。</p>
+          <p className="t2a-footnote">后两项是基于相应 Prompt 子集的事后条件分析，用于选择下一轮专项复测，不作为预注册的总体错误率。</p>
         </div>
       </section>
 
@@ -154,7 +154,7 @@ export default function T2AEvaluationProgramPage() {
         </details>
         <details className="t2a-collapsible">
           <summary>客观指标与方法边界</summary>
-          <div><p>早期 Acoustic Diagnostics（声学诊断）从文件、频谱、空间与能量等角度检查解码、声道和响度风险。客观指标只用于定位与复听，不替代人工语义裁决。</p><p>CLAP仅作前5秒工作流的边界检查，未显示与人工评分的有效单调关系。完整七类FAD/JS保持NOT RUN。</p><p><Link href="/point-line-scene-framework#evaluation-system">查看自动声学诊断如何补充主观听评 →</Link></p></div>
+          <div><p>早期 Acoustic Diagnostics（声学诊断）从文件、频谱、空间与能量等角度检查解码、声道和响度风险。客观指标只用于定位与复听，不替代人工语义裁决。</p><p>CLAP 仅作前 5 秒工作流的边界检查，未显示与人工评分的有效单调关系。完整七类 FAD/JS 保持 NOT RUN。</p><p><Link href="/point-line-scene-framework#evaluation-system">查看自动声学诊断如何补充主观听评 →</Link></p></div>
         </details>
         <details className="t2a-collapsible">
           <summary>版本与审计记录</summary>

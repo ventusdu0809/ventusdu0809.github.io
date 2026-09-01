@@ -11,7 +11,7 @@
   padding: 32px 0 64px;
   background: var(--resume-bg);
   color: var(--resume-ink);
-  font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", "Source Han Sans SC", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Source Han Sans SC", Arial, sans-serif;
   overflow-wrap: anywhere;
 }
 
@@ -178,25 +178,29 @@
   .resume-role { margin: 7px 0 3px; font-size: 17px; }
   .resume-specialties { font-size: 10px; }
   .resume-intro { margin-top: 10px; font-size: 10.5px; line-height: 1.55; }
-  .resume-contact { gap: 7px; padding-left: 16px; }
+  .resume-contact { grid-template-columns: 1fr; gap: 7px; padding: 0 0 0 16px; border-top: 0; border-left: 1px solid var(--resume-line); }
   .resume-contact a { font-size: 10px; }
+  .resume-contact a { overflow-wrap: normal; word-break: normal; white-space: nowrap; }
   .resume-contact span { font-size: 8px; }
   .resume-metrics { margin-top: 10px; border-width: 1px; }
   .resume-metrics-note { padding: 6px 10px; font-size: 8.5px; line-height: 1.45; }
   .resume-metrics-grid > div { min-height: 59px; padding: 9px 10px; }
+  .resume-metrics-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .resume-metrics-grid > div { border-bottom: 0 !important; }
   .resume-metrics-grid strong { font-size: 18px; }
   .resume-metrics-grid span { font-size: 8.5px; }
   .resume-section { margin-top: 20px; }
   .resume-section-heading { margin-bottom: 8px; }
   .resume-section-heading > p { margin-bottom: 4px; font-size: 8.5px; }
   .resume-section-heading h2 { font-size: 14px; }
-  .ability-grid { gap: 7px; }
+  .ability-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; }
   .ability-card { min-height: 100px; padding: 12px; }
   .ability-card > span { font-size: 8.5px; }
   .ability-card h3 { margin: 10px 0 4px; font-size: 11px; }
   .ability-card p { font-size: 9.5px; line-height: 1.5; }
   .resume-content-grid { grid-template-columns: minmax(0, 2fr) minmax(180px, 1fr); gap: 22px; }
   .resume-primary-section, .resume-sidebar { margin-top: 24px; }
+  .resume-sidebar { display: block; }
   .t2a-project { padding: 14px; border-top-width: 3px; box-shadow: none; }
   .entry-title-group h3 { font-size: 12px; }
   .entry-title-group p, .entry-meta { font-size: 9px; }
@@ -224,7 +228,7 @@
   .sidebar-section h2 { margin-bottom: 9px; font-size: 10px; }
   .education-entry + .education-entry { margin-top: 11px; }
   .education-entry h3 { font-size: 9.5px; }
-  .education-entry p, .education-entry small, .sidebar-definition-list dt, .sidebar-definition-list dd, .language-list { font-size: 8.8px; line-height: 1.48; }
+  .education-entry p, .education-entry small, .sidebar-definition-list dt, .sidebar-definition-list dd, .language-list { font-size: 9px; line-height: 1.48; }
   .education-entry p { margin: 2px 0; }
   .education-entry time { margin-bottom: 3px; }
   .sidebar-definition-list { gap: 9px; }
