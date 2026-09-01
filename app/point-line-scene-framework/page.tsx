@@ -119,7 +119,7 @@ export default function PointLineSceneFrameworkPage() {
       </header>
 
       <section className="pls-hero t2a-shell pls-eval-hero">
-        <div className="pls-hero-index"><p className="eyebrow">PLS-EVAL</p><span>点 / POINT</span><span>线 / LINE</span><span>面 / SCENE</span></div>
+        <div className="pls-hero-index"><p className="eyebrow">PLS-EVAL</p><span>点 POINT</span><span>线 LINE</span><span>面 SCENE</span></div>
         <div className="pls-hero-copy"><p className="pls-kicker">Point–Line–Scene Structured Diagnostic Evaluation</p><h1>先定位失败原因，<br />再讨论整体多少分</h1><p className="pls-eval-subtitle">从原子约束、关系约束到场景一致性的结构化诊断评测框架；独立质量（Quality）单独记录。</p><blockquote>PLS 不从“整体多少分”开始，而从“哪一项要求在哪里失败”开始。</blockquote><div className="pls-hero-actions"><a className="btn btn-primary" href="#framework">查看框架</a><Link className="paper-link" href="/point-line-scene-framework/report/">阅读完整报告</Link></div></div>
       </section>
 
