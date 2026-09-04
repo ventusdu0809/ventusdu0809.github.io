@@ -24,7 +24,7 @@ export const siteCopy = {
       id: "diagnostic-dimensions",
       title: "Point–Line–Scene / PLS-Eval",
       body: "把“整体听起来不错”拆成“哪一项要求正确、哪一项失败”：按点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）检查局部事实、关系、整体场景与输出质量。",
-      tags: ["Atomic Decomposition", "Failure Localization", "Reference-aware Diagnosis", "Judge-ready Schema"],
+      tags: ["Atomic Decomposition", "Failure Localization", "Reference-aware Diagnosis", "Structured Schema"],
       href: "/point-line-scene-framework",
       linkLabel: "查看 PLS 评测方法",
     },

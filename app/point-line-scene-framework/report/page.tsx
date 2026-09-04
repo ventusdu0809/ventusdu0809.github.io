@@ -5,7 +5,7 @@ import "./report.css";
 
 export const metadata: Metadata = {
   title: "Point–Line–Scene｜生成式音频与音视频模型分层诊断评测框架｜杜明",
-  description: "Point–Line–Scene 完整研究报告：从 Capability Taxonomy 与 Evaluation Schema，到 Human-in-the-loop Evaluation System、Signal Diagnostics、Controlled Regression 与 Execution Layer。",
+  description: "Point–Line–Scene 完整研究报告：从 Capability Taxonomy 与 Evaluation Schema，到 Human Evaluation、Signal Diagnostics、Controlled Regression 与 Execution Layer。",
   alternates: { canonical: "/point-line-scene-framework/report/" },
   openGraph: { title: "Point–Line–Scene｜生成式音频与音视频模型分层诊断评测框架", description: "从细粒度能力分解到显式参考链诊断与可执行评测。", type: "article", images: [] },
   twitter: { card: "summary", title: "Point–Line–Scene｜生成式音频与音视频模型分层诊断评测框架", description: "从细粒度能力分解到显式参考链诊断与可执行评测。", images: [] },
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 const toc = [
   ["introduction", "1. 引言"], ["related-work", "2. 相关工作"], ["method", "3. PLS 方法框架"],
   ["taxonomy-schema", "4. Taxonomy 与 Schema"], ["case-study", "5. 音视频案例研究"], ["reference-aware", "6. 显式参考链诊断"],
-  ["execution-layer", "7. Execution Layer v0.1"], ["evaluation-system", "8. Human-in-the-loop Evaluation System"],
+  ["execution-layer", "7. Execution Layer v0.1"], ["evaluation-system", "8. Human Evaluation + Signal Diagnostics"],
   ["results", "9. 结果与诊断发现"], ["discussion", "10. 讨论"],
   ["limitations", "11. 研究范围与限制"], ["future-work", "12. 后续研究"], ["conclusion", "13. 结论"],
   ["references", "参考文献"], ["appendix-a", "附录 A · Taxonomy"], ["appendix-b", "附录 B · 记录"],
@@ -89,7 +89,7 @@ export default function PointLineSceneReportPage() {
           </header>
           <section className="paper-abstract" aria-labelledby="abstract-title">
             <h2 id="abstract-title">摘要 <span>ABSTRACT</span></h2>
-            <p>生成式音频与音视频模型常以整体相似度或总体质量概括表现，但单一结果难以回答事件是否缺失、关系何处失配以及错误发生在哪一条跨模态链路。本文提出 Point–Line–Scene（PLS）分层诊断框架，将评价对象组织为原子正确性、关系正确性与整体场景一致性，并保留独立的感知质量轴。在此基础上，本文固定 P1–P4、L1–L4、S1–S4 共 12 项能力，建立 PLS Evaluation Schema v1.0，将可观察事实、能力评分、维度概况、有效性、诊断门与 OVL 连接为结构化记录。两轮 Audio-Visual Generation Evaluation 由 Round-1 问题发现进入 Round-2 受控回归，形成 Exact-count、Onset、Dynamic、Cross-shot 与 Audio Quality 的跨轮证据状态。P06、P10 与 R2-H1-B 的 3→4→4 模式进一步促成显式参考链诊断（Reference-aware Diagnosis），将 Prompt↔Visual 与 Visual↔Audio 分开判断。Execution Layer v0.1 已支持 Schema 校验、Dimension Profile 派生、轻量一致性检查与人可读诊断摘要；Human-in-the-loop Evaluation System 将人工关系判断与辅助信号证据并行组织。当前结果基于诊断性案例研究，尚不用于模型总体性能估计。</p>
+            <p>生成式音频与音视频模型常以整体相似度或总体质量概括表现，但单一结果难以回答事件是否缺失、关系何处失配以及错误发生在哪一条跨模态链路。本文提出 Point–Line–Scene（PLS）分层诊断框架，将评价对象组织为原子正确性、关系正确性与整体场景一致性，并保留独立的感知质量轴。在此基础上，本文固定 P1–P4、L1–L4、S1–S4 共 12 项能力，建立 PLS Evaluation Schema v1.0，将可观察事实、能力评分、维度概况、有效性、诊断门与 OVL 连接为结构化记录。两轮 Audio-Visual Generation Evaluation 由 Round-1 问题发现进入 Round-2 受控回归，形成 Exact-count、Onset、Dynamic、Cross-shot 与 Audio Quality 的跨轮证据状态。P06、P10 与 R2-H1-B 的 3→4→4 模式进一步促成显式参考链诊断（Reference-aware Diagnosis），将 Prompt↔Visual 与 Visual↔Audio 分开判断。Execution Layer v0.1 已支持 Schema 校验、Dimension Profile 派生、轻量一致性检查与人可读诊断摘要；Human Evaluation 与 Signal Diagnostics 分别保留并在分析阶段进行人工对照。当前结果基于诊断性案例研究，尚不用于模型总体性能估计。</p>
             <p className="paper-keywords"><strong>关键词：</strong>生成式音频评测；音视频生成；细粒度评测；失败定位；显式参考链诊断；受控回归</p>
           </section>
           <section id="introduction"><h2><span>1</span> 引言 <small>INTRODUCTION</small></h2>
@@ -131,12 +131,12 @@ export default function PointLineSceneReportPage() {
           <section id="execution-layer"><h2><span>7</span> 执行层（Execution Layer）v0.1</h2>
             <p>人工评测负责事实判定、能力评分与 Bad Case 归因；执行层负责 Schema 校验、Dimension Profile 派生、轻量一致性检查与诊断摘要生成。程序不替代评测员的专业判断。</p>
             <figure className="paper-figure"><div className="figure-execution"><div><b>人工评测</b><span>Facts · Scores · Bad Cases</span></div><i>→</i><div><b>Schema 校验</b><span>Schema · Required Fields</span></div><i>→</i><div><b>维度聚合</b><span>Point · Line · Scene</span></div><i>→</i><div><b>诊断输出</b><span>Summary · Case Profile</span></div></div><figcaption>图 4. 人机协同的执行层工作流。</figcaption></figure>
-            <h3>7.1–7.3 Human-in-the-loop、校验与聚合</h3><p>完整记录进入 Draft 2020-12 Schema 校验，12 项 Capability 必须显式存在。聚合只计算 SCORED 项的平均值与有效样本数 n，并由能力分数派生 Dimension Profile。</p>
+            <h3>7.1–7.3 Human Evaluation、校验与聚合</h3><p>完整记录进入 Draft 2020-12 Schema 校验，12 项 Capability 必须显式存在。聚合只计算 SCORED 项的平均值与有效样本数 n，并由能力分数派生 Dimension Profile。</p>
             <h3>7.4–7.5 诊断摘要与案例汇总</h3><p>执行层输出人可读摘要、Capability Breakdown、参考链判断和案例汇总。四个迁移诊断案例得到 Point=5.00（n=10）、Line=4.25（n=8）、Scene=5.00（n=4），用于检查 Schema 与 Execution Layer 的聚合和展示流程，不作为模型整体能力估计。</p>
           </section>
           <section id="evaluation-system"><h2><span>8</span> 人在回路的评测系统 <small>HUMAN-IN-THE-LOOP EVALUATION SYSTEM</small></h2>
-            <p>PLS 的执行对象不是单一分数，而是一条可复查的证据链。人工评测负责识别事实、判断关系与给出 Capability 评分；信号诊断（Signal Diagnostics）从文件、频谱、空间与能量四组测量中提供补充证据。两条分支在 Evaluation Record 汇合，再由 Schema、Execution Layer 与数据集级分析支持诊断和回归。</p>
-            <figure className="paper-figure"><div className="figure-system"><div className="figure-system-input"><b>Requirement</b><i>→</i><b>Capability Taxonomy</b><i>→</i><b>Evaluation Set</b></div><div className="figure-system-branches"><div><small>Human Evaluation</small><strong>Facts · PLS · OVL · Bad Case</strong></div><span>+</span><div><small>Signal Diagnostics</small><strong>File · Spectrum · Spatial · Energy</strong></div></div><div className="figure-system-output"><b>Evidence / Evaluation Record</b><i>→</i><b>Schema &amp; Execution</b><i>→</i><b>Diagnosis &amp; Regression</b></div></div><figcaption>图 5. 人工判断与信号证据并行进入结构化评测记录。</figcaption></figure>
+            <p>PLS 的执行对象不是单一分数，而是一条可复查的证据链。人工评测负责识别事实、判断关系与给出 Capability 评分；信号诊断（Signal Diagnostics）从文件、频谱、空间与能量四组测量中提供补充证据。Human Evaluation 与 Signal Diagnostics 分别保留；当前通过人工分析进行对照，Signal 不自动生成或修改 PLS / OVL。Schema、Execution Layer 与数据集级分析支持结构化记录、诊断与回归。</p>
+            <figure className="paper-figure"><div className="figure-system"><div className="figure-system-input"><b>Requirement</b><i>→</i><b>Capability Taxonomy</b><i>→</i><b>Evaluation Set</b></div><div className="figure-system-branches"><div><small>Human Evaluation · Implemented</small><strong>Facts · PLS · OVL · Bad Case</strong></div><span>+</span><div><small>Signal Diagnostics · Supporting evidence</small><strong>File · Spectrum · Spatial · Energy</strong></div></div><div className="figure-system-output"><b>Evaluation Record</b><i>→</i><b>Schema &amp; Execution</b><i>→</i><b>Diagnosis &amp; Regression</b></div></div><figcaption>图 5. Human Evaluation 进入结构化记录；Signal Diagnostics 作为独立辅助证据，当前通过人工对照使用。</figcaption></figure>
             <p>信号级测量用于定位异常、选择复听样本和补充诊断证据，不替代 Capability Judgment。尤其是语义是否正确、声画关系是否成立、问题是否构成 Bad Case，仍需由评测员结合任务要求与可观察事实判断。</p>
             <p>当前公开实现包括 PLS Schema、Execution Layer 与批量声学分析；Signal→PLS 记录连接属于 Integrated Concept，多评测员 QA 与更大规模相关性验证属于 Future Extension。正式 T2A 样本的 200 条批量声学分析为信号分支提供了已执行的数据来源，但本文不据此推导统一阈值或替代主观结论。</p>
           </section>

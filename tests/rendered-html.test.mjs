@@ -29,7 +29,7 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "2 轮", "音视频受控评测",
     "3 个案例", "重复出现 3→4→4 诊断模式",
     "Point–Line–Scene / PLS-Eval",
-    "Atomic Decomposition", "Failure Localization", "Reference-aware Diagnosis", "Judge-ready Schema",
+    "Atomic Decomposition", "Failure Localization", "Reference-aware Diagnosis", "Structured Schema",
     "让主观评测可以复查",
     "从失败案例进入受控回归",
     "证据与版本 / EVIDENCE &amp; VERSIONING",
@@ -40,7 +40,7 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "重复诊断模式（Repeated Diagnostic Pattern）",
     "评测方法 / EVALUATION METHOD",
     "UNIT STATE", "FAILURE", "LOCALIZATION", "Independent axis",
-    "固定能力坐标系；", "按任务激活原子评价单元；", "用 Dependency + Reference 定位失败。",
+    "固定能力坐标系；", "按任务激活原子评价单元；", "用 Unit-level Record + Reference Chain 定位失败。",
     "人工判断 × 信号诊断 × 结构化执行",
     "查看 PLS-Eval 方法",
     "T2A 系统化听评基础",
@@ -59,7 +59,7 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
-test("PLS-Eval foregrounds dependency-aware units, reference chains and evidence boundaries", async () => {
+test("PLS-Eval foregrounds executed evidence and separates extensions", async () => {
   const response = await render("/point-line-scene-framework");
   assert.equal(response.status, 200);
   const html = await response.text();
@@ -67,12 +67,11 @@ test("PLS-Eval foregrounds dependency-aware units, reference chains and evidence
     "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位失败原因", "再讨论整体分数",
     "PLS 不从“整体分数”开始，而从“哪一项要求在哪里失败”开始。", "PLS + Q",
     "STABLE TAXONOMY", "ACTIVE SCHEMA", "Ontology stays stable", "COUPLED RUBRIC", "DECOUPLED UNITS",
-    "DEPENDENCY-AWARE EVALUATION", "原子化不等于无依赖", "Three knocks, followed by a wooden object sliding.",
-    "P1 · Knock exists", "P2 · Count = 3", "P3 · Sliding exists", "BLOCKED ≠ N/A ≠ SKIPPED",
-    "FAIL_PREREQUISITE", "Near / far 属于 Line，不属于 Scene。", "68 / 85", "68 / 100",
     "3→4→4：比较哪一段参考链，决定问题归因", "Visual Instruction Failure", "audio_early",
-    "EVALUATOR ROUTING", "FUTURE / NOT IMPLEMENTED", "OBSERVABLE FAILURE LOCALIZATION",
+    "CONTROLLED REGRESSION · IMPLEMENTED", "P06 · P10 · R2-H1-B", "Increase exact-count regression priority",
+    "EVIDENCE ROLES · IMPLEMENTED", "HUMAN EVALUATION", "SIGNAL DIAGNOSTICS", "Signal Diagnostics 不自动生成或修改 PLS / OVL 评分",
     "Repeated Diagnostic Pattern", "Not Replicated", "Mixed / Refined", "Audio / Omni Judge",
+    "INTEGRATED CONCEPT", "not fully executed / not backfilled", "METHOD EXTENSIONS", "FORMULA ONLY · NO PROJECT RESULT",
     "AudioScape-TTA", "AnyAudio-Judge", "AcoustiTrace", "AVGen-Bench", "展开已执行的 Signal Diagnostics 指标",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   const dom = renderedDom(html);
@@ -82,19 +81,19 @@ test("PLS-Eval foregrounds dependency-aware units, reference chains and evidence
   assert.match(dom, /href="\/point-line-scene-framework\/report\/"[^>]*>完整报告/);
   assert.doesNotMatch(dom, /下载完整报告|\sdownload(?:=|\s|>)/);
   assert.equal((html.match(/https:\/\/arxiv\.org\/abs\//g) ?? []).length >= 13, true);
-  assert.equal((html.match(/class="pls-landing-details/g) ?? []).length, 2);
+  assert.equal((html.match(/class="pls-landing-details/g) ?? []).length, 4);
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
   assert.doesNotMatch(html, /Automatic Judge.*IMPLEMENTED|Judge 已实现|Reward 已实现/);
   assert.match(html, /不构成 multi-seed statistical experiment/);
   const css = await readFile(new URL("../app/point-line-scene-framework/point-line-scene-framework.css", import.meta.url), "utf8");
+  const evidenceCss = await readFile(new URL("../app/point-line-scene-framework/evidence-integrity.css", import.meta.url), "utf8");
   const globalCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.pls-v21-core-graph \{[^}]*overflow: hidden/s);
-  assert.match(css, /\.pls-v21-dag-grid \{[^}]*grid-template-columns:[^}]*68px/s);
-  assert.match(css, /\.pls-v21-connector\.is-blocked \{[^}]*dashed/s);
-  assert.doesNotMatch(css, /edge-p1-p3|rotate\(38deg\)|rotate\(68deg\)/);
-  assert.doesNotMatch(html, /Metallic knock exists|edge-p1-p3/);
-  assert.match(css, /\.pls-v21-metric-tiles \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
+  assert.doesNotMatch(html, /T2A_TEMP_007|FAIL_PREREQUISITE|100 Designed Cases|85%|80%|68 \/ 85|68 \/ 100/);
+  assert.doesNotMatch(html, /EVALUATOR ROUTING|MODEL REGRESSION|Judge-ready Schema/);
+  assert.match(evidenceCss, /\.pls-v21-evidence-architecture \{[^}]*grid-template-columns/s);
+  assert.match(evidenceCss, /\.pls-v21-extension-grid \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
   assert.match(css, /\.pls-v21-frontier \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
   assert.match(css, /@media \(max-width: 680px\)[\s\S]*\.pls-v21-layer-map[^}]*grid-template-columns: 1fr/s);
   assert.match(globalCss, /\.paper-link::after \{[^}]*content: "→"/s);
