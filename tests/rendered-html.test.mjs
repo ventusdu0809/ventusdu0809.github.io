@@ -64,7 +64,7 @@ test("PLS-Eval foregrounds dependency-aware units, reference chains and evidence
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位哪一项要求失败", "再讨论整体分数",
+    "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位失败原因", "再讨论整体分数",
     "PLS 不从“整体分数”开始，而从“哪一项要求在哪里失败”开始。", "PLS + Q",
     "STABLE TAXONOMY", "ACTIVE SCHEMA", "Ontology stays stable", "COUPLED RUBRIC", "DECOUPLED UNITS",
     "DEPENDENCY-AWARE EVALUATION", "原子化不等于无依赖", "Three knocks, followed by a wooden object sliding.",
