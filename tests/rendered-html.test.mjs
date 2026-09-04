@@ -66,13 +66,13 @@ test("PLS-Eval foregrounds executed evidence and separates extensions", async ()
   for (const text of [
     "PLS-Eval", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位失败原因", "再讨论整体分数",
     "PLS 不从“整体分数”开始，而从“哪一项要求在哪里失败”开始。", "PLS + Q",
-    "STABLE TAXONOMY", "ACTIVE SCHEMA", "Ontology stays stable", "COUPLED RUBRIC", "DECOUPLED UNITS",
-    "3→4→4：比较哪一段参考链，决定问题归因", "Visual Instruction Failure", "audio_early",
-    "CONTROLLED REGRESSION · IMPLEMENTED", "P06 · P10 · R2-H1-B", "Increase exact-count regression priority",
+    "固定能力分类", "当前任务激活项", "能力分类保持稳定", "耦合式评分", "拆分后的评价单元",
+    "3→4→4：比较哪一段参考链，决定问题归因", "文本 → 画面数量约束失败", "audio_early",
+    "06 / 受控回归 · 已执行", "P06 · P10 · R2-H1-B", "提高精确计数回归优先级",
     "07 / 证据分工", "人工评测", "信号诊断", "Signal Diagnostics 不自动生成或修改 PLS / OVL 评分",
-    "Repeated Diagnostic Pattern", "Not Replicated", "Mixed / Refined", "Audio / Omni Judge",
-    "INTEGRATED CONCEPT", "not fully executed / not backfilled", "METHOD EXTENSIONS", "FORMULA ONLY · NO PROJECT RESULT",
-    "AudioScape-TTA", "AnyAudio-Judge", "AcoustiTrace", "AVGen-Bench", "展开已执行的 Signal Diagnostics 指标",
+    "Repeated Diagnostic Pattern", "Not Replicated", "Mixed / Refined", "音频 / 全模态评测器",
+    "概念整合", "未完全执行 / 未回填", "09 / 方法扩展", "仅为公式设计 · 无项目结果",
+    "AudioScape-TTA", "AnyAudio-Judge", "AcoustiTrace", "AVGen-Bench", "展开已执行的信号诊断（Signal Diagnostics）指标",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   const dom = renderedDom(html);
   assert.match(html, /href="\/audio-visual-evaluation"/);
@@ -85,7 +85,7 @@ test("PLS-Eval foregrounds executed evidence and separates extensions", async ()
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
   assert.doesNotMatch(html, /Automatic Judge.*IMPLEMENTED|Judge 已实现|Reward 已实现/);
-  assert.match(html, /不构成 multi-seed statistical experiment/);
+  assert.match(html, /不构成多随机种子统计实验（multi-seed statistical experiment）/);
   const css = await readFile(new URL("../app/point-line-scene-framework/point-line-scene-framework.css", import.meta.url), "utf8");
   const evidenceCss = await readFile(new URL("../app/point-line-scene-framework/evidence-integrity.css", import.meta.url), "utf8");
   const globalCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");

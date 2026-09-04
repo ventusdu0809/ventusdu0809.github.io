@@ -19,14 +19,25 @@
 .pls-v21-evidence-architecture .is-future { border-style: dashed; border-color: #9b8871; background: #fbf8f2; }
 .pls-v21-evidence-architecture .is-future small { color: #85735f; }
 .pls-v21-evidence-note { margin: 18px 0 0; padding: 14px 18px; border-left: 3px solid var(--v21-amber); color: var(--ink-soft); background: #fffaf3; font-size: 12px; line-height: 1.7; }
+.pls-v21-layer-map h3 { margin: 0 0 6px; }
+.pls-v21-layer-map article p { margin-top: auto; }
+.pls-v21-schema-diagram > article > h3 { margin: 0 0 5px; font-family: var(--serif); font-size: 23px; font-weight: 600; }
+.pls-v21-reference-chain article span small,
+.pls-v21-reference-edge b small,
+.pls-v21-record-flow article > span small,
+.pls-v21-record-flow b small { display: block; margin-top: 4px; color: var(--ink-soft); font-family: var(--sans); font-size: 9px; font-weight: 500; letter-spacing: .03em; }
+.pls-v21-regression-diff article em,
+.pls-v21-audit-matrix em { display: block; margin-bottom: 8px; color: var(--ink-soft); font-size: 10px; font-style: normal; letter-spacing: .04em; }
 .pls-v21-boundary-grid-four { grid-template-columns: repeat(4, 1fr); }
 .pls-v21-boundary-grid-four article:nth-child(2) span { color: var(--v21-green); }
 .pls-v21-boundary-grid-four article:nth-child(3) span { color: var(--v21-amber); }
 .pls-v21-boundary-grid-four article:nth-child(4) span { color: #85735f; }
 .pls-v21-boundary-grid-four small { color: var(--ink-soft); font-family: var(--sans); font-size: 11px; }
+.pls-v21-boundary-grid-four span small { display: block; margin-top: 4px; font-size: 9px; font-weight: 500; letter-spacing: .04em; }
 .pls-v21-extension-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; padding: 8px 0 28px; }
 .pls-v21-extension-grid article { min-height: 255px; display: flex; flex-direction: column; padding: 22px; border: 1px dashed #9b8871; background: #fbf8f2; }
 .pls-v21-extension-grid span, .pls-v21-extension-grid small { color: #85735f; font-size: 10px; font-weight: 800; letter-spacing: .06em; }
+.pls-v21-extension-grid span small { display: block; margin-top: 4px; font-size: 9px; font-weight: 500; }
 .pls-v21-extension-grid h3 { margin: auto 0 14px; font-family: var(--serif); font-size: 24px; font-weight: 600; }
 .pls-v21-extension-grid p { margin: 0 0 18px; color: var(--ink-soft); font-size: 12px; line-height: 1.75; }
 .pls-v21-judge-concept { display: grid; grid-template-columns: 1fr auto 1fr; gap: 20px; align-items: center; margin: 18px 0 28px; padding: 24px; border: 1px dashed #9b8871; background: #fbf8f2; text-align: center; }
