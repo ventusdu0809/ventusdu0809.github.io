@@ -6,193 +6,84 @@ import { evaluationSystemEvidence, publicEvidenceStatusLabels } from "../../src/
 
 export const metadata: Metadata = {
   title: "PLS-Eval｜Point–Line–Scene 结构化诊断评测",
-  description: "PLS-Eval 将生成任务拆成 Point、Line、Scene 三层可验证约束，并保留独立 Quality 轴、显式参考链、原子评价单元与受控回归。",
-  keywords: ["PLS-Eval", "Point-Line-Scene", "Failure Localization", "Atomic Evaluation Unit", "Reference-aware Diagnosis", "Judge Audit", "生成式音频评测", "音视频生成评测"],
+  description: "PLS-Eval 将生成任务拆成 Point、Line、Scene 三层可验证约束，并以独立 Quality 轴、参考链和单元级记录定位可观察失败。",
+  keywords: ["PLS-Eval", "Point-Line-Scene", "Failure Localization", "Dependency-aware Evaluation", "Reference-aware Diagnosis", "生成式音频评测"],
   alternates: { canonical: "/point-line-scene-framework" },
 };
 
 const layers = [
-  { id: "POINT", type: "Atomic Constraint", title: "点：局部事实", question: "单个事实是否正确？", items: ["Event", "Source", "Attribute", "Material", "Count"] },
-  { id: "LINE", type: "Relational Constraint", title: "线：事实关系", question: "两个或多个事实之间的关系是否正确？", items: ["Temporal", "Spatial", "Causal", "Interactive", "Dynamic / Sync"] },
-  { id: "SCENE", type: "Graph-level Constraint", title: "面：整体场景", question: "整个生成世界是否成立？", items: ["Environment", "Hierarchy", "Context", "Salience", "Coherence"] },
-  { id: "QUALITY", type: "Orthogonal Quality Axis", title: "独立质量轴", question: "输出本身听起来怎么样？", items: ["Artifact", "Noise", "Clipping", "Loudness", "Spectral / Spatial Quality"] },
+  ["POINT", "点：局部事实", "Local / Atomic", "事件、声源、属性、材质、计数"],
+  ["LINE", "线：事实关系", "Relational", "时间、空间、因果、交互、动态 / 声画同步"],
+  ["SCENE", "面：整体场景", "Graph-level", "环境、层级、语境、显著性、整体一致性"],
 ] as const;
 
-const taxonomy = [
-  ["POINT", ["P1 事件完整性", "P2 声源正确性", "P3 材质 / 属性一致性", "P4 事件计数"]],
-  ["LINE", ["L1 起点对齐", "L2 时间顺序", "L3 持续时间 / 重叠", "L4 动态对应"]],
-  ["SCENE", ["S1 环境匹配", "S2 空间合理性", "S3 注意 / 显著性一致性", "S4 叙事内声音一致性"]],
-] as const;
-
-const activeUnits = [
-  ["P1", "事件完整性", "ACTIVE"], ["P3", "材质 / 属性一致性", "ACTIVE"], ["P4", "精确计数", "ACTIVE"],
-  ["L2", "时间顺序", "ACTIVE"], ["OVL", "独立质量", "ACTIVE"], ["其他能力", "与当前任务无关", "N/A"],
-] as const;
-
-const atomicFacts = [
-  ["事件是否出现", "Boolean / observed fact"], ["事件次数", "Integer"], ["声画偏移", "Continuous"],
-  ["自然度 / OVL", "Ordinal 1–5"], ["候选偏好", "Pairwise · Future"],
-] as const;
-
-const p06State = [
-  ["P4 事件计数", "5 / 5", "Visual ↔ Audio"], ["L1 起点对齐", "3 / 5", "audio_early"],
-  ["Instruction Fidelity", "FAIL", "Prompt → Visual"], ["Cross-modal Correspondence", "PASS", "Visual → Audio"],
-  ["OVL", "4 / 5", "Independent Quality"],
-] as const;
-
-const evaluatorRouting = [
-  ["P1 事件完整性", "主要", "—", "Future", "Human"], ["P3 材质 / 属性", "主要", "辅助", "Future", "Human"],
-  ["P4 精确计数", "主要", "—", "Future", "Human"], ["L1 声画起点", "主要", "Future", "Future", "Human"],
-  ["Q 伪影 / 削波", "确认", "主要", "—", "Hybrid"], ["S 场景一致性", "主要", "—", "Future", "Human"],
-] as const;
-
-const judgeAudit = [
-  ["01", "Detection", ["Positive Recall", "Failure Recall", "Balanced Accuracy"]],
-  ["02", "Localization", ["Exact Failure Set Match", "Failure Jaccard"]],
-  ["03", "Decoupling", ["Dimension Correlation", "Error Correlation", "Pseudo-Decoupling"]],
-  ["04", "Reliability", ["Human Agreement", "Domain Stability", "Prompt Stability", "Confidence Calibration"]],
+const evaluationStates = [
+  ["PASS ✓", "有资格评价，满足要求", "pass"], ["PARTIAL ◐", "有资格评价，部分满足", "partial"],
+  ["FAIL ×", "有资格评价，明确不满足", "fail"], ["BLOCKED ⊘", "前置条件失败，无法独立评价", "blocked"],
+  ["N/A —", "当前任务从设计上不适用", "na"], ["SKIPPED", "具备资格，但本次未完成评分", "skipped"],
 ] as const;
 
 const regressionCases = [
-  ["Exact-count", "Repeated Diagnostic Pattern", "3 个案例重复出现 3→4→4，提高精确计数与参考链检查的回归优先级。"],
-  ["Onset", "Not Replicated", "Round-2 未复现 audio_early，降低其作为稳定失效模式的证据强度。"],
-  ["Dynamic", "Mixed / Refined", "边界响应存在，但连续 source-motion 跟随不足，问题被细化而不是简单判为成功或失败。"],
-  ["Cross-shot", "Not Replicated", "No-cut 与 Planned-cut 均未复现持续声音中断，不支持一般化的 Cut→Audio Loss 解释。"],
+  ["Exact-count", "Repeated Diagnostic Pattern", "3→4→4 在 3 个可精确判定案例中重复出现。"],
+  ["Onset", "Not Replicated", "Round-2 未复现 audio_early。"],
+  ["Dynamic", "Mixed / Refined", "有边界响应，但连续 source-motion 跟随不足。"],
+  ["Cross-shot", "Not Replicated", "未支持一般化的 Cut→Audio Loss 解释。"],
+] as const;
+
+const judgeAudit = [
+  ["Detection", "Failure Recall · Balanced Accuracy"], ["Localization", "Exact Set Match · Failure Jaccard"],
+  ["Decoupling", "Prediction Correlation · Pseudo-Decoupling"], ["Reliability", "Human Agreement · Domain Stability"],
 ] as const;
 
 const frontierPapers = [
-  {
-    title: "OmniJudge or OmniBias?", theme: "Schema & Judge Audit", href: "https://arxiv.org/abs/2608.24160",
-    findings: ["Balanced / Decoupled", "53 orthogonal binary dimensions", "Failure detection beyond aggregate accuracy"],
-    influence: "支持保留原子级、维度级判断，并把 Judge 的失败发现能力与总体准确率分开审计。",
-    boundary: "用于启发 PLS 的 Judge Audit；D³-Omni 并未验证当前音视频案例或 PLS Schema。",
-  },
-  {
-    title: "Voice-Agent Judge", theme: "Evaluator Deployment", href: "https://arxiv.org/abs/2608.24314",
-    findings: ["Metric-specific reliability", "Configuration sensitivity", "Human oversight"],
-    influence: "支持按评价单元路由不同 Evaluator，并逐项验证自动评测可靠性。",
-    boundary: "论文场景是电信与零售语音代理，不直接证明生成式音频 Judge 已可部署。",
-  },
-  {
-    title: "RubricRM", theme: "Preference & Reward", href: "https://arxiv.org/abs/2608.26956",
-    findings: ["Input-specific rubric", "Dimension weights", "Pairwise preference / reward"],
-    influence: "启发在固定能力分类之上研究任务相关的选择与重要性，而不是每次重新发明能力分类。",
-    boundary: "图像生成 / 编辑中的研究方向；PLS 尚未实现 Dynamic Importance、Preference 或 Reward。",
-  },
-] as const;
-
-const literature = [
-  ["细粒度拆解", "AudioScape-TTA · AnyAudio-Judge", "评价单位从总体相似度下沉到事件、属性和任务相关 rubric。", "https://arxiv.org/abs/2608.04479"],
-  ["关系评价", "Fine-Grained Feedback · MMAG", "事件存在与时间关系应分开检查；混合音频需要同时处理语义与时间控制。", "https://arxiv.org/abs/2607.13408"],
-  ["物理约束", "AcoustiTrace", "感知合理性不能替代生成、传播与接收过程中的声学物理一致性。", "https://arxiv.org/abs/2608.02035"],
-  ["音视频联合评测", "AVGen-Bench", "单模态评价与粗粒度相似度不足以覆盖跨模态联合正确性。", "https://arxiv.org/abs/2604.08540"],
-] as const;
-
-const researchQuestions = [
-  ["RQ1", "Point → Line → Scene 是否形成可测量的复杂度梯度？", "NOT TESTED"],
-  ["RQ2", "PLS 是否比 holistic-only evaluation 更容易定位模型回归？", "FORMAL COMPARISON NOT TESTED"],
-  ["RQ3", "PLS-derived Preference 能否形成有效 Reward Signal？", "FUTURE WORK"],
-  ["RQ4", "显式参考链能否降低音视频评测中的错误归因？", "CASE-MOTIVATED"],
+  ["OmniJudge", "Schema / Judge Audit", "保留分离维度，并审计失败发现能力。", "FUTURE INPUT", "https://arxiv.org/abs/2608.24160"],
+  ["Voice-Agent Judge", "Evaluator Deployment", "按单元验证自动评测的可靠性。", "FUTURE INPUT", "https://arxiv.org/abs/2608.24314"],
+  ["RubricRM", "Preference / Reward", "在固定 taxonomy 上研究任务相关偏好。", "FUTURE INPUT", "https://arxiv.org/abs/2608.26956"],
 ] as const;
 
 const references = [
-  ["Wang, J. et al. (2026)", "AudioScape-TTA", "https://arxiv.org/abs/2608.04479"],
-  ["Li, H. et al. (2026)", "AnyAudio-Judge", "https://arxiv.org/abs/2606.03116"],
-  ["Kuan, C.-Y. et al. (2026)", "Fine-Grained Feedback for TTA", "https://arxiv.org/abs/2607.13408"],
-  ["Zheng, Z. et al. (2026)", "MMAG", "https://arxiv.org/abs/2608.06900"],
-  ["Li, S. et al. (2026)", "AcoustiTrace", "https://arxiv.org/abs/2608.02035"],
-  ["Zhou, Z. et al. (2026)", "AVGen-Bench", "https://arxiv.org/abs/2604.08540"],
-  ["Desbos, M. et al. (2026)", "Production-Oriented SFX Evaluation", "https://arxiv.org/abs/2607.09973"],
-  ["Yu, F. et al. (2026)", "AudioRubrics", "https://arxiv.org/abs/2608.02831"],
-  ["Park, J. et al. (2026)", "LALM Judge Audit", "https://arxiv.org/abs/2607.13477"],
-  ["Hu, G. et al. (2026)", "OmniJudge or OmniBias? D³-Omni", "https://arxiv.org/abs/2608.24160"],
-  ["Purwar, A. et al. (2026)", "Benchmarking LLM Judges for Voice-Agent Evaluation", "https://arxiv.org/abs/2608.24314"],
-  ["Kan, Z. et al. (2026)", "RubricRM", "https://arxiv.org/abs/2608.26956"],
+  ["AudioScape-TTA", "https://arxiv.org/abs/2608.04479"], ["AnyAudio-Judge", "https://arxiv.org/abs/2606.03116"], ["Fine-Grained Feedback for TTA", "https://arxiv.org/abs/2607.13408"],
+  ["MMAG", "https://arxiv.org/abs/2608.06900"], ["AcoustiTrace", "https://arxiv.org/abs/2608.02035"], ["AVGen-Bench", "https://arxiv.org/abs/2604.08540"],
+  ["Production-Oriented SFX Evaluation", "https://arxiv.org/abs/2607.09973"], ["AudioRubrics", "https://arxiv.org/abs/2608.02831"], ["LALM Judge Audit", "https://arxiv.org/abs/2607.13477"],
+  ["OmniJudge or OmniBias? D³-Omni", "https://arxiv.org/abs/2608.24160"], ["Benchmarking LLM Judges for Voice-Agent Evaluation", "https://arxiv.org/abs/2608.24314"], ["RubricRM", "https://arxiv.org/abs/2608.26956"],
 ] as const;
 
+function Arrow({ className = "" }: { className?: string }) { return <span className={`pls-v21-arrow ${className}`} aria-hidden="true" />; }
+function SectionHeading({ index, title, children }: { index: string; title: string; children?: React.ReactNode }) { return <header className="pls-v21-heading"><p>{index}</p><h2>{title}</h2>{children && <div>{children}</div>}</header>; }
+
 export default function PointLineSceneFrameworkPage() {
-  return (
-    <main className="t2a-page pls-page pls-eval-page">
-      <header className="t2a-topbar">
-        <Link className="wordmark" href="/" aria-label="返回作品集首页"><span className="wordmark-mark" aria-hidden="true" /><span>DU MING / AUDIO</span></Link>
-        <nav aria-label="PLS-Eval 页面导航"><Link className="topbar-mobile-only" href="/">首页</Link><a className="topbar-mobile-only" href="#framework">框架</a><a className="topbar-mobile-only" href="#case-study">案例</a><a className="topbar-desktop-only" href="#framework">框架</a><a className="topbar-desktop-only" href="#schema">Schema</a><a className="topbar-desktop-only" href="#case-study">3→4→4</a><a className="topbar-desktop-only" href="#routing">Routing</a><a className="topbar-desktop-only" href="#boundary">边界</a><a className="topbar-desktop-only" href="#research-details">文献</a></nav>
-      </header>
+  return <main className="t2a-page pls-page pls-eval-page pls-v21-page">
+    <header className="t2a-topbar"><Link className="wordmark" href="/" aria-label="返回作品集首页"><span className="wordmark-mark" aria-hidden="true" /><span>DU MING / AUDIO</span></Link><nav aria-label="PLS-Eval 页面导航"><Link className="topbar-mobile-only" href="/">首页</Link><a className="topbar-mobile-only" href="#dependency">依赖</a><a className="topbar-mobile-only" href="#reference">案例</a><a className="topbar-desktop-only" href="#framework">框架</a><a className="topbar-desktop-only" href="#dependency">依赖</a><a className="topbar-desktop-only" href="#reference">参考链</a><a className="topbar-desktop-only" href="#routing">路由</a><a className="topbar-desktop-only" href="#boundary">边界</a><a className="topbar-desktop-only" href="#research-details">文献</a></nav></header>
 
-      <section className="pls-hero t2a-shell pls-eval-hero">
-        <div className="pls-hero-index"><p className="eyebrow">PLS-EVAL</p><span>点 POINT</span><span>线 LINE</span><span>面 SCENE</span></div>
-        <div className="pls-hero-copy"><p className="pls-kicker">Point–Line–Scene Structured Diagnostic Evaluation</p><h1>先定位失败原因，<br />再讨论整体多少分</h1><p className="pls-eval-subtitle">从原子约束、关系约束到场景一致性的结构化诊断评测框架；独立质量（Quality）单独记录。</p><blockquote>PLS 不从“整体多少分”开始，而从“哪一项要求在哪里失败”开始。</blockquote><div className="pls-hero-actions"><a className="btn btn-primary" href="#framework">查看框架</a><Link className="paper-link" href="/point-line-scene-framework/report/">阅读完整报告</Link></div></div>
-      </section>
+    <section className="pls-v21-hero t2a-shell"><div className="pls-v21-hero-copy"><p className="eyebrow">PLS-EVAL / METHOD</p><p className="pls-v21-kicker">Point–Line–Scene Structured Diagnostic Evaluation</p><h1>先定位失败原因，<br />再讨论整体多少分</h1><p>PLS 不从“整体多少分”开始，而从“哪一项要求在哪里失败”开始。Quality（质量）独立记录，不进入 P→L→S 的层级链。</p><div className="pls-v21-hero-actions"><a className="btn btn-primary" href="#framework">查看方法</a><Link className="paper-link" href="/point-line-scene-framework/report/">完整报告</Link></div></div><figure className="pls-v21-core-graph" role="img" aria-label="Requirement 分解为 Point、Line、Scene，得到单元级状态和失败定位；Quality 作为独立轴从侧面进入。"><div className="pls-v21-core-node is-root">REQUIREMENT</div><Arrow className="is-down" /><div className="pls-v21-core-branches"><div className="pls-v21-core-node">POINT<small>Local</small></div><div className="pls-v21-core-node">LINE<small>Relation</small></div><div className="pls-v21-core-node">SCENE<small>Global</small></div></div><Arrow className="is-down" /><div className="pls-v21-core-node is-state">UNIT-LEVEL STATE</div><Arrow className="is-down" /><div className="pls-v21-core-node is-output">FAILURE LOCALIZATION</div><div className="pls-v21-quality-rail"><span>QUALITY</span><small>Orthogonal axis</small></div><figcaption>PLS = 结构化任务要求，再定位可观察失败。</figcaption></figure></section>
 
-      <section className="t2a-section t2a-shell" id="framework">
-        <header className="t2a-section-heading"><p>01 / WHAT IS PLS-EVAL</p><h2>Point、Line、Scene 与 Quality 分别回答不同问题</h2><p>PLS-Eval 将生成要求拆成不同粒度的可验证约束。主要输出不是新的总分，而是每个评价单元保留下来的证据。</p></header>
-        <div className="pls-eval-layer-grid">{layers.map((layer) => <article key={layer.id}><span>{layer.id}</span><small>{layer.type}</small><h3>{layer.title}</h3><ul>{layer.items.map((item) => <li key={item}>{item}</li>)}</ul><p>{layer.question}</p></article>)}</div>
-        <div className="pls-primary-output"><div><span>PRIMARY OUTPUT</span><strong>Unit-level State / Score Vector</strong></div><b className="pls-connector" aria-hidden="true" /><div><span>DERIVED VIEW</span><strong>Point / Line / Scene reporting</strong></div><p>聚合用于报告；单元级记录用于失败定位。Layer score 不反向覆盖 Capability、Facts 或 Bad Case。</p></div>
-      </section>
+    <section className="t2a-section t2a-shell" id="framework"><SectionHeading index="01 / PLS + QUALITY" title="三个约束层，外加一条独立质量轴"><p>Point、Line、Scene 分别检查事实、关系和场景；Quality 只描述输出自身质量。</p></SectionHeading><div className="pls-v21-layer-map" role="img" aria-label="Point、Line、Scene 三层约束与独立 Quality 质量轴">{layers.map(([id, title, type, items]) => <article key={id}><span>{id}</span><small>{type}</small><h3>{title}</h3><p>{items}</p></article>)}<aside><span>QUALITY</span><h3>独立质量轴</h3><p>Artifact · Noise · Clipping · Loudness · Spectral / Spatial Quality</p><strong>PLS + Q</strong></aside></div></section>
 
-      <section className="t2a-section t2a-section-tint" id="schema"><div className="t2a-shell">
-        <header className="t2a-section-heading"><p>02 / STABLE TAXONOMY × PROMPT-SPECIFIC SCHEMA</p><h2>能力分类保持稳定，适用评价单元随任务变化</h2><p>PLS 使用封闭、已冻结的 P1–P4、L1–L4、S1–S4；每条任务只激活与当前要求有关的单元，其余明确记为 N/A。</p></header>
-        <div className="pls-taxonomy-schema"><article><span>STABLE CAPABILITY TAXONOMY</span><div>{taxonomy.map(([group, items]) => <section key={group}><h3>{group}</h3><ul>{items.map((item) => <li key={item}>{item}</li>)}</ul></section>)}</div></article><b className="pls-op-x" aria-hidden="true" /><article><span>PROMPT-SPECIFIC ACTIVE SCHEMA</span><blockquote>“金属杯被敲三次，随后滑过木桌。”</blockquote><dl>{activeUnits.map(([id, label, status]) => <div key={id}><dt><code>{id}</code> {label}</dt><dd className={status === "ACTIVE" ? "is-active" : "is-na"}>{status}</dd></div>)}</dl></article></div>
-        <p className="pls-method-principle">Ontology stays stable; applicable evaluation units change with the task.</p>
-      </div></section>
+    <section className="t2a-section t2a-section-tint" id="schema"><div className="t2a-shell"><SectionHeading index="02 / STABLE TAXONOMY × DYNAMIC SCHEMA" title="固定坐标系，按任务激活评价单元"><p>已冻结的 P1–P4、L1–L4、S1–S4 不随 Prompt 改写；每条任务只激活适用单元。</p></SectionHeading><div className="pls-v21-schema-diagram" role="img" aria-label="稳定 taxonomy 在 prompt 激活后形成 active schema"><article><span>STABLE TAXONOMY</span><div className="pls-v21-taxonomy-dots"><b>P</b><b>P</b><b>P</b><b>P</b><b>L</b><b>L</b><b>L</b><b>L</b><b>S</b><b>S</b><b>S</b><b>S</b></div><small>12 项冻结 Capability</small></article><Arrow /><article><span>ACTIVE SCHEMA</span><p>“金属杯被敲三次，随后滑过木桌。”</p><div className="pls-v21-active-units"><b>P1 ●</b><b>P3 ●</b><b className="is-primary">P4 ● PRIMARY</b><b>L2 ●</b><b className="is-na">S1 ○ N/A</b></div></article></div><p className="pls-v21-principle">Ontology stays stable; applicable evaluation units change with the task.</p></div></section>
 
-      <section className="t2a-section t2a-shell" id="atomic-units">
-        <header className="t2a-section-heading"><p>03 / ATOMIC EVALUATION UNIT</p><h2>One Unit = One Falsifiable Question</h2><p>原子化不要求所有指标使用同一种数据类型，而是要求一个评价单元只对应一个明确、可证伪的问题。</p></header>
-        <div className="pls-coupling-compare"><article className="is-coupled"><span>COUPLED RUBRIC</span><h3>事件、材质、次数和顺序是否都正确？</h3><strong>FAIL</strong><p>失败后无法知道具体是哪项要求没有满足。</p></article><article className="is-decoupled"><span>DECOUPLED UNITS</span><dl><div><dt>P1 事件完整性</dt><dd>5</dd></div><div><dt>P3 材质 / 属性</dt><dd>5</dd></div><div className="is-focus"><dt>P4 事件计数</dt><dd>2</dd></div><div><dt>L2 时间顺序</dt><dd>5</dd></div></dl><p>结构示例：低分可以直接回到 P4，不会被其他正确项遮蔽。</p></article></div>
-        <div className="pls-data-type-grid">{atomicFacts.map(([unit, type]) => <article key={unit}><strong>{unit}</strong><span>{type}</span></article>)}</div>
-      </section>
+    <section className="t2a-section t2a-shell" id="atomic-units"><SectionHeading index="03 / ATOMIC EVALUATION UNIT" title="一个单元，只回答一个可证伪问题"><p>原子化使低分能回到具体要求，而不是把事件、材质、次数和顺序揉成一个结论。</p></SectionHeading><div className="pls-v21-atomic-compare"><article className="is-coupled"><span>COUPLED RUBRIC</span><h3>事件、材质、次数和顺序是否都正确？</h3><strong>FAIL ×</strong><p>无法识别哪项要求失败。</p></article><Arrow /><article className="is-decoupled"><span>DECOUPLED UNITS</span><div><b>P1 事件完整性 <i>5</i></b><b>P3 材质 / 属性 <i>5</i></b><b className="is-focus">P4 事件计数 <i>2</i></b><b>L2 时间顺序 <i>5</i></b></div><p>低分可直接回到 P4。</p></article></div></section>
 
-      <section className="pls-case-band" id="case-study"><div className="t2a-shell">
-        <header className="t2a-section-heading"><p>04 / WHY REFERENCE MATTERS</p><h2>3→4→4：正确性取决于比较哪一段参考链</h2><p>P06、P10 与 R2-H1-B 跨两轮重复出现同一条可精确判定的模式。</p></header>
-        <div className="pls-reference-case"><div><span>文本要求 / PROMPT</span><strong>3</strong><small>COUNT = 3</small></div><b className="pls-connector" aria-hidden="true" /><div className="is-fail"><span>画面事实 / VISUAL</span><strong>4</strong><small>Instruction Fidelity · FAIL</small></div><b className="pls-connector" aria-hidden="true" /><div className="is-pass"><span>音频事实 / AUDIO</span><strong>4</strong><small>Event Correspondence · PASS</small></div></div>
-        <p className="pls-reference-warning">如果直接比较 Prompt → Audio，容易把问题误写成 Audio Counting Failure。加入 Visual Fact 后，偏差定位到“文本 → 画面”的指令满足环节。</p><div className="pls-case-links"><Link className="btn btn-primary" href="/audio-visual-evaluation">查看两轮音视频评测</Link><span>Evidence status · Repeated Diagnostic Pattern</span></div>
-      </div></section>
+    <section className="t2a-section t2a-section-tint" id="dependency"><div className="t2a-shell"><SectionHeading index="04 / DEPENDENCY-AWARE EVALUATION" title="原子化不等于无依赖"><p>评价单元保持原子化，但一个单元是否具备评价资格，可以依赖上游前置条件。</p></SectionHeading><div className="pls-v21-dependency-layout"><figure className="pls-v21-dag" role="img" aria-label="P2 依赖 P1；P4 依赖 P3；L1 同时依赖 P1 和 P3 的资格依赖图。"><figcaption>Three metallic knocks, followed by a wooden object sliding.</figcaption><div className="pls-v21-dag-grid"><article className="is-pass"><span>P1</span><strong>Metallic knock exists</strong><small>PASS ✓</small></article><article className="is-pass"><span>P2</span><strong>Count = 3</strong><small>PASS ✓</small></article><article className="is-fail"><span>P3</span><strong>Sliding event exists</strong><small>FAIL ×</small></article><article className="is-blocked"><span>P4</span><strong>Material = wooden</strong><small>BLOCKED ⊘</small></article><article className="is-blocked is-l1"><span>L1</span><strong>Knock before sliding</strong><small>BLOCKED ⊘</small></article><i className="edge edge-p1-p2" aria-hidden="true" /><i className="edge edge-p1-p3" aria-hidden="true" /><i className="edge edge-p3-p4" aria-hidden="true" /><i className="edge edge-p1-l1" aria-hidden="true" /><i className="edge edge-p3-l1" aria-hidden="true" /></div></figure><aside className="pls-v21-state-legend"><h3>Evaluation State</h3>{evaluationStates.map(([state, description, tone]) => <div key={state} className={`is-${tone}`}><strong>{state}</strong><span>{description}</span></div>)}<p>BLOCKED ≠ N/A ≠ SKIPPED</p></aside></div><p className="pls-v21-callout">一个 missing event 不应扩散成 material failure 和 temporal failure。</p><div className="pls-v21-outcome-split" role="img" aria-label="单元级 P2 失败、L1 阻断，与案例级 temporal order 前置条件失败的分离状态。"><article><span>UNIT-LEVEL ATTRIBUTION</span><div><b>P2 · Bird exists</b><strong>FAIL ×</strong></div><div><b>L1 · Temporal order</b><strong>BLOCKED ⊘</strong><small>blocked_by = P2</small></div></article><Arrow /><article className="is-case"><span>CASE-LEVEL OUTCOME</span><p>PRIMARY TARGET</p><b>TEMPORAL ORDER</b><strong>FAIL_PREREQUISITE</strong><small>下游 Unit 可以 BLOCKED，但 Case 仍然失败。</small></article></div></div></section>
 
-      <section className="t2a-section t2a-shell" id="unit-record">
-        <header className="t2a-section-heading"><p>05 / UNIT-LEVEL RECORD</p><h2>先保留单元判断，再派生报告视图</h2><p>P06 的记录同时保留 Capability、参考关系、Bad Case 与独立质量；Point / Line 均值只是后续展示。</p></header>
-        <div className="pls-unit-record"><div className="pls-state-vector"><span>PRIMARY · P06 STATE VECTOR</span>{p06State.map(([unit, value, note]) => <article key={unit}><strong>{unit}</strong><b className={value === "FAIL" ? "is-fail" : value === "PASS" ? "is-pass" : ""}>{value}</b><small>{note}</small></article>)}</div><b className="pls-connector" aria-hidden="true" /><div className="pls-derived-view"><span>DERIVED REPORTING VIEW</span><article><strong>Point</strong><b>5.00</b></article><article><strong>Line</strong><b>4.00</b></article><article><strong>OVL</strong><b>4 / 5</b></article><p>均值不能删除 <code>audio_early</code>，也不能改变 Prompt→Visual FAIL。</p></div></div>
-        <aside className="pls-judgment-note"><div><span>JUDGMENT</span><strong>3 / 5 = 部分满足</strong></div><div><span>VALIDITY</span><strong>证据是否足以评价</strong></div><div><span>CONFIDENCE</span><strong>Future field · 尚未写入 v1.0</strong></div><p>判断分数、证据有效性与判断把握不是同一变量；本模块只做概念区分，不修改已冻结的 PLS Evaluation Schema v1.0。</p></aside>
-        <div className="pls-quality-proof"><div><span>RELATION CORRECTNESS</span><strong>H2 · Point 5.00 / Line 5.00</strong></div><b className="pls-op-ne" aria-hidden="true" /><div><span>PERCEPTUAL QUALITY</span><strong>OVL 3 · loudness_imbalance</strong></div><p>关系判断成立，输出质量仍可较低，因此 Quality 保持独立。</p></div>
-      </section>
+    <section className="t2a-section t2a-shell" id="case-anatomy"><SectionHeading index="05 / PRIMARY TARGET + DIAGNOSTIC UNITS" title="主评测目标引导案例，其他适用单元保留为诊断项"><p>Focused diagnostic cases 通常有一个主评测目标；Integration Cases 可以有复合目标。</p></SectionHeading><div className="pls-v21-case-anatomy" role="img" aria-label="T2A_TEMP_007 的主评测目标是 Temporal Order，诊断项包括 Dog exists、Bird exists、Near far。"><article><span>CASE</span><strong>T2A_TEMP_007</strong><p>A dog barks nearby before a bird chirps in the distance.</p></article><Arrow /><article className="is-target"><span>PRIMARY TARGET</span><strong>Temporal<br />Order</strong><small>L1 · dog before bird</small></article><Arrow /><article className="is-diagnostics"><span>DIAGNOSTIC REQUIREMENTS</span><div><b>P1 · Dog exists</b><b>P2 · Bird exists</b><b>L2 · Near / Far</b></div><small>Near / far 属于 Line，不属于 Scene。</small></article></div></section>
 
-      <section className="t2a-section t2a-section-tint" id="routing"><div className="t2a-shell">
-        <header className="t2a-section-heading"><p>06 / EVALUATION STACK & ROUTING</p><h2>不同评价单元可以交给不同证据来源</h2><p>当前系统由人工判断、信号诊断和结构化执行组成。Judge 只作为待验证路由，不写成已实现能力。</p></header>
-        <div className="pls-stack-flow-wrap"><div className="pls-stack-flow">{["Requirement", "Stable Capability Taxonomy", "Prompt-specific Schema", "Atomic Evaluation Units", "Evidence Collection", "Evaluator Routing", "Unit-level Record", "Failure Localization", "Controlled Regression"].map((item, index) => <div key={item} style={{ display: "flex", alignItems: "stretch" }}>{index > 0 && <span className="flow-connector" aria-hidden="true" />}<div className="flow-node"><span className="step-num">{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong></div></div>)}</div></div>
-        <div className="table-wrap pls-routing-table"><table><thead><tr><th>Evaluation Unit</th><th>Human</th><th>Signal / Tool</th><th>Model Judge</th><th>Current Route</th></tr></thead><tbody>{evaluatorRouting.map((row) => <tr key={row[0]}>{row.map((cell, index) => index === 0 ? <th scope="row" key={cell}>{cell}</th> : <td key={`${row[0]}-${cell}-${index}`}>{cell}</td>)}</tr>)}</tbody></table></div>
-        <p className="pls-routing-boundary"><strong>Current：</strong>Human + Signal + Execution。<strong>Future Validation：</strong>Audio / Omni Judge。没有经过逐单元可靠性验证的 Judge，不进入正式评分链路。</p>
-      </div></section>
+    <section className="t2a-section t2a-section-tint" id="metrics"><div className="t2a-shell"><SectionHeading index="06 / CONDITIONAL VS END-TO-END" title="同时报告资格、条件准确率与端到端成功"><p>Conditional Accuracy 只解释前置条件成立后的能力；End-to-End Success 保留实际任务完成情况。</p></SectionHeading><figure className="pls-v21-metric-flow" role="img" aria-label="100 个 Temporal cases 中，15 个前置条件失败，85 个可评价；可评价案例中 68 个顺序正确，17 个顺序错误。"><div className="pls-v21-metric-root"><strong>100</strong><span>Designed Cases</span></div><div className="pls-v21-metric-branches"><div className="is-fail"><strong>15</strong><span>Prerequisite Failure</span></div><div className="is-pass"><strong>85</strong><span>Eligible</span><div><b>68 · Order Correct</b><b>17 · Order Wrong</b></div></div></div></figure><div className="pls-v21-metric-tiles"><article><strong>85%</strong><span>Prerequisite Satisfaction</span><small>85 / 100</small></article><article><strong>80%</strong><span>Conditional Temporal Accuracy</span><small>68 / 85</small></article><article><strong>68%</strong><span>End-to-End Temporal Success</span><small>68 / 100</small></article></div></div></section>
 
-      <section className="t2a-section t2a-shell" id="judge-audit">
-        <header className="t2a-section-heading"><p>07 / JUDGE AUDIT · FUTURE VALIDATION</p><h2>Aggregate Accuracy is not sufficient.</h2><p>自动 Judge 即使总体准确率较高，也可能更擅长确认正确项，而不擅长发现失败项。PLS 的未来审计将 Detection、Localization、Decoupling 与 Reliability 分开。</p></header>
-        <div className="pls-judge-audit">{judgeAudit.map(([index, title, metrics]) => <article key={title}><span>{index}</span><h3>{title}</h3><ul>{metrics.map((metric) => <li key={metric}>{metric}</li>)}</ul><strong>NOT IMPLEMENTED</strong></article>)}</div>
-        <div className="pls-localization-example"><span>LOCALIZATION EXAMPLE</span><div><p>Ground truth failure</p><code>{`{ P3, L2 }`}</code></div><b className="pls-op-bi" aria-hidden="true" /><div><p>Judge failure set</p><code>{`{ P3, L2 }`}</code></div><strong>Exact Localization · PASS</strong></div>
-      </section>
+    <section className="pls-v21-reference-band" id="reference"><div className="t2a-shell"><SectionHeading index="07 / REFERENCE-AWARE DIAGNOSIS" title="3→4→4：比较哪一段参考链，决定问题归因"><p>P06、P10 与 R2-H1-B 在两轮中形成可精确判定的 Repeated Diagnostic Pattern。</p></SectionHeading><div className="pls-v21-reference-chain" role="img" aria-label="Prompt count 3 到 Visual count 4 是 instruction fidelity fail，Visual count 4 到 Audio count 4 是 event correspondence pass。"><article><span>PROMPT</span><strong>3</strong><small>COUNT = 3</small></article><div className="pls-v21-reference-edge is-fail"><Arrow /><b>Instruction Fidelity<br />FAIL ×</b></div><article className="is-fail"><span>VISUAL</span><strong>4</strong><small>COUNT = 4</small></article><div className="pls-v21-reference-edge is-pass"><Arrow /><b>Event Correspondence<br />PASS ✓</b></div><article className="is-pass"><span>AUDIO</span><strong>4</strong><small>COUNT = 4</small></article></div><div className="pls-v21-attribution-compare"><div><span>WITHOUT REFERENCE CHAIN</span><strong>Audio Counting Failure <b>×</b></strong></div><div><span>WITH REFERENCE CHAIN</span><strong>Visual Instruction Failure <b>✓</b></strong></div></div><div className="pls-v21-case-links"><Link className="btn btn-primary" href="/audio-visual-evaluation">查看两轮音视频评测</Link><span>Evidence status · Repeated Diagnostic Pattern</span></div></div></section>
 
-      <section className="t2a-section t2a-section-tint" id="regression"><div className="t2a-shell">
-        <header className="t2a-section-heading"><p>08 / CONTROLLED REGRESSION</p><h2>发现失败以后，下一轮检查它是否重现</h2><p>第一轮发现问题；第二轮在生成前冻结假设、观察字段和判定规则，再更新证据强度与排查优先级。</p></header>
-        <div className="pls-regression-summary">{regressionCases.map(([probe, status, detail]) => <article key={probe}><span>{probe}</span><h3>{status}</h3><p>{detail}</p></article>)}</div>
-      </div></section>
+    <section className="t2a-section t2a-shell" id="unit-record"><SectionHeading index="08 / UNIT-LEVEL RECORD" title="原始单元状态在前，聚合展示在后"><p>单元级记录保留 Capability、参考关系、Bad Case 与独立质量；Point / Line 均值只是派生视图。</p></SectionHeading><div className="pls-v21-record-flow"><article><span>RAW STATE · P06</span><div><b>P4 Event Counting <i>5 / 5</i></b><b>L1 Onset Alignment <i>3 / 5</i></b><b>Instruction Fidelity <i className="is-fail">FAIL ×</i></b><b>Cross-modal Correspondence <i className="is-pass">PASS ✓</i></b><b>OVL <i>4 / 5</i></b></div><small><code>audio_early</code> remains observable.</small></article><Arrow /><article className="is-derived"><span>DERIVED VIEW</span><div><b>Point <i>5.00</i></b><b>Line <i>4.00</i></b><b>OVL <i>4 / 5</i></b></div><small>聚合不能反向覆盖 Facts 或 Bad Case。</small></article></div><div className="pls-v21-quality-proof"><span>H2 · RELATION CORRECTNESS</span><strong>Point 5.00 / Line 5.00</strong><b>≠</b><span>PERCEPTUAL QUALITY</span><strong>OVL 3 · <code>loudness_imbalance</code></strong><p>关系正确，输出质量仍可较低。</p></div></section>
 
-      <section className="t2a-section t2a-shell" id="future-alignment">
-        <header className="t2a-section-heading"><p>09 / RESEARCH FRONTIER & FUTURE ALIGNMENT</p><h2>固定能力分类之上，再研究 Judge、Preference 与 Reward</h2><p>三篇新工作解释了 PLS-Eval 为什么需要保留单元判断、按单元路由 Evaluator，并谨慎进入偏好与奖励研究。</p></header>
-        <div className="pls-frontier-papers">{frontierPapers.map((paper) => <article key={paper.title}><span>{paper.theme}</span><h3>{paper.title}</h3><ul>{paper.findings.map((item) => <li key={item}>{item}</li>)}</ul><p><strong>对 PLS 的影响：</strong>{paper.influence}</p><small>{paper.boundary}</small><a href={paper.href} target="_blank" rel="noreferrer">阅读论文 ↗</a></article>)}</div>
-        <div className="pls-horizon-grid"><article><span>CURRENT</span><ul><li>Fixed Taxonomy</li><li>Prompt-specific Applicability</li><li>Human Evaluation</li><li>Structured Unit Data</li><li>Controlled Regression</li></ul></article><article><span>NEXT</span><ul><li>Multi-evaluator Calibration</li><li>Judge Reliability Benchmark</li><li>Failure Localization Benchmark</li></ul></article><article><span>FUTURE</span><ul><li>Dynamic Importance</li><li>Pairwise Preference</li><li>PLS-derived Reward</li></ul><strong>Research direction, not implemented claim.</strong></article></div>
-      </section>
+    <section className="t2a-section t2a-section-tint" id="routing"><div className="t2a-shell"><SectionHeading index="09 / EVALUATOR ROUTING" title="不同单元，匹配不同证据来源"><p>当前路由是 Human + Signal + structured execution；Audio / Omni Judge 仍是 Future Validation。</p></SectionHeading><figure className="pls-v21-routing-graph" role="img" aria-label="一个原子评价单元可由 Human、Signal 或 Future Judge 评估，汇聚成单元级状态。"><div>ATOMIC UNIT</div><Arrow className="is-down" /><section><article>HUMAN<small>Scene coherence</small></article><article>SIGNAL<small>AV offset · clipping</small></article><article className="is-future">JUDGE<small>FUTURE / NOT IMPLEMENTED</small></article></section><Arrow className="is-down" /><div>UNIT STATE</div></figure><div className="pls-v21-routing-examples"><b>AV Offset <span>→ Timestamp / Signal</span></b><b>Artifact / Clipping <span>→ Signal + Human</span></b><b>Scene Coherence <span>→ Human</span></b><b>Audio / Omni Judge <span>→ Future Validation</span></b></div></div></section>
 
-      <section className="t2a-section t2a-section-tint" id="boundary"><div className="t2a-shell">
-        <header className="t2a-section-heading"><p>10 / CURRENT EVIDENCE & LIMITATIONS</p><h2>哪些已经做过，哪些仍是研究方向</h2></header>
-        <div className="pls-boundary-grid"><article><strong>10 + 6</strong><h3>两轮单次生成</h3><p>Round-1 10 个、Round-2 6 个；没有 multi-seed statistical experiment，不做总体性能泛化。</p></article><article><strong>IMPLEMENTED</strong><h3>PLS Schema + Execution Layer</h3><p>12 项 Capability、真实案例迁移、维度派生与结构化摘要已实现。</p></article><article><strong>LIMITED</strong><h3>Scene 与评测者证据</h3><p>Scene 案例有限；项目由单评测员完成，未测试 inter-rater reliability。</p></article><article><strong>FUTURE</strong><h3>Judge / Preference / Reward</h3><p>仅形成研究设计与路由框架，尚未完成正式验证。</p></article></div>
-      </div></section>
+    <section className="t2a-section t2a-shell" id="drill-down"><SectionHeading index="10 / OBSERVABLE FAILURE LOCALIZATION" title="从回归信号下钻到可观察证据"><p>这条链定位的是评测对象与可观察失败，不主张没有模型 traces 的内部因果。</p></SectionHeading><div className="pls-v21-drilldown" role="img" aria-label="模型回归从 capability 下钻到 unit、case、observable evidence、failure label、regression action。"><div className="pls-v21-drill-chain">{["MODEL REGRESSION", "CAPABILITY · P / L / S / Q", "UNIT", "CASE", "OBSERVABLE EVIDENCE", "FAILURE LABEL", "REGRESSION ACTION"].map((item, index) => <span key={item}>{index > 0 && <Arrow className="is-down" />}<b>{item}</b></span>)}</div><article><span>EXAMPLE</span><p>REL ↓</p><b>Multi-event → Point → Secondary Event Recall</b><code>missing_secondary_event</code><strong>Regression Set</strong></article></div><p className="pls-v21-boundary-tag">No internal causal claim without model traces.</p></section>
 
-      <section className="t2a-section t2a-shell" id="research-details">
-        <header className="t2a-section-heading"><p>11 / RESEARCH DETAILS</p><h2>完整文献依据与研究材料</h2><p>默认页面先回答框架、Schema、案例和证据边界；文献脉络与完整引用在这里展开。</p></header>
-        <details className="pls-landing-details"><summary>展开 Literature Landscape</summary><div className="pls-research-landscape">{literature.map(([theme, papers, evidence, href]) => <article key={theme}><span>{theme}</span><h3>{papers}</h3><p>{evidence}</p><a href={href} target="_blank" rel="noreferrer">查看代表论文 ↗</a></article>)}</div></details>
-        <details className="pls-landing-details"><summary>展开 Signal Diagnostics 已执行指标</summary><div className="pls-signal-detail"><div className="pls-system-status">{evaluationSystemEvidence.systemStatuses.map((item) => <article key={item.label}><span>{publicEvidenceStatusLabels[item.status]}</span><strong>{item.label}</strong></article>)}</div><div className="pls-signal-groups">{evaluationSystemEvidence.signalGroups.map((group) => <article key={group.id}><span>{group.id}</span><ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul></article>)}</div><div className="pls-signal-evidence-block"><header><p className="eyebrow">BATCH ANALYSIS / SIGNAL EVIDENCE</p><h3>{evaluationSystemEvidence.acousticBatch.label}</h3><p>Generated N={evaluationSystemEvidence.acousticBatch.n} · Source: {evaluationSystemEvidence.acousticBatch.source}</p></header><div>{evaluationSystemEvidence.acousticBatch.metrics.map((metric) => <article key={metric.id}><span>{metric.statistic}</span><strong>{metric.value}{metric.unit ? ` ${metric.unit}` : ""}</strong><p>{metric.label}</p></article>)}</div></div><p className="pls-system-boundary">{evaluationSystemEvidence.publicBoundary}</p></div></details>
-        <details className="pls-landing-details"><summary>展开 Research Questions</summary><div className="pls-rq-list">{researchQuestions.map(([id, question, status]) => <article key={id}><span>{id}</span><h3>{question}</h3><strong>{status}</strong></article>)}</div></details>
-        <details className="pls-landing-details"><summary>展开 12 条参考文献</summary><ol className="pls-reference-list">{references.map(([authors, title, href]) => <li key={href}><span>{authors}</span><a href={href} target="_blank" rel="noreferrer">{title}</a><small>arXiv ↗</small></li>)}</ol></details>
-        <div className="pls-report-link"><div><span>WORKING PAPER</span><h3>Point–Line–Scene 完整研究报告</h3><p>保留 Capability Taxonomy、Schema、真实迁移记录、研究限制与附录。</p><Link className="paper-link" href="/audio-world-framework">阅读早期研究笔记</Link></div><Link className="btn btn-primary" href="/point-line-scene-framework/report/">阅读完整报告</Link></div>
-      </section>
+    <section className="t2a-section t2a-section-tint" id="regression"><div className="t2a-shell"><SectionHeading index="11 / CONTROLLED REGRESSION" title="发现失败后，用新样本检查是否重现"><p>Round-1 负责发现；Round-2 在生成前冻结假设、观察字段和判定规则，再更新后续排查优先级。</p></SectionHeading><div className="pls-v21-regression-diff" role="img" aria-label="模型版本通过 regression suite 比较证据状态；这些是跨轮证据状态，不是总体性能数值差异。"><div><b>MODEL v1</b><Arrow className="is-down" /><strong>Regression Suite</strong><Arrow className="is-down" /><b>MODEL v2</b></div><section>{regressionCases.map(([probe, status, detail]) => <article key={probe}><span>{probe}</span><strong>{status}</strong><small>{detail}</small></article>)}</section></div><p className="pls-v21-fineprint">展示的是跨轮证据状态，不是总体性能增减或统计显著性结论。</p></div></section>
 
-      <footer className="t2a-footer t2a-shell"><Link href="/">← 返回作品集</Link><Link href="/t2a-case-study">T2A 评测</Link><Link href="/audio-visual-evaluation">音视频生成评测</Link><Link href="/point-line-scene-framework/report/">完整报告</Link><span>© 2026 杜明</span></footer>
-    </main>
-  );
+    <section className="t2a-section t2a-shell" id="judge-audit"><SectionHeading index="12 / JUDGE AUDIT · FUTURE" title="总体准确率不等于失败定位能力"><p>Judge 进入正式评分链路前，需单独审计 Detection、Localization、Decoupling 与 Reliability。</p></SectionHeading><div className="pls-v21-audit-matrix">{judgeAudit.map(([title, metric]) => <article key={title}><h3>{title}</h3><p>{metric}</p><span>FUTURE / NOT IMPLEMENTED</span></article>)}</div><div className="pls-v21-localization-proof"><strong>85%<small>AGGREGATE ACCURACY</small></strong><b>≠</b><article><span>GT {`{P3, L2}`}</span><span>Judge {`{P3, L2}`}</span><strong>Exact Localization ✓</strong></article></div></section>
+
+    <section className="t2a-section t2a-section-tint" id="boundary"><div className="t2a-shell"><SectionHeading index="13 / EVIDENCE BOUNDARY" title="区分已实现、方法扩展与未来研究"><p>页面用真实案例说明现有证据，也明确不做超过样本和执行范围的主张。</p></SectionHeading><div className="pls-v21-boundary-grid"><article><span>IMPLEMENTED</span><p>PLS Schema · Human Evaluation · Signal Diagnostics · Reference-aware Diagnosis · Unit Record · Controlled Regression</p></article><article><span>METHOD EXTENSION</span><p>Dependency-aware Eligibility · BLOCKED semantics · Primary Target + Diagnostic Units · Conditional / End-to-End separation</p></article><article><span>FUTURE</span><p>Audio / Omni Judge · Judge Reliability Benchmark · Dynamic Importance · Pairwise Preference · Reward Model</p></article></div><p className="pls-v21-limitation"><strong>当前证据：</strong>Round-1 10 个、Round-2 6 个单次生成；不构成 multi-seed statistical experiment，也不做总体性能泛化。</p></div></section>
+
+    <section className="t2a-section t2a-shell" id="research-details"><SectionHeading index="RESEARCH DETAILS" title="研究来源与完整材料"><p>研究脉络收进折叠区；主体页面优先解释方法、案例、边界与可观察证据。</p></SectionHeading><div className="pls-v21-frontier">{frontierPapers.map(([title, theme, influence, label, href]) => <article key={title}><span>{theme}</span><h3>{title}</h3><p>{influence}</p><b>{label}</b><a href={href} target="_blank" rel="noreferrer">阅读论文 ↗</a></article>)}</div><details className="pls-landing-details"><summary>展开已执行的 Signal Diagnostics 指标</summary><div className="pls-v21-signal-details"><div>{evaluationSystemEvidence.systemStatuses.map((item) => <article key={item.label}><span>{publicEvidenceStatusLabels[item.status]}</span><strong>{item.label}</strong></article>)}</div><p>{evaluationSystemEvidence.publicBoundary}</p></div></details><details className="pls-landing-details"><summary>展开 12 条参考文献</summary><ol className="pls-reference-list">{references.map(([title, href]) => <li key={href}><a href={href} target="_blank" rel="noreferrer">{title}</a><small>arXiv ↗</small></li>)}</ol></details><div className="pls-report-link"><div><span>WORKING PAPER</span><h3>Point–Line–Scene 完整研究报告</h3><p>保留 Capability Taxonomy、Schema、真实迁移记录、研究限制与附录。</p><Link className="paper-link" href="/audio-world-framework">早期研究笔记</Link></div><Link className="btn btn-primary" href="/point-line-scene-framework/report/">阅读完整报告</Link></div></section>
+    <footer className="t2a-footer t2a-shell"><Link href="/">← 返回作品集</Link><Link href="/t2a-case-study">T2A 评测</Link><Link href="/audio-visual-evaluation">音视频生成评测</Link><Link href="/point-line-scene-framework/report/">完整报告</Link><span>© 2026 杜明</span></footer>
+  </main>;
 }

@@ -39,9 +39,10 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "3→4→4",
     "重复诊断模式（Repeated Diagnostic Pattern）",
     "评测方法 / EVALUATION METHOD",
-    "点：事件是否正确", "线：关系是否成立", "面：整体是否可信", "执行：结果是否可追溯",
+    "UNIT STATE", "FAILURE", "LOCALIZATION", "Independent axis",
+    "固定能力坐标系；", "按任务激活原子评价单元；", "用 Dependency + Reference 定位失败。",
     "人工判断 × 信号诊断 × 结构化执行",
-    "查看评测方法",
+    "查看 PLS-Eval 方法",
     "T2A 系统化听评基础",
     "事件级错误可以用于定位能力差异",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
@@ -58,56 +59,42 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
-test("PLS-Eval foregrounds framework, atomic evidence, routing and evidence boundaries", async () => {
+test("PLS-Eval foregrounds dependency-aware units, reference chains and evidence boundaries", async () => {
   const response = await render("/point-line-scene-framework");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation",
-    "先定位失败原因", "再讨论整体多少分",
-    "PLS 不从“整体多少分”开始，而从“哪一项要求在哪里失败”开始。",
-    "Point、Line、Scene 与 Quality 分别回答不同问题",
-    "Atomic Constraint", "Relational Constraint", "Graph-level Constraint", "Orthogonal Quality Axis",
-    "Unit-level State / Score Vector", "DERIVED VIEW",
-    "STABLE TAXONOMY × PROMPT-SPECIFIC SCHEMA", "Ontology stays stable",
-    "P1 事件完整性", "P2 声源正确性", "P3 材质 / 属性一致性", "P4 事件计数",
-    "One Unit = One Falsifiable Question", "COUPLED RUBRIC", "DECOUPLED UNITS",
-    "3→4→4：正确性取决于比较哪一段参考链", "Repeated Diagnostic Pattern",
-    "Instruction Fidelity · FAIL", "Event Correspondence · PASS",
-    "P06 STATE VECTOR", "audio_early", "Prompt→Visual FAIL",
-    "Future field · 尚未写入 v1.0", "关系判断成立，输出质量仍可较低",
-    "EVALUATION STACK &amp; ROUTING", "Model Judge", "Future Validation",
-    "Aggregate Accuracy is not sufficient.", "Failure Recall", "Failure Jaccard", "Pseudo-Decoupling",
-    "NOT IMPLEMENTED", "Exact Localization · PASS",
-    "Repeated Diagnostic Pattern", "Not Replicated", "Mixed / Refined",
-    "OmniJudge or OmniBias?", "Voice-Agent Judge", "RubricRM",
-    "Research direction, not implemented claim.",
-    "PLS Schema + Execution Layer", "Judge / Preference / Reward",
-    "Literature Landscape", "AudioScape-TTA", "AnyAudio-Judge", "AcoustiTrace", "AVGen-Bench",
-    "Signal Diagnostics 已执行指标", "Research Questions", "RQ1", "RQ4",
+    "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位失败原因", "再讨论整体多少分",
+    "PLS 不从“整体多少分”开始，而从“哪一项要求在哪里失败”开始。", "PLS + Q",
+    "STABLE TAXONOMY", "ACTIVE SCHEMA", "Ontology stays stable", "COUPLED RUBRIC", "DECOUPLED UNITS",
+    "DEPENDENCY-AWARE EVALUATION", "原子化不等于无依赖", "BLOCKED ≠ N/A ≠ SKIPPED",
+    "FAIL_PREREQUISITE", "Near / far 属于 Line，不属于 Scene。", "68 / 85", "68 / 100",
+    "3→4→4：比较哪一段参考链，决定问题归因", "Visual Instruction Failure", "audio_early",
+    "EVALUATOR ROUTING", "FUTURE / NOT IMPLEMENTED", "OBSERVABLE FAILURE LOCALIZATION",
+    "Repeated Diagnostic Pattern", "Not Replicated", "Mixed / Refined", "Audio / Omni Judge",
+    "AudioScape-TTA", "AnyAudio-Judge", "AcoustiTrace", "AVGen-Bench", "展开已执行的 Signal Diagnostics 指标",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   const dom = renderedDom(html);
   assert.match(html, /href="\/audio-visual-evaluation"/);
-  assert.match(html, /Generated N=[\s\S]*?200/);
   assert.equal((dom.match(/href="\/point-line-scene-framework\/report\/"/g) ?? []).length, 3);
   assert.match(dom, /href="\/point-line-scene-framework\/report\/"[^>]*>阅读完整报告/);
   assert.match(dom, /href="\/point-line-scene-framework\/report\/"[^>]*>完整报告/);
   assert.doesNotMatch(dom, /下载完整报告|\sdownload(?:=|\s|>)/);
   assert.equal((html.match(/https:\/\/arxiv\.org\/abs\//g) ?? []).length >= 13, true);
-  assert.equal((html.match(/class="pls-landing-details/g) ?? []).length, 4);
+  assert.equal((html.match(/class="pls-landing-details/g) ?? []).length, 2);
   assert.doesNotMatch(html, /PLS 已被统计证明/);
   assert.doesNotMatch(html, /PLS 是行业标准/);
   assert.doesNotMatch(html, /Automatic Judge.*IMPLEMENTED|Judge 已实现|Reward 已实现/);
-  assert.match(html, /不修改已冻结的 PLS Evaluation Schema v1\.0/);
+  assert.match(html, /不构成 multi-seed statistical experiment/);
   const css = await readFile(new URL("../app/point-line-scene-framework/point-line-scene-framework.css", import.meta.url), "utf8");
   const globalCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
-  assert.match(css, /\.pls-hero-index \{[^}]*background: var\(--pls-green\)/s);
-  assert.match(css, /\.pls-hero-index > span \{[^}]*color: #fcfaf5/s);
-  assert.match(css, /\.pls-eval-layer-grid \{[^}]*grid-template-columns: repeat\(4, 1fr\)/s);
-  assert.match(css, /\.pls-frontier-papers \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
-  assert.match(css, /@media \(max-width: 720px\)[\s\S]*\.pls-eval-layer-grid[^}]*grid-template-columns: 1fr/s);
+  assert.match(css, /\.pls-v21-core-graph \{[^}]*overflow: hidden/s);
+  assert.match(css, /\.pls-v21-dag-grid \.edge-p3-p4 \{[^}]*dashed/s);
+  assert.match(css, /\.pls-v21-metric-tiles \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
+  assert.match(css, /\.pls-v21-frontier \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
+  assert.match(css, /@media \(max-width: 680px\)[\s\S]*\.pls-v21-layer-map[^}]*grid-template-columns: 1fr/s);
   assert.match(globalCss, /\.paper-link::after \{[^}]*content: "→"/s);
-  assert.doesNotMatch(css, /\.pls-hero \{[^}]*radial-gradient/s);
+  assert.doesNotMatch(css, /\.pls-v21-hero \{[^}]*radial-gradient/s);
 });
 
 test("PLS complete report presents the frozen research as a working paper", async () => {
@@ -354,7 +341,7 @@ test("audio world framework page presents the four-layer method and keeps the tr
   const home = await (await render("/")).text();
   const pls = await (await render("/point-line-scene-framework")).text();
   assert.doesNotMatch(home, /href="\/audio-world-framework"/);
-  assert.match(pls, /href="\/audio-world-framework"[^>]*>阅读早期研究笔记/);
+  assert.match(pls, /href="\/audio-world-framework"[^>]*>早期研究笔记/);
   // 不虚构：未做过的内容必须标注 Proposed
   assert.match(html, /scene_incoherence/);
   assert.match(html, /补充 Prompt、场景状态和最终声音之间的组织与检查环节/);

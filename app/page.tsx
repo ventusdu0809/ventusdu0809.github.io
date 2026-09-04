@@ -144,17 +144,15 @@ export default function Home() {
           <header className="section-heading">
             <p className="eyebrow">评测方法 / EVALUATION METHOD</p>
             <h2 id="pls-home-title">点—线—面（Point–Line–Scene）评测方法</h2>
-            <p className="section-lead">把事件、关系、场景与独立质量分开检查，再通过评测结构（Evaluation Schema）与执行层（Execution Layer）形成可复查的诊断记录。</p>
+            <p className="section-lead">把任务要求拆成可验证的原子评价单元（Evaluation Unit），再通过依赖与参考链定位失败。</p>
           </header>
-          <div className="pls-home-grid">
-            <article><span>01 · POINT</span><strong>点：事件是否正确</strong><p>检查事件、声源、材质、属性与数量。</p></article>
-            <article><span>02 · LINE</span><strong>线：关系是否成立</strong><p>检查时间、空间、因果与动态对应。</p></article>
-            <article><span>03 · SCENE</span><strong>面：整体是否可信</strong><p>检查环境、前后景、显著性与场景一致性。</p></article>
-            <article><span>04 · EXECUTION</span><strong>执行：结果是否可追溯</strong><p>程序整理人工评分，完成结构化记录、自动聚合与诊断输出。</p></article>
+          <div className="pls-home-diagram" role="img" aria-label="Point、Line、Scene 汇聚为单元状态并进行失败定位，Quality 作为独立质量轴。">
+            <div className="pls-home-inputs"><b>POINT</b><b>LINE</b><b>SCENE</b></div><span className="pls-home-arrow" aria-hidden="true">→</span><b className="pls-home-state">UNIT STATE</b><span className="pls-home-arrow" aria-hidden="true">→</span><b className="pls-home-output">FAILURE<br />LOCALIZATION</b><aside><span>+</span><b>QUALITY</b><small>Independent axis</small></aside>
           </div>
+          <ol className="pls-home-steps"><li>固定能力坐标系；</li><li>按任务激活原子评价单元；</li><li>用 Dependency + Reference 定位失败。</li></ol>
           <div className="pls-home-note">
             <p><strong>方法边界：</strong>PLS 是对现有细粒度评测对象的一种组织方式，用于帮助定位问题；它不替代已有 Benchmark、Metric 或行业评测协议。</p>
-            <a className="btn btn-primary" href="/point-line-scene-framework">查看评测方法</a>
+            <a className="btn btn-primary" href="/point-line-scene-framework">查看 PLS-Eval 方法</a>
           </div>
         </div>
       </section>
@@ -180,7 +178,7 @@ export default function Home() {
 
           <div className="evaluation-system-home-actions">
             <p><strong>从听感判断到诊断证据。</strong> 该评测系统是对现有 T2A、音视频评测、PLS 与执行层的整体工作流整理，不是额外提出的一套独立理论。</p>
-            <div><a className="btn btn-primary" href="/point-line-scene-framework#evaluation-system">查看评测方法</a><a className="paper-link" href="/audio-visual-evaluation">查看案例研究 →</a></div>
+            <div><a className="btn btn-primary" href="/point-line-scene-framework#evaluation-system">查看 PLS-Eval 方法</a><a className="paper-link" href="/audio-visual-evaluation">查看案例研究 →</a></div>
           </div>
 
         </div>
