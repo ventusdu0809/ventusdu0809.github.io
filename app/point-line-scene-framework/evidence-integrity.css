@@ -8,6 +8,7 @@
 .pls-v21-evidence-architecture > div > span, .pls-v21-evidence-architecture > aside > span { align-self: start; color: var(--v21-green); font-size: 10px; font-weight: 800; letter-spacing: .08em; }
 .pls-v21-evidence-architecture article { width: min(100%, 440px); padding: 21px; border: 1px solid rgba(53,100,90,.45); background: var(--white); }
 .pls-v21-evidence-architecture article b { display: block; color: var(--ink); font-family: var(--serif); font-size: 21px; }
+.pls-v21-evidence-architecture article em { display: block; margin-top: 4px; color: var(--ink-soft); font-size: 10px; font-style: normal; letter-spacing: .04em; }
 .pls-v21-evidence-architecture article small { display: block; margin-top: 8px; color: var(--v21-green); font-size: 10px; font-weight: 800; }
 .pls-v21-evidence-architecture article p { margin: 20px 0 0; color: var(--ink-soft); font-size: 12px; line-height: 1.7; }
 .pls-v21-human-lane .pls-v21-arrow { width: 1px; height: 30px; margin: 0; }

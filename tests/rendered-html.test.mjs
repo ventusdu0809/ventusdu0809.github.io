@@ -29,7 +29,7 @@ test("homepage uses the recruiter-facing three-narrative structure", async () =>
     "2 轮", "音视频受控评测",
     "3 个案例", "重复出现 3→4→4 诊断模式",
     "Point–Line–Scene / PLS-Eval",
-    "Atomic Decomposition", "Failure Localization", "Reference-aware Diagnosis", "Structured Schema",
+    "原子拆分", "失败定位", "显式参考链", "结构化记录",
     "让主观评测可以复查",
     "从失败案例进入受控回归",
     "证据与版本 / EVIDENCE &amp; VERSIONING",
@@ -64,12 +64,12 @@ test("PLS-Eval foregrounds executed evidence and separates extensions", async ()
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位失败原因", "再讨论整体分数",
+    "PLS-Eval", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位失败原因", "再讨论整体分数",
     "PLS 不从“整体分数”开始，而从“哪一项要求在哪里失败”开始。", "PLS + Q",
     "STABLE TAXONOMY", "ACTIVE SCHEMA", "Ontology stays stable", "COUPLED RUBRIC", "DECOUPLED UNITS",
     "3→4→4：比较哪一段参考链，决定问题归因", "Visual Instruction Failure", "audio_early",
     "CONTROLLED REGRESSION · IMPLEMENTED", "P06 · P10 · R2-H1-B", "Increase exact-count regression priority",
-    "EVIDENCE ROLES · IMPLEMENTED", "HUMAN EVALUATION", "SIGNAL DIAGNOSTICS", "Signal Diagnostics 不自动生成或修改 PLS / OVL 评分",
+    "07 / 证据分工", "人工评测", "信号诊断", "Signal Diagnostics 不自动生成或修改 PLS / OVL 评分",
     "Repeated Diagnostic Pattern", "Not Replicated", "Mixed / Refined", "Audio / Omni Judge",
     "INTEGRATED CONCEPT", "not fully executed / not backfilled", "METHOD EXTENSIONS", "FORMULA ONLY · NO PROJECT RESULT",
     "AudioScape-TTA", "AnyAudio-Judge", "AcoustiTrace", "AVGen-Bench", "展开已执行的 Signal Diagnostics 指标",
