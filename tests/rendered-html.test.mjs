@@ -64,10 +64,11 @@ test("PLS-Eval foregrounds dependency-aware units, reference chains and evidence
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位失败原因", "再讨论整体分数",
+    "PLS-EVAL", "Point–Line–Scene Structured Diagnostic Evaluation", "先定位哪一项要求失败", "再讨论整体分数",
     "PLS 不从“整体分数”开始，而从“哪一项要求在哪里失败”开始。", "PLS + Q",
     "STABLE TAXONOMY", "ACTIVE SCHEMA", "Ontology stays stable", "COUPLED RUBRIC", "DECOUPLED UNITS",
-    "DEPENDENCY-AWARE EVALUATION", "原子化不等于无依赖", "BLOCKED ≠ N/A ≠ SKIPPED",
+    "DEPENDENCY-AWARE EVALUATION", "原子化不等于无依赖", "Three knocks, followed by a wooden object sliding.",
+    "P1 · Knock exists", "P2 · Count = 3", "P3 · Sliding exists", "BLOCKED ≠ N/A ≠ SKIPPED",
     "FAIL_PREREQUISITE", "Near / far 属于 Line，不属于 Scene。", "68 / 85", "68 / 100",
     "3→4→4：比较哪一段参考链，决定问题归因", "Visual Instruction Failure", "audio_early",
     "EVALUATOR ROUTING", "FUTURE / NOT IMPLEMENTED", "OBSERVABLE FAILURE LOCALIZATION",
@@ -89,7 +90,10 @@ test("PLS-Eval foregrounds dependency-aware units, reference chains and evidence
   const css = await readFile(new URL("../app/point-line-scene-framework/point-line-scene-framework.css", import.meta.url), "utf8");
   const globalCss = await readFile(new URL("../app/globals.css", import.meta.url), "utf8");
   assert.match(css, /\.pls-v21-core-graph \{[^}]*overflow: hidden/s);
-  assert.match(css, /\.pls-v21-dag-grid \.edge-p3-p4 \{[^}]*dashed/s);
+  assert.match(css, /\.pls-v21-dag-grid \{[^}]*grid-template-columns:[^}]*68px/s);
+  assert.match(css, /\.pls-v21-connector\.is-blocked \{[^}]*dashed/s);
+  assert.doesNotMatch(css, /edge-p1-p3|rotate\(38deg\)|rotate\(68deg\)/);
+  assert.doesNotMatch(html, /Metallic knock exists|edge-p1-p3/);
   assert.match(css, /\.pls-v21-metric-tiles \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
   assert.match(css, /\.pls-v21-frontier \{[^}]*grid-template-columns: repeat\(3, 1fr\)/s);
   assert.match(css, /@media \(max-width: 680px\)[\s\S]*\.pls-v21-layer-map[^}]*grid-template-columns: 1fr/s);
