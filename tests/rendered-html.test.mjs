@@ -19,43 +19,19 @@ function renderedDom(html) {
 
 const prohibitedHomeTerms = ["评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
 
-test("homepage uses the recruiter-facing three-narrative structure", async () => {
+test("homepage exposes evidence before methods and direct email contact", async () => {
   const response = await render("/");
   assert.equal(response.status, 200);
-  const html = await response.text();
-  for (const text of [
-    "杜明", "AI 音频与音视频生成评测",
-    "600", "T2A 正式样本 · 两阶段累计",
-    "2 轮", "音视频受控评测",
-    "3 个案例", "重复出现 3→4→4 诊断模式",
-    "Point–Line–Scene / PLS-Eval",
-    "原子拆分", "失败定位", "显式参考链", "结构化记录",
-    "让主观评测可以复查",
-    "从失败案例进入受控回归",
-    "证据与版本 / EVIDENCE &amp; VERSIONING",
-    "Cross-Round Analysis v1.0 · Frozen",
-    "主项目 / PRIMARY CASE",
-    "Audio-Visual Generation Evaluation",
-    "3→4→4",
-    "重复诊断模式（Repeated Diagnostic Pattern）",
-    "评测方法 / EVALUATION METHOD",
-    "UNIT STATE", "FAILURE", "LOCALIZATION", "Independent axis",
-    "固定能力坐标系；", "按任务激活原子评价单元；", "用 Unit-level Record + Reference Chain 定位失败。",
-    "人工判断 × 信号诊断 × 结构化执行",
-    "查看 PLS-Eval 方法",
-    "T2A 系统化听评基础",
-    "事件级错误可以用于定位能力差异",
-  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.equal((html.match(/class="recruiter-narrative"/g) ?? []).length, 3);
-  assert.match(html, /class="eyebrow recruiter-hero-eyebrow"><strong>AI AUDIO &amp; AUDIO-VISUAL EVALUATION<\/strong><\/p>/);
-  assert.match(html, /href="\/t2a-case-study"/);
-  assert.match(html, /href="\/audio-visual-evaluation"/);
-  assert.match(html, /href="\/point-line-scene-framework"/);
-  assert.ok(html.indexOf("主项目 / PRIMARY CASE") < html.indexOf("基础项目 / FOUNDATION CASE"));
-  assert.ok(html.indexOf("声音实践 / SOUND PRACTICE") < html.indexOf("评测方法 / EVALUATION METHOD"));
-  assert.doesNotMatch(html, /RESEARCH EVOLUTION/);
-  assert.doesNotMatch(html, /href="\/audio-world-framework"[^>]*>场景框架/);
-  assert.doesNotMatch(html, /项目不是框架的装饰|数量偏差首先发生|查看T2VA主项目/);
+  const html = renderedDom(await response.text());
+  assert.match(html, /href="mailto:mingdu0809@gmail.com"/);
+  assert.match(html, /<video[^>]*controls/);
+  assert.match(html, /src="\/video\/t2va\/R2-H1-B.mp4"/);
+  assert.doesNotMatch(html, /<video[^>]*autoplay/i);
+  assert.ok(html.indexOf('<video') < html.indexOf('id="pls-home-title"'));
+  assert.match(html, /声画计数一致，仍未满足文本要求/);
+  assert.match(html, /单一评测人/);
+  assert.match(html, /600/);
+  assert.match(html, /<details class="mobile-nav"/);
   for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
 });
 
@@ -153,7 +129,7 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
   for (const text of [
     "Audio-Visual Generation Evaluation",
     "从失败案例发现（Bad Case Discovery）", "受控回归（Controlled Regression）",
-    "3→4→4 不等于音频计数失败（Audio Counting Failure）",
+    "3→4→4：声画一致，文本数量要求未满足",
     "点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）",
     "重复诊断模式（Repeated Diagnostic Pattern）", "起点对齐（Onset Alignment）", "未复现（Not Replicated）",
     "动态对应（Dynamic Correspondence）", "部分成立 / 需细化（Mixed / Refined）",
@@ -161,7 +137,7 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
     "小样本诊断，不做统计泛化",
     "查看 T2A 评测案例",
     "查看 PLS 评测方法",
-    "R2-H1-B · 精确计数（Exact-count）", "文本 → 画面：失败（FAIL）", "画面 → 音频：通过（PASS）", "P4 事件计数（Event Counting）：5 / 5",
+    "R2-H1-B · 精确计数（Exact-count）", "文本 → 画面：数量不符", "画面 → 音频：计数一致", "P4 事件计数（Event Counting）：5 / 5",
     "R2-H3 · 动态对应（Dynamic Correspondence）", "声源运动跟随（Source-motion Tracking）：部分问题", "L4 动态对应：3 / 5",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/point-line-scene-framework"/);

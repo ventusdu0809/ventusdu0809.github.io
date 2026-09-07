@@ -1,0 +1,34 @@
+.portfolio-home .hero.recruiter-hero { min-height: auto; padding-top: 112px; padding-bottom: 56px; gap: 48px; }
+.portfolio-home .hero-intro { font-size: 18px; line-height: 1.8; margin-left: 0; }
+.portfolio-home .content-section { padding-block: 64px; }
+.portfolio-home .recruiter-project-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 48px; }
+.portfolio-home .recruiter-finding { font-size: clamp(25px, 2.5vw, 32px); line-height: 1.5; font-weight: 600; }
+.portfolio-home .home-explanation { font-size: 16px; line-height: 1.85; margin: 20px 0; color: var(--color-text-secondary); }
+.portfolio-home .recruiter-boundary, .portfolio-home .audit-trust p, .portfolio-home .recruiter-practice-grid p, .portfolio-home .recruiter-hero-facts span, .portfolio-home .recruiter-hero-facts p { font-size: 14px; }
+.portfolio-home .eyebrow, .portfolio-home .recruiter-hero-eyebrow strong { font-size: 12px; }
+.portfolio-home .recruiter-practice-grid article { min-height: auto; }
+.portfolio-home .recruiter-scale-list span { font-size: 20px; }
+.home-evidence { margin: 0; min-width: 0; }
+.home-evidence video { width: 100%; aspect-ratio: 16 / 9; object-fit: contain; background: #202421; border-radius: 8px; }
+.home-evidence figcaption { font-size: 14px; color: var(--color-text-secondary); padding-top: 12px; }
+.home-counts { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 20px 0 0; }
+.home-counts div { border-top: 1px solid var(--color-border); padding-top: 12px; }
+.home-counts dt { font-size: 14px; }
+.home-counts dd { margin: 4px 0 0; font-size: 28px; color: var(--color-primary); }
+.home-method { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; padding: 0; list-style: none; }
+.home-method li { border-top: 1px solid var(--color-border); padding-top: 18px; }
+.home-method strong { font-size: 20px; }
+.home-method p { font-size: 16px; margin: 10px 0; }
+.portfolio-home .site-footer .contact-email { font-size: 18px; overflow-wrap: anywhere; }
+.mobile-nav { display: none; }
+@media (max-width: 780px) {
+  .portfolio-home .recruiter-header > nav { display: none; }
+  .mobile-nav { display: block; margin-left: auto; }
+  .mobile-nav summary { cursor: pointer; padding: 10px; font-size: 14px; }
+  .mobile-nav nav { position: absolute; top: calc(100% + 8px); right: 0; width: min(260px, 85vw); display: flex; flex-direction: column; align-items: stretch; gap: 0; background: var(--color-paper); border: 1px solid var(--color-border); border-radius: 8px; padding: 8px; box-shadow: var(--shadow-paper); }
+  .portfolio-home .mobile-nav nav a { display: block; padding: 12px 16px; font-size: 16px; }
+  .portfolio-home .recruiter-project-grid, .home-method { grid-template-columns: 1fr; gap: 24px; }
+  .portfolio-home .hero.recruiter-hero { grid-template-columns: 1fr; padding: 100px 24px 40px; gap: 28px; }
+  .portfolio-home .section-shell { width: calc(100% - 40px); }
+  .portfolio-home .content-section { padding-block: 40px; }
+}

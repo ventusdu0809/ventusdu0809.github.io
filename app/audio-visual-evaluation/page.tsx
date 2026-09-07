@@ -20,7 +20,7 @@ const findings = [
 ] as const;
 
 const engineeringActions = [
-  ["3→4→4", "先查文本 → 画面的数量约束与视觉事件规划", "不把视觉阶段的偏差误归因为音频计数失败。"],
+  ["3→4→4", "优先复测文本要求与画面事件数的偏差", "这是基于输出观察的复测方向，不据此推断模型内部生成机制。"],
   ["起点 · 未复现", "降低专项回归优先级，保留监测", "已发生的失败案例仍有效，但当前证据不足以升级为稳定问题。"],
   ["动态 · 部分成立 / 需细化", "转向连续运动与细粒度动态测试", "把粗粒度的“有无响应”细化为更可执行的诊断问题。"],
   ["跨镜头 · 未复现", "暂不以切镜 → 音频丢失作为重点假设", "第二轮的 A/B 验证未支持该因果归因。"],
@@ -65,8 +65,8 @@ export default function AudioVisualEvaluationPage() {
           <strong>文本提示（Prompt）要求 3 次，画面（Visual）与音频（Audio）均呈现 4 次：偏差应归入哪一段评价链？</strong>
           <dl>
             <div><dt>文本提示（Prompt）</dt><dd>3</dd></div>
-            <div><dt>画面（Visual）</dt><dd className="av-fail">4 · 失败</dd></div>
-            <div><dt>音频（Audio）</dt><dd className="av-pass">4 · 通过</dd></div>
+            <div><dt>画面（Visual）</dt><dd className="av-fail">4 · 不符合文本要求</dd></div>
+            <div><dt>音频（Audio）</dt><dd className="av-pass">4 · 与画面计数一致</dd></div>
           </dl>
         </aside>
       </section>
@@ -75,16 +75,16 @@ export default function AudioVisualEvaluationPage() {
         <div className="t2a-shell av-case-layout">
           <div>
             <p className="eyebrow">核心案例 / EXACT-COUNT</p>
-            <h2 id="count-title">3→4→4 不等于音频计数失败（Audio Counting Failure）</h2>
+            <h2 id="count-title">3→4→4：声画一致，文本数量要求未满足</h2>
           </div>
           <div className="av-chain" aria-label="Prompt、Visual、Audio 三阶段计数链">
             <div><span>文本提示（Prompt）</span><strong>3</strong></div>
             <i aria-hidden="true">→</i>
-            <div className="av-chain-fail"><span>画面（Visual）</span><strong>4</strong><small>文本 → 画面：失败（FAIL）</small></div>
+            <div className="av-chain-fail"><span>画面（Visual）</span><strong>4</strong><small>文本 → 画面：数量不符</small></div>
             <i aria-hidden="true">→</i>
-            <div className="av-chain-pass"><span>音频（Audio）</span><strong>4</strong><small>画面 → 音频：通过（PASS）</small></div>
+            <div className="av-chain-pass"><span>音频（Audio）</span><strong>4</strong><small>画面 → 音频：计数一致</small></div>
           </div>
-          <p className="av-case-note">P06、P10 与 R2-H1-B 三个可精确判定案例重复出现这一结构。它是一个<b>重复诊断模式（Repeated Diagnostic Pattern）</b>，用于提高回归优先级；不是对模型普遍缺陷的统计性宣称。</p>
+          <p className="av-case-note">整体结果未满足文本要求；本例未观察到声画计数不一致。P06、P10 与 R2-H1-B 三个可精确判定案例重复出现这一结构。它是一个<b>重复诊断模式（Repeated Diagnostic Pattern）</b>，用于提高回归优先级；不是对模型普遍缺陷的统计性宣称。</p>
         </div>
       </section>
 
@@ -103,7 +103,7 @@ export default function AudioVisualEvaluationPage() {
             <figcaption>
               <div className="av-media-heading"><span>R2-H1-B · 精确计数（Exact-count）</span><strong>3→4→4</strong></div>
               <p>Prompt 条件：木筷敲陶瓷杯，恰好 3 次。实际画面与音频均为 4 次。</p>
-              <div className="av-verdict-row"><b className="is-fail">文本 → 画面：失败（FAIL）</b><b className="is-pass">画面 → 音频：通过（PASS）</b><b>P4 事件计数（Event Counting）：5 / 5</b></div>
+              <div className="av-verdict-row"><b className="is-fail">文本 → 画面：数量不符</b><b className="is-pass">画面 → 音频：计数一致</b><b>P4 事件计数（Event Counting）：5 / 5</b></div>
             </figcaption>
           </figure>
           <figure className="av-media-card">
@@ -151,7 +151,7 @@ export default function AudioVisualEvaluationPage() {
       </section>
 
       <section className="t2a-section t2a-shell" id="results">
-        <header className="t2a-section-heading"><p>04 / 跨轮结果</p><h2>五条冻结结论，各自保留证据边界</h2><p>这里呈现 Cross-Round Analysis v1.0 的结论层，而非重新评分或新增统计推断。</p></header>
+        <header className="t2a-section-heading"><p>04 / 跨轮结果</p><h2>五项跨轮发现，各自保留证据边界</h2><p>这里呈现 Cross-Round Analysis v1.0 的结论层，而非重新评分或新增统计推断。</p></header>
         <div className="av-findings">
           {findings.map(([topic, verdict, detail], index) => <article key={topic} className={index === 0 ? "av-finding-primary" : undefined}><p>{topic}</p><h3>{verdict}</h3><span>{detail}</span></article>)}
         </div>

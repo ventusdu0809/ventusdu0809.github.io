@@ -158,7 +158,7 @@ export default function T2AEvaluationProgramPage() {
         </details>
         <details className="t2a-collapsible">
           <summary>版本与审计记录</summary>
-          <div><p>{siteCopy.auditTrustLine.body}</p><p>{siteCopy.auditTrustLine.status}</p><a href={links.auditRecordHref} download>下载审计说明</a><a href={links.currentReportHref} download>下载当前报告</a></div>
+          <div><p>{siteCopy.auditTrustLine.body}</p><p>已完成统计复算与文件完整性检查，结果由本人复核。版本编号和具体检查范围见审计说明。</p><a href={links.auditRecordHref} download>下载审计说明</a><a href={links.currentReportHref} download>下载当前报告</a></div>
         </details>
       </section>
 
