@@ -76,31 +76,37 @@ test("PLS-Eval foregrounds executed evidence and separates extensions", async ()
   assert.doesNotMatch(css, /\.pls-v21-hero \{[^}]*radial-gradient/s);
 });
 
-test("PLS complete report presents the frozen research as a working paper", async () => {
+test("PLS complete report presents the v2.1 method and keeps evidence boundaries", async () => {
   const response = await render("/point-line-scene-framework/report");
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "WORKING PAPER · METHODS &amp; CASE STUDY",
-    "面向生成式音频与音视频模型的分层诊断评测框架",
+    "PLS-EVAL v2.1 · WORKING PAPER",
+    "面向生成式音频与音视频的结构化诊断评测",
     "作者", "杜明", "摘要", "ABSTRACT",
     "1. 引言", "2. 相关工作", "3. PLS 方法框架",
-    "PLS Evaluation Schema v1.0", "Execution Layer v0.1",
+    "PLS Schema v2.1", "稳定能力坐标", "按任务生成原子评价单元",
+    "Atomic ≠ Independent", "依赖感知的评价资格", "诊断向量",
+    "PASS", "FAIL", "BLOCKED", "N/A", "UNEVALUABLE",
+    "v2.1 执行约定与实现边界", "Execution Layer v0.1",
     "Audio-Visual Generation Evaluation",
     "显式参考链诊断", "REFERENCE-AWARE DIAGNOSIS",
     "参考文献", "REFERENCES",
     "Repeated Diagnostic Pattern",
     "Not Replicated", "Mixed / Refined", "Persistent / Exploratory Concern",
-    "Point=5.00", "Line=4.25", "Scene=5.00",
+    "失败位置在文本→画面，不是音频计数",
+    "10.1 从平均分转向失败位置", "10.2 依赖关系减少重复归因", "10.3 关系正确不等于感知质量", "10.4 失败定位与后续回归",
     "附录 A", "附录 B",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   assert.match(html, /href="\/point-line-scene-framework\/"[^>]*>← 返回 PLS 研究页/);
   assert.match(html, /<details class="paper-mobile-toc">/);
-  assert.match(html, /图 3\. 显式参考链诊断/);
-  assert.match(html, /表 3\. 执行层示例概况/);
+  assert.match(html, /图 4\. 显式参考链诊断/);
+  assert.match(html, /图 5\. PLS v2\.1 的执行约定/);
+  assert.match(html, /表 2\. 3→4→4 的 v2\.1 诊断表示/);
   assert.match(html, /class="record-list"/);
   assert.doesNotMatch(html, /class="record-cards"/);
   assert.doesNotMatch(html, /Source Audit|五个必须回答的问题|Provenance-aware|freeze\//);
+  assert.doesNotMatch(html, /PLS Evaluation Schema v1\.0|Primary capability|Point=5\.00|Line=4\.25|Scene=5\.00/);
   const css = await readFile(new URL("../app/point-line-scene-framework/report/report.css", import.meta.url), "utf8");
   assert.match(css, /@media \(max-width: 1220px\)/);
   assert.match(css, /@media \(max-width: 430px\)/);
@@ -109,6 +115,8 @@ test("PLS complete report presents the frozen research as a working paper", asyn
   assert.match(css, /\.paper-table-wrap \{[^}]*overflow-x: auto/s);
   assert.match(css, /\.paper-toc \{[^}]*max-height: calc\(100vh - 44px\)[^}]*overflow-y: auto/s);
   assert.match(css, /\.paper-mobile-toc \{ display: none; \}/);
+  assert.match(css, /\.paper-state-grid \{[^}]*grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/s);
+  assert.match(css, /\.paper-version-flow \{[^}]*grid-template-columns: 1fr auto 1fr auto 1\.15fr/s);
   assert.match(css, /\.paper-sheet section > h2 \{[^}]*border: 0/s);
   assert.match(css, /\.paper-sheet th \{[^}]*background: transparent/s);
   assert.match(css, /--paper-sans: "Microsoft YaHei", "微软雅黑", "PingFang SC"/);
@@ -118,8 +126,7 @@ test("PLS complete report presents the frozen research as a working paper", asyn
   assert.match(css, /\.table-caption \{[^}]*text-align: center/s);
   assert.doesNotMatch(css, /Noto Serif SC|Source Han Serif SC|Songti SC/);
   assert.ok(html.indexOf("表 1. PLS 能力分类") > html.indexOf("capability-table"));
-  assert.ok(html.indexOf("表 2. 迁移诊断案例") > html.indexOf("Primary capability"));
-  assert.ok(html.indexOf("表 3. 执行层示例概况") > html.indexOf("profile-table"));
+  assert.ok(html.indexOf("表 2. 3→4→4 的 v2.1 诊断表示") > html.indexOf("评价关系 / 单元"));
 });
 
 test("T2VA is an additive case study with frozen cross-round conclusions", async () => {

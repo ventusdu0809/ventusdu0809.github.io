@@ -65,6 +65,25 @@
 .figure-flow { display: grid; grid-template-columns: repeat(11, auto); align-items: center; justify-content: center; gap: 5px; padding: 14px 0; border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); font-family: var(--paper-sans); text-align: center; }
 .figure-flow i { color: var(--paper-accent); font-style: normal; }
 .figure-flow b { padding: 7px 8px; border: 1px solid var(--paper-line); background: transparent; font-size: 10.5px; font-weight: 600; }
+.figure-flow-v21 { grid-template-columns: repeat(15, auto); overflow-x: auto; justify-content: start; padding-inline: 2px; }
+.figure-flow-v21 b { min-width: 86px; }
+.figure-dependency { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 10px; padding: 14px 0; border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); font-family: var(--paper-sans); }
+.figure-dependency > div { min-height: 72px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; padding: 10px; border: 1px solid var(--paper-line); text-align: center; }
+.figure-dependency > div:nth-of-type(3) { grid-column: 1; }
+.figure-dependency > i { align-self: center; color: var(--paper-accent); font-style: normal; text-align: center; }
+.figure-dependency b { font-size: 12.5px; }
+.figure-dependency small { color: var(--paper-soft); font-size: 10.5px; }
+.paper-state-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); margin: 24px 0 32px; border-top: 1.5px solid var(--paper-ink); border-bottom: 1.5px solid var(--paper-ink); }
+.paper-state-grid article { min-width: 0; padding: 13px 11px; border-right: 1px solid var(--paper-line); }
+.paper-state-grid article:last-child { border-right: 0; }
+.paper-state-grid strong { color: var(--paper-accent); font-size: 11px; letter-spacing: .04em; }
+.paper-state-grid p { margin: 7px 0 0; color: var(--paper-soft); font-size: 11px; line-height: 1.55; }
+.paper-version-flow { display: grid; grid-template-columns: 1fr auto 1fr auto 1.15fr; gap: 12px; align-items: stretch; margin: 22px 0; }
+.paper-version-flow article { padding: 16px; border: 1px solid var(--paper-line); background: var(--paper-tint); }
+.paper-version-flow article:last-child { border-color: var(--paper-accent); background: #f1f5f2; }
+.paper-version-flow span { color: var(--paper-accent); font-size: 12px; font-weight: 700; }
+.paper-version-flow p { margin: 8px 0 0; color: var(--paper-soft); font-size: 11.5px; line-height: 1.65; }
+.paper-version-flow > i { align-self: center; color: var(--paper-accent); font-style: normal; }
 .figure-system { padding: 14px 0; border-top: 1px solid var(--paper-line); border-bottom: 1px solid var(--paper-line); font-family: var(--paper-sans); }
 .figure-system-input, .figure-system-output { display: flex; align-items: center; justify-content: center; gap: 8px; }
 .figure-system-input b, .figure-system-output b { padding: 8px 10px; border: 1px solid var(--paper-line); font-size: 10.5px; text-align: center; }
@@ -137,6 +156,17 @@
   .figure-reference > i span { font-size: 10px; }
   .figure-flow { grid-template-columns: 1fr; max-width: 360px; margin-inline: auto; }
   .figure-flow i { transform: rotate(90deg); }
+  .figure-flow-v21 { overflow: visible; }
+  .figure-flow-v21 b { width: 100%; }
+  .figure-dependency { grid-template-columns: 1fr; max-width: 360px; margin-inline: auto; }
+  .figure-dependency > div:nth-of-type(3) { grid-column: auto; }
+  .figure-dependency > i { transform: rotate(90deg); }
+  .paper-state-grid { grid-template-columns: 1fr 1fr; }
+  .paper-state-grid article { border-bottom: 1px solid var(--paper-line); }
+  .paper-state-grid article:nth-child(2n) { border-right: 0; }
+  .paper-state-grid article:last-child { grid-column: 1 / -1; border-bottom: 0; }
+  .paper-version-flow { grid-template-columns: 1fr; max-width: 420px; margin-inline: auto; }
+  .paper-version-flow > i { transform: rotate(90deg); text-align: center; }
   .figure-system-input, .figure-system-output { flex-direction: column; }
   .figure-system-input i, .figure-system-output i { transform: rotate(90deg); }
   .figure-system-input b, .figure-system-output b { width: min(100%, 360px); }
