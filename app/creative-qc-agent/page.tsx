@@ -3,7 +3,7 @@ import trace from './trace.json';
 import type { Metadata } from 'next';
 import './case-study.css';
 
-export const metadata: Metadata = { title: 'Creative QC & Repair Agent | Du Ming', description: 'An evaluated multimodal creative Agent prototype for requirement compilation, tool planning, automatic QC, failure localization and targeted repair.', alternates: { canonical: '/creative-qc-agent/' }, openGraph: { title: 'Creative QC & Repair Agent | Du Ming', description: '需求编译、工具规划、自动质检与定向修复 Agent 原型', url: 'https://ventusdu0809.github.io/creative-qc-agent/' } };
+export const metadata: Metadata = { title: '创作 Agent 质检与定向修复｜杜明', description: '受控评测的多模态创作 Agent 原型：需求编译、工具规划、自动质检、失败定位与定向修复。', alternates: { canonical: '/creative-qc-agent/' }, openGraph: { title: '创作 Agent 质检与定向修复｜杜明', description: '需求编译、工具规划、自动质检与定向修复 Agent 原型', url: 'https://ventusdu0809.github.io/creative-qc-agent/' } };
 const base = '/assets/creative-qc-agent';
 function Film({ name, label, chapters = false }: { name: string; label: string; chapters?: boolean }) {
  return <div className="cs-film"><video controls playsInline preload="metadata" poster={`${base}/media/${name}-poster.jpg`} aria-label={label}><source src={`${base}/media/${name === "a10-repair" ? "a03" : name}.mp4`} type="video/mp4" />浏览器不支持视频播放。</video>{chapters && <p className="cs-caption">时间索引：3.5s 配音与配乐避让 · 8s Logo · 10s CTA</p>}<small>{label} · 原始成片，未重新编码</small></div>;

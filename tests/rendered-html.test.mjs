@@ -217,7 +217,7 @@ test("game audio link opens a dedicated sound practice page", async () => {
   for (const text of [
     "游戏音频与运行时排查",
     "GameKit3D + Wwise 全流程集成",
-    "Hitstop 时缓与声音逻辑协同",
+    "Hitstop 时缓与声音逻辑配合",
     "动态混音与 Snapshot 切换",
     "50 × 约 2 MB",
     "查看音频验收案例",
