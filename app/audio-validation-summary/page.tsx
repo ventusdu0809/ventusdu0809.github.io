@@ -41,17 +41,17 @@ export default function AudioValidationSummaryPage() {
     <main className="document-page qa-page">
       <header className="document-header document-shell qa-hero">
         <Link className="back-link" href="/">返回作品集</Link>
-        <p className="eyebrow">音频资产质量控制 / AUDIO ASSET QUALITY CONTROL</p>
-        <h1>音频资产验收：从交付标准到可复查结果</h1>
+        <p className="eyebrow">音频资产质量控制</p>
+        <h1>7,872 条音频资产的交付验收</h1>
         <p className="document-lead">基于与直属领导共同起草并迭代的交付规范，我定义验收口径、审核检测逻辑，并对 7,872 条音频资产进行批量检查。</p>
         <div className="qa-hero-note"><strong>我的职责</strong><span>规则定义 · 逻辑审核 · 问题反馈 · 迭代验收</span><small>代码实现与批量执行由 AI 辅助完成。</small></div>
       </header>
 
       <article className="document-shell document-body qa-body">
         <section aria-labelledby="qa-result-title">
-          <p className="document-kicker">01 / 验收结果 / RESULT</p>
-          <h2 id="qa-result-title">验收结果先回答哪些文件需要处理</h2>
-          <p className="document-section-lead">三态结果区分“可直接进入下一环节”“仅需格式修正”和“命中质量规则”。不通过不等于文件损坏，而是需要复核或返修。</p>
+          <p className="document-kicker">01 / 验收结果</p>
+          <h2 id="qa-result-title">哪些文件需要复核与返修</h2>
+          <p className="document-section-lead">结果分为通过、待优化和不通过。不通过表示命中质量规则，需进一步复核或返修，并不表示文件损坏。</p>
           <div className="summary-metrics qa-summary" aria-label="音频资产验收汇总">
             <div><strong>7,872</strong><span>检查文件</span><small>最终资产总量</small></div>
             <div className="qa-pass"><strong>1,922</strong><span>通过 · 24.4%</span><small>未命中当前自动规则</small></div>
@@ -61,7 +61,7 @@ export default function AudioValidationSummaryPage() {
         </section>
 
         <section aria-labelledby="qa-issues-title">
-          <p className="document-kicker">02 / 问题分布 / ISSUE DISTRIBUTION</p>
+          <p className="document-kicker">02 / 问题分布</p>
           <h2 id="qa-issues-title">问题主要集中在哪里</h2>
           <p className="document-section-lead">条形长度表示命中该检查项的文件数。一个文件可能同时命中响度、峰值或瞬态等多项规则。</p>
           <div className="issue-bars qa-issue-bars" aria-label="问题分布横向条形图">
@@ -77,8 +77,8 @@ export default function AudioValidationSummaryPage() {
         </section>
 
         <section aria-labelledby="qa-standard-title">
-          <p className="document-kicker">03 / 验收标准 / ACCEPTANCE STANDARD</p>
-          <h2 id="qa-standard-title">验收规范如何转成可执行规则</h2>
+          <p className="document-kicker">03 / 验收标准</p>
+          <h2 id="qa-standard-title">项目验收规则</h2>
           <p className="document-section-lead">规范先定义项目红线，再根据资产类别映射响度目标。自动检测负责筛查，人工听审负责判断可听问题。</p>
           <div className="qa-standard-block">
             <article><span>基础格式</span><h3>WAV · 24-bit · 48 kHz</h3><p>统一进入引擎前的交付格式，减少采样率和位深混用。</p></article>
@@ -93,8 +93,8 @@ export default function AudioValidationSummaryPage() {
         </section>
 
         <section aria-labelledby="qa-auto-title">
-          <p className="document-kicker">04 / 自动筛查 / AUTOMATED SCREENING</p>
-          <h2 id="qa-auto-title">自动检查覆盖什么，又不能判断什么</h2>
+          <p className="document-kicker">04 / 自动筛查</p>
+          <h2 id="qa-auto-title">检查项目与人工复核边界</h2>
           <div className="validation-grid qa-check-grid">
             {automatedChecks.map((check) => <article className="validation-card" key={check.code}><span className="validation-card-number">{check.code}</span><h3>{check.title}</h3><strong>{check.rule}</strong><p>{check.boundary}</p></article>)}
           </div>
@@ -105,8 +105,8 @@ export default function AudioValidationSummaryPage() {
         </section>
 
         <section aria-labelledby="qa-process-title">
-          <p className="document-kicker">05 / 验收流程 / WORKFLOW</p>
-          <h2 id="qa-process-title">一次验收如何形成返修依据</h2>
+          <p className="document-kicker">05 / 验收流程</p>
+          <h2 id="qa-process-title">验收记录与返修依据</h2>
           <div className="validation-process qa-process">
             <div className="validation-process-step"><strong>1</strong><h3>读取规范</h3><p>确认格式、类别响度和编辑红线。</p></div>
             <div className="validation-process-step"><strong>2</strong><h3>映射类别</h3><p>按 13 个 FMOD 目录选择对应规则。</p></div>

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
 import "./home-review.css";
+import "./reading-refinement.css";
 
 export const metadata: Metadata = {
   title: "杜明｜AI音频与音视频生成评测作品集",

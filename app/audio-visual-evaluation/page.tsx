@@ -24,7 +24,7 @@ const engineeringActions = [
   ["起点 · 未复现", "降低专项回归优先级，保留监测", "已发生的失败案例仍有效，但当前证据不足以升级为稳定问题。"],
   ["动态 · 部分成立 / 需细化", "转向连续运动与细粒度动态测试", "把粗粒度的“有无响应”细化为更可执行的诊断问题。"],
   ["跨镜头 · 未复现", "暂不以切镜 → 音频丢失作为重点假设", "第二轮的 A/B 验证未支持该因果归因。"],
-  ["质量门槛（Quality Gate）", "保留独立质量门槛", "关系正确不等于最终音频可直接使用。"],
+  ["质量门槛（Quality Gate）", "保留独立质量门槛", "声画关系通过后，仍需检查音质是否达到使用要求。"],
 ] as const;
 
 export default function AudioVisualEvaluationPage() {
@@ -48,11 +48,11 @@ export default function AudioVisualEvaluationPage() {
 
       <section className="av-hero t2a-shell" id="overview">
         <div className="av-hero-copy">
-          <p className="eyebrow">主项目 / PRIMARY CASE</p>
+          <p className="eyebrow">主项目</p>
           <h1>音视频生成<br />诊断评测</h1>
-          <p className="av-hero-title-en">Audio-Visual Generation Evaluation</p>
-          <p className="av-hero-subtitle">从失败案例发现（Bad Case Discovery）到受控回归（Controlled Regression）</p>
-          <p className="t2a-lead">这是一项两轮诊断性评测：第一轮发现问题，第二轮以预先定义的假设、观察字段与判定规则进行受控回归，最后把证据转成下一步的研发排查与评测优先级。</p>
+          <p className="av-hero-title-en">Audio-Visual Evaluation</p>
+          <p className="av-hero-subtitle">两轮评测：发现问题，再检查是否重复出现</p>
+          <p className="t2a-lead">本人记录画面事实、判断声画关系，并用第二轮受控评测检查失败是否复现。共 16 个生成样本。</p>
           <div className="t2a-status-row" aria-label="项目概况">
             <strong>Cross-Round Analysis v1.0</strong>
             <span>2 轮</span>
@@ -61,7 +61,7 @@ export default function AudioVisualEvaluationPage() {
           </div>
         </div>
         <aside className="av-hero-facts" aria-label="核心研究框架">
-          <p>核心问题</p>
+          <img className="evidence-still" src="/images/portfolio/av-count.jpg" alt="木筷敲杯计数案例的实际生成画面" width="1200" height="675"/><p>真实案例 · 木筷敲杯</p>
           <strong>文本提示（Prompt）要求 3 次，画面（Visual）与音频（Audio）均呈现 4 次：偏差应归入哪一段评价链？</strong>
           <dl>
             <div><dt>文本提示（Prompt）</dt><dd>3</dd></div>
@@ -74,7 +74,7 @@ export default function AudioVisualEvaluationPage() {
       <section className="av-case-band" aria-labelledby="count-title">
         <div className="t2a-shell av-case-layout">
           <div>
-            <p className="eyebrow">核心案例 / EXACT-COUNT</p>
+            <p className="eyebrow">核心案例</p>
             <h2 id="count-title">3→4→4：声画一致，文本数量要求未满足</h2>
           </div>
           <div className="av-chain" aria-label="Prompt、Visual、Audio 三阶段计数链">
@@ -96,7 +96,7 @@ export default function AudioVisualEvaluationPage() {
         </header>
         <div className="av-media-grid">
           <figure className="av-media-card">
-            <video controls preload="metadata" playsInline aria-label="R2-H1-B 木筷敲陶瓷杯计数案例">
+            <video controls preload="metadata" poster="/images/portfolio/av-count.jpg" playsInline aria-label="R2-H1-B 木筷敲陶瓷杯计数案例">
               <source src="/video/t2va/R2-H1-B.mp4" type="video/mp4" />
               当前浏览器不支持视频播放。
             </video>
@@ -107,7 +107,7 @@ export default function AudioVisualEvaluationPage() {
             </figcaption>
           </figure>
           <figure className="av-media-card">
-            <video controls preload="metadata" playsInline aria-label="R2-H3 吸尘器动态对应案例">
+            <video controls preload="metadata" poster="/images/portfolio/av-dynamics.jpg" playsInline aria-label="R2-H3 吸尘器动态对应案例">
               <source src="/video/t2va/R2-H3.mp4" type="video/mp4" />
               当前浏览器不支持视频播放。
             </video>

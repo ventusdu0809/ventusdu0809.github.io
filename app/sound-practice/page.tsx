@@ -23,22 +23,22 @@ export default function SoundPracticePage() {
       <section className="sound-practice-hero">
         <div className="section-shell">
           <p className="eyebrow">游戏音频与声音实践 / GAME AUDIO &amp; SOUND PRACTICE</p>
-          <h1>声音设计进入游戏后才是可验证的体验</h1>
-          <p>这些案例覆盖声音制作、交互集成、动态混音和运行时问题定位，重点呈现听觉问题的发现、定位与修改过程。</p>
+          <h1>游戏音频与运行时排查</h1><img className="sound-hero-still" src="/images/portfolio/game-audio.jpg" alt="Unity与FMOD游戏战斗音频运行时联调画面" width="1200" height="675"/>
+          <p>制作、集成，再到实机复核。以下案例展示声音触发、动态混音与运行时问题的修改前后对比。</p>
           <div className="tag-row"><span>Wwise</span><span>FMOD</span><span>Unity</span><span>Unreal Engine</span><span>动态混音</span><span>空间音频</span></div>
         </div>
       </section>
 
       <section className="content-section content-section--paper" aria-labelledby="practice-capability-title">
         <div className="section-shell">
-          <header className="section-heading"><p className="eyebrow">01 / 实践领域 / PRACTICE AREAS</p><h2 id="practice-capability-title">我处理哪些游戏音频问题</h2><p className="section-lead">从音效资产本身延伸到中间件、引擎状态和最终听觉表现。</p></header>
+          <header className="section-heading"><p className="eyebrow">01 / 实践领域</p><h2 id="practice-capability-title">我处理哪些游戏音频问题</h2><p className="section-lead">从音效资产本身延伸到中间件、引擎状态和最终听觉表现。</p></header>
           <div className="practice-row">{practices.map(([number, title, body]) => <article key={number}><span className="practice-number">{number}</span><h3>{title}</h3><p>{body}</p></article>)}</div>
         </div>
       </section>
 
       <section className="content-section" aria-labelledby="integration-title">
         <div className="section-shell">
-          <header className="section-heading"><p className="eyebrow">02 / 交互音频 / INTERACTIVE AUDIO</p><h2 id="integration-title">交互声音如何与画面和状态连接</h2><p className="section-lead">两个公开案例分别展示智能座舱反馈设计，以及 Wwise 与 Unity 的配置、联调和运行时表现。</p></header>
+          <header className="section-heading"><p className="eyebrow">02 / 交互音频</p><h2 id="integration-title">交互声音与状态联动</h2><p className="section-lead">两个公开案例分别展示智能座舱反馈设计，以及 Wwise 与 Unity 的配置、联调和运行时表现。</p></header>
           <div className="runtime-media-grid sound-video-grid">
             <figure className="runtime-media"><figcaption>交互声音设计｜智能座舱 HMI</figcaption><div className="runtime-embed"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=115678921170383&bvid=BV1W2mABvEhG&cid=34575813914&p=1&autoplay=0" title="交互声音设计｜智能座舱 HMI" loading="lazy" allowFullScreen scrolling="no" /></div><a className="runtime-fallback" href="https://www.bilibili.com/video/BV1W2mABvEhG/" target="_blank" rel="noreferrer">在 Bilibili 打开</a></figure>
             <figure className="runtime-media"><figcaption>GameKit3D + Wwise 全流程集成</figcaption><div className="runtime-embed"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116001815402657&bvid=BV1cyFuz5Ejd&cid=35778857476&p=1&autoplay=0" title="GameKit3D 与 Wwise 全流程集成" loading="lazy" allowFullScreen scrolling="no" /></div><div className="sound-resource-links"><a className="runtime-fallback" href="https://www.bilibili.com/video/BV1cyFuz5Ejd/" target="_blank" rel="noreferrer">在 Bilibili 打开</a><a className="runtime-fallback" href="https://ziv0av2u21.feishu.cn/wiki/Vn5aw8hsBi776BkW0VWciETxnAe?from=from_copylink" target="_blank" rel="noreferrer">查看技术文档</a></div></figure>
@@ -48,9 +48,9 @@ export default function SoundPracticePage() {
 
       <section className="content-section content-section--paper" aria-labelledby="runtime-title">
         <div className="section-shell">
-          <header className="section-heading"><p className="eyebrow">03 / 运行时案例 / RUNTIME CASES</p><h2 id="runtime-title">通过 QA 前后对比验证问题修复</h2><p className="section-lead">下面这些案例记录的是修改前后的实际变化——我只描述能观察到的东西，不推测引擎或底层原因。</p></header>
+          <header className="section-heading"><p className="eyebrow">03 / 运行时案例</p><h2 id="runtime-title">通过 QA 前后对比验证问题修复</h2><p className="section-lead">对照修改前后的视频，检查时缓触发、声音响应与混音变化。</p></header>
           <div className="runtime-case-list">
-            <article className="runtime-case"><p className="eyebrow">案例 01 / HITSTOP</p><h3>Hitstop 时缓与声音逻辑协同</h3><p>通过修改前后视频，检查时缓（Hitstop）触发瞬间的声音响应，让动作停顿、冲击反馈和底层逻辑保持一致。</p><div className="runtime-media-grid"><figure className="runtime-media"><figcaption>修改前</figcaption><video controls preload="none" aria-label="Hitstop 修改前视频"><source src="/video/hitstop-before.mp4" type="video/mp4" /></video></figure><figure className="runtime-media"><figcaption>修改后</figcaption><video controls preload="none" aria-label="Hitstop 修改后视频"><source src="/video/hitstop-after.mp4" type="video/mp4" /></video></figure></div></article>
+            <article className="runtime-case"><p className="eyebrow">案例 01 / HITSTOP</p><h3>Hitstop 时缓与声音逻辑协同</h3><p>通过修改前后视频，检查时缓（Hitstop）触发瞬间的声音响应，让动作停顿、冲击反馈和底层逻辑保持一致。</p><div className="runtime-media-grid"><figure className="runtime-media"><figcaption>修改前</figcaption><video controls preload="none" poster="/images/portfolio/game-before.jpg" aria-label="Hitstop 修改前视频"><source src="/video/hitstop-before.mp4" type="video/mp4" /></video></figure><figure className="runtime-media"><figcaption>修改后</figcaption><video controls preload="none" poster="/images/portfolio/game-audio.jpg" aria-label="Hitstop 修改后视频"><source src="/video/hitstop-after.mp4" type="video/mp4" /></video></figure></div></article>
             <article className="runtime-case"><p className="eyebrow">案例 02 / DYNAMIC MIX</p><h3>动态混音与 Snapshot 切换</h3><p>通过混音调整 SFX、音乐与人声的层级关系，并检查 Snapshot 切换时是否出现突兀的听感变化。</p><div className="runtime-media-grid"><figure className="runtime-media"><figcaption>混音案例一</figcaption><div className="runtime-embed"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116798179511695&bvid=BV1Wqjy6CEPF&cid=39335690503&p=2&autoplay=0" title="动态混音案例一" loading="lazy" allowFullScreen scrolling="no" /></div><a className="runtime-fallback" href="https://www.bilibili.com/video/BV1Wqjy6CEPF/?p=2" target="_blank" rel="noreferrer">在 Bilibili 打开</a></figure><figure className="runtime-media"><figcaption>混音案例二</figcaption><div className="runtime-embed"><iframe src="https://player.bilibili.com/player.html?isOutside=true&aid=116679816318744&bvid=BV1CAVz6DEwL&cid=38794496414&p=2&autoplay=0" title="动态混音案例二" loading="lazy" allowFullScreen scrolling="no" /></div><a className="runtime-fallback" href="https://www.bilibili.com/video/BV1CAVz6DEwL/?p=2" target="_blank" rel="noreferrer">在 Bilibili 打开</a></figure></div></article>
           </div>
         </div>
@@ -58,7 +58,7 @@ export default function SoundPracticePage() {
 
       <section className="content-section" aria-labelledby="pipeline-title">
         <div className="section-shell">
-          <header className="section-heading"><p className="eyebrow">04 / 资源流程与交付 / PIPELINE &amp; DELIVERY</p><h2 id="pipeline-title">资源组织与交付规则同样影响最终体验</h2></header>
+          <header className="section-heading"><p className="eyebrow">04 / 资源流程与交付 / PIPELINE &amp; DELIVERY</p><h2 id="pipeline-title">资源组织与交付规则</h2></header>
           <div className="game-feature-grid">
             <article><p className="eyebrow">FMOD / UNITY 资源组织</p><h3>按剧情章节拆分 Bank</h3><p>音乐 Bank 原本约 50 MB。由于自定义 .bank 转 Unity Metadata 与 Byte 数据的链路无法使用 Stream，后续按剧情章节拆分为 50 个约 2 MB 的 Bank，以降低单次加载规模与加载频率。</p><div className="bank-diagram"><div className="bank-source"><b>原 Music Bank</b><span>约 50 MB</span></div><span className="bank-arrow" aria-hidden="true">→</span><div className="bank-target"><b>50 × 约 2 MB</b><span>按剧情章节组织</span></div></div></article>
             <article><p className="eyebrow">音频交付与验收</p><h3>将交付规范变成检查结果</h3><p>围绕格式、响度、真实峰值、瞬态和循环风险定义批量检查；工具负责筛查，最终听觉质量仍由人工判断。</p><ul className="check-list"><li>WAV / 24-bit / 48 kHz</li><li>短时 LUFS</li><li>True Peak</li><li>瞬态对齐</li><li>循环零交叉</li><li>爆点风险（Click）</li></ul><Link className="paper-link" href="/audio-validation-summary">查看音频验收案例</Link></article>

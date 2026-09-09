@@ -19,20 +19,13 @@ function renderedDom(html) {
 
 const prohibitedHomeTerms = ["评测闭环", "体系化赋能", "Wilcoxon", "MT19937", "rank-biserial", "SHA256"];
 
-test("homepage exposes evidence before methods and direct email contact", async () => {
-  const response = await render("/");
-  assert.equal(response.status, 200);
-  const html = renderedDom(await response.text());
-  assert.match(html, /href="mailto:mingdu0809@gmail.com"/);
-  assert.match(html, /<video[^>]*controls/);
-  assert.match(html, /src="\/video\/t2va\/R2-H1-B.mp4"/);
-  assert.doesNotMatch(html, /<video[^>]*autoplay/i);
-  assert.ok(html.indexOf('<video') < html.indexOf('id="pls-home-title"'));
-  assert.match(html, /声画计数一致，仍未满足文本要求/);
-  assert.match(html, /单一评测人/);
-  assert.match(html, /600/);
-  assert.match(html, /<details class="mobile-nav"/);
-  for (const text of prohibitedHomeTerms) assert.doesNotMatch(html, new RegExp(text));
+test("homepage uses an accessible image-led project gallery and direct contact", async () => {
+ const response=await render('/');assert.equal(response.status,200);const html=renderedDom(await response.text());
+ assert.match(html,/mailto:mingdu0809@gmail.com/);assert.ok((html.match(/<img /g)||[]).length>=4);
+ for(const route of ['creative-qc-agent','audio-visual-evaluation','t2a-case-study','sound-practice','resume'])assert.ok(html.includes('/'+route+'/'));
+ assert.ok(html.indexOf('id="projects"')<html.indexOf('id="evaluation-system"'));
+ for(const text of ['单一评测人','600','6/10','声音设计'])assert.ok(html.includes(text));
+ assert.doesNotMatch(html,/<video|autoplay/); assert.doesNotMatch(html.split('id="projects"')[0], /game-audio|Wwise|FMOD/); assert.ok(html.indexOf('id="sound-practice"')>html.indexOf('id="evaluation-system"'));for(const text of prohibitedHomeTerms)assert.doesNotMatch(html,new RegExp(text));
 });
 
 test("PLS-Eval foregrounds executed evidence and separates extensions", async () => {
@@ -135,7 +128,7 @@ test("T2VA is an additive case study with frozen cross-round conclusions", async
   const html = await response.text();
   for (const text of [
     "Audio-Visual Generation Evaluation",
-    "从失败案例发现（Bad Case Discovery）", "受控回归（Controlled Regression）",
+    "两轮评测：发现问题，再检查是否重复出现", "受控回归（Controlled Regression）",
     "3→4→4：声画一致，文本数量要求未满足",
     "点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）",
     "重复诊断模式（Repeated Diagnostic Pattern）", "起点对齐（Onset Alignment）", "未复现（Not Replicated）",
@@ -169,11 +162,11 @@ test("case study keeps the essential evaluation story open and deep detail close
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "听起来好", "不等于生成正确",
+    "音效生成评测", "音质与文本符合度",
     "先判断声音质量，再判断内容是否正确",
     "先盲听，再阅读 Prompt",
     "当前测试集未观察到明确的总体优势方向",
-    "总体分数之外，还要看模型具体错在哪里",
+    "按类型记录生成错误",
     "隐藏重复检查同一评测人的复测稳定性",
     "38 / 40（95.0%）", "39 / 40（97.5%）",
     "SA3M 14.5% · SAO1 6.5%", "SA3M 42.5% · SAO1 60.0%", "SA3M 37.5% · SAO1 33.8%",
@@ -202,11 +195,11 @@ test("audio validation separates results, standards and review boundaries", asyn
   assert.equal(response.status, 200);
   const html = await response.text();
   for (const text of [
-    "音频资产验收：从交付标准到可复查结果",
-    "验收结果先回答哪些文件需要处理",
+    "7,872 条音频资产的交付验收",
+    "哪些文件需要复核与返修",
     "问题主要集中在哪里",
-    "验收规范如何转成可执行规则",
-    "自动检查覆盖什么，又不能判断什么",
+    "项目验收规则",
+    "检查项目与人工复核边界",
     "仍需人工听审",
     "7,872", "1,922", "5,904",
   ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
@@ -219,10 +212,10 @@ test("game audio link opens a dedicated sound practice page", async () => {
   assert.equal(homeResponse.status, 200);
   assert.equal(practiceResponse.status, 200);
   const [home, practice] = await Promise.all([homeResponse.text(), practiceResponse.text()]);
-  assert.match(home, /href="\/sound-practice"[^>]*>查看游戏音频案例/);
+  assert.match(home, /href="\/sound-practice\/"[^>]*>查看声音实践/);
   assert.doesNotMatch(home, /href="\/resume#game-audio"/);
   for (const text of [
-    "声音设计进入游戏后才是可验证的体验",
+    "游戏音频与运行时排查",
     "GameKit3D + Wwise 全流程集成",
     "Hitstop 时缓与声音逻辑协同",
     "动态混音与 Snapshot 切换",
