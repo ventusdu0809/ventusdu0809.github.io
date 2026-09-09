@@ -1,0 +1,35 @@
+[
+  {
+    "file": "media/a03.mp4",
+    "source": "outputs/e2e_v1/run-01/A03/execution/output.mp4",
+    "sha256": "435ea3e8411fffb6c3ea1060657bb8d449ae992e860dc68e632bce5137a40caf",
+    "copy": "byte-identical",
+    "poster": {
+      "file": "media/a03-poster.jpg",
+      "requested_timestamp_sec": 1.5,
+      "derived_from": "outputs/e2e_v1/run-01/A03/execution/output.mp4"
+    }
+  },
+  {
+    "file": "media/a10-fault.mp4",
+    "source": "outputs/e2e_v1/run-01/A10/recovery_harness/faulty.mp4",
+    "sha256": "f8689a355b0bebbfca6b18bcff61f9ab5ee907bc96b4be9e39747129347bf842",
+    "copy": "byte-identical",
+    "poster": {
+      "file": "media/a10-fault-poster.jpg",
+      "requested_timestamp_sec": 8.5,
+      "derived_from": "outputs/e2e_v1/run-01/A10/recovery_harness/faulty.mp4"
+    }
+  },
+  {
+    "file": "media/a03.mp4",
+    "source": "outputs/e2e_v1/run-01/A10/repair/recovery/output.mp4",
+    "sha256": "435ea3e8411fffb6c3ea1060657bb8d449ae992e860dc68e632bce5137a40caf",
+    "copy": "byte-identical",
+    "poster": {
+      "file": "media/a10-repair-poster.jpg",
+      "requested_timestamp_sec": 8.5,
+      "derived_from": "outputs/e2e_v1/run-01/A10/repair/recovery/output.mp4"
+    }
+  }
+]

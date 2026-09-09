@@ -43,6 +43,8 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="content-section recruiter-project recruiter-project-primary" aria-labelledby="agent-project-title"><div className="section-shell"><header className="section-heading"><p className="eyebrow">精选项目 / CREATIVE AGENT</p><h2 id="agent-project-title">Creative QC &amp; Repair Agent</h2><p className="section-lead">多模态创作 Agent · 自动质检 · 失败定位 · 定向修复</p></header><p className="home-explanation">将自然语言需求编译为结构化要求，通过受限工具编辑时间线，再用时间线、音频信号、成片元数据和画面证据逐项质检。失败项定位到具体参数后，再进行定向修复。</p><div className="agent-home-metrics">{[['10/10','受控回归预期判断'],['8/8','支持的自动修复案例'],['10/10','Planner 受控案例'],['6/10','端到端预期行为匹配']].map(([n,label])=><div key={label}><strong>{n}</strong><span>{label}</span></div>)}</div><p className="recruiter-boundary">保留真实失败与安全停止。各指标来自不同受控测试集；6/10 不是 Agent 准确率。</p><div className="hero-actions"><a className="btn btn-primary" href="/creative-qc-agent/">查看 Case Study</a><a className="paper-link" href="/creative-qc-agent/build-log/">技术附录</a></div></div></section>
+
       <section className="content-section recruiter-project recruiter-project-primary" id="projects" aria-labelledby="project-title">
         <div className="section-shell">
           <header className="section-heading">

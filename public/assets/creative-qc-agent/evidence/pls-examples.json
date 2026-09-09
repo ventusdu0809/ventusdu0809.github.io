@@ -1,0 +1,1239 @@
+[
+  {
+    "source": "outputs/regression_v1/C02/evaluation/evaluation.json",
+    "sha256": "918e45a380a8aa9b8f12c6e9cc6834f033d18e667bfb896d1f7b4dd71c62fe9d",
+    "content": {
+      "evaluation_version": "0.2",
+      "recorded_at_utc": "2026-09-08T09:38:06.123211+00:00",
+      "scope": "Deterministic units only; visual units not evaluated; no repair execution",
+      "units": [
+        {
+          "unit_id": "P1",
+          "state": "NOT_EVALUATED",
+          "expected": {
+            "time_range": [
+              0.0,
+              3.0
+            ]
+          },
+          "observed": null,
+          "evidence": {
+            "source": "vision",
+            "available": false,
+            "reason": "Visual review not enabled for this evaluation run"
+          },
+          "diagnosis": {
+            "code": "evaluator_not_implemented"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "play_complete_asset": true
+          },
+          "observed": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "asset_duration_sec": 3.065063,
+            "stem_rms_dbfs": -16.683372600763416,
+            "full_asset_preserved": true,
+            "scope": "Non-silent complete audio track; speech semantics not judged"
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "delta_db": -7.999880739677382,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "bbf4fb22f87ad05ce2daa66640d7d4ef32d2f7e0b83f98e3509ba0ba7e490e2a",
+              "command_sha256": "8e642afcf09ae3f9e9b339920ae68638e3ec85d595758d68cff72de7df2fc005",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12.0,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\regression_v1\\C02\\evaluation\\evidence\\after.wav",
+                "sha256": "87a8e1841274b820e91f1b47317496943572340710584d3a0d0a736e9274fbab",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "before": {
+                "path": "outputs\\regression_v1\\C02\\evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "voiceover": {
+                "path": "outputs\\regression_v1\\C02\\evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P3",
+          "state": "FAIL",
+          "expected": {},
+          "observed": {
+            "present": false,
+            "overlay": null
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "logo_missing"
+          },
+          "repair_target": {
+            "path": "overlays.ventus_logo",
+            "recommended_value": {
+              "id": "ventus_logo",
+              "type": "image",
+              "asset": "assets/logo.png",
+              "start": 8.0,
+              "end": 9.5,
+              "position": "top_left"
+            },
+            "action": "add_or_restore_overlay"
+          },
+          "depends_on": []
+        },
+        {
+          "unit_id": "P4",
+          "state": "PASS",
+          "expected": {
+            "text": "Discover More"
+          },
+          "observed": {
+            "present": true,
+            "overlay": {
+              "id": "cta_text",
+              "type": "text",
+              "text": "Discover More",
+              "start": 10.0,
+              "end": 12.0,
+              "position": "bottom_center"
+            }
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "L1",
+          "state": "BLOCKED",
+          "expected": {
+            "target_start_sec": 8.0,
+            "tolerance_sec": 0.5
+          },
+          "observed": null,
+          "evidence": {
+            "source": "dependency_resolver"
+          },
+          "diagnosis": {
+            "code": "dependency_not_pass",
+            "blocked_by": [
+              {
+                "unit_id": "P3",
+                "state": "FAIL"
+              }
+            ]
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P3"
+          ]
+        },
+        {
+          "unit_id": "L2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 10.0,
+            "end_sec": 12.0,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "start_sec": 10.0,
+            "end_sec": 12.0
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P4"
+          ]
+        },
+        {
+          "unit_id": "L3",
+          "state": "PASS",
+          "expected": {
+            "voiceover_range": [
+              3.5,
+              6.5650625
+            ],
+            "min_duck_db": 8.0
+          },
+          "observed": {
+            "delta_db": -7.999880739677382,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "measurement_tolerance_db": 0.01
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "delta_db": -7.999880739677382,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "bbf4fb22f87ad05ce2daa66640d7d4ef32d2f7e0b83f98e3509ba0ba7e490e2a",
+              "command_sha256": "8e642afcf09ae3f9e9b339920ae68638e3ec85d595758d68cff72de7df2fc005",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12.0,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\regression_v1\\C02\\evaluation\\evidence\\after.wav",
+                "sha256": "87a8e1841274b820e91f1b47317496943572340710584d3a0d0a736e9274fbab",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "before": {
+                "path": "outputs\\regression_v1\\C02\\evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "voiceover": {
+                "path": "outputs\\regression_v1\\C02\\evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P2"
+          ]
+        },
+        {
+          "unit_id": "S1",
+          "state": "NOT_EVALUATED",
+          "expected": {
+            "hero_must_remain_prominent": true,
+            "preserve_elements": [
+              "smoothing_mask",
+              "renewing_conditioner",
+              "wooden_comb"
+            ]
+          },
+          "observed": null,
+          "evidence": {
+            "source": "vision",
+            "available": false,
+            "reason": "Visual review not enabled for this evaluation run"
+          },
+          "diagnosis": {
+            "code": "evaluator_not_implemented"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "Q1",
+          "state": "PASS",
+          "expected": {
+            "duration_sec": 12.0,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "duration_sec": 12.0
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "bbf4fb22f87ad05ce2daa66640d7d4ef32d2f7e0b83f98e3509ba0ba7e490e2a"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "Q2",
+          "state": "PASS",
+          "expected": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16"
+          },
+          "observed": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16",
+            "display_aspect_ratio": "9:16"
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "bbf4fb22f87ad05ce2daa66640d7d4ef32d2f7e0b83f98e3509ba0ba7e490e2a"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        }
+      ],
+      "diagnostic_vector": {
+        "P1": "NOT_EVALUATED",
+        "P2": "PASS",
+        "P3": "FAIL",
+        "P4": "PASS",
+        "L1": "BLOCKED",
+        "L2": "PASS",
+        "L3": "PASS",
+        "S1": "NOT_EVALUATED",
+        "Q1": "PASS",
+        "Q2": "PASS"
+      },
+      "failure_localization": [
+        {
+          "unit_id": "P3",
+          "diagnosis": {
+            "code": "logo_missing"
+          },
+          "repair_target": {
+            "path": "overlays.ventus_logo",
+            "recommended_value": {
+              "id": "ventus_logo",
+              "type": "image",
+              "asset": "assets/logo.png",
+              "start": 8.0,
+              "end": 9.5,
+              "position": "top_left"
+            },
+            "action": "add_or_restore_overlay"
+          }
+        }
+      ],
+      "repair_executed": false,
+      "video_sha256": "bbf4fb22f87ad05ce2daa66640d7d4ef32d2f7e0b83f98e3509ba0ba7e490e2a"
+    }
+  },
+  {
+    "source": "outputs/regression_v1/C10/evaluation/evaluation.json",
+    "sha256": "2ae0a15fc1e7490254fb97dadb0c3391f25fc3ca42ee6b40af92f361bf427236",
+    "content": {
+      "evaluation_version": "0.4",
+      "recorded_at_utc": "2026-09-08T09:39:22.154978+00:00",
+      "scope": "Sampled visual judgments plus deterministic evidence; no repair execution",
+      "units": [
+        {
+          "unit_id": "P1",
+          "state": "PASS",
+          "expected": {
+            "time_range": [
+              0.0,
+              3.0
+            ]
+          },
+          "observed": {
+            "sampled_timestamps": [
+              0.5,
+              1.5,
+              2.5
+            ],
+            "observations": [
+              {
+                "timestamp": 0.5,
+                "actual_timestamp_sec": 0.52,
+                "frame_sha256": "2dc6923acd932545f4a7ad0d546428b1037abeb47501e67755f72fafc267ecab",
+                "visible": true,
+                "identifiable": true,
+                "reason": "SMOOTHING MASK 大字清楚，罐身和盖子完整显著。"
+              },
+              {
+                "timestamp": 1.5,
+                "actual_timestamp_sec": 1.52,
+                "frame_sha256": "be03dd9fb72e76674c4e738250c843f0a42851fbfdebc5448c0a0f229a3b7fd3",
+                "visible": true,
+                "identifiable": true,
+                "reason": "罐体正面 SMOOTHING MASK 两行文字清楚可读。"
+              },
+              {
+                "timestamp": 2.5,
+                "actual_timestamp_sec": 2.52,
+                "frame_sha256": "a7d4fee489ba0d800a40696b74d8801676498c8eeb5e3ad5f57315e4713bf170",
+                "visible": true,
+                "identifiable": true,
+                "reason": "Mask 罐身与产品名清楚，前景梳齿没有盖住名称。"
+              }
+            ],
+            "failed_criteria": [],
+            "aggregation": "all sampled criteria must pass"
+          },
+          "evidence": {
+            "source": "vision_frames",
+            "type": "vision_frames",
+            "available": true,
+            "timestamps": [
+              0.5,
+              1.5,
+              2.5,
+              8.5,
+              10.5,
+              11.5
+            ],
+            "video_sha256": "a7e338d95fb998a91bae8d689005b31fa9f44c63f66a11dd38a0eea7953b5569",
+            "review_sha256": "57882b2ee250d8f3a527186d9416a37aa3905509fe051f62ccd95ad34f80c366",
+            "judge": {
+              "provider": "current_session_multimodal_assistant",
+              "method": "Actual visual inspection using view_image of all six native rendered frames and the source reference",
+              "model_id": "not_exposed_in_visual_tool_result",
+              "standalone_api_invoked": false,
+              "review_scope": "Session-based visual review; not a blind benchmark. CLI validates these recorded responses; it does not create new visual opinions."
+            },
+            "reference_sha256": "4f6f9cd910f834b951aa1f4a7709526683ca01ed6bdeee603e6977d61ecee2e1",
+            "rubric": {
+              "version": "0.1",
+              "P1": "Is the SMOOTHING MASK clearly visible and identifiable in this frame?",
+              "S1": {
+                "hero_prominent": "SMOOTHING MASK is a clearly identifiable, prominent subject within the product group.",
+                "conditioner_preserved": "RENEWING CONDITIONER is not severely cropped or hidden.",
+                "comb_preserved": "The wooden comb is not severely cropped or hidden.",
+                "no_severe_overlay_occlusion": "Logo/CTA do not severely occlude the products or comb.",
+                "same_display_recognizable": "The mask, conditioner and comb remain identifiable as the same display as the source reference."
+              },
+              "aggregation": "Every sampled frame must meet every applicable criterion. Any definite false gives FAIL; otherwise any unknown gives BLOCKED.",
+              "limits": "Sampled-frame evidence, not proof about every frame or general vision accuracy. Judge images only; do not infer outcomes from filenames, timeline crop values, or expected fault labels."
+            },
+            "observations": [
+              {
+                "timestamp": 0.5,
+                "frame_sha256": "2dc6923acd932545f4a7ad0d546428b1037abeb47501e67755f72fafc267ecab",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "SMOOTHING MASK 大字清楚，罐身和盖子完整显著。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "Mask 显著且名称清楚；Conditioner 完全不在画内，梳齿左端和梳柄右端出框，源组合未完整保留。"
+                },
+                "actual_timestamp_sec": 0.52,
+                "frame_index": 13,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0013.png"
+              },
+              {
+                "timestamp": 1.5,
+                "frame_sha256": "be03dd9fb72e76674c4e738250c843f0a42851fbfdebc5448c0a0f229a3b7fd3",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "罐体正面 SMOOTHING MASK 两行文字清楚可读。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "保留了 Mask，但没有 Conditioner；木梳横跨画面而两端被截，整体陈列不完整。"
+                },
+                "actual_timestamp_sec": 1.52,
+                "frame_index": 38,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0038.png"
+              },
+              {
+                "timestamp": 2.5,
+                "frame_sha256": "a7d4fee489ba0d800a40696b74d8801676498c8eeb5e3ad5f57315e4713bf170",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "Mask 罐身与产品名清楚，前景梳齿没有盖住名称。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "Conditioner 缺席、梳体两端裁掉；没有叠加遮挡，但原三件产品陈列已被破坏。"
+                },
+                "actual_timestamp_sec": 2.52,
+                "frame_index": 63,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0063.png"
+              },
+              {
+                "timestamp": 8.5,
+                "frame_sha256": "8806c8fbf52e06dd4654354b79ac9a4e0a5314df683bdb9c0c259713f8df0d0a",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "Mask 名称清楚，罐体是画面显著主体。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "左上 Logo 位于空白处，未严重遮挡罐体；Conditioner 缺失且梳子两端出框。"
+                },
+                "actual_timestamp_sec": 8.52,
+                "frame_index": 213,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0213.png"
+              },
+              {
+                "timestamp": 10.5,
+                "frame_sha256": "bf0d000306c76b8eb3ccf75c7888b75ca9bd576087555a0799b3656290e61f8a",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "SMOOTHING MASK 标签清晰，CTA 位于其下方。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "CTA 没有严重遮挡 Mask；Conditioner 未出现，梳子两端被裁掉，不能保留完整原陈列。"
+                },
+                "actual_timestamp_sec": 10.52,
+                "frame_index": 263,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0263.png"
+              },
+              {
+                "timestamp": 11.5,
+                "frame_sha256": "1aba25be025853ed731d66b818c9c001f47faefbdfc9e532065fbe3b962c0750",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "Mask 的盖子、罐体和文字均清楚可辨。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "Mask 显著，CTA 位于下方；Conditioner 缺失，木梳两端出框，整体组合不完整。"
+                },
+                "actual_timestamp_sec": 11.52,
+                "frame_index": 288,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0288.png"
+              }
+            ],
+            "scope": "Actual multimodal assistant review of sampled rendered frames; CLI validates stored responses, not a standalone model API."
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "play_complete_asset": true
+          },
+          "observed": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "asset_duration_sec": 3.065063,
+            "stem_rms_dbfs": -16.683372600763416,
+            "full_asset_preserved": true,
+            "scope": "Non-silent complete audio track; speech semantics not judged"
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "delta_db": -7.999880739677382,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "a7e338d95fb998a91bae8d689005b31fa9f44c63f66a11dd38a0eea7953b5569",
+              "command_sha256": "b9363f658755fd82b0d4b653954edac4b8bfcf77833aa015176d4388a0ff7695",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12.0,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\regression_v1\\C10\\evaluation\\evidence\\after.wav",
+                "sha256": "87a8e1841274b820e91f1b47317496943572340710584d3a0d0a736e9274fbab",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "before": {
+                "path": "outputs\\regression_v1\\C10\\evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "voiceover": {
+                "path": "outputs\\regression_v1\\C10\\evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P3",
+          "state": "PASS",
+          "expected": {},
+          "observed": {
+            "present": true,
+            "overlay": {
+              "id": "ventus_logo",
+              "type": "image",
+              "asset": "assets/logo.png",
+              "start": 8.0,
+              "end": 9.5,
+              "position": "top_left"
+            }
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P4",
+          "state": "PASS",
+          "expected": {
+            "text": "Discover More"
+          },
+          "observed": {
+            "present": true,
+            "overlay": {
+              "id": "cta_text",
+              "type": "text",
+              "text": "Discover More",
+              "start": 10.0,
+              "end": 12.0,
+              "position": "bottom_center"
+            }
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "L1",
+          "state": "PASS",
+          "expected": {
+            "target_start_sec": 8.0,
+            "tolerance_sec": 0.5
+          },
+          "observed": {
+            "start_sec": 8.0
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P3"
+          ]
+        },
+        {
+          "unit_id": "L2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 10.0,
+            "end_sec": 12.0,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "start_sec": 10.0,
+            "end_sec": 12.0
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P4"
+          ]
+        },
+        {
+          "unit_id": "L3",
+          "state": "PASS",
+          "expected": {
+            "voiceover_range": [
+              3.5,
+              6.5650625
+            ],
+            "min_duck_db": 8.0
+          },
+          "observed": {
+            "delta_db": -7.999880739677382,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "measurement_tolerance_db": 0.01
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "delta_db": -7.999880739677382,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "a7e338d95fb998a91bae8d689005b31fa9f44c63f66a11dd38a0eea7953b5569",
+              "command_sha256": "b9363f658755fd82b0d4b653954edac4b8bfcf77833aa015176d4388a0ff7695",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12.0,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\regression_v1\\C10\\evaluation\\evidence\\after.wav",
+                "sha256": "87a8e1841274b820e91f1b47317496943572340710584d3a0d0a736e9274fbab",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "before": {
+                "path": "outputs\\regression_v1\\C10\\evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              },
+              "voiceover": {
+                "path": "outputs\\regression_v1\\C10\\evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12.0,atrim=end=12.0"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P2"
+          ]
+        },
+        {
+          "unit_id": "S1",
+          "state": "FAIL",
+          "expected": {
+            "hero_must_remain_prominent": true,
+            "preserve_elements": [
+              "smoothing_mask",
+              "renewing_conditioner",
+              "wooden_comb"
+            ]
+          },
+          "observed": {
+            "sampled_timestamps": [
+              0.5,
+              1.5,
+              2.5,
+              8.5,
+              10.5,
+              11.5
+            ],
+            "observations": [
+              {
+                "timestamp": 0.5,
+                "actual_timestamp_sec": 0.52,
+                "frame_sha256": "2dc6923acd932545f4a7ad0d546428b1037abeb47501e67755f72fafc267ecab",
+                "hero_prominent": true,
+                "conditioner_preserved": false,
+                "comb_preserved": false,
+                "no_severe_overlay_occlusion": true,
+                "same_display_recognizable": false,
+                "reason": "Mask 显著且名称清楚；Conditioner 完全不在画内，梳齿左端和梳柄右端出框，源组合未完整保留。"
+              },
+              {
+                "timestamp": 1.5,
+                "actual_timestamp_sec": 1.52,
+                "frame_sha256": "be03dd9fb72e76674c4e738250c843f0a42851fbfdebc5448c0a0f229a3b7fd3",
+                "hero_prominent": true,
+                "conditioner_preserved": false,
+                "comb_preserved": false,
+                "no_severe_overlay_occlusion": true,
+                "same_display_recognizable": false,
+                "reason": "保留了 Mask，但没有 Conditioner；木梳横跨画面而两端被截，整体陈列不完整。"
+              },
+              {
+                "timestamp": 2.5,
+                "actual_timestamp_sec": 2.52,
+                "frame_sha256": "a7d4fee489ba0d800a40696b74d8801676498c8eeb5e3ad5f57315e4713bf170",
+                "hero_prominent": true,
+                "conditioner_preserved": false,
+                "comb_preserved": false,
+                "no_severe_overlay_occlusion": true,
+                "same_display_recognizable": false,
+                "reason": "Conditioner 缺席、梳体两端裁掉；没有叠加遮挡，但原三件产品陈列已被破坏。"
+              },
+              {
+                "timestamp": 8.5,
+                "actual_timestamp_sec": 8.52,
+                "frame_sha256": "8806c8fbf52e06dd4654354b79ac9a4e0a5314df683bdb9c0c259713f8df0d0a",
+                "hero_prominent": true,
+                "conditioner_preserved": false,
+                "comb_preserved": false,
+                "no_severe_overlay_occlusion": true,
+                "same_display_recognizable": false,
+                "reason": "左上 Logo 位于空白处，未严重遮挡罐体；Conditioner 缺失且梳子两端出框。"
+              },
+              {
+                "timestamp": 10.5,
+                "actual_timestamp_sec": 10.52,
+                "frame_sha256": "bf0d000306c76b8eb3ccf75c7888b75ca9bd576087555a0799b3656290e61f8a",
+                "hero_prominent": true,
+                "conditioner_preserved": false,
+                "comb_preserved": false,
+                "no_severe_overlay_occlusion": true,
+                "same_display_recognizable": false,
+                "reason": "CTA 没有严重遮挡 Mask；Conditioner 未出现，梳子两端被裁掉，不能保留完整原陈列。"
+              },
+              {
+                "timestamp": 11.5,
+                "actual_timestamp_sec": 11.52,
+                "frame_sha256": "1aba25be025853ed731d66b818c9c001f47faefbdfc9e532065fbe3b962c0750",
+                "hero_prominent": true,
+                "conditioner_preserved": false,
+                "comb_preserved": false,
+                "no_severe_overlay_occlusion": true,
+                "same_display_recognizable": false,
+                "reason": "Mask 显著，CTA 位于下方；Conditioner 缺失，木梳两端出框，整体组合不完整。"
+              }
+            ],
+            "failed_criteria": [
+              "comb_preserved",
+              "conditioner_preserved",
+              "same_display_recognizable"
+            ],
+            "aggregation": "all sampled criteria must pass"
+          },
+          "evidence": {
+            "source": "vision_frames",
+            "type": "vision_frames",
+            "available": true,
+            "timestamps": [
+              0.5,
+              1.5,
+              2.5,
+              8.5,
+              10.5,
+              11.5
+            ],
+            "video_sha256": "a7e338d95fb998a91bae8d689005b31fa9f44c63f66a11dd38a0eea7953b5569",
+            "review_sha256": "57882b2ee250d8f3a527186d9416a37aa3905509fe051f62ccd95ad34f80c366",
+            "judge": {
+              "provider": "current_session_multimodal_assistant",
+              "method": "Actual visual inspection using view_image of all six native rendered frames and the source reference",
+              "model_id": "not_exposed_in_visual_tool_result",
+              "standalone_api_invoked": false,
+              "review_scope": "Session-based visual review; not a blind benchmark. CLI validates these recorded responses; it does not create new visual opinions."
+            },
+            "reference_sha256": "4f6f9cd910f834b951aa1f4a7709526683ca01ed6bdeee603e6977d61ecee2e1",
+            "rubric": {
+              "version": "0.1",
+              "P1": "Is the SMOOTHING MASK clearly visible and identifiable in this frame?",
+              "S1": {
+                "hero_prominent": "SMOOTHING MASK is a clearly identifiable, prominent subject within the product group.",
+                "conditioner_preserved": "RENEWING CONDITIONER is not severely cropped or hidden.",
+                "comb_preserved": "The wooden comb is not severely cropped or hidden.",
+                "no_severe_overlay_occlusion": "Logo/CTA do not severely occlude the products or comb.",
+                "same_display_recognizable": "The mask, conditioner and comb remain identifiable as the same display as the source reference."
+              },
+              "aggregation": "Every sampled frame must meet every applicable criterion. Any definite false gives FAIL; otherwise any unknown gives BLOCKED.",
+              "limits": "Sampled-frame evidence, not proof about every frame or general vision accuracy. Judge images only; do not infer outcomes from filenames, timeline crop values, or expected fault labels."
+            },
+            "observations": [
+              {
+                "timestamp": 0.5,
+                "frame_sha256": "2dc6923acd932545f4a7ad0d546428b1037abeb47501e67755f72fafc267ecab",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "SMOOTHING MASK 大字清楚，罐身和盖子完整显著。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "Mask 显著且名称清楚；Conditioner 完全不在画内，梳齿左端和梳柄右端出框，源组合未完整保留。"
+                },
+                "actual_timestamp_sec": 0.52,
+                "frame_index": 13,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0013.png"
+              },
+              {
+                "timestamp": 1.5,
+                "frame_sha256": "be03dd9fb72e76674c4e738250c843f0a42851fbfdebc5448c0a0f229a3b7fd3",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "罐体正面 SMOOTHING MASK 两行文字清楚可读。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "保留了 Mask，但没有 Conditioner；木梳横跨画面而两端被截，整体陈列不完整。"
+                },
+                "actual_timestamp_sec": 1.52,
+                "frame_index": 38,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0038.png"
+              },
+              {
+                "timestamp": 2.5,
+                "frame_sha256": "a7d4fee489ba0d800a40696b74d8801676498c8eeb5e3ad5f57315e4713bf170",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "Mask 罐身与产品名清楚，前景梳齿没有盖住名称。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "Conditioner 缺席、梳体两端裁掉；没有叠加遮挡，但原三件产品陈列已被破坏。"
+                },
+                "actual_timestamp_sec": 2.52,
+                "frame_index": 63,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0063.png"
+              },
+              {
+                "timestamp": 8.5,
+                "frame_sha256": "8806c8fbf52e06dd4654354b79ac9a4e0a5314df683bdb9c0c259713f8df0d0a",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "Mask 名称清楚，罐体是画面显著主体。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "左上 Logo 位于空白处，未严重遮挡罐体；Conditioner 缺失且梳子两端出框。"
+                },
+                "actual_timestamp_sec": 8.52,
+                "frame_index": 213,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0213.png"
+              },
+              {
+                "timestamp": 10.5,
+                "frame_sha256": "bf0d000306c76b8eb3ccf75c7888b75ca9bd576087555a0799b3656290e61f8a",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "SMOOTHING MASK 标签清晰，CTA 位于其下方。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "CTA 没有严重遮挡 Mask；Conditioner 未出现，梳子两端被裁掉，不能保留完整原陈列。"
+                },
+                "actual_timestamp_sec": 10.52,
+                "frame_index": 263,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0263.png"
+              },
+              {
+                "timestamp": 11.5,
+                "frame_sha256": "1aba25be025853ed731d66b818c9c001f47faefbdfc9e532065fbe3b962c0750",
+                "P1": {
+                  "visible": true,
+                  "identifiable": true,
+                  "reason": "Mask 的盖子、罐体和文字均清楚可辨。"
+                },
+                "S1": {
+                  "hero_prominent": true,
+                  "conditioner_preserved": false,
+                  "comb_preserved": false,
+                  "no_severe_overlay_occlusion": true,
+                  "same_display_recognizable": false,
+                  "reason": "Mask 显著，CTA 位于下方；Conditioner 缺失，木梳两端出框，整体组合不完整。"
+                },
+                "actual_timestamp_sec": 11.52,
+                "frame_index": 288,
+                "file": "<project>\\outputs\\case_001\\visual\\fault_b\\frames\\frame_0288.png"
+              }
+            ],
+            "scope": "Actual multimodal assistant review of sampled rendered frames; CLI validates stored responses, not a standalone model API."
+          },
+          "diagnosis": {
+            "code": "composition_not_preserved"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "Q1",
+          "state": "PASS",
+          "expected": {
+            "duration_sec": 12.0,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "duration_sec": 12.0
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "a7e338d95fb998a91bae8d689005b31fa9f44c63f66a11dd38a0eea7953b5569"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "Q2",
+          "state": "PASS",
+          "expected": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16"
+          },
+          "observed": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16",
+            "display_aspect_ratio": "9:16"
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "a7e338d95fb998a91bae8d689005b31fa9f44c63f66a11dd38a0eea7953b5569"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        }
+      ],
+      "diagnostic_vector": {
+        "P1": "PASS",
+        "P2": "PASS",
+        "P3": "PASS",
+        "P4": "PASS",
+        "L1": "PASS",
+        "L2": "PASS",
+        "L3": "PASS",
+        "S1": "FAIL",
+        "Q1": "PASS",
+        "Q2": "PASS"
+      },
+      "failure_localization": [
+        {
+          "unit_id": "S1",
+          "diagnosis": {
+            "code": "composition_not_preserved"
+          },
+          "repair_target": null
+        }
+      ],
+      "repair_executed": false,
+      "video_sha256": "a7e338d95fb998a91bae8d689005b31fa9f44c63f66a11dd38a0eea7953b5569"
+    }
+  }
+]

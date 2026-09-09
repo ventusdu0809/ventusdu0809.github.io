@@ -1,0 +1,66 @@
+{
+  "source": "outputs/e2e_v1/summary.json",
+  "sha256": "0d523b61dc5ed032c7872011d643500336c1d8052c2d76d04dffee3d2b6277d9",
+  "cases": [
+    {
+      "case_id": "A01",
+      "name": "Canonical English Full Task",
+      "final_outcome": "REVIEW_REQUIRED",
+      "attribution": "REVIEW_REQUIRED"
+    },
+    {
+      "case_id": "A02",
+      "name": "Formal Chinese Full Task",
+      "final_outcome": "REVIEW_REQUIRED",
+      "attribution": "REVIEW_REQUIRED"
+    },
+    {
+      "case_id": "A03",
+      "name": "Production Notes",
+      "final_outcome": "COMPLETED",
+      "attribution": "SUCCESS"
+    },
+    {
+      "case_id": "A04",
+      "name": "Already Satisfied",
+      "final_outcome": "ERROR",
+      "attribution": "COMPILER_SCHEMA_ERROR"
+    },
+    {
+      "case_id": "A05",
+      "name": "CTA Omitted",
+      "final_outcome": "REVIEW_REQUIRED",
+      "attribution": "REVIEW_REQUIRED"
+    },
+    {
+      "case_id": "A06",
+      "name": "Ducking Omitted",
+      "final_outcome": "ERROR",
+      "attribution": "PLAN_VALIDATION_ERROR"
+    },
+    {
+      "case_id": "A07",
+      "name": "Unsupported Premium Request",
+      "final_outcome": "ERROR",
+      "attribution": "PLAN_VALIDATION_ERROR"
+    },
+    {
+      "case_id": "A08",
+      "name": "Ambiguous Logo Timing",
+      "final_outcome": "EXPECTED_STOP",
+      "attribution": "EXPECTED_CLARIFICATION"
+    },
+    {
+      "case_id": "A09",
+      "name": "Conflicting Duration",
+      "final_outcome": "ERROR",
+      "attribution": "COMPILER_SCHEMA_ERROR"
+    },
+    {
+      "case_id": "A10",
+      "name": "Controlled Recovery Loop",
+      "final_outcome": "COMPLETED",
+      "attribution": "SUCCESS"
+    }
+  ]
+}

@@ -1,0 +1,856 @@
+[
+  {
+    "source": "outputs/e2e_v1/run-01/A10/recovery_harness/fault_definition.json",
+    "sha256": "47d71e805927f09dfd1fada7a7f1c8c3ed0bb9553a9d2be8d105981c8b60ca31",
+    "content": {
+      "faults": [
+        {
+          "target_path": "overlays.ventus_logo.start",
+          "gold_value": 8.0,
+          "injected_value": 9.2
+        },
+        {
+          "target_path": "audio_tracks.bgm.automation[0].gain_delta_db",
+          "gold_value": -8.0,
+          "injected_value": 0.0
+        }
+      ]
+    }
+  },
+  {
+    "source": "outputs/e2e_v1/run-01/A10/recovery_evaluation/evaluation.json",
+    "sha256": "5530975d46d6a2a25ce4d76ca92d6c44aa5dc9191f381fa160285e16bfd348c1",
+    "content": {
+      "evaluation_version": "0.2",
+      "recorded_at_utc": "2026-09-09T04:37:10.852191+00:00",
+      "scope": "Deterministic units only; visual units not evaluated; no repair execution",
+      "units": [
+        {
+          "unit_id": "P2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "play_complete_asset": true
+          },
+          "observed": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "asset_duration_sec": 3.065063,
+            "stem_rms_dbfs": -16.683372600763416,
+            "full_asset_preserved": true,
+            "scope": "Non-silent complete audio track; speech semantics not judged"
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -33.0640885154786,
+            "delta_db": 0.0,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "f8689a355b0bebbfca6b18bcff61f9ab5ee907bc96b4be9e39747129347bf842",
+              "command_sha256": "ab73051bc0de375b1d74dc65df8c5c51bb708dc8e5e29343488d7aa33e374ab5",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\recovery_evaluation\\evidence\\after.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),1,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),1,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "before": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\recovery_evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "voiceover": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\recovery_evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12,atrim=end=12"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P3",
+          "state": "PASS",
+          "expected": {},
+          "observed": {
+            "present": true,
+            "overlay": {
+              "id": "ventus_logo",
+              "type": "image",
+              "asset": "assets/logo.png",
+              "start": 9.2,
+              "end": 9.5,
+              "position": "top_left"
+            }
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P4",
+          "state": "PASS",
+          "expected": {
+            "text": "Discover More"
+          },
+          "observed": {
+            "present": true,
+            "overlay": {
+              "id": "cta_text",
+              "type": "text",
+              "text": "Discover More",
+              "start": 10,
+              "end": 12,
+              "position": "bottom_center"
+            }
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "L1",
+          "state": "FAIL",
+          "expected": {
+            "target_start_sec": 8,
+            "tolerance_sec": 0.5
+          },
+          "observed": {
+            "start_sec": 9.2
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "logo_too_late"
+          },
+          "repair_target": {
+            "path": "overlays.ventus_logo.start",
+            "recommended_value": 8
+          },
+          "depends_on": [
+            "P3"
+          ]
+        },
+        {
+          "unit_id": "L2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 10,
+            "end_sec": 12,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "start_sec": 10,
+            "end_sec": 12
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P4"
+          ]
+        },
+        {
+          "unit_id": "L3",
+          "state": "FAIL",
+          "expected": {
+            "voiceover_range": [
+              3.5,
+              6.5650625
+            ],
+            "min_duck_db": 8
+          },
+          "observed": {
+            "delta_db": 0.0,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -33.0640885154786,
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "measurement_tolerance_db": 0.01
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -33.0640885154786,
+            "delta_db": 0.0,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "f8689a355b0bebbfca6b18bcff61f9ab5ee907bc96b4be9e39747129347bf842",
+              "command_sha256": "ab73051bc0de375b1d74dc65df8c5c51bb708dc8e5e29343488d7aa33e374ab5",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\recovery_evaluation\\evidence\\after.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),1,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),1,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "before": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\recovery_evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "voiceover": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\recovery_evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12,atrim=end=12"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "insufficient_bgm_ducking"
+          },
+          "repair_target": {
+            "path": "audio_tracks.bgm.automation[0].gain_delta_db",
+            "recommended_value": -8
+          },
+          "depends_on": [
+            "P2"
+          ]
+        },
+        {
+          "unit_id": "Q1",
+          "state": "PASS",
+          "expected": {
+            "duration_sec": 12,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "duration_sec": 12.0
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "f8689a355b0bebbfca6b18bcff61f9ab5ee907bc96b4be9e39747129347bf842"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "Q2",
+          "state": "PASS",
+          "expected": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16"
+          },
+          "observed": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16",
+            "display_aspect_ratio": "9:16"
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "f8689a355b0bebbfca6b18bcff61f9ab5ee907bc96b4be9e39747129347bf842"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        }
+      ],
+      "diagnostic_vector": {
+        "P2": "PASS",
+        "P3": "PASS",
+        "P4": "PASS",
+        "L1": "FAIL",
+        "L2": "PASS",
+        "L3": "FAIL",
+        "Q1": "PASS",
+        "Q2": "PASS"
+      },
+      "failure_localization": [
+        {
+          "unit_id": "L1",
+          "diagnosis": {
+            "code": "logo_too_late"
+          },
+          "repair_target": {
+            "path": "overlays.ventus_logo.start",
+            "recommended_value": 8
+          }
+        },
+        {
+          "unit_id": "L3",
+          "diagnosis": {
+            "code": "insufficient_bgm_ducking"
+          },
+          "repair_target": {
+            "path": "audio_tracks.bgm.automation[0].gain_delta_db",
+            "recommended_value": -8
+          }
+        }
+      ],
+      "repair_executed": false
+    }
+  },
+  {
+    "source": "outputs/e2e_v1/run-01/A10/repair/recovery/repair_plan.json",
+    "sha256": "45a350ce9438fa14aa4dbd5e47c4f4efe76a45219b54b18e75b0bee52bd62167",
+    "content": {
+      "repair_plan_version": "0.1",
+      "created_at": "2026-09-09T04:37:10.854185+00:00",
+      "source_timeline": "current timeline",
+      "source_evaluation": "evaluation",
+      "source_timeline_fingerprint": "a2e9ce3680d02cf05eb16aed170430e559d11bc7a690cc580396f9c51e03df10",
+      "source_evaluation_fingerprint": "55162e1a40e731985ff706a6ceebf3dca3a123b4b906088db89953709ef317b5",
+      "actions": [
+        {
+          "unit_id": "L1",
+          "diagnosis_code": "logo_too_late",
+          "tool": "move_overlay",
+          "arguments": {
+            "id": "ventus_logo",
+            "start": 8
+          },
+          "target_path": "overlays.ventus_logo.start",
+          "recommended_value": 8
+        },
+        {
+          "unit_id": "L3",
+          "diagnosis_code": "insufficient_bgm_ducking",
+          "tool": "set_bgm_ducking",
+          "arguments": {
+            "track_id": "bgm",
+            "automation_index": 0,
+            "gain_delta_db": -8
+          },
+          "target_path": "audio_tracks.bgm.automation[0].gain_delta_db",
+          "recommended_value": -8
+        }
+      ],
+      "skipped_units": [
+        {
+          "unit_id": "P2",
+          "state": "PASS",
+          "reason": "Only FAIL is repairable"
+        },
+        {
+          "unit_id": "P3",
+          "state": "PASS",
+          "reason": "Only FAIL is repairable"
+        },
+        {
+          "unit_id": "P4",
+          "state": "PASS",
+          "reason": "Only FAIL is repairable"
+        },
+        {
+          "unit_id": "L2",
+          "state": "PASS",
+          "reason": "Only FAIL is repairable"
+        },
+        {
+          "unit_id": "Q1",
+          "state": "PASS",
+          "reason": "Only FAIL is repairable"
+        },
+        {
+          "unit_id": "Q2",
+          "state": "PASS",
+          "reason": "Only FAIL is repairable"
+        }
+      ],
+      "validation": {
+        "status": "Validated",
+        "allowed_paths": [
+          "audio_tracks.voiceover",
+          "duration",
+          "output.width",
+          "output.height",
+          "overlays.ventus_logo",
+          "overlays.ventus_logo.start",
+          "overlays.ventus_logo.end",
+          "overlays.cta_text",
+          "overlays.cta_text.start",
+          "overlays.cta_text.end",
+          "overlays.ventus_logo",
+          "overlays.ventus_logo.start",
+          "overlays.ventus_logo.end",
+          "overlays.cta_text",
+          "overlays.cta_text.start",
+          "overlays.cta_text.end",
+          "audio_tracks.bgm.automation[0].gain_delta_db"
+        ],
+        "decision_inputs": [
+          "current_timeline",
+          "requirement",
+          "evaluation",
+          "tool_catalog",
+          "allowed_path_policy"
+        ],
+        "ground_truth_access": false
+      }
+    }
+  },
+  {
+    "source": "outputs/e2e_v1/run-01/A10/repair/recovery/diff.json",
+    "sha256": "581800407ba5abdc9038ca27880a5cb04d1a363c46559cde469ba39b3177faea",
+    "content": {
+      "changes": [
+        {
+          "path": "audio_tracks.bgm.automation[0].gain_delta_db",
+          "before": 0.0,
+          "after": -8,
+          "unit_id": "L3"
+        },
+        {
+          "path": "overlays.ventus_logo.start",
+          "before": 9.2,
+          "after": 8,
+          "unit_id": "L1"
+        }
+      ],
+      "reassertions": [],
+      "changed_path_audit": "Verified",
+      "source_unchanged": true,
+      "schema_validation": "Verified"
+    }
+  },
+  {
+    "source": "outputs/e2e_v1/run-01/A10/repair/recovery/evaluation/evaluation.json",
+    "sha256": "968c713cd881b5278a7acf4d01a179886f99dd12a7a1d05ca4b88e1f98f50855",
+    "content": {
+      "evaluation_version": "0.2",
+      "recorded_at_utc": "2026-09-09T04:37:19.680018+00:00",
+      "scope": "Deterministic units only; visual units not evaluated; no repair execution",
+      "units": [
+        {
+          "unit_id": "P2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "play_complete_asset": true
+          },
+          "observed": {
+            "start_sec": 3.5,
+            "end_sec": 6.5650625,
+            "asset_duration_sec": 3.065063,
+            "stem_rms_dbfs": -16.683372600763416,
+            "full_asset_preserved": true,
+            "scope": "Non-silent complete audio track; speech semantics not judged"
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "delta_db": -7.999880739677382,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "435ea3e8411fffb6c3ea1060657bb8d449ae992e860dc68e632bce5137a40caf",
+              "command_sha256": "e84b1acd6999876143583f2d6fcd7634e952de5bf3d41566cb092f6a81ef7a67",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\repair\\recovery\\evaluation\\evidence\\after.wav",
+                "sha256": "87a8e1841274b820e91f1b47317496943572340710584d3a0d0a736e9274fbab",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "before": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\repair\\recovery\\evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "voiceover": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\repair\\recovery\\evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12,atrim=end=12"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P3",
+          "state": "PASS",
+          "expected": {},
+          "observed": {
+            "present": true,
+            "overlay": {
+              "id": "ventus_logo",
+              "type": "image",
+              "asset": "assets/logo.png",
+              "start": 8,
+              "end": 9.5,
+              "position": "top_left"
+            }
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "P4",
+          "state": "PASS",
+          "expected": {
+            "text": "Discover More"
+          },
+          "observed": {
+            "present": true,
+            "overlay": {
+              "id": "cta_text",
+              "type": "text",
+              "text": "Discover More",
+              "start": 10,
+              "end": 12,
+              "position": "bottom_center"
+            }
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "L1",
+          "state": "PASS",
+          "expected": {
+            "target_start_sec": 8,
+            "tolerance_sec": 0.5
+          },
+          "observed": {
+            "start_sec": 8
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P3"
+          ]
+        },
+        {
+          "unit_id": "L2",
+          "state": "PASS",
+          "expected": {
+            "start_sec": 10,
+            "end_sec": 12,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "start_sec": 10,
+            "end_sec": 12
+          },
+          "evidence": {
+            "source": "timeline",
+            "available": true,
+            "scope": "Declared timeline presence/timing, not visual detection",
+            "binding": "matches_render_snapshot"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P4"
+          ]
+        },
+        {
+          "unit_id": "L3",
+          "state": "PASS",
+          "expected": {
+            "voiceover_range": [
+              3.5,
+              6.5650625
+            ],
+            "min_duck_db": 8
+          },
+          "observed": {
+            "delta_db": -7.999880739677382,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "measurement_tolerance_db": 0.01
+          },
+          "evidence": {
+            "source": "measured_audio_stems",
+            "method": "Saved render graph replay; before bypasses automation only",
+            "interval_sec": [
+              3.5,
+              6.5650625
+            ],
+            "sample_count_per_channel": 147123,
+            "before_rms_dbfs": -33.0640885154786,
+            "after_rms_dbfs": -41.06396925515598,
+            "delta_db": -7.999880739677382,
+            "voiceover_rms_dbfs": -16.683372600763416,
+            "voiceover_asset_duration_sec": 3.065063,
+            "voiceover_full_asset_preserved": true,
+            "voiceover_relative_rms_residual": 0.0,
+            "render_binding": {
+              "verified": true,
+              "output_sha256": "435ea3e8411fffb6c3ea1060657bb8d449ae992e860dc68e632bce5137a40caf",
+              "command_sha256": "e84b1acd6999876143583f2d6fcd7634e952de5bf3d41566cb092f6a81ef7a67",
+              "compared_audio_duration_sec": 12.0,
+              "timeline_duration_sec": 12,
+              "relative_rms_residual": 0.0,
+              "relative_rms_residual_db": null,
+              "threshold_db": -60,
+              "exact_decoded_match": true
+            },
+            "stems": {
+              "after": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\repair\\recovery\\evaluation\\evidence\\after.wav",
+                "sha256": "87a8e1841274b820e91f1b47317496943572340710584d3a0d0a736e9274fbab",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,aeval=exprs='val(0)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)|val(1)*if(gte(t,3.5)*lt(t,6.5650625),0.398107170553,1)':channel_layout=stereo,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "before": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\repair\\recovery\\evaluation\\evidence\\before.wav",
+                "sha256": "cc144e094c541a58ee597aca50350525a1182133c7e03d288fce9b25374570dc",
+                "filters": "atrim=start=0:end=12.0,asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=-14dB,adelay=0S:all=1,apad=whole_dur=12,atrim=end=12"
+              },
+              "voiceover": {
+                "path": "outputs\\e2e_v1\\run-01\\A10\\repair\\recovery\\evaluation\\evidence\\voiceover.wav",
+                "sha256": "46558b855069a1c57ea731fbb574a08717d4a29842b752da9ae8e2b693d85731",
+                "filters": "asetpts=PTS-STARTPTS,aresample=48000,aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,volume=0dB,adelay=168000S:all=1,apad=whole_dur=12,atrim=end=12"
+              }
+            },
+            "limitations": "Independent stems replayed from saved render graph, not separated from final mix; replay matched decoded MP4 audio. Not a speech/vision quality judgment.",
+            "available": true
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": [
+            "P2"
+          ]
+        },
+        {
+          "unit_id": "Q1",
+          "state": "PASS",
+          "expected": {
+            "duration_sec": 12,
+            "tolerance_sec": 0.2
+          },
+          "observed": {
+            "duration_sec": 12.0
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "435ea3e8411fffb6c3ea1060657bb8d449ae992e860dc68e632bce5137a40caf"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        },
+        {
+          "unit_id": "Q2",
+          "state": "PASS",
+          "expected": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16"
+          },
+          "observed": {
+            "width": 1080,
+            "height": 1920,
+            "aspect_ratio": "9:16",
+            "display_aspect_ratio": "9:16"
+          },
+          "evidence": {
+            "source": "ffprobe",
+            "available": true,
+            "observed": {
+              "duration_sec": 12.0,
+              "width": 1080,
+              "height": 1920,
+              "aspect_ratio": "9:16",
+              "sample_aspect_ratio": "1:1",
+              "display_aspect_ratio": "9:16",
+              "fps": 25.0,
+              "video_duration_sec": 12.0,
+              "video_frame_count": 300,
+              "audio_sample_rate_hz": 48000,
+              "audio_channels": 2
+            },
+            "output_sha256": "435ea3e8411fffb6c3ea1060657bb8d449ae992e860dc68e632bce5137a40caf"
+          },
+          "diagnosis": {
+            "code": "requirement_satisfied"
+          },
+          "repair_target": null,
+          "depends_on": []
+        }
+      ],
+      "diagnostic_vector": {
+        "P2": "PASS",
+        "P3": "PASS",
+        "P4": "PASS",
+        "L1": "PASS",
+        "L2": "PASS",
+        "L3": "PASS",
+        "Q1": "PASS",
+        "Q2": "PASS"
+      },
+      "failure_localization": [],
+      "repair_executed": false
+    }
+  }
+]

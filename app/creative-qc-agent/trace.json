@@ -1,0 +1,98 @@
+{
+  "input": "12s / 9:16 vertical\r\nVO @3.5s\r\nlogo ~8s\r\nBGM duck >=8dB during VO\r\nCTA \"Discover More\" last 2s",
+  "stages": [
+    {
+      "stage": "compiler",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "compiler_gate",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "planner",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "plan_gate",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "baseline_evaluate",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "tool_apply",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "timeline_gate",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "render",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "evaluate",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "acceptance_gate",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "repair_plan",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "repair_apply",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "repair_render",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "repair_evaluate",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "final_acceptance",
+      "status": "SUCCESS"
+    },
+    {
+      "stage": "recovery_injection",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "recovery_render",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "recovery_evaluate",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "recovery_repair_plan",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "recovery_repair_apply",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "recovery_repair_render",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "recovery_repair_evaluate",
+      "status": "NOT_RUN"
+    },
+    {
+      "stage": "recovery_acceptance",
+      "status": "NOT_RUN"
+    }
+  ],
+  "source": "A03 frozen execution trace"
+}

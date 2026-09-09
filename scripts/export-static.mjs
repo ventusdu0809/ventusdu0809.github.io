@@ -14,6 +14,8 @@ const outputDir = path.join(root, mode === "pages" ? "pages-dist" : "offline-dis
 const basePath = normalizeBasePath(process.env.PAGES_BASE_PATH || "/");
 const routes = [
   "/",
+  "/creative-qc-agent",
+  "/creative-qc-agent/build-log",
   "/t2a-case-study",
   "/audio-visual-evaluation",
   "/point-line-scene-framework",

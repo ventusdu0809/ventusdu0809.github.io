@@ -1,0 +1,308 @@
+[
+  {
+    "source": "outputs/regression_v1_1/metrics.json",
+    "sha256": "fa640f847b0ae52845094125bc0120b3a30426eb61f595ac0e379f0d4eeb6bd4",
+    "content": {
+      "name": "Controlled Regression Set v1",
+      "case_metrics": {
+        "expected_judgments": {
+          "numerator": 10,
+          "denominator": 10,
+          "value": 1.0
+        },
+        "fault_detection": {
+          "numerator": 10,
+          "denominator": 10,
+          "value": 1.0
+        },
+        "eligibility": {
+          "numerator": 3,
+          "denominator": 3,
+          "value": 1.0
+        },
+        "targeted_repair": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "regression_free_repair": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        }
+      },
+      "unit_metrics": {
+        "fault_detection": {
+          "numerator": 11,
+          "denominator": 11,
+          "value": 1.0
+        },
+        "failure_localization": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "expected_state_agreement": {
+          "numerator": 84,
+          "denominator": 84,
+          "value": 1.0
+        },
+        "targeted_repair": {
+          "numerator": 8,
+          "denominator": 8,
+          "value": 1.0
+        },
+        "previously_passing_preserved": {
+          "numerator": 53,
+          "denominator": 53,
+          "value": 1.0
+        }
+      },
+      "automation_split": {
+        "AUTO": {
+          "cases": 8,
+          "unit_fault_detection": {
+            "numerator": 8,
+            "denominator": 8,
+            "value": 1.0
+          }
+        },
+        "REVIEW_ASSISTED": {
+          "cases": 2,
+          "unit_fault_detection": {
+            "numerator": 3,
+            "denominator": 3,
+            "value": 1.0
+          }
+        }
+      },
+      "new_regression_count": 0,
+      "new_regressions": [],
+      "execution_count": {
+        "numerator": 10,
+        "denominator": 10,
+        "value": 1.0
+      },
+      "excluded_from_execution_metrics": [],
+      "repair_exclusions": [
+        {
+          "case_id": "C09",
+          "status": "REVIEW_ONLY"
+        },
+        {
+          "case_id": "C10",
+          "status": "REVIEW_ONLY"
+        }
+      ],
+      "repair_scope_gaps": [],
+      "definitions": {
+        "fault_detection": "Expected FAIL Units only; BLOCKED and NOT_EVALUATED are never ordinary detected failures.",
+        "localization": "Exact expected target-path set for eligible Units, not just matching Unit ID. Review-only visual cases excluded.",
+        "eligibility": "Designated parent FAIL / child BLOCKED pairs; chain-level denominator.",
+        "repair": "Only supported cases with actual patch, render and re-evaluation; all exclusions shown.",
+        "case_vs_unit": "C09 is one case with two expected FAIL Units.",
+        "scope": "Only declared expected states; AUTO runs score eight automated Units. No general Agent accuracy claim."
+      }
+    }
+  },
+  {
+    "source": "outputs/planner_v1/run-02/metrics.json",
+    "sha256": "d52ed251f8704f45b60eff18dd43cfdb120dbe48f20efd87bb88646caeb642ae",
+    "content": {
+      "provider_calls": {
+        "numerator": 10,
+        "denominator": 10,
+        "value": 1.0
+      },
+      "schema_validity": {
+        "numerator": 10,
+        "denominator": 10,
+        "value": 1.0
+      },
+      "plan_validation": {
+        "numerator": 10,
+        "denominator": 10,
+        "value": 1.0
+      },
+      "required_action_recall": {
+        "numerator": 14,
+        "denominator": 14,
+        "value": 1.0
+      },
+      "tool_selection_precision": {
+        "numerator": 14,
+        "denominator": 14,
+        "value": 1.0
+      },
+      "parameter_accuracy": {
+        "numerator": 20,
+        "denominator": 20,
+        "value": 1.0
+      },
+      "dependency_accuracy": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "unnecessary_edit_rate": {
+        "numerator": 0,
+        "denominator": 14,
+        "value": 0.0
+      },
+      "unsupported_tool_emission": 0,
+      "apply_success": {
+        "numerator": 8,
+        "denominator": 8,
+        "value": 1.0
+      },
+      "render_success": {
+        "numerator": 8,
+        "denominator": 8,
+        "value": 1.0
+      },
+      "expected_execution_completed": {
+        "numerator": 8,
+        "denominator": 8,
+        "value": 1.0
+      },
+      "downstream_satisfaction": {
+        "numerator": 80,
+        "denominator": 80,
+        "value": 1.0
+      },
+      "rendered_downstream_satisfaction": {
+        "numerator": 64,
+        "denominator": 64,
+        "value": 1.0
+      },
+      "new_regressions": 0,
+      "previously_passing_preserved": {
+        "numerator": 63,
+        "denominator": 63,
+        "value": 1.0
+      },
+      "matches": {
+        "numerator": 10,
+        "denominator": 10,
+        "value": 1.0
+      },
+      "not_executed": [
+        {
+          "case_id": "P09",
+          "validation": {
+            "status": "VALID",
+            "expanded_actions": [],
+            "action_order": []
+          },
+          "execution": "COMPLETED"
+        },
+        {
+          "case_id": "P10",
+          "validation": {
+            "status": "VALID",
+            "expanded_actions": [],
+            "action_order": []
+          },
+          "execution": "COMPLETED"
+        }
+      ],
+      "definitions": {
+        "action_recall": "Necessary tool/target pairs; independent of parameter correctness, which has a separate metric.",
+        "minimality": "One-to-one action matching; duplicate/extraneous actions count against precision and unnecessary edit rate.",
+        "parameters": "Semantic expected fields; omitted CTA endpoint may use already-correct current endpoint.",
+        "dependencies": "Required partial order via dependency reachability; unrelated action permutations are allowed.",
+        "apply_render": "Denominators are actual attempts; expected_execution_completed additionally exposes omitted/invalid plans.",
+        "downstream": "Actually evaluated automated Units only; rendered-only denominator shown separately. Visual Units not reviewed.",
+        "no_actions": "P09/P10 have zero-action success; zero tool denominator is null, not an invented 100%."
+      }
+    }
+  },
+  {
+    "source": "outputs/e2e_v1/summary.json",
+    "sha256": "0d523b61dc5ed032c7872011d643500336c1d8052c2d76d04dffee3d2b6277d9",
+    "content": {
+      "case_outcome_match": {
+        "numerator": 6,
+        "denominator": 10,
+        "value": 0.6
+      },
+      "compiler_completion": {
+        "numerator": 8,
+        "denominator": 10,
+        "value": 0.8
+      },
+      "planner_completion": {
+        "numerator": 5,
+        "denominator": 7,
+        "value": 0.7142857142857143
+      },
+      "executable_cases": 8,
+      "successful_executable_cases": 5,
+      "plan_apply": {
+        "numerator": 4,
+        "denominator": 4,
+        "value": 1.0
+      },
+      "render": {
+        "numerator": 4,
+        "denominator": 4,
+        "value": 1.0
+      },
+      "automated_requirement_satisfaction": {
+        "numerator": 38,
+        "denominator": 38,
+        "value": 1.0
+      },
+      "safe_stop": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "omission_safety": {
+        "numerator": 1,
+        "denominator": 2,
+        "value": 0.5
+      },
+      "deferred_preservation": {
+        "numerator": 0,
+        "denominator": 1,
+        "value": 0.0
+      },
+      "deferred_request_retained": {
+        "numerator": 1,
+        "denominator": 1,
+        "value": 1.0
+      },
+      "recovery_detection": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "recovery_repair": {
+        "numerator": 2,
+        "denominator": 2,
+        "value": 1.0
+      },
+      "new_regressions": 0,
+      "regression_free_completion": {
+        "numerator": 5,
+        "denominator": 5,
+        "value": 1.0
+      },
+      "review_required_cases": [
+        "A01",
+        "A02",
+        "A05"
+      ],
+      "definitions": {
+        "planner_completion": "Conditional on compiler gate SUCCESS; requires planner and plan gate success.",
+        "apply_render": "Actual attempted stages; skipped no-op stages are not failures. Executable-case coverage shown separately.",
+        "automatic": "Final PASS/FAIL automated Units with real evidence only. Visual and BLOCKED/NOT_RUN excluded, never promoted to PASS.",
+        "case_match": "Includes frozen active requirements, parameters, safe stops, omission/deferred behavior and recovery; not just output quality.",
+        "safe_stop": "Expected clarification is correct behavior; timeout remains an error, not clarification.",
+        "deferred": "deferred_preservation requires an accepted plan; raw request retention is reported independently of plan validity.",
+        "recovery": "A10 harness perturbation is RECOVERY_TEST, not natural pipeline failure attribution."
+      }
+    }
+  }
+]

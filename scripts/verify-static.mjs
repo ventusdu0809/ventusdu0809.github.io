@@ -9,6 +9,8 @@ const errors = [];
 
 const requiredPages = [
   "index.html",
+  "creative-qc-agent/index.html",
+  "creative-qc-agent/build-log/index.html",
   "t2a-case-study/index.html",
   "t2a-formal-summary/index.html",
   "point-line-scene-framework/index.html",

@@ -15,7 +15,7 @@
     "verify:pages": "node scripts/verify-static.mjs pages-dist",
     "verify:offline": "node scripts/verify-static.mjs offline-dist --offline",
     "start": "vinext start",
-    "test": "npm run build && node --test tests/rendered-html.test.mjs",
+    "test": "npm run build && node --test tests/rendered-html.test.mjs tests/creative-qc-static.test.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint . --ignore-pattern dist --ignore-pattern .next",
     "db:generate": "drizzle-kit generate"
