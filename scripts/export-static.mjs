@@ -120,6 +120,7 @@ function transformHtml(source, route) {
 
   const enhancement = `<script>
 document.addEventListener("click", async function (event) {
+  if (event.target.closest('.resume-print-button')) { window.print(); return; }
   const button = event.target.closest("[data-copy-sha]");
   if (!button) return;
   const value = button.getAttribute("data-copy-sha");

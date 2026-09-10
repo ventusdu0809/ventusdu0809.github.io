@@ -226,53 +226,23 @@ test("game audio link opens a dedicated sound practice page", async () => {
   assert.match(practice, /\/video\/hitstop-after\.mp4/);
 });
 
-test("public resume matches the reviewed ATS source and links to evidence", async () => {
+test("public resume matches the latest supplied resume", async () => {
   const response = await render("/resume");
   assert.equal(response.status, 200);
-  const html = await response.text();
-  for (const text of [
-    "杜明",
-    "AI 音频 / 音视频生成评测",
-    "600 个正式样本和 660 次试听事件",
-    "660", "试听事件（累计）",
-    "AI 音频与音视频评测作品集",
-    "Text-to-Audio 专项评测",
-    "SAO1 PoC 与 SAO1 v2 / SA3M 受控对比",
-    "Audio-Visual Generation Evaluation",
-    "Cross-Round Analysis v1.0",
-    "点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）",
-    "重复诊断模式（Repeated Diagnostic Pattern）",
-    "查看 PLS 研究方法",
-    "The Explorer",
-    "杭州千乎网络",
-    "2026.03—2026.07",
-    "杭州伏腊",
-    "成都锦泰麓山丰田",
-    "凤凰艺术",
-    "爱丁堡大学",
-    "米兰布雷拉美术学院",
-    "与直属领导共同起草并迭代音频外包制作与交付规范",
-    "AI 用于资料归纳、代码实现和批处理执行",
-  ]) assert.match(html, new RegExp(text.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  for (const href of ["/t2a-case-study", "/audio-visual-evaluation", "/point-line-scene-framework", "/sound-practice", "/audio-validation-summary"]) {
-    assert.match(html, new RegExp(`href="${href}"`));
-  }
-  assert.doesNotMatch(html, /\/#game-detail/);
-  assert.doesNotMatch(html, /2026\.03 — 至今/);
-  assert.doesNotMatch(html, /50 个约 (?:2|20) MB/);
-  assert.doesNotMatch(html, /153[\s-]?0999[\s-]?3915/);
-  assert.doesNotMatch(html, /href="tel:/);
-  assert.doesNotMatch(html, /五层评测框架/);
-  assert.match(html, /Accademia di Belle Arti di Brera/);
-  assert.match(html, /<time[^>]*>2026\.08<\/time>/);
-  const resumeCss = await readFile(new URL("../app/resume/resume.css", import.meta.url), "utf8");
-  assert.match(resumeCss, /@media print[\s\S]*\.resume-metrics-grid \{ grid-template-columns: repeat\(4, minmax\(0, 1fr\)\); \}/);
-  assert.match(resumeCss, /@media print[\s\S]*\.ability-grid \{ grid-template-columns: repeat\(3, minmax\(0, 1fr\)\);/);
-  assert.match(resumeCss, /@media print[\s\S]*\.resume-sidebar \{ display: block; \}/);
-  const projectPoints = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
-  assert.ok(projectPoints.length >= 2);
-  assert.equal((projectPoints[0][1].match(/<li>/g) ?? []).length, 3);
-  assert.equal((projectPoints[1][1].match(/<li>/g) ?? []).length, 3);
+  const html = renderedDom(await response.text());
+  for (const text of ["多模态 Agent 与 AI 音视频评测", "独立设计并通过 AI 辅助开发", "10/10", "8/8", "4 项真实失败", "review-assisted", "600 个正式样本、660 次试听评测", "Python / pandas 基础", "成都锦泰麓山丰田"]) assert.ok(html.includes(text), text);
+  assert.doesNotMatch(html, /凤凰艺术/);
+  for (const href of ["/creative-qc-agent", "/audio-visual-evaluation", "/t2a-case-study", "tel:15309993915", "mailto:mingdu0809@qq.com"]) assert.ok(html.includes('href="' + href + '"'));
+  const projects = [...html.matchAll(/<ol class="resume-points">([\s\S]*?)<\/ol>/g)];
+  assert.equal(projects.length, 3);
+  assert.ok(projects[0][1].includes("Compiler"));
+  assert.ok(projects[1][1].includes("Visual"));
+  assert.ok(projects[2][1].includes("OVL"));
+  const css = await readFile(new URL("../app/resume/resume.css", import.meta.url), "utf8");
+  assert.match(css, /@page\s*\{\s*size:A4/);
+  assert.ok(css.includes(".resume-shell { display:none!important; }"));
+  const exporter = await readFile(new URL("../scripts/export-static.mjs", import.meta.url), "utf8");
+  assert.ok(exporter.includes("window.print()"));
 });
 
 test("pages share the site copy source and keep public artifacts available", async () => {

@@ -2,71 +2,66 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PrintResumeButton } from "./PrintResumeButton";
 import "./resume.css";
+import { ResumePrint } from "./ResumePrint";
 
 export const metadata: Metadata = {
-  title: "杜明｜AI 音频与音视频生成评测",
+  title: "杜明｜多模态 Agent 与 AI 音视频评测",
   description:
-    "爱丁堡大学声音设计硕士杜明的 AI 音频评测简历，包含 Text-to-Audio 评测集构建、主观听评、失败案例分析，以及两轮音视频生成受控评测。",
+    "杜明的多模态 Agent 与 AI 音视频评测简历，包含 Agent Workflow、自动 QC、失败定位、局部修复及音视频创作经历。",
 };
 
 const abilities = [
   {
-    number: "01",
-    title: "音频与音视频生成评测",
-    body: "主观听评、分层能力框架、失败案例（Bad Case）发现、受控回归（Controlled Regression）、失败定位与研发优先级。",
+    "number": "01",
+    "title": "Agent Workflow",
+    "body": "结构化需求、工具编排、QC / Repair"
   },
   {
-    number: "02",
-    title: "专业听感与问题判断",
-    body: "音质、音色、声场、底噪、爆音、失真、伪影、截断、材质与声源匹配、事件时间关系。",
+    "number": "02",
+    "title": "AI 音视频评测",
+    "body": "原子评测、证据路由、受控回归"
   },
   {
-    number: "03",
-    title: "声画同步与环境音效",
-    body: "声画同步、环境音效匹配、Foley、空间音频、多声源层次、声音遮蔽与音量平衡判断。",
+    "number": "03",
+    "title": "音视频创作",
+    "body": "声音设计、视频制作、游戏音频、声画判断"
   },
+  {
+    "number": "04",
+    "title": "快速原型",
+    "body": "Vibe Coding / AI 辅助开发、Python 基础"
+  }
 ];
 
-const workExperience = [
+const workExperience: {company:string; role:string; date:string; points:string[]; links:{href:string;label:string}[]}[] = [
   {
-    company: "杭州千乎网络",
-    role: "游戏音频策划 / 声音设计 · 《辉烬》",
-    date: "2026.03—2026.07",
-    points: [
-      "参与战斗音效设计、动态混音和音频效果实机评测，按动作、武器和战斗事件拆分声音层级；通过修改前后对比检查 Snapshot、Sidechain Ducking 及高频战斗场景中关键声音的可辨识性。",
-      "与直属领导共同起草并迭代音频外包制作与交付规范，明确文件格式、命名、短时响度、True Peak、瞬态对齐、循环零交叉及爆点风险（Click）等验收标准；参与把验收标准整理为自动检查规则，负责规则审核、样例核验、问题反馈与迭代。",
+    "company": "杭州千乎网络",
+    "role": "游戏音频策划 / 声音设计 ｜《辉烬》",
+    "date": "2026.03 - 2026.07",
+    "points": [
+      "参与战斗音效、动态混音及实机评测，按动作、武器与事件拆分声音需求；对比修改前后 Snapshot、Sidechain Ducking 与复杂战斗中的关键声音可辨识性。",
+      "与直属领导共同起草、迭代外包制作与交付规范，将格式、响度、True Peak、瞬态、循环与 Click 风险整理为验收项；参与自动检查规则转化，负责规则审核、样例核验与反馈。"
     ],
-    links: [
-      { href: "/sound-practice", label: "查看游戏音频案例" },
-      { href: "/audio-validation-summary", label: "查看音频资产验收案例" },
-    ],
+    "links": []
   },
   {
-    company: "杭州伏腊",
-    role: "游戏音效设计师 / 声音设计",
-    date: "2025.03—2025.07",
-    points: [
-      "参与 UE5 游戏及多款微信小游戏的音频需求梳理，整理音频需求文档与资产验收标准，检查音质、响度、触发逻辑及场景匹配。",
-      "基于 Unity 与 Wwise 完成 UI 及交互音频配置，围绕视觉动效、交互状态和声音触发时机检查声画协调性；负责过场动画和环境声音配置，从声源位置、空间衰减、遮挡、混响及前后景关系等维度判断场景声音合理性。",
-      "通过动态混音、优先级和并发限制处理复杂声场，积累多事件重叠、声音遮蔽、响度失衡及次要声音缺失的排查经验。",
+    "company": "杭州伏腊",
+    "role": "游戏音效设计师 / 声音设计",
+    "date": "2025.03 - 2025.07",
+    "points": [
+      "参与 UE5 游戏与微信小游戏的音频需求梳理、资产验收；基于 Unity / Wwise 配置 UI、交互、过场及环境声音，检查触发逻辑、声画协调、空间关系与场景匹配。"
     ],
+    "links": []
   },
   {
-    company: "成都锦泰麓山丰田",
-    role: "摄影摄像 / 视频制作",
-    date: "2022.08—2023.02",
-    points: [
-      "负责品牌活动、产品及直播内容的摄影摄像与现场视听环境搭建，参与灯光、音视频设备调试及素材制作，积累画面构图、动作时序、现场声音与视听内容协调的实际经验。",
+    "company": "成都锦泰麓山丰田",
+    "role": "摄影摄像 / 视频制作",
+    "date": "2022.08 - 2023.02",
+    "points": [
+      "负责品牌活动、产品及直播的摄影摄像与现场视听环境搭建，参与灯光、音视频设备调试与素材制作。"
     ],
-  },
-  {
-    company: "凤凰艺术",
-    role: "多媒体视听内容编辑",
-    date: "2021.10—2022.01",
-    points: [
-      "负责艺术展览、采访及纪录片现场录音，在复杂环境中完成声音采集和素材质量检查；使用 iZotope RX 进行频谱检查、降噪和音频修复，识别并处理底噪、杂音、爆音、失真等音频缺陷；完成纪录片和采访内容的音频编辑及混音，检查声音清晰度、音量平衡和画面内容匹配。",
-    ],
-  },
+    "links": []
+  }
 ];
 
 export default function ResumePage() {
@@ -74,7 +69,7 @@ export default function ResumePage() {
     <main className="resume-page">
       <div className="resume-shell">
         <nav className="resume-nav" aria-label="简历页面导航">
-          <Link className="resume-back-link" href="/" aria-label="返回 AI 音频与音视频评测作品集">
+          <Link className="resume-back-link" href="/" aria-label="返回 多模态 Agent 与 AI 音视频评测作品集">
             ← 返回作品集
           </Link>
           <PrintResumeButton />
@@ -82,41 +77,32 @@ export default function ResumePage() {
 
         <header className="resume-hero">
           <div className="resume-hero-copy">
-            <p className="resume-eyebrow">AI 音频与音视频生成评测 / AI AUDIO &amp; AUDIO-VISUAL EVALUATION</p>
+            
             <h1>杜明</h1>
-            <p className="resume-role">AI 音频 / 音视频生成评测</p>
-            <p className="resume-specialties">声音设计硕士 · 音频模型主观评测 · 声画同步与环境音效判断</p>
-            <p className="resume-intro">
-              爱丁堡大学声音设计硕士，具备游戏音频、影视声音与声画内容制作经验，目前聚焦 AI 音频与音视频生成评测。独立完成 T2A 主观评测及两轮音视频生成评测，能以结构化评分、失败案例（Bad Case）分析和可复核结论记录专业听感与声画判断。
-            </p>
+            <p className="resume-role">多模态 Agent 与 AI 音视频评测</p>
+            <p className="resume-specialties">声音设计硕士 · 音视频创作者背景 · Agent Workflow · 自动 QC / 失败定位</p>
+            <p className="resume-intro">爱丁堡大学声音设计硕士，具备游戏音频与视频制作经历。聚焦多模态 Agent 与创作工作流，通过 AI 辅助开发搭建需求编译、时间线执行、质检与局部修复原型；结合专业声画判断和模型评测经验，将创作要求转化为可验证条件与回归案例。</p>
           </div>
 
           <address className="resume-contact" aria-label="联系方式">
+<a href="tel:15309993915"><span>电话</span>15309993915</a>
             <a href="mailto:mingdu0809@qq.com" aria-label="发送邮件至 mingdu0809@qq.com">
               <span>邮箱</span>
               mingdu0809@qq.com
             </a>
-            <Link href="/" aria-label="查看 AI 音频与音视频评测作品集">
+            <Link href="/" aria-label="查看 多模态 Agent 与 AI 音视频评测作品集">
               <span>作品集</span>
-              AI 音频与音视频评测作品集 →
+              多模态 Agent 与 AI 音视频评测作品集 →
             </Link>
           </address>
         </header>
 
-        <section className="resume-metrics" aria-label="Text-to-Audio 个人项目数据成果">
-          <p className="resume-metrics-note">以下数据来自个人 Text-to-Audio 评测项目；隐藏重复衡量单评测员的 ±1 分复测一致率（within-1）。</p>
-          <div className="resume-metrics-grid">
-            <div><strong>40</strong><span>测试 Prompt</span></div>
-            <div><strong>600</strong><span>正式样本</span></div>
-            <div><strong>660</strong><span>试听事件（累计）</span></div>
-            <div><strong>95% / 98%</strong><span>OVL / REL ±1 分复测一致率</span></div>
-          </div>
-        </section>
+
 
         <section className="resume-section" aria-labelledby="abilities-title">
           <div className="resume-section-heading">
             <p>核心能力</p>
-            <h2 id="abilities-title">让听感判断留下结构化评测记录</h2>
+            <h2 id="abilities-title">Agent、评测与音视频创作</h2>
           </div>
           <div className="ability-grid">
             {abilities.map((ability) => (
@@ -134,43 +120,23 @@ export default function ResumePage() {
             <section className="resume-section resume-primary-section" aria-labelledby="t2a-title">
               <div className="resume-section-heading">
                 <p>重点项目</p>
-                <h2 id="t2a-title">AI 音频与音视频生成评测项目</h2>
+                <h2 id="t2a-title">Agent 与 AI 评测项目</h2>
               </div>
-              <article className="t2a-project">
-                <div className="entry-header">
-                  <div className="entry-title-group">
-                    <h3>音视频生成两轮评测</h3>
-                    <p>Audio-Visual Generation Evaluation · Cross-Round Analysis v1.0</p>
-                  </div>
-                  <time dateTime="2026-08">2026.08</time>
-                </div>
-                <ol className="resume-points">
-                  <li>构建点（Point）→ 线（Line）→ 面（Scene）+ 独立质量（Quality）分层评测框架，围绕事件完整性、计数、声画起点、时序、动态对应、场景一致性及音频质量完成两轮诊断性评测。</li>
-                  <li>基于第一轮问题发现（Discovery）设计第二轮受控回归（Controlled Regression），拆分文本 → 画面与画面 → 音频失败链路；3 个可精确判定案例均出现「文本提示（Prompt）要求 3 次 → 画面（Video）生成 4 次 → 音频（Audio）对应 4 次」，将计数偏差定位到“文本 → 画面”的指令满足环节，避免误判为音频计数失败（Audio Counting Failure）。</li>
-                  <li>将结果区分为重复诊断模式（Repeated Diagnostic Pattern）、未复现（Not Replicated）、部分成立 / 需细化（Mixed / Refined）与独立质量门槛（Quality Gate），据此确定回归优先级、失败定位及后续专项验证方向。</li>
-                </ol>
-                <Link className="resume-arrow-link" href="/audio-visual-evaluation">查看音视频生成评测项目 →</Link>
-                <Link className="resume-arrow-link resume-related-link" href="/point-line-scene-framework">查看 PLS 研究方法 →</Link>
-              </article>
-              <article className="t2a-project resume-project-secondary">
-                <div className="entry-header">
-                  <div className="entry-title-group">
-                    <h3>Text-to-Audio 专项评测 ｜ SAO1 PoC 与 SAO1 v2 / SA3M 受控对比</h3>
-                    <p>评测集构建 · 盲听评分 · 失败案例分析与评测报告</p>
-                  </div>
-                  <time dateTime="2026-07">2026.07</time>
-                </div>
-                <ol className="resume-points">
-                  <li>独立搭建 Text-to-Audio 评测流程，审核 40 条测试 Prompt，覆盖音频质检、盲听评分、问题标注、隐藏重复与复测裁决，累计完成 600 个正式样本和 660 次试听事件。</li>
-                  <li>建立整体质量（Overall Quality, OVL）、文本符合度（Relevance, REL）及失败案例分类体系；通过单评测员隐藏重复检查评分稳定性，OVL 的 ±1 分复测一致率为 95%，REL 为 98%。</li>
-                  <li>分析问题发生率、模型差异与变化趋势，识别声源错误、次要事件缺失、次数控制、噪声纹理及人工伪影等短板，并输出结构化评测报告。</li>
-                </ol>
-                <aside className="responsibility-boundary">
-                  <strong>个人贡献边界</strong>
-                  <p>T2A 评测规则、听评方法、正式评分和失败案例裁决由本人完成；AI 用于资料归纳、代码实现和批处理执行，本人负责规则提出、结果审核与修改意见。</p>
-                </aside>
-                <Link className="resume-arrow-link" href="/t2a-case-study">查看完整评测项目 →</Link>
-              </article>
+<article className="t2a-project ">
+<div className="entry-header"><div className="entry-title-group"><h3>多模态音视频 Agent Evaluation &amp; Repair Workflow</h3><p>个人项目</p></div><time>2026.09</time></div>
+<ol className="resume-points"><li>独立设计并通过 AI 辅助开发搭建自然语言 → Compiler → Planner → 可编辑 Timeline → 执行 / 渲染 → Evaluate / Repair 原型，处理配音、Logo、CTA 与 BGM ducking 等约束。</li><li>建立 Evidence Routing、Atomic Evaluation 与 Dependency 机制，按需求选择文本、时间线、音频或视觉证据，定位失败 Unit；视觉证据采用人工辅助审核（review-assisted）。</li><li>基于 Failure Localization 生成 Targeted Repair，并复测目标条件与原有正确条件；受控故障案例中修复 Logo 时序和配音期间 BGM 压低问题，保留修复前后证据与 Regression Set。</li><li>构建 10 Case 受控回归集，判断结果 10/10 符合预期、已支持自动修复 8/8；另完成 10 Case 端到端自然语言实测，保留 4 项真实失败及 Compiler / Plan Gate 阶段归因。</li></ol>
+<Link className="resume-arrow-link" href="/creative-qc-agent">查看 Agent 项目 →</Link>
+</article>
+<article className="t2a-project resume-project-secondary">
+<div className="entry-header"><div className="entry-title-group"><h3>Audio-Visual Generation Evaluation ｜ 跨轮诊断</h3><p>个人项目</p></div><time>2026.08</time></div>
+<ol className="resume-points"><li>构建 Point → Line → Scene + Quality 分层框架，完成两轮事件完整性、计数、声画时序、动态对应、场景一致性与音质评测；由首轮发现设计次轮 Controlled Regression。</li><li>拆分 Text → Visual → Audio 失败链路：3 个可精确判定案例均为“要求 3 次 → 画面 4 次 → 声音 4 次”，将计数偏差定位到视觉生成阶段；整理复现、未复现及混合结论，为 QC 与回归集提供案例。</li></ol>
+<Link className="resume-arrow-link" href="/audio-visual-evaluation">查看音视频生成评测 →</Link>
+</article>
+<article className="t2a-project resume-project-secondary">
+<div className="entry-header"><div className="entry-title-group"><h3>Text-to-Audio 专项评测 ｜ 评测集、盲听与 Bad Case</h3><p>个人项目</p></div><time>2026.07</time></div>
+<ol className="resume-points"><li>独立搭建评测流程，审核 <b>40 条 Prompt</b>，完成 <b>600 个正式样本、660 次试听评测</b>，覆盖音频质检、盲听评分、问题标注、隐藏重复及复测裁决。</li><li>建立 OVL 整体质量、REL 文本相关性及 Bad Case 分类；单评测员隐藏重复 <b>within-1：OVL 95%、REL 98%</b>。分析声源错误、次要事件缺失、次数控制及伪影，输出结构化报告。</li></ol>
+<Link className="resume-arrow-link" href="/t2a-case-study">查看 T2A 评测 →</Link>
+</article>
             </section>
 
             <section className="resume-section" aria-labelledby="supporting-projects-title">
@@ -187,7 +153,7 @@ export default function ResumePage() {
                     </div>
                     <time dateTime="2025-10">2025.10—2026.02</time>
                   </div>
-                  <p>整理音频命名、ID、优先级、响度及交付流程规范，建立有明确验收依据的音频资产质量标准；基于 Wwise 与 Unity 完成环境声、空间混响及动态混音配置，并通过 Profiler 检查并发声音、声部优先级和性能异常。</p>
+                  <p>整理命名、ID、优先级、响度与交付规范；完成环境声、空间混响及动态混音配置，用 Profiler 排查并发与性能问题，贯通需求、资产、工具配置和实机检查流程。</p>
                   <Link className="resume-arrow-link" href="/sound-practice">查看相关案例 →</Link>
                 </article>
                 <article className="supporting-project">
@@ -198,7 +164,7 @@ export default function ResumePage() {
                     </div>
                     <time dateTime="2024-03">2024.03—2024.05</time>
                   </div>
-                  <p>采用 7.1.2 杜比全景声完成影视声音设计，从声源定位、空间层次、环境反射、低频控制及叙事节奏等维度设计并检查整体听觉体验。</p>
+                  <p>围绕声源定位、空间层次、环境反射与叙事节奏完成声音设计，检查声音与画面、空间及情绪的关系。</p>
                 </article>
               </div>
             </section>
@@ -206,7 +172,7 @@ export default function ResumePage() {
             <section className="resume-section resume-work-section" aria-labelledby="experience-title">
               <div className="resume-section-heading">
                 <p>工作经历</p>
-                <h2 id="experience-title">声音制作、验收与运行时判断</h2>
+                <h2 id="experience-title">音频制作、质量验收与视频创作</h2>
               </div>
               <div className="experience-timeline">
                 {workExperience.map((experience) => (
@@ -239,10 +205,10 @@ export default function ResumePage() {
                 <h3>爱丁堡大学（University of Edinburgh）</h3>
                 <p>声音设计硕士（MSc）</p>
                 <time dateTime="2023-09">2023.09—2024.11</time>
-                <small>影视声音、交互音频、空间声音、声音与画面关系、创意声音技术</small>
+                <small>影视声音、交互与空间音频</small>
               </article>
               <article className="education-entry">
-                <h3>米兰布雷拉美术学院（Accademia di Belle Arti di Brera）</h3>
+                <h3>米兰布雷拉美术学院（Accademia Di Brera）</h3>
                 <p>新技术艺术本科（BA）</p>
                 <time dateTime="2017-10">2017.10—2022.03</time>
                 <small>摄影、视频、动画、新媒体与装置艺术</small>
@@ -252,9 +218,10 @@ export default function ResumePage() {
             <section className="sidebar-section" aria-labelledby="tools-title">
               <h2 id="tools-title">工具与技能</h2>
               <dl className="sidebar-definition-list">
-                <div><dt>音频工具</dt><dd>Cubase、Reaper、Audition、iZotope RX、Wwise、Unity、Unreal Engine、Dolby Atmos Renderer</dd></div>
+                <div><dt>原型开发</dt><dd>Vibe Coding / AI 辅助开发</dd></div>
+<div><dt>创作工具</dt><dd>Cubase、Reaper、Audition、iZotope RX、Wwise、Unity、Unreal Engine、Dolby Atmos Renderer</dd></div>
                 <div><dt>数据工具</dt><dd>Excel：数据筛选、排序、基础函数、条件格式、基础统计</dd></div>
-                <div><dt>Python / pandas 基础</dt><dd>可在 AI 辅助下完成评分表整理、字段检查与简单统计</dd></div>
+                <div><dt>Python / pandas 基础</dt><dd>评分表整理、字段检查、简单统计</dd></div>
               </dl>
             </section>
 
@@ -268,7 +235,8 @@ export default function ResumePage() {
         <footer className="resume-footer">
           <p>公开简历版本｜内容对应可展示的项目材料与案例页面。</p>
           <div>
-            <Link href="/t2a-case-study">T2A 评测案例</Link>
+            <Link href="/creative-qc-agent">Agent 项目</Link>
+<Link href="/t2a-case-study">T2A 评测案例</Link>
             <Link href="/audio-visual-evaluation">音视频生成评测</Link>
             <Link href="/point-line-scene-framework">PLS 研究方法</Link>
             <Link href="/sound-practice">游戏音频案例</Link>
@@ -276,6 +244,7 @@ export default function ResumePage() {
           </div>
         </footer>
       </div>
+      <ResumePrint />
     </main>
   );
 }
